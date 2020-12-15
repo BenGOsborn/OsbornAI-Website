@@ -18,17 +18,29 @@ const Content = () => {
                 changePage(3);
             }}>Portfolio</button>
             {() => {
-                if (page == 0) {
+                if (page === 0) {
                     return (
+                        <div>
+                            About
+                        </div>
                     );
-                } else if (page == 1) {
+                } else if (page === 1) {
                     return (
+                        <div>
+                            What We Offer
+                        </div>
                     );
-                } else if (page == 2) {
+                } else if (page === 2) {
                     return (
+                        <div>
+                            Book A Consult
+                        </div>
                     );
                 } else {
                     return (
+                        <div>
+                            Portfolio
+                        </div>
                     );
                 }
             }} 
