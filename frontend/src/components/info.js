@@ -6,16 +6,23 @@ import Portfolio from '../pages/portfolio';
 
 const Info = () => {
     let [page, setPage] = useState(0);
+    let [pageTitle, setPageTitle] = useState('About');
 
     return (
         <div className="Info">
-            <div className="Buttons">
-                <button onClick={e => setPage(0)}>About</button>
-                <button onClick={e => setPage(1)}>What We Offer</button>
-                <button onClick={e => setPage(2)}>Book A Consult</button>
-                <button onClick={e => setPage(3)}>Portfolio</button>
-            </div>
-            <div className="PageSource">
+
+            <nav class="nav-extended blue darken-1">
+                <div class="nav-content">
+                    <ul class="tabs tabs-transparent">
+                        <li class="tab"><button class="btn-flat" onClick={e => {setPage(0);setPageTitle('About')}}>About</button></li>
+                        <li class="tab"><button class="btn-flat" onClick={e => {setPage(1);setPageTitle('What We Offer')}}>What We Offer</button></li>
+                        <li class="tab"><button class="btn-flat" onClick={e => {setPage(2);setPageTitle('Book A Consult')}}>Book A Consult</button></li>
+                        <li class="tab"><button class="btn-flat" onClick={e => {setPage(3);setPageTitle('Portfolio')}}>Portfolio</button></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div className="PageSource" class="container center">
                 {PageSource(page)}
             </div>
         </div>
