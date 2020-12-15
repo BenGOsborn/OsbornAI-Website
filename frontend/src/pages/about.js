@@ -1,7 +1,8 @@
 const About = () => {
     return (
         <div className="About">
-            THIS IS THE ABOUT PAGE: VERY GOOD COMPANY
+            <h3>About:</h3>
+            This is the about page of the OsbornAI official website.
         </div>
     );
 }

@@ -22,7 +22,7 @@ const Info = () => {
                 </div>
             </nav>
 
-            <div className="PageSource" class="container center">
+            <div className="PageSource" class="container center flow-text">
                 {PageSource(page)}
             </div>
         </div>

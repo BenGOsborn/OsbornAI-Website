@@ -1,7 +1,8 @@
 const Services = () => {
     return (
         <div className="Services">
-            THIS IS THE SERVICES PAGE: HERE IS WHAT WE OFFER
+            <h3>What We Offer:</h3>
+            This is the page that will tell potential client's the type of services that we offer.
         </div>
     );
 }
