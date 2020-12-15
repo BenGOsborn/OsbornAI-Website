@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
-import Nav from './components/nav';
-import Content from './components/content'
+import Header from './components/header';
+import Info from './components/info';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Nav />
-    <Content />
+    <Header />
+    <Info />
   </React.StrictMode>,
   document.getElementById('root')
 );
