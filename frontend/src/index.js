@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 import Header from './components/header';
-import Info from './components/info';
+import Body from './components/body';
 
 ReactDOM.render(
   <React.StrictMode>
     <Header />
-    <Info />
+    <Body />
   </React.StrictMode>,
   document.getElementById('root')
 );

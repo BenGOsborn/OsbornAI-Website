@@ -16,11 +16,32 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+    <script>
+      window.addEventListener("DOMContentLoaded", event => {
+        const optionsTabs = {
+          duration: 300,
+          onShow: null,
+          swipeable: false,
+          responsiveThreshold: Infinity
+        };
+
+        const tabsContainer = document.querySelector(".tabs");
+        M.Tabs.init(tabsContainer, optionsTabs);
+
+        const optionsPin = {
+          top: 0,
+          bottom: Infinity,
+          offset: 0,
+          onPositionChange: null
+        };
+
+        const pinContainer = document.querySelector(".Header");
+        M.Pushpin.init(pinContainer, optionsPin);
+      });
+    </script>
 
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
