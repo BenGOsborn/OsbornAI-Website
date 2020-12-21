@@ -30,6 +30,21 @@
 
         const tabsContainer = document.querySelector(".tabs");
         M.Tabs.init(tabsContainer, optionsTabs);
+
+        const optionsSidenav = {
+          edge: 'left',
+          draggable: true,
+          inDuration: 250,
+          outDuration: 200,
+          onOpenStart: null,
+          onOpenEnd: null,
+          onCloseStart: null,
+          onCloseEnd: null,
+          preventScrolling: false
+        }
+
+        const sidenavContainer = document.querySelector(".sidenav");
+        M.Sidenav.init(sidenavContainer, optionsSidenav);
       });
     </script>
 
