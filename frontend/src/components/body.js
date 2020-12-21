@@ -7,7 +7,6 @@ const Body = () => {
     return (
         <div className="Body">
 
-
             <div className="PageSource" class="container center flow-text">
                 <About />
                 <br />
