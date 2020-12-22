@@ -2,8 +2,10 @@ const Book = () => {
     return (
         <div className="Book">
             <br />
-            <h3>Book A Consult:</h3>
-            This is the page that will allow users to book a consult with a professional from OsbornAI.
+            <br />
+
+            And that’s just the beginning. If you’re interested in what we can do for your business, or have a project in mind that requires data, then book a consultation with us and let’s get started!
+
         </div>
     );
 }

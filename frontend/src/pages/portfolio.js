@@ -2,8 +2,10 @@ const Portfolio = () => {
     return (
         <div className="Portfolio">
             <br />
-            <h3>Portfolio:</h3>
-            This will show off all of the previous work that we have done.
+            <br />
+
+            Here's some projects we have worked on in the past to help you get a better idea of what we do.
+
         </div>
     );
 }
