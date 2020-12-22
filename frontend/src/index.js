@@ -4,11 +4,13 @@ import reportWebVitals from './reportWebVitals';
 
 import Header from './components/header';
 import Body from './components/body';
+import Footer from './components/footer';
 
 ReactDOM.render(
   <React.StrictMode>
     <Header />
     <Body />
+    <Footer />
   </React.StrictMode>,
   document.getElementById('root')
 );

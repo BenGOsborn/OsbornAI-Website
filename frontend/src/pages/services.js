@@ -1,6 +1,16 @@
+import { Link } from 'react-scroll';
+
 const Services = () => {
     const whatWeDoStyle = {
         fontSize: 23
+    };
+
+    const textDefaultStyle = {
+        fontSize: 18
+    };
+
+    const bookConsultStyle = {
+        color: 'black'
     };
 
     return (
@@ -15,65 +25,65 @@ const Services = () => {
                 </p>
             </b>
 
-            <p>
+            <p style={textDefaultStyle}>
                 Whether you want to know how data can help improve your business, or you have lots of data that you don’t know what to do with, we can help you.
                 Here's some of the service's we can help you with.
             </p>
             
             <div class="row">
-                <div class="col s1 m4 l4">
+                <div class="col s12 m4 l4">
                 <div class="card">
                     <div class="card-image">
-                        <img alt="Man Holding Black Smartphone" src="https://images.pexels.com/photos/1220757/pexels-photo-1220757.jpeg?auto=compress&cs=tinysrgb&h=750&w=12600" />
+                        <img alt="Person Holding Space Gray Iphone 6" src="https://images.pexels.com/photos/17663/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=750&w=1260" />
                         <span class="card-title">
-                            Consulting
+                            <b>Consulting</b>
                         </span>
                     </div>
                     <div class="card-content">
                     <p>
-                        We'll work with you to find ways to apply to apply data to your business to help you grow.
+                        We'll work with you to find ways to use data with your business to help you grow, and help you to implement these systems.
+                    </p>
+                    </div>
+                </div>
+                </div>
+                
+                <div class="col s12 m4 l4">
+                <div class="card">
+                    <div class="card-image">
+                        <img alt="Blue Click Pen Near White Document Papers on Top of Brown Wooden Table" src="https://images.pexels.com/photos/95916/pexels-photo-95916.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
+                        <span class="card-title">
+                            <b>Dashboards</b>
+                        </span>
+                    </div>
+                    <div class="card-content">
+                    <p>
+                        We'll build you a beautiful dashboard so that you can clearly see your data, making it easier to make tough business decisions.
                     </p>
                     </div>
                 </div>
                 </div>
 
-                <div class="col s1 m4 l4">
+                <div class="col s12 m4 l4">
                 <div class="card">
                     <div class="card-image">
                         <img alt="Time Lapse Photography of Blue Lights" src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260s" />
-                        <span class="card-title">AI</span>
+                        <span class="card-title">
+                            <b>AI</b>
+                        </span>
                     </div>
                     <div class="card-content">
                     <p>
-                        We'll use cutting edge Aritifical Intelligence algorithms to help you scale your business.
-                    </p>
-                    </div>
-                </div>
-                </div>
-
-                <div class="col s1 m4 l4">
-                <div class="card">
-                    <div class="card-image">
-                        <img alt="Time Lapse Photography of Blue Lights" src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260s" />
-                        <span class="card-title">AI</span>
-                    </div>
-                    <div class="card-content">
-                    <p>
-                        We'll use cutting edge Aritifical Intelligence algorithms to help you scale your business.
+                        We'll use cutting edge Aritifical Intelligence algorithms to draw out hidden insights from your data.
                     </p>
                     </div>
                 </div>
                 </div>
             </div>
 
-            {/* <ul>
-                <li>Finding ways to apply data to your business</li>
-                <li>Handling, analysing and visualizing your data</li>
-                <li>Designing and building new data systems specific to your business</li>
-                <li>Building beautiful dashboards for your data</li>
-                <li>Reporting analytics to you</li>
-                <li>Creation of Artificial intelligence systems to help with your business</li>
-            </ul> */}
+            <p style={textDefaultStyle}>
+                And that’s just the beginning. If you’re interested in what we can do for your business, 
+                or have a project in mind that requires data, then <Link href="/" style={bookConsultStyle} to="Book" smooth={true} spy={true} duration={300}><b>book a consultation</b></Link> with us and let’s get started!
+            </p>
 
         </div>
     );

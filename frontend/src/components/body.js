@@ -1,4 +1,4 @@
-import About from '../pages/about';
+import Home from '../pages/home';
 import Services from '../pages/services';
 import Book from '../pages/book';
 import Portfolio from '../pages/portfolio';
@@ -8,28 +8,10 @@ const Body = () => {
         <div className="Body">
 
             <div class="container">
-                <About />
+                <Home />
                 <Services />
                 <Book />
-                <Portfolio />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
+                {/* <Portfolio /> */}
             </div>
 
         </div>

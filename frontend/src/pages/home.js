@@ -1,14 +1,14 @@
-const About = () => {
+const Home = () => {
     const aboutHookStyle = {
         fontSize: 23
     };
 
     const aboutFollowStyle = {
-        fontSize: 16
+        fontSize: 18
     };
 
     return (
-        <div className="About">
+        <div className="Home">
             <br />
             <br />
             <br />
@@ -41,4 +41,4 @@ const About = () => {
     );
 }
 
-export default About;
+export default Home;
