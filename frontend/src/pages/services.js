@@ -50,6 +50,20 @@ const Services = () => {
                     </div>
                 </div>
                 </div>
+
+                <div class="col s1 m4 l4">
+                <div class="card">
+                    <div class="card-image">
+                        <img alt="Time Lapse Photography of Blue Lights" src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260s" />
+                        <span class="card-title">AI</span>
+                    </div>
+                    <div class="card-content">
+                    <p>
+                        We'll use cutting edge Aritifical Intelligence algorithms to help you scale your business.
+                    </p>
+                    </div>
+                </div>
+                </div>
             </div>
 
             {/* <ul>
