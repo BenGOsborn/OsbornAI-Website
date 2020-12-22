@@ -12,6 +12,24 @@ const Body = () => {
                 <Services />
                 <Book />
                 <Portfolio />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
 
         </div>

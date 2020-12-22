@@ -4,7 +4,7 @@ const About = () => {
     };
 
     const aboutFollowStyle = {
-        fontSize: 18
+        fontSize: 16
     };
 
     return (
@@ -15,17 +15,18 @@ const About = () => {
             
             <div class="row">
                 <div class="col s12 m12 l8">
-                    <img class="responsive-img" alt="Stock Exchange Board" src="https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="562.5" height="375"/>
+                    <img class="responsive-img" alt="Black and Gray Mining Rig"
+                    src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="562.5" height="375"/>
                 </div>
-                <div class="col s12 m12 l4" id="About-Hook">
+                <div class="col s12 m12 l4">
                     <p style={aboutHookStyle}>
-                        Data can be confusing, but it’s also essential to the success of your business. 
-
-                        <br />
-                        <br />
-
-                        Whether you’re a large company or a small business, correct usage of data will allow you to scale your 
-                        business to new heights and increase your revenue.
+                        <p>
+                            Data can be confusing, but it’s also essential to the success of your business. 
+                        </p>
+                        <p>
+                            Whether you’re a large company or a small business, correct usage of data will allow you to scale your 
+                            business to new heights and increase your revenue.
+                        </p>
                     </p>
                 </div>
             </div>
