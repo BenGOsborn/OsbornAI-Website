@@ -1,26 +1,40 @@
 const About = () => {
+    const aboutHookStyle = {
+        fontSize: 23
+    };
+
+    const aboutFollowStyle = {
+        fontSize: 18
+    };
+
     return (
         <div className="About">
             <br />
             <br />
-
+            <br />
+            
             <div class="row">
-                <div class="col s8">
-                    <img class="responsive-img" alt="data" src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="566" height="375"/>
-                    <p class="flow-text">
-                        Data can be confusing however it’s also essential to the success of your business. 
+                <div class="col s12 m12 l8">
+                    <img class="responsive-img" alt="Stock Exchange Board" src="https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="562.5" height="375"/>
+                </div>
+                <div class="col s12 m12 l4" id="About-Hook">
+                    <p style={aboutHookStyle}>
+                        Data can be confusing, but it’s also essential to the success of your business. 
+
+                        <br />
+                        <br />
+
                         Whether you’re a large company or a small business, correct usage of data will allow you to scale your 
                         business to new heights and increase your revenue.
                     </p>
                 </div>
             </div>
 
-
-            <br />
-            <br />
-            <br />
-
-            Here at OsbornAI, we understand the importance of data, so we make it our mission to help you use data in the most effective way for your business, so you can make smarter business decisions and tackle complex problems within your business. 
+            <p style={aboutFollowStyle}>
+                Here at OsbornAI, we understand the importance of data, so we make it our mission 
+                to help you use data in the most effective way for your business, so you can make 
+                smarter business decisions and tackle complex problems within your business. 
+            </p>
 
         </div>
     );
