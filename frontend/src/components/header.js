@@ -17,7 +17,9 @@ const Header = () => {
                     <nav>
                         <div class="nav-wrapper blue darken-1">
                             <a href="/" class="brand-logo center">OSBORNAI</a>
-                            <a href="/" data-target="slide-out" class="sidenav-trigger">MENU</a>
+                            <a href="/" data-target="slide-out" class="sidenav-trigger">
+                                <i class="material-icons right">menu</i>
+                            </a>
                             <div class="hide-on-med-and-down">
                                 <ul class="left"> 
                                     <li><Link to="Home" smooth={true} spy={true} duration={300}>HOME</Link></li>

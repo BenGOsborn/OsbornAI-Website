@@ -1,4 +1,5 @@
 import emailjs from 'emailjs-com';
+import './form.css';
 
 const Book = () => {
     const hookStyle = {
@@ -36,17 +37,23 @@ const Book = () => {
                 Inquire about a consult below so we can get started.
             </p>
 
-            {/* How do I make the highlighting blue? */}
             {/* Have a cookie here that acts as a line of defense against people that have already inquired */}
-            <form onSubmit={sendEmail}>
-                <input type="text" placeholder="First" name="first" required={true} />
-                <input type="text" placeholder="Last" name="last" required={true} />
-                <input type="email" placeholder="Email" name="email" required={true} />
-                <input type="tel" placeholder="Phone" name="phone" required={true} />
-                <textarea class="materialize-textarea" placeholder="Inquiry" name="inquiry" required={true} minLength="10" maxLength="300" />
-                <input class="btn waves-effect waves-light" type="submit" value="Send" />
+
+            <form onSubmit={sendEmail} id="sendForm">
+                <div class="input-field">
+                    <input type="text" placeholder="First" name="first" required={true} />
+                    <input type="text" placeholder="Last" name="last" required={true} />
+                    <input type="email" placeholder="Email" name="email" required={true} />
+                    <input type="tel" placeholder="Phone" name="phone" required={true} />
+                    <textarea class="materialize-textarea" id="inquiry" placeholder="Inquiry" name="inquiry" required={true} minLength="10" maxLength="300" />
+                </div>
             </form>
 
+            <button class="btn waves-effect waves-light" type="submit" name="action" form="sendForm">Send
+                <i class="material-icons right">send</i>
+            </button>
+
+            <br />
             <br />
 
         </div>
