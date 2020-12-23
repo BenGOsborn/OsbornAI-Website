@@ -12,7 +12,6 @@ const Home = () => {
             <br />
             <br />
             <br />
-            
             <div class="row">
                 <div class="col s12 m12 l8">
                     <img class="responsive-img" alt="Black and Gray Mining Rig"
@@ -30,13 +29,11 @@ const Home = () => {
                     </p>
                 </div>
             </div>
-
             <p style={aboutFollowStyle}>
                 Here at OsbornAI, we understand the importance of data, so we make it our mission 
                 to help you use data in the most effective way for your business, so you can make 
                 smarter business decisions and tackle complex problems within your business. 
             </p>
-
         </div>
     );
 }

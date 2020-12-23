@@ -29,7 +29,7 @@ const Book = () => {
             }
         }
 
-    });
+    }, []);
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -72,7 +72,7 @@ const Book = () => {
                     <div class="container">
                         <br />
                         <p style={{color: '#1E88E5', fontWeight: 'bold'}} class="flow-text">
-                            We're on our way! You can inquire again in {parseInt((JSON.parse(localStorage.getItem('Cooldown')) - new Date().getTime()) / 8.64e7) + 1} days.
+                            We'll contact you shortly! You may reinquire in {parseInt((JSON.parse(localStorage.getItem('Cooldown')) - new Date().getTime()) / 8.64e7) + 1} days.
                         </p>
                     </div>
                 </div>
@@ -92,14 +92,13 @@ const Book = () => {
                 </p>
             </b>
             <p style={followUpStyle}>
-                Inquire about a consult below so we can get started.
+                Inquire about a consult below so we can get started. We look forward to working with you!
             </p>
 
             {isDisplayed()}
 
             <br />
             <br />
-
         </div>
     );
 }

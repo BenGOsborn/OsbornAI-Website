@@ -18,18 +18,15 @@ const Services = () => {
             <br />
             <br />
             <br />
-
             <b>
                 <p style={whatWeDoStyle}>
                     So what can we do for you?
                 </p>
             </b>
-
             <p style={textDefaultStyle}>
                 Whether you want to know how data can help improve your business, or you have lots of data that you don’t know what to do with, we can help you.
-                Here's some of the service's we can help you with.
+                Here's some of the service's we provide:
             </p>
-            
             <div class="row">
                 <div class="col s12 m4 l4">
                 <div class="card">
@@ -41,12 +38,11 @@ const Services = () => {
                     </div>
                     <div class="card-content">
                     <p>
-                        We'll work with you to find ways to use data with your business to help you grow, and help you to implement these systems.
+                        We'll work with you to find ways in which data can help your business grow, then implement these systems for you.
                     </p>
                     </div>
                 </div>
                 </div>
-                
                 <div class="col s12 m4 l4">
                 <div class="card">
                     <div class="card-image">
@@ -57,12 +53,11 @@ const Services = () => {
                     </div>
                     <div class="card-content">
                     <p>
-                        We'll build you a beautiful dashboard so that you can clearly see your data, making it easier to make tough business decisions.
+                        We'll build you a beautiful data dashboard so you can easily visualize your businesses performance and make smart decisions. 
                     </p>
                     </div>
                 </div>
                 </div>
-
                 <div class="col s12 m4 l4">
                 <div class="card">
                     <div class="card-image">
@@ -73,18 +68,17 @@ const Services = () => {
                     </div>
                     <div class="card-content">
                     <p>
-                        We'll use cutting edge Aritifical Intelligence algorithms to draw out hidden insights from your data.
+                        We'll use cutting edge Aritifical Intelligence to automatically extract insights from your data and save you time.
                     </p>
                     </div>
                 </div>
                 </div>
             </div>
-
             <p style={textDefaultStyle}>
                 And that’s just the beginning. If you’re interested in what we can do for your business, 
-                or have a project in mind that requires data, then <Link href="/" style={bookConsultStyle} to="Book" smooth={true} spy={true} duration={300}><b>book a consultation</b></Link> with us and let’s get started!
+                or have a project in mind that requires data, 
+                then <Link href="/" style={bookConsultStyle} to="Book" smooth={true} spy={true} duration={300}><b>book a consultation</b></Link> with us and let’s get started!
             </p>
-
         </div>
     );
 }
