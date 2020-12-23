@@ -49,7 +49,7 @@ const Book = () => {
                 </div>
             </form>
 
-            <button class="btn waves-effect waves-light" type="submit" name="action" form="sendForm">Send
+            <button class="btn blue darken-1 waves-effect waves-light" type="submit" name="action" form="sendForm">Send
                 <i class="material-icons right">send</i>
             </button>
 
