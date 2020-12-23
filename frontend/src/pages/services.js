@@ -77,7 +77,8 @@ const Services = () => {
             <p style={textDefaultStyle}>
                 And that’s just the beginning. If you’re interested in what we can do for your business, 
                 or have a project in mind that requires data, 
-                then <Link href="/" style={bookConsultStyle} to="Book" smooth={true} spy={true} duration={300}><b>book a consultation</b></Link> with us and let’s get started!
+                then <Link href="/" style={bookConsultStyle} to="Book" smooth={true} spy={true} duration={300}><b>book a consultation</b></Link> with us 
+                and let’s get started!
             </p>
         </div>
     );
