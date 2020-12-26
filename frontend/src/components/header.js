@@ -10,7 +10,7 @@ const Header = () => {
                     <li><Link to="Book" smooth={true} spy={true} duration={300}>BOOK A CONSULT</Link></li>
                     {/* <li><Link to="Portfolio" smooth={true} spy={true} duration={300}>PORTFOLIO</Link></li> */}
                     <li><a href="https://github.com/OsbornAI" target="_blank" rel="noreferrer">GITHUB</a></li>
-                    <li><a href="https://www.youtube.com/channel/UCVm_tIEM4uu5HrMT2tG5hVw" target="_blank" rel="noreferrer">YOUTUBE</a></li>
+                    {/* <li><a href="https://www.youtube.com/channel/UCVm_tIEM4uu5HrMT2tG5hVw" target="_blank" rel="noreferrer">YOUTUBE</a></li> */}
                     <li><a href="https://www.linkedin.com/in/OsbornAI/" target="_blank" rel="noreferrer">LINKEDIN</a></li>
                 </ul>
                 <div class="navbar-fixed">
@@ -29,7 +29,7 @@ const Header = () => {
                                 </ul>
                                 <ul class="right">
                                     <li><a href="https://github.com/OsbornAI" target="_blank" rel="noreferrer">GITHUB</a></li>
-                                    <li><a href="https://www.youtube.com/channel/UCVm_tIEM4uu5HrMT2tG5hVw" target="_blank" rel="noreferrer">YOUTUBE</a></li>
+                                    {/* <li><a href="https://www.youtube.com/channel/UCVm_tIEM4uu5HrMT2tG5hVw" target="_blank" rel="noreferrer">YOUTUBE</a></li> */}
                                     <li><a href="https://www.linkedin.com/in/OsbornAI/" target="_blank" rel="noreferrer">LINKEDIN</a></li>
                                 </ul>
                             </div>
