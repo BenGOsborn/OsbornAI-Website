@@ -101,6 +101,6 @@ const Book = () => {
             <br />
         </div>
     );
-}
+};
 
 export default Book;

@@ -1,16 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Header from './components/header';
-import Body from './components/body';
+import Home from './pages/home';
+import Articles from './pages/articles';
+import NotFound from './pages/notfound';
 import Footer from './components/footer';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header />
-    <Body />
-    <Footer />
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/articles" exact component={Articles} />
+        <Route path="*" component={NotFound} />
+      </Switch>
+      <Footer />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
