@@ -4,11 +4,16 @@ const Header = () => {
     return (
         <div className="Header">
             <header>
+
+                {/* I want to change my social media links up the top with a link to my articles, and I might add a carousel of links to my articles on the main page */}
+
                 <ul id="slide-out" class="sidenav">
                     <li><Link to="Home" smooth={true} spy={true} duration={300}>HOME</Link></li>
                     <li><Link to="Services" smooth={true} spy={true} duration={300}>SERVICES</Link></li>
                     <li><Link to="Book" smooth={true} spy={true} duration={300}>BOOK A CONSULT</Link></li>
                     {/* <li><Link to="Portfolio" smooth={true} spy={true} duration={300}>PORTFOLIO</Link></li> */}
+
+                    {/* These will have to be removed */}
                     <li><a href="https://github.com/OsbornAI" target="_blank" rel="noreferrer">GITHUB</a></li>
                     {/* <li><a href="https://www.youtube.com/channel/UCVm_tIEM4uu5HrMT2tG5hVw" target="_blank" rel="noreferrer">YOUTUBE</a></li> */}
                     <li><a href="https://www.linkedin.com/in/OsbornAI/" target="_blank" rel="noreferrer">LINKEDIN</a></li>

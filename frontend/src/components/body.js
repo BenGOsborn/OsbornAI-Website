@@ -1,7 +1,7 @@
 import Home from '../pages/home';
 import Services from '../pages/services';
-import Book from '../pages/book';
-import Portfolio from '../pages/portfolio';
+// import Book from '../pages/book';
+// import Portfolio from '../pages/portfolio';
 
 const Body = () => {
     return (
@@ -10,7 +10,7 @@ const Body = () => {
             <div class="container">
                 <Home />
                 <Services />
-                <Book />
+                {/* <Book /> */}
                 {/* <Portfolio /> */}
             </div>
 

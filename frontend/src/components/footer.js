@@ -1,3 +1,5 @@
+import Book from '../pages/book';
+
 const Footer = () => {
     const linkStyle = {
         color: 'white'
@@ -9,6 +11,9 @@ const Footer = () => {
 
     return (
         <div className="Footer">
+            <div class="container">
+                <Book />
+            </div>
             <footer class="page-footer grey darken-4">
                 <div class="container center">
                     <div class="container">
