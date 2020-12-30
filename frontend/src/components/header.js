@@ -9,15 +9,15 @@ const Header = () => {
         if (url === "/") {
             return (
                 <>
-                    <li><Link to="About" smooth={true} duration={400}>ABOUT</Link></li>
-                    <li><Link to="Services" smooth={true} duration={400}>SERVICES</Link></li>
+                    <li><Link href="/" to="About" smooth={true} duration={400}>ABOUT</Link></li>
+                    <li><Link href="/" to="Services" smooth={true} duration={400}>SERVICES</Link></li>
                 </>
             );
         } else {
             return (
                 <>
-                    <li><HashLink to="/#About" smooth={true}>ABOUT</HashLink></li> 
-                    <li><HashLink to="/#Services" smooth={true}>SERVICES</HashLink></li>
+                    <li><HashLink href="/" to="/#About" smooth={true}>ABOUT</HashLink></li> 
+                    <li><HashLink href="/" to="/#Services" smooth={true}>SERVICES</HashLink></li>
                 </>
             );
         }
@@ -28,7 +28,7 @@ const Header = () => {
             <header>
                 <ul id="slide-out" class="sidenav">
                     {links()}
-                    <li><Link to="Book" smooth={true} duration={400}>BOOK A CONSULT</Link></li>
+                    <li><Link href="/" to="Book" smooth={true} duration={400}>BOOK A CONSULT</Link></li>
                     <li><RouteLink to="/articles">ARTICLES</RouteLink></li>
 
                 </ul>

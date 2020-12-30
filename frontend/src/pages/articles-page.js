@@ -15,7 +15,7 @@ const ArticleCard = (props) => {
     return (
         // This should be in the form of a card
         <div className="ArticleCard">
-            <div class="col s6 m4 l4">
+            <div class="col s6 m6 l6">
                 <div class="card white">
                     <div class="card-content black-text center">
                         <span class="card-title"><Link to={path}><b>{String(props.title).toUpperCase()}</b></Link></span>
@@ -28,8 +28,8 @@ const ArticleCard = (props) => {
 };
 
 const Articles = () => {
-    // So this is going to take for us a list of items and have a page number button down the bottom as well to sort between them
-    // I'm going to have to pull through each article, and take the most recent ones using a division argument and then 
+    // I want an option on this page which can determine what page of articles to list and will split the articles depending on the page, and I want to be
+    // able to determine that if there are no items within the object we try and map then we will return an error to the user
 
     const articles = Object.keys(articleMetadata).map((articlePath) => {
         const currentArticle = articleMetadata[articlePath];
@@ -45,8 +45,10 @@ const Articles = () => {
                 <br />
                 <br />
                 <br />
-                <div class="row">
-                    {articles}
+                <div class="container">
+                    <div class="row">
+                        {articles}
+                    </div>
                 </div>
             </div>
         </div>

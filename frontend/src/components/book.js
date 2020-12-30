@@ -85,7 +85,6 @@ const Book = () => {
             <br />
             <br />
             <br />
-
             <b>
                 <p style={hookStyle}>
                     Ready to take the next step for your business?
@@ -94,9 +93,7 @@ const Book = () => {
             <p style={followUpStyle}>
                 Inquire about a consult below so we can get started. We look forward to working with you!
             </p>
-
             {isDisplayed()}
-
             <br />
             <br />
         </div>
