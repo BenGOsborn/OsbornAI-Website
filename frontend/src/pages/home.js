@@ -5,8 +5,8 @@ const Home = () => {
     return (
         <div className="Home">
             <div class="container">
-                <About />
-                <Services />
+                <About id="About" />
+                <Services id="Services" />
             </div>
         </div>
     );

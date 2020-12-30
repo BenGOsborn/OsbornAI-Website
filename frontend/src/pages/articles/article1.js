@@ -1,5 +1,3 @@
-import { articleMetadata } from "../articles";
-
 const article1 = () => {
     return (
         <div className="Article1">

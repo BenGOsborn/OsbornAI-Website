@@ -36,7 +36,7 @@ const Article = (props) => {
                     {article.component}
                 </div>
                 <Helmet>
-                    <title>{article.title}</title>
+                    <title>{`${article.title} - OsbornAI`}</title>
                     <meta name="author" content={article.author} />
                     <meta name="description" content={article.description} />
                     <meta name="keywords" content={article.keywords} />

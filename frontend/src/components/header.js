@@ -1,15 +1,35 @@
 import { Link } from 'react-scroll';
-import { Link as RouteLink } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
+import { Link as RouteLink, useLocation } from 'react-router-dom';
 
 const Header = () => {
+    const url = useLocation().pathname;
+
+    const links = () => {
+        if (url === "/") {
+            return (
+                <>
+                    <li><Link to="About" smooth={true} spy={true} duration={300}>ABOUT</Link></li>
+                    <li><Link to="Services" smooth={true} spy={true} duration={300}>SERVICES</Link></li>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    {/* It is not navigating to the component properly */}
+                    <li><HashLink smooth to="/#About">ABOUT</HashLink></li> 
+                    <li><HashLink smooth to="/#Services">SERVICES</HashLink></li>
+                </>
+            );
+        }
+    };            
+
     return (
         <div className="Header">
             <header>
                 <ul id="slide-out" class="sidenav">
 
-                    {/* How am I going to have these link to other pages and go to the correct section */}
-                    <li><Link to="Home" smooth={true} spy={true} duration={300}>HOME</Link></li>
-                    <li><Link to="Services" smooth={true} spy={true} duration={300}>SERVICES</Link></li>
+                    {links()}
                     <li><Link to="Book" smooth={true} spy={true} duration={300}>BOOK A CONSULT</Link></li>
                     <li><RouteLink to="/articles">ARTICLES</RouteLink></li>
 
@@ -23,8 +43,7 @@ const Header = () => {
                             </a>
                             <div class="hide-on-med-and-down">
                                 <ul class="left"> 
-                                    <li><Link to="Home" smooth={true} spy={true} duration={300}>HOME</Link></li>
-                                    <li><Link to="Services" smooth={true} spy={true} duration={300}>SERVICES</Link></li>
+                                    {links()}
                                 </ul>
                                 <ul class="right">
                                     <li><Link to="Book" smooth={true} spy={true} duration={300}>BOOK A CONSULT</Link></li>
