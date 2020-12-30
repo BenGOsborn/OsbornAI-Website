@@ -1,4 +1,4 @@
-import Book from '../pages/book';
+import Book from './book';
 
 const Footer = () => {
     const linkStyle = {
