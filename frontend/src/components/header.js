@@ -9,35 +9,33 @@ const Header = () => {
         if (url === "/") {
             return (
                 <>
-                    <li><Link to="About" smooth={true} spy={true} duration={300}>ABOUT</Link></li>
-                    <li><Link to="Services" smooth={true} spy={true} duration={300}>SERVICES</Link></li>
+                    <li><Link to="About" smooth={true} duration={400}>ABOUT</Link></li>
+                    <li><Link to="Services" smooth={true} duration={400}>SERVICES</Link></li>
                 </>
             );
         } else {
             return (
                 <>
-                    {/* It is not navigating to the component properly */}
-                    <li><HashLink smooth to="/#About">ABOUT</HashLink></li> 
-                    <li><HashLink smooth to="/#Services">SERVICES</HashLink></li>
+                    <li><HashLink to="/#About" smooth={true}>ABOUT</HashLink></li> 
+                    <li><HashLink to="/#Services" smooth={true}>SERVICES</HashLink></li>
                 </>
             );
         }
-    };            
-
+    };          
+    
     return (
         <div className="Header">
             <header>
                 <ul id="slide-out" class="sidenav">
-
                     {links()}
-                    <li><Link to="Book" smooth={true} spy={true} duration={300}>BOOK A CONSULT</Link></li>
+                    <li><Link to="Book" smooth={true} duration={400}>BOOK A CONSULT</Link></li>
                     <li><RouteLink to="/articles">ARTICLES</RouteLink></li>
 
                 </ul>
                 <div class="navbar-fixed">
                     <nav>
                         <div class="nav-wrapper blue darken-1">
-                            <a href="/" class="brand-logo center">OSBORNAI</a>
+                            <HashLink class="brand-logo center" to="/#top" smooth={true}>OSBORNAI</HashLink>
                             <a href="/" data-target="slide-out" class="sidenav-trigger">
                                 <i class="material-icons right">menu</i>
                             </a>
@@ -46,7 +44,7 @@ const Header = () => {
                                     {links()}
                                 </ul>
                                 <ul class="right">
-                                    <li><Link to="Book" smooth={true} spy={true} duration={300}>BOOK A CONSULT</Link></li>
+                                    <li><Link to="Book" smooth={true} duration={400}>BOOK A CONSULT</Link></li>
                                     <li><RouteLink to="/articles">ARTICLES</RouteLink></li>
                                 </ul>
                             </div>
