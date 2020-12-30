@@ -3,6 +3,7 @@
 
 // This is going to pull information from the custom URL containing the links that we have
 
+import { Suspense } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom'; // Clean the ones that are not used up
 import { articleMetadata } from './articles';
 
@@ -38,6 +39,30 @@ const Articles = () => {
         );
     });
 
+    const loadingComponent = () => {
+        return (
+            <>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <p class="flow-text">Loading...</p>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+            </>
+        );
+    };
+
     return (
         <div className="ArticlesPage">
             <div class="container">
@@ -46,9 +71,11 @@ const Articles = () => {
                 <br />
                 <br />
                 <div class="container">
-                    <div class="row">
-                        {articles}
-                    </div>
+                    <Suspense fallback={loadingComponent()}>
+                        <div class="row">
+                            {articles}
+                        </div>
+                    </Suspense>
                 </div>
             </div>
         </div>
