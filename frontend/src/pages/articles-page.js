@@ -26,9 +26,10 @@ const ArticleCard = (props) => {
 };
 
 const Articles = () => {
-    // I want an option on this page which can determine what page of articles to list and will split the articles depending on the page, and I want to be
-    // able to determine that if there are no items within the object we try and map then we will return an error to the user
 
+    // This is the big block of mapped article cards that we have to go and change for ths
+
+    // Use the content component instead of the 'react-infinite-scroll-component'
     const articles = Object.keys(articleMetadata).map((articlePath) => {
         const currentArticle = articleMetadata[articlePath];
         return (
@@ -51,7 +52,7 @@ const Articles = () => {
                     <br />
                     {/* I need to add an infinite scrolling feature */}
                     {/* Group the return by the amount to return which will be about 30 each call */}
-                    <div class="row">
+                    <div class="row" onScroll>
                         {articles}
                     </div>
                 </div>

@@ -39,14 +39,12 @@ const articleMetadata = {
 
 // This is going to render our raw HTML components
 const Article = (props) => {
-    // This will come from the URL that we are sent by
     const articleId = props.match.params.id;
     const article = articleMetadata[articleId];
 
-    const recents = Object.keys(articleMetadata).slice(0, 3).map((articlePath) => {
+    const recents = Object.keys(articleMetadata).filter(articlePath => articlePath !== articleId).slice(0, 3).map((articlePath) => {
         const currentArticle = articleMetadata[articlePath];
         return (
-            // My articles are not returning themselves properly
             <div class="col s12 m4 l4">
                 <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
             </div>
