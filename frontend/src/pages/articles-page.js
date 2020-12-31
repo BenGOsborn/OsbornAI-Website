@@ -3,8 +3,8 @@
 
 // This is going to pull information from the custom URL containing the links that we have
 
-import { Suspense } from 'react';
 import { Link } from 'react-router-dom'; // Clean the ones that are not used up
+import { Helmet } from 'react-helmet';
 import { articleMetadata } from './articles';
 
 
@@ -17,8 +17,8 @@ const ArticleCard = (props) => {
         <div className="ArticleCard">
             <div class="card white">
                 <div class="card-content black-text center">
-                    <span class="card-title"><Link to={path}><b>{String(props.title).toUpperCase()}</b></Link></span>
-                    <p>{props.author} - {props.date_published}</p>
+                    <span style={{fontWeight: 750}} class="card-title"><Link to={path}>{String(props.title).toUpperCase()}</Link></span>
+                    <p style={{fontWeight: 400, fontSize: 17.5}}>{props.author} - {props.date_published}</p>
                 </div>
             </div>
         </div>
@@ -32,35 +32,11 @@ const Articles = () => {
     const articles = Object.keys(articleMetadata).map((articlePath) => {
         const currentArticle = articleMetadata[articlePath];
         return (
-            <div class="col s6 m6 l6">
+            <div class="col s12 m6 l6">
                 <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
             </div>
         );
     });
-
-    const loadingComponent = () => {
-        return (
-            <>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <p class="flow-text">Loading...</p>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-            </>
-        );
-    };
 
     return (
         <div className="ArticlesPage">
@@ -68,18 +44,24 @@ const Articles = () => {
                 <br />
                 <br />
                 <div class="container center">
-                    <p class="flow-text">
+                    <p style={{fontSize: 30}} class="flow-text">
                         Here's a list of our existing articles. Check back regularly to find
                         the latest topics, news, and tutorials regarding all things data science!
                     </p>
                     <br />
-                    <Suspense fallback={loadingComponent()}>
-                        <div class="row">
-                            {articles}
-                        </div>
-                    </Suspense>
+                    {/* I need to add an infinite scrolling feature */}
+                    {/* Group the return by the amount to return which will be about 30 each call */}
+                    <div class="row">
+                        {articles}
+                    </div>
                 </div>
             </div>
+            <Helmet>
+                <title>Articles - OsbornAI</title>
+                <meta name="author" content="OsbornAI" />
+                <meta name="description" content="A list of our existing articles containing the latest topics, news, and tutorials regarding all things data science!" />
+                <meta name="keywords" content="articles, data science, ai, machine learning, news, blog, tutorials" />
+            </Helmet>
         </div>
     );
 
