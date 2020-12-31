@@ -4,24 +4,21 @@
 // This is going to pull information from the custom URL containing the links that we have
 
 import { Suspense } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom'; // Clean the ones that are not used up
+import { Link } from 'react-router-dom'; // Clean the ones that are not used up
 import { articleMetadata } from './articles';
 
 
 // Maybe I wont even need this article card
 const ArticleCard = (props) => {
-    const { url } = useRouteMatch();
-    const path = `${url}/${props.path}`
+    const path = `/articles/${props.path}`
 
     return (
         // This should be in the form of a card
         <div className="ArticleCard">
-            <div class="col s6 m6 l6">
-                <div class="card white">
-                    <div class="card-content black-text center">
-                        <span class="card-title"><Link to={path}><b>{String(props.title).toUpperCase()}</b></Link></span>
-                        <p>{props.author} - {props.date_published}</p>
-                    </div>
+            <div class="card white">
+                <div class="card-content black-text center">
+                    <span class="card-title"><Link to={path}><b>{String(props.title).toUpperCase()}</b></Link></span>
+                    <p>{props.author} - {props.date_published}</p>
                 </div>
             </div>
         </div>
@@ -35,7 +32,9 @@ const Articles = () => {
     const articles = Object.keys(articleMetadata).map((articlePath) => {
         const currentArticle = articleMetadata[articlePath];
         return (
-            <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
+            <div class="col s6 m6 l6">
+                <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
+            </div>
         );
     });
 
@@ -83,4 +82,4 @@ const Articles = () => {
 
 };
 
-export default Articles;
+export { Articles, ArticleCard };

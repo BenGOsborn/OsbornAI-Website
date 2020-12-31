@@ -6,7 +6,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/header';
 import Home from './pages/home';
 
-import Articles from './pages/articles-page';
+import { Articles } from './pages/articles-page';
 import { Article } from './pages/articles';
 
 import NotFound from './pages/notfound';

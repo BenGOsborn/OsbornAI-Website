@@ -1,15 +1,16 @@
 // This is going to be a single JSON based component that will contain the metadata for each article
 
 import { Helmet } from 'react-helmet';
-
-import article1 from './articles/article1';
-import article2 from './articles/article2';
-
 import { Link } from 'react-router-dom';
+import { ArticleCard } from './articles-page';
+
+import TestArticle from './articles/test-article';
 
 const articleMetadata = {
-    'test-one': {'component': article1(), 'title': 'Article 1', 'author': 'OsbornAI', 'description': 'Art1', 'keywords': 'ArtKeyword1', 'date_published': 'Dec 30'},
-    'test-two': {'component': article2(), 'title': 'Article 2', 'author': 'OsbornAI', 'description': 'Art2', 'keywords': 'ArtKeyword2', 'date_published': 'Dec 30'},
+    'test-one': {'component': TestArticle(), 'title': 'Article 1', 'author': 'OsbornAI', 'description': 'Art1', 'keywords': 'ArtKeyword1', 'date_published': 'Dec 30'},
+    'test-two': {'component': TestArticle(), 'title': 'Article 2', 'author': 'OsbornAI', 'description': 'Art2', 'keywords': 'ArtKeyword2', 'date_published': 'Dec 30'},
+    'test-three': {'component': TestArticle(), 'title': 'Article 3', 'author': 'OsbornAI', 'description': 'Art3', 'keywords': 'ArtKeyword3', 'date_published': 'Dec 31'},
+    'test-four': {'component': TestArticle(), 'title': 'Article 4', 'author': 'OsbornAI', 'description': 'Art4', 'keywords': 'ArtKeyword4', 'date_published': 'Dec 31'},
 };
 
 // This is going to render our raw HTML components
@@ -18,10 +19,21 @@ const Article = (props) => {
     const articleId = props.match.params.id;
     const article = articleMetadata[articleId];
 
+    const recents = Object.keys(articleMetadata).slice(0, 3).map((articlePath) => {
+        const currentArticle = articleMetadata[articlePath];
+        return (
+            // My articles are not returning themselves properly
+            <div class="col s12 m4 l4">
+                <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
+            </div>
+        );
+    });
+
     if (!article) {
         return (
             <div className="Article">
                 <div class="container center">
+                    <br />
                     <br />
                     <br />
                     <br />
@@ -41,6 +53,7 @@ const Article = (props) => {
                     <br />
                     <br />
                     <br />
+                    <br />
                 </div>
             </div>
         );
@@ -48,7 +61,22 @@ const Article = (props) => {
         return (
             <div className="Article">
                 <div class="container">
+                    <div class="center">
+                        <h1>{article.title}</h1>
+                        <p class="col s6 m6 l6 flow-text">{article.author} - {article.date_published} </p>
+                    </div>
+                    <br />
                     {article.component}
+                    <br />
+                    <br />
+                    <div class="center">
+                        <p class="flow-text">
+                            Enjoyed this article? Checkout our most recent posts!
+                        </p>
+                        <div class="row">
+                            {recents}
+                        </div>
+                    </div>
                 </div>
                 <Helmet>
                     <title>{`${article.title} - OsbornAI`}</title>
