@@ -3,10 +3,10 @@
 
 // This is going to pull information from the custom URL containing the links that we have
 
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Clean the ones that are not used up
 import { Helmet } from 'react-helmet';
 import { articleMetadata } from './articles';
-
 
 // Maybe I wont even need this article card
 const ArticleCard = (props) => {
@@ -25,12 +25,39 @@ const ArticleCard = (props) => {
     );
 };
 
+const pageSize = 20;
+
+const grabArticles = (page) => {
+    const articles = Object.keys(articleMetadata).slice((page - 1) * pageSize, page * pageSize);
+
+    return articles;
+};
+
 const Articles = () => {
+    const [page, setPage] = useState(1);
+    const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(true); // Do something with this loading tag
 
-    // This is the big block of mapped article cards that we have to go and change for ths
+    const handleScroll = (event) => {
+        if (document.body.scrollHeight - window.scrollY < 1400) {
+            setPage(prev => prev + 1);
+        }
+    };
 
-    // Use the content component instead of the 'react-infinite-scroll-component'
-    const articles = Object.keys(articleMetadata).map((articlePath) => {
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        setLoading(true);
+        const articles = grabArticles(page);
+        setArticles(prev => [...prev, ...articles]);
+        setLoading(false);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [page]);
+
+    const articleDisplay = articles.map((articlePath) => {
         const currentArticle = articleMetadata[articlePath];
         return (
             <div class="col s12 m6 l6">
@@ -44,16 +71,14 @@ const Articles = () => {
             <div class="container">
                 <br />
                 <br />
-                <div class="container center">
+                <div class="container center" >
                     <p style={{fontSize: 30}} class="flow-text">
                         Here's a list of our existing articles. Check back regularly to find
                         the latest topics, news, and tutorials regarding all things data science!
                     </p>
                     <br />
-                    {/* I need to add an infinite scrolling feature */}
-                    {/* Group the return by the amount to return which will be about 30 each call */}
-                    <div class="row" onScroll>
-                        {articles}
+                    <div class="row">
+                        {articleDisplay}
                     </div>
                 </div>
             </div>
