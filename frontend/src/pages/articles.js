@@ -40,13 +40,12 @@ const Article = (props) => {
                     <br />
                     <br />
                     <br />
-                    <br />
-                    <br />
-                    <h3>The article you're looking for does not exist!</h3>
+                    <h1>404 Error:</h1>
+                    <h3>The article you're looking for cannot be found!</h3>
                     <div class="container">
                         <p class="flow-text">
                             You can find a list of our existing articles <Link href="/" to="/articles">here</Link>. 
-                            Check back regularly to find the latest topics, news and tutorials regarding all things data science!
+                            Check back regularly to find the latest topics, news, and tutorials regarding all things data science!
                         </p>
                     </div>
                     <br />

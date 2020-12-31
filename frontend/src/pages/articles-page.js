@@ -67,9 +67,12 @@ const Articles = () => {
             <div class="container">
                 <br />
                 <br />
-                <br />
-                <br />
-                <div class="container">
+                <div class="container center">
+                    <p class="flow-text">
+                        Here's a list of our existing articles. Check back regularly to find
+                        the latest topics, news, and tutorials regarding all things data science!
+                    </p>
+                    <br />
                     <Suspense fallback={loadingComponent()}>
                         <div class="row">
                             {articles}
