@@ -9,6 +9,9 @@ const Footer = () => {
         fontSize: 14
     };
 
+    const date = new Date();
+    const year = date.getFullYear();
+
     return (
         <div className="Footer">
             <div class="container">
@@ -20,14 +23,13 @@ const Footer = () => {
                         <div class="container">
                             <div class="container">
                                 <a class="col left" href="https://github.com/OsbornAI" style={linkStyle} target="_blank" rel="noreferrer">GitHub</a>
-                                {/* <a class="col center" href="https://www.youtube.com/channel/UCVm_tIEM4uu5HrMT2tG5hVw" style={linkStyle} target="_blank" rel="noreferrer">YouTube</a> */}
                                 <a class="col right" href="https://www.linkedin.com/in/OsbornAI/" style={linkStyle} target="_blank" rel="noreferrer">LinkedIn</a>
                             </div>
                         </div>
                     </div>
                     <br />
                     <div style={copyrightStyle}>
-                        © Copyright OsbornAI 2021
+                        © Copyright OsbornAI {year}
                     </div>
                 </div>
             </footer>
