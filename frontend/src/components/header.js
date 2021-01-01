@@ -31,15 +31,14 @@ const Header = () => {
                     {links()}
                     <li><Link href="/" to="Book" smooth={true} duration={400}>BOOK A CONSULT</Link></li>
                     <li><RouteLink to="/articles">ARTICLES</RouteLink></li>
-
                 </ul>
                 <div class="navbar-fixed">
                     <nav>
                         <div class="nav-wrapper blue darken-1">
-                            <HashLink class="brand-logo center" to="/#top" smooth={true} style={{fontSize: 40}}>
+                            <HashLink class="brand-logo center" to="/#top" smooth={true} style={{fontSize: 34}}>
                                 <div class="valign-wrapper row">
                                     <div class="col valign-wrapper">
-                                        <img class="responsive-img center" src={headerLogo} width="48" height="48"/>
+                                        <img class="center" src={headerLogo} alt="OsbornAI logo" width="42" height="42"/>
                                     </div>
                                     <div class="col valign-wrapper">
                                         OSBORNAI
