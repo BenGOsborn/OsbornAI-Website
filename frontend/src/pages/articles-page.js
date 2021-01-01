@@ -6,33 +6,39 @@ import articleMetadata from './articles/article-metadata';
 const Articles = () => {
     const [page, setPage] = useState(1);
     const [articles, setArticles] = useState([]);
-    const [loading, setLoading] = useState(true); // Do something with this loading tag
+    const [loading, setLoading] = useState(true);
 
     const pageSize = 20;
 
     const grabArticles = (page) => {
+        console.log(page);
+        
         const articles = Object.keys(articleMetadata).slice((page - 1) * pageSize, page * pageSize);
 
         return articles;
     };
 
-    const handleScroll = (event) => {
-        if (document.body.scrollHeight - window.scrollY < 1400) {
-            setPage(prev => prev + 1);
-        }
-    };
-
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll, { passive: true });
+        const handleScroll = (event) => {
+            if ((document.body.scrollHeight - window.scrollY < 1400) && (loading === false)) {
+                setPage(prev => prev + 1);
+            }
+        };
 
-        setLoading(true);
-        const articles = grabArticles(page);
-        setArticles(prev => [...prev, ...articles]);
-        setLoading(false);
+        window.addEventListener("scroll", handleScroll, { passive: true });
 
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
+    }, [loading]);
+
+    useEffect(() => {
+        setLoading(true);
+        const articles = grabArticles(page);
+        if (articles.length !== 0) {
+            setArticles(prev => [...prev, ...articles]);
+            setLoading(false);
+        }
     }, [page]);
 
     const articleDisplay = articles.map((articlePath) => {
