@@ -129,7 +129,7 @@ const Article = (props) => {
                     <br />
                     <br />
                     <div class="center">
-                        <p class="flow-text">
+                        <p class="flow-text" style={{fontSize: 23}}>
                             Enjoyed this article? Checkout our most recent posts!
                         </p>
                         <div class="row">

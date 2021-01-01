@@ -1,10 +1,10 @@
 const About = () => {
     const aboutHookStyle = {
-        fontSize: 23
+        fontSize: 23,
     };
 
     const aboutFollowStyle = {
-        fontSize: 18
+        fontSize: 20,
     };
 
     return (
@@ -47,7 +47,7 @@ const About = () => {
                     </p>
                 </div>
             </div>
-
+            <br />
             <p style={aboutFollowStyle}>
                 Here at OsbornAI, we understand the importance of data, so we make it our mission 
                 to help you use data in the most effective way for your business, so you can make 
