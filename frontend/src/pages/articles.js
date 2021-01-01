@@ -42,14 +42,52 @@ const Article = (props) => {
     const articleId = props.match.params.id;
     const article = articleMetadata[articleId];
 
-    const recents = Object.keys(articleMetadata).filter(articlePath => articlePath !== articleId).slice(0, 3).map((articlePath) => {
-        const currentArticle = articleMetadata[articlePath];
-        return (
-            <div class="col s12 m4 l4">
-                <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
-            </div>
-        );
-    });
+    const validArticles = Object.keys(articleMetadata).filter(articlePath => articlePath !== articleId).slice(0, 3);
+
+    const recents = () => {
+        if (validArticles.length === 0) {
+            return (
+                <>
+                    <div class="container">
+                        <p class="flow-text" style={{fontSize: 20}}>
+                            There are no other articles available at this time. 
+                            Check back regularly to find the latest topics, news and tutorials regarding all things data science!
+                        </p>;
+                    </div>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    {
+                        validArticles.map((articlePath) => {
+                            const currentArticle = articleMetadata[articlePath];
+                            if (validArticles.length === 1) {
+                                return (
+                                    <div class="col s12 m12 l12">
+                                        <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
+                                    </div>
+                                );
+                            } else if (validArticles.length === 2) {
+                                return (
+                                    <div class="col s12 m12 l6">
+                                        <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
+                                    </div>
+                                );
+                            } else {
+                                return (
+                                    <div class="col s12 m12 l4">
+                                        <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
+                                    </div>
+                                );
+                            }
+                        })
+                    }
+                </>
+            );
+        }
+    };
+
 
     if (!article) {
         return (
@@ -95,7 +133,7 @@ const Article = (props) => {
                             Enjoyed this article? Checkout our most recent posts!
                         </p>
                         <div class="row">
-                            {recents}
+                            {recents()}
                         </div>
                     </div>
                 </div>

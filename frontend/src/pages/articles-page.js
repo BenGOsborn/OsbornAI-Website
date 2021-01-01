@@ -59,11 +59,19 @@ const Articles = () => {
 
     const articleDisplay = articles.map((articlePath) => {
         const currentArticle = articleMetadata[articlePath];
-        return (
-            <div class="col s12 m6 l6">
-                <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
-            </div>
-        );
+        if ((articles.length % 2 !== 0) && (articlePath === articles[articles.length - 1])) {
+            return (
+                <div class="col s12 m12 l12">
+                    <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
+                </div>
+            );
+        } else {
+            return (
+                <div class="col s12 m12 l6">
+                    <ArticleCard path={articlePath} title={currentArticle.title} date_published={currentArticle.date_published} author={currentArticle.author} />
+                </div>
+            );
+        }
     });
 
     return (

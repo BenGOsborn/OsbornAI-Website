@@ -12,12 +12,13 @@ const About = () => {
             <br />
             <br />
             <br />
-            <div class="row">
-                <div class="col s12 m12 l8">
+            {/* This is not rendering properly */}
+            <div class="row center valign-wrapper">
+                <div class="col s12 m12 l6">
                     <img class="responsive-img" alt="Black and Gray Mining Rig"
                     src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="562.5" height="375"/>
                 </div>
-                <div class="col s12 m12 l4">
+                <div class="col s12 m12 l6">
                     <p style={aboutHookStyle}>
                         <p>
                             Data can be confusing, but it’s also essential to the success of your business. 
