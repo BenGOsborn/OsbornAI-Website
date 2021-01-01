@@ -1,7 +1,7 @@
 import { Link } from 'react-scroll';
 import { HashLink } from 'react-router-hash-link';
 import { Link as RouteLink, useLocation } from 'react-router-dom';
-import headerLogo from './headerLogo.png';
+import headerLogo from './header-logo.png';
 
 const Header = () => {
     const url = useLocation().pathname;

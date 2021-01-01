@@ -6,10 +6,10 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/header';
 import Home from './pages/home';
 
-import { Articles } from './pages/articles-page';
-import { Article } from './pages/articles';
+import Articles from './pages/articles-page';
+import Article from './pages/article';
 
-import NotFound from './pages/notfound';
+import NotFound from './pages/not-found';
 import Footer from './components/footer';
 
 ReactDOM.render(
@@ -21,10 +21,7 @@ ReactDOM.render(
 
         <Route path="/articles" exact component={Articles} />
         <Route path="/articles/:id" exact component={Article} />
-
-        {/* Now this route is going to take in the prop of the route it is sent to and target that URL */}
-
-        <Route path="*" component={NotFound} /> {/* This route will have to be used for bad /article/ routes as well */}
+        <Route path="*" component={NotFound} />
       </Switch>
       <Footer />
     </Router>
