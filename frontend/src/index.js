@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-import ReactGA from 'react-ga';
 
 import Header from './components/header';
 import Home from './pages/home';
@@ -12,15 +11,12 @@ import Article from './pages/article';
 import NotFound from './pages/not-found';
 import Footer from './components/footer';
 
-ReactGA.initialize('G-KPL5T3PYW1');
-
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />
-
         <Route path="/articles" exact component={Articles} />
         <Route path="/articles/:id" exact component={Article} />
         <Route path="*" component={NotFound} />
