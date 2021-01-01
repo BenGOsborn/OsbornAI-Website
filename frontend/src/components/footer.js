@@ -27,7 +27,7 @@ const Footer = () => {
                     </div>
                     <br />
                     <div style={copyrightStyle}>
-                        © Copyright OsbornAI 2020
+                        © Copyright OsbornAI 2021
                     </div>
                 </div>
             </footer>
