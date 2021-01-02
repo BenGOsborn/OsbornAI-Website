@@ -103,6 +103,7 @@ const Article = (props) => {
                         <p class="col s6 m6 l6 flow-text">{article.author} - {article.date_published} </p>
                     </div>
                     <br />
+                    <br />
                     {article.component}
                     <br />
                     <br />
