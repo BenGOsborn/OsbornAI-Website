@@ -1,7 +1,7 @@
 import ReactGA from 'react-ga';
 
 const init = () => {
-    ReactGA.initialize('G-KPL5T3PYW1');
+    ReactGA.initialize('UA-186264216-1');
 };
 
 const sendEvent = (payload) => {
