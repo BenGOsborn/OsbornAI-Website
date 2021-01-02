@@ -1,6 +1,14 @@
+import { useEffect } from 'react';
+import analytics from '../analytics';
 import { Link } from 'react-scroll';
 
 const Home = () => {
+    useEffect(() => {
+        analytics.init();
+        analytics.sendPageview('/');
+        console.log("/");
+    });
+
     return (
         <div className="Home">
             <div class="container">

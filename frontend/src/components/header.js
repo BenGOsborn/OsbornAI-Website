@@ -6,6 +6,36 @@ import headerLogo from './header-logo.png';
 const Header = () => {
     const url = useLocation().pathname;
 
+    const title = () => {
+        if (url === "/") {
+            return (
+                <Link class="brand-logo center" href="/" to="Top" smooth={true} duration={400} style={{fontSize: 34}}>
+                    <div class="valign-wrapper row">
+                        <div class="col valign-wrapper">
+                            <img class="center" src={headerLogo} alt="OsbornAI logo" width="42" height="42"/>
+                        </div>
+                        <div class="col valign-wrapper">
+                            OSBORNAI
+                        </div>
+                    </div>
+                </Link>
+            );
+        } else {
+            return (
+                <RouteLink class="brand-logo center" to="/" style={{fontSize: 34}}>
+                    <div class="valign-wrapper row">
+                        <div class="col valign-wrapper">
+                            <img class="center" src={headerLogo} alt="OsbornAI logo" width="42" height="42"/>
+                        </div>
+                        <div class="col valign-wrapper">
+                            OSBORNAI
+                        </div>
+                    </div>
+                </RouteLink>
+            );
+        }
+    };
+
     const links = () => {
         if (url === "/") {
             return (
@@ -26,6 +56,7 @@ const Header = () => {
     
     return (
         <div className="Header">
+            <div className="Top" />
             <header>
                 <ul id="slide-out" class="sidenav">
                     {links()}
@@ -35,16 +66,7 @@ const Header = () => {
                 <div class="navbar-fixed">
                     <nav>
                         <div class="nav-wrapper blue darken-1">
-                            <HashLink class="brand-logo center" to="/#top" smooth={true} style={{fontSize: 34}}>
-                                <div class="valign-wrapper row">
-                                    <div class="col valign-wrapper">
-                                        <img class="center" src={headerLogo} alt="OsbornAI logo" width="42" height="42"/>
-                                    </div>
-                                    <div class="col valign-wrapper">
-                                        OSBORNAI
-                                    </div>
-                                </div>
-                            </HashLink>
+                            {title()}
                             <a href="/" data-target="slide-out" class="sidenav-trigger">
                                 <i class="material-icons right">menu</i>
                             </a>

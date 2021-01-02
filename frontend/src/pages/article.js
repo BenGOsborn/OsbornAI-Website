@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import analytics from '../analytics';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import ArticleCard from '../components/article-card';
@@ -8,6 +10,17 @@ const Article = (props) => {
     const article = articleMetadata[articleId];
 
     const validArticles = Object.keys(articleMetadata).filter(articlePath => articlePath !== articleId).slice(0, 3);
+
+    useEffect(() => {
+        const id = props.match.params.id;
+        const validArticle = articleMetadata[id];
+
+        if (validArticle) {
+            analytics.init();
+            analytics.sendPageview(`/articles/${id}`);
+            console.log(`/articles/${id}`);
+        }
+    });
 
     const recents = () => {
         if (validArticles.length === 0) {

@@ -1,3 +1,4 @@
+import analytics from '../analytics';
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import ArticleCard from '../components/article-card';
@@ -11,12 +12,16 @@ const Articles = () => {
     const pageSize = 20;
 
     const grabArticles = (page) => {
-        console.log(page);
-        
         const articles = Object.keys(articleMetadata).slice((page - 1) * pageSize, page * pageSize);
 
         return articles;
     };
+
+    useEffect(() => {
+        analytics.init();
+        analytics.sendPageview('/articles');
+        console.log("/articles");
+    });
 
     useEffect(() => {
         const handleScroll = (event) => {

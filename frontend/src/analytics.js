@@ -13,4 +13,6 @@ const sendPageview = (path) => {
     ReactGA.pageview(path);
 };
 
-export default { init, sendEvent, sendPageview };
+const exprt = { init, sendEvent, sendPageview }
+
+export default exprt;
