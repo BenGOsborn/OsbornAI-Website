@@ -7,7 +7,7 @@ const Home = () => {
         analytics.init();
         analytics.sendPageview('/');
         console.log("/");
-    });
+    }, []);
 
     return (
         <div className="Home">

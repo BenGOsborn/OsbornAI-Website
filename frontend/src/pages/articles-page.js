@@ -20,8 +20,7 @@ const Articles = () => {
     useEffect(() => {
         analytics.init();
         analytics.sendPageview('/articles');
-        console.log("/articles");
-    });
+    }, []);
 
     useEffect(() => {
         const handleScroll = (event) => {
