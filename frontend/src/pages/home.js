@@ -6,7 +6,6 @@ const Home = () => {
     useEffect(() => {
         analytics.init();
         analytics.sendPageview('/');
-        console.log("/");
     }, []);
 
     return (
