@@ -13,7 +13,7 @@ import Footer from './components/footer';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router onUpdate={() => window.scrollTo(0, 0)}>
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />
