@@ -12,6 +12,10 @@ const Article = (props) => {
     const validArticles = Object.keys(articleMetadata).filter(articlePath => articlePath !== articleId).slice(0, 3);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         const id = props.match.params.id;
         const validArticle = articleMetadata[id];
 
