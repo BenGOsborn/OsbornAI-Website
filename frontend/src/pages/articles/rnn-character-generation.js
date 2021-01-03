@@ -266,7 +266,6 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text center" style={{fontWeight: 600}}>Credits:</p>
-                <br />
                 <div class="row">
                     <div class="col">
                         <p style={{fontWeight: 500}}>Gutenberg Dataset</p>
@@ -278,21 +277,21 @@ const RNNTextGeneration = () => {
                             <li>Address: Gothenburg, Sweden</li>
                             <li>Publisher: Association for Computational Linguistics</li>
                             <li>Pages: 96-105</li>
-                            <li>URL: <a href="http://www.aclweb.org/anthology/E14-3011" target="_blank" rel="noreferrer">http://www.aclweb.org/anthology/E14-3011</a>, <a href="https://web.eecs.umich.edu/~lahiri/gutenberg_dataset.html" target="_blank" rel="noreferrer">https://web.eecs.umich.edu/~lahiri/gutenberg_dataset.html1</a></li>
+                            <li>URL: <a href="https://bit.ly/391s7bQ" target="_blank" rel="noreferrer">https://bit.ly/391s7bQ</a>, <a href="https://bit.ly/2Lgks13" target="_blank" rel="noreferrer">https://bit.ly/2Lgks13</a></li>
                         </ul>
                     </div>
                     <div class="col">
                         <p style={{fontWeight: 500}}>Alice In Wonderland</p>
                         <ul>
-                            <li>Dataset Provider: <a href="https://github.com/phillipj" target="_blank" rel="noreferrer">https://github.com/phillipj</a></li>
-                            <li>Dataset Link: <a href="https://gist.githubusercontent.com/phillipj/4944029/raw/75ba2243dd5ec2875f629bf5d79f6c1e4b5a8b46/alice_in_wonderland.txt" target="_blank" rel="noreferrer">https://gist.githubusercontent.com/phillipj/4944029/raw/75ba2243dd5ec2875f629bf5d79f6c1e4b5a8b46/alice_in_wonderland.txt</a></li>
+                            <li>Dataset Provider: <a href="https://bit.ly/3hBJbc9" target="_blank" rel="noreferrer">https://bit.ly/3hBJbc9</a></li>
+                            <li>Dataset Link: <a href="https://bit.ly/3b6a5rk" target="_blank" rel="noreferrer">https://bit.ly/3b6a5rk</a></li>
                             <li>Author: Lewis Carroll</li>
                             <li>Booktitle: Alice's Adventures In Wonderland</li>
                             <li>Publish Date: November 1865</li>
                             <li>Publisher: Macmillan Publishers</li>
                             <li>Illustrator: John Tennial</li>
                             <li>Pages: 88</li>
-                            <li>Book URL: <a href="https://www.amazon.com.au/Alice-Wonderland-Lewis-Carroll-ebook/dp/B003A83VUK" target="_blank" rel="noreferrer">https://www.amazon.com.au/Alice-Wonderland-Lewis-Carroll-ebook/dp/B003A83VUK</a></li>
+                            <li>Book URL: <a href="https://amzn.to/2X4WCIa" target="_blank" rel="noreferrer">https://amzn.to/2X4WCIa</a></li>
                         </ul>
                     </div>
                 </div>

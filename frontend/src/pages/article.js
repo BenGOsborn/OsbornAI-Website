@@ -30,7 +30,7 @@ const Article = (props) => {
                         <p class="flow-text" style={{fontSize: 20}}>
                             There are no other articles available at this time. 
                             Check back regularly to find the latest topics, news and tutorials regarding all things data science!
-                        </p>;
+                        </p>
                     </div>
                 </>
             );
