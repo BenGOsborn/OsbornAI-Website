@@ -1,13 +1,8 @@
 import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-scroll';
 import { Link as RouteLink } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const NotFound = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
     return (
         <div className="NotFound">
             <div class="container">

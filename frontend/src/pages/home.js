@@ -6,8 +6,6 @@ const Home = () => {
     useEffect(() => {
         analytics.init();
         analytics.sendPageview('/');
-
-        window.scrollTo(0, 0);
     }, []);
 
     return (

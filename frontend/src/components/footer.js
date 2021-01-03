@@ -1,14 +1,7 @@
 import Book from './book';
+import { Link } from 'react-scroll';
 
 const Footer = () => {
-    const linkStyle = {
-        color: 'white'
-    };
-
-    const copyrightStyle = {
-        fontSize: 14
-    };
-
     const date = new Date();
     const year = date.getFullYear();
 
@@ -22,13 +15,14 @@ const Footer = () => {
                     <div class="container">
                         <div class="container">
                             <div class="container">
-                                <a class="col left" href="https://github.com/OsbornAI" style={linkStyle} target="_blank" rel="noreferrer">GitHub</a>
-                                <a class="col right" href="https://www.linkedin.com/in/OsbornAI/" style={linkStyle} target="_blank" rel="noreferrer">LinkedIn</a>
+                                <a class="col left" href="https://github.com/OsbornAI" style={{color: 'white', fontWeight: 500}} target="_blank" rel="noreferrer">GitHub</a>
+                                <Link class="col center" href="/" to="Top" smooth={true} duration={400} style={{color: 'white', fontWeight: 500}}>Top Of Page</Link>
+                                <a class="col right" href="https://www.linkedin.com/in/OsbornAI/" style={{color: 'white', fontWeight: 500}} target="_blank" rel="noreferrer">LinkedIn</a>
                             </div>
                         </div>
                     </div>
                     <br />
-                    <div style={copyrightStyle}>
+                    <div style={{fontSize: 14}}>
                         © Copyright OsbornAI {year}
                     </div>
                 </div>

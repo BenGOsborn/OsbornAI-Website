@@ -20,8 +20,6 @@ const Articles = () => {
     useEffect(() => {
         analytics.init();
         analytics.sendPageview('/articles');
-
-        window.scrollTo(0, 0);
     }, []);
 
     useEffect(() => {
