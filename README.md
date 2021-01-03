@@ -1,2 +1,8 @@
-# Company-Website
-The official repository featuring the source code for the OsbornAI website.
+# OsbornAI Website
+
+<br />
+
+## This repository contains the source code for the [OsbornAI website](https://osbornai.com/#/)
+
+<br />
+
