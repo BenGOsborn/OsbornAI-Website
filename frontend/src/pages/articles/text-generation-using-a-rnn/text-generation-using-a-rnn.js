@@ -10,6 +10,9 @@ const RNNTextGeneration = () => {
             <div class="container">
                 <img class="responsive-img center" alt="Pile of Scrabble Letter Pieces" src="https://images.pexels.com/photos/278888/pexels-photo-278888.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"/>
                 <p class="flow-text" style={style}>
+                    <b>Introduction</b>
+                    <br />
+                    <br />
                     In this article we're going to be building an RNN (Recurrent Neural Network) that generates text one character at a time. Before we get started it should be noted
                     that the model we will be building in this episode certaintly won't be fooling any decent English teacher, but I encourage you to play around with the code
                     featured to create a model that you're happy with.
@@ -28,6 +31,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Loading raw data</b>
+                    <br />
+                    <br />
                     Now that the data has been downloaded, we're going to read the contents of each file and store them in a Pandas series. Set the <i>root</i> variable to be
                     the location of the documents located within your downloaded Gutenberg dataset. We will then load these files, shuffle them, and then select a sample of
                     documents.
@@ -45,6 +51,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Data cleaning</b>
+                    <br />
+                    <br />
                     Now let's go and clean up our dataset. I only want the model to contain letters, whitespaces and punctuation, so I'll go and make a string that contains these
                     valid characters. 
                     <br />
@@ -61,6 +70,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Data encoding</b>
+                    <br />
+                    <br />
                     Now we're going to create a dictionary called <i>char2num</i> which maps each of our valid characters to a unique number. We'll also create another dictionary 
                     called <i>num2char</i> which will map that number back to it's respective character.
                     <br />
@@ -75,7 +87,10 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
-                    Now we will create two list, <i>X</i> and <i>Y</i>. <i>X</i> will store our sequences of characters, and <i>Y</i> will store the character that should come after each sequence,
+                    <b>Dataset generation</b>
+                    <br />
+                    <br />
+                    Now we will create two lists, <i>X</i> and <i>Y</i>. <i>X</i> will store our sequences of characters, and <i>Y</i> will store the character that should come after each sequence,
                     which will act as the labels.
                     <br />
                     <br />
@@ -97,6 +112,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Create training and validation sets</b>
+                    <br />
+                    <br />
                     Now we will split our data into a training set and a validation set. We will use the training set to train our model, and the validation set to test how our
                     model performs on unseen data. 
                     <br />
@@ -118,6 +136,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Model building</b>
+                    <br />
+                    <br />
                     Now we'll go and build the model that will be responsible for predicting the next character in a sequence. The model will contain an input layer 
                     fed into a bidirectional LSTM which will be the bulk of the network, then we will feed it into a dropout layer, and then finally into a dense layer.
                     <br />
@@ -147,6 +168,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Text generation function</b>
+                    <br />
+                    <br />
                     Now we'll create a function that will take in a piece of text and will predict the characters that come after it.
                     <br />
                     <br />
@@ -170,6 +194,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Model training</b>
+                    <br />
+                    <br />
                     Now we're going to train our model. First of all we'll declare a <i>seed_text</i> variable. We will generate predictions from this text during training
                     to observe the models performance. 
                     <br />
@@ -182,6 +209,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Saving the model</b>
+                    <br />
+                    <br />
                     Now we will go and save our model to a file that can be loaded whenever we want to use it.
                     <br />
                     <br />
@@ -192,6 +222,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Model evaluation</b>
+                    <br />
+                    <br />
                     Now we'll go and evaluate our model on our validation set. I encourage you to play around with the code to achieve an 
                     evaluation loss and accuracy that you're happy with.
                     <br />
@@ -200,6 +233,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Adapting the model to new data/Loading adaptation data</b>
+                    <br />
+                    <br />
                     Now we're going to adapt our model to generate text in the style of Alice in Wonderland. 
                     <br />
                     <br />
@@ -212,6 +248,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Creating our adaptation dataset</b>
+                    <br />
+                    <br />
                     Now we'll use our <i>createData</i> function on our <i>encoded_text</i> to make two new lists of data: <i>X</i> which contains the sequences of text,
                     and <i>Y</i> which contains the character that comes after the sequence. We will then shuffle our data, and one-hot encode each encoded character within 
                     our <i>X</i> and <i>Y</i> lists.
@@ -221,6 +260,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Create training and validation set</b>
+                    <br />
+                    <br />
                     Now we'll go and split our new data into a training set and a validation set. Once again we'll use 90% of the data for training, and the other 10%
                     will be used for validating the model.
                     <br />
@@ -232,6 +274,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Training adapted model</b>
+                    <br />
+                    <br />
                     Now we're going to adapt our pre-trained model to the Alice in Wonderland data. We'll start off by declaring a <i>seed_text</i> variable, which the model 
                     will generate predictions with after it's finished training. We'll then go and use our <i>genSequence</i> function to predict the characters that come after 
                     our <i>seed_text</i>, which we'll print out to see what the model has generated.
@@ -241,6 +286,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Saving the adapted model</b>
+                    <br />
+                    <br />
                     Now we will go and save our adapted model to a file that can be loaded whenever we want to use it.
                     <br />
                     <br />
@@ -252,6 +300,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Evaluating adapted model</b>
+                    <br />
+                    <br />
                     Finally we'll go and evaluate our model on our validation set. You should find that the adapted model's validation loss and accuracy are better than the 
                     original model.
                     <br />
@@ -260,6 +311,9 @@ const RNNTextGeneration = () => {
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
+                    <b>Outroduction</b>
+                    <br />
+                    <br />
                     So now you know how to use a RNN to generate characters to form a sequence. I encourage you to play around with the code featured in this article.
                     Change the training data, change the amount of training data, change the models architecture, do whatever helps you to better understand 
                     natural language processing and recurrent neural networks. Because the best way to learn is by doing.
