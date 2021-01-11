@@ -4,6 +4,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Header from './components/header';
 import Home from './pages/home';
+import ScrollToTop from './scroll-to-top';
 
 import Articles from './pages/articles-page';
 import Article from './pages/article';
@@ -14,6 +15,7 @@ import Footer from './components/footer';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
+      <ScrollToTop />
       <Header />
       <Switch>
         <Route path="/" exact component={Home} />

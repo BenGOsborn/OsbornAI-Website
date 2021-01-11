@@ -123,7 +123,7 @@ const Home = () => {
                         <p style={{fontSize: 18}}>
                             And that’s just the beginning. If you’re interested in what we can do for your business, 
                             or have a project in mind that requires data, 
-                            then <Link href="/" style={{color: 'black'}} to="Book" smooth={true} spy={true} duration={300}><b>book a consultation</b></Link> with us 
+                            then <Link href="/" to="Book" smooth={true} duration={300}><b>book a consultation</b></Link> with us 
                             and let’s get started!
                         </p>
                     </div>
