@@ -1,8 +1,5 @@
 import Gist from 'react-gist';
-
-const style = {
-    fontSize: 20
-};
+import style from '../article-style';
 
 const RNNTextGeneration = () => {
     return (
