@@ -10,7 +10,7 @@ const DeepFakeFaceSwap = () => {
                 <br />
                 <br />
                 This article is going to demonstrate how you can build an autoencoder that can swap the face in an image with another. To do this, we're going to be building
-                a deep convolutional autoencoder using TensorFlow and Keras. This tutorial is for educational purposes only, and I DO NOT condone any unethical use of this technology.
+                a deep convolutional autoencoder using TensorFlow and Keras. This tutorial is for educational purposes only, I DO NOT condone any misuse of this technology and I am NOT RESPONSIBLE for anything you do with it.
                 <br />
                 <br />
                 The code for this tutorial, as well as the trained model can be found on my GitHub page <a href="https://github.com/OsbornAI/Deep-Fake-Face-Swap-Autoencoder" target="_blank" rel="noreferrer" >here</a>.
@@ -147,8 +147,7 @@ const DeepFakeFaceSwap = () => {
                 <b>Outroduction</b>
                 <br />
                 <br />
-                So now you know how to build your own face swap program that you can apply to whoevers face you want. However this tutorial is just for educational purposes and I DO NOT condone 
-                any unethical use of this technology. As stated before, go and play around and experiment the model to make it do what you want it to do. Because after all, the best way to learn is by doing!
+                So now you know how to build your own face swap program that you can apply to whoevers face you want. As stated before, go and play around and experiment the model to make it do what you want it to do. Because after all, the best way to learn is by doing!
             </p>
         </div>
     );
