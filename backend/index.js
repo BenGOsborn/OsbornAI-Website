@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const pay = require('./routes/pay');
 
 const app = express();
