@@ -57,13 +57,13 @@ class Database:
             self.clients.insert_one(document)
             self.client_notifications.insert_one(notification_document)
 
-            return 1
+            return True
         
         for inquiry in existing_user['inquiries']:
             inquiry_date = inquiry['inquiry_date']
             days_since = (date - inquiry_date).days
             if days_since < 10:
-                return 0
+                return False
 
         self.clients.update_one(
             {'email': email},
@@ -71,7 +71,7 @@ class Database:
         )
         self.client_notifications.insert_one(notification_document)
 
-        return 1
+        return True
 
     def add_payment(self, first, last, email, purchase, amount):
         date = datetime.utcnow()
@@ -94,33 +94,33 @@ class Database:
 
             self.payments.inset_one(document)
 
-            return 1
+            return True
 
         self.payments.update_one(
             {'email': email},
             {'$push': {'payments': {'purchase_date': date, 'purchase': purchase, 'amount': amount}}}
         )
 
-        return 1
+        return True
 
     def admin_view_inquiry_notifications(self):
         new_inquiries = self.client_notifications.find()
 
         if new_inquiries == None:
-            return None
+            return False
 
         return new_inquiries
 
-    def admin_delete_inquiry_notification(self, email):
-        query = {'email': email}
+    def admin_delete_inquiry_notification(self, inquiry_notification_id):
+        query = {'_id': inquiry_notification_id}
 
         find_inquiry = self.client_notifications.find_one(query)
         if find_inquiry == None:
-            return 0
+            return False
 
         self.client_notifications.delete_one(query)
 
-        return 1
+        return True
 
     def admin_create_payment_id(self, purchase, amount):
         payment_id = self.payment_ids.insert_one({'purchase': purchase, 'amount': amount, 'expiry': datetime.utcnow()})
@@ -131,16 +131,21 @@ class Database:
         id_exists = self.payment_ids.find_one({'_id': payment_id})
 
         if id_exists == None:
-            return 0
+            return False
 
         self.payment_ids.delete_one({'_id': payment_id})
 
-        return 1
+        return True
 
     def admin_view_payment_ids(self):
         payment_ids = self.payment_ids.find()
 
         return payment_ids
 
-db = Database()
-db.admin_create_payment_id('item', 10)
+    def admin_view_payment_id_details(self, payment_id):
+        payment_id_info = self.payment_ids.find_one({'_id': payment_id})
+
+        if payment_id_info == None:
+            return False
+
+        return payment_id_info

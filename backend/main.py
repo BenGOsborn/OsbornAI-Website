@@ -9,40 +9,93 @@ db = Database()
 
 stripe.api_key = os.getenv('STRIPE_SECRET')
 
-@app.route('/pay/:pay_token', methods=['POST'], strict_slashes=False)
-def pay():
-    # This is where we will get the pay request information sent by the token which will contain the amount, the type of item and such
-    amount = None
+# -------------------------- Payment routes -----------------------------
 
+@app.route('/validate_payment_id', methods=['POST'], strict_slashes=False)
+def validateId():
+    form_json = request.get_json()
+    payment_id = form_json['payment_id']
+
+    payment_info = db.admin_view_payment_id_details(payment_id)
+    if payment_info == False:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True})
+
+@app.route('/pay', methods=['POST'], strict_slashes=False)
+def pay():
     form_json = request.get_json()
     email = form_json['email']
+    payment_id = form_json['payment_id']
 
-    # Add more information here - Description to be echoed back to the user
+    payment_info = db.admin_view_payment_id_details(payment_id)
+    if payment_info == False:
+        return jsonify({'success': False})
+
+    amount = payment_info['amount'] * 100
+    purchase = payment_info['purchase']
+
     intent = stripe.PaymentIntent.create(
         amount=amount * 100,
+        description=purchase,
         currency='aud',
         receipt_email=email
     )
 
-    return jsonify({'client_secret': intent['client_secret']})
+    return jsonify({'success': True, 'client_secret': intent['client_secret']})
 
-# Add this webhook once the app has been deployed
 @app.route('/payment_webook', methods=['POST'], strict_slashes=False)
 def paymentWebhook():
-    event = request.get_json()
+    form_json = request.get_json()
 
-    if event['type'] == 'payment_intent.succeeded':
-        user_email = event['data']['object']['receipt_email']
+    if form_json['type'] == 'payment_intent.succeeded':
+        user_email = form_json['data']['object']['receipt_email']
 
         # This callback will also add the user to the paid database somehow on confirmation
 
         # Send an email here then return success
         # Send a custom email template
 
-        return jsonify({'success': 1})
+        # I need to find a way to create some sort of receipt which can then be emailed with HTML - this is the web callback
+
+        return jsonify({'success': True})
 
     else:
-        return jsonify({'success': 0})
+        return jsonify({'success': False})
+
+# ------------------- Inquiry routes -----------------------
+
+@app.route('/add_inquiry', methods=['POST'], strict_slashes=False)
+def addInquiry():
+    form_json = request.json()
+
+    first = form_json['first']
+    last = form_json['last']
+    email = form_json['email']
+    inquiry = form_json['inquiry']
+
+    success = db.add_inquiry(first, last, email, inquiry)
+
+    return jsonify({'success': success})
+
+@app.route('/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
+def viewInquiryNotifications():
+    inquiries = db.admin_view_inquiry_notifications()
+
+    if inquiries == False:
+        return jsonify({'success': False})
+
+    return jsonify({'success': True, 'inquiries': inquiries})
+
+@app.route('/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
+def deleteInquiryNotification():
+    form_json = request.get_json()
+
+    inquiry_notification_id = form_json['inquiry_notification_id'] # This will come from the '_id'
+
+    success = db.admin_delete_inquiry_notification(inquiry_notification_id)
+
+    return jsonify({'success': success})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
