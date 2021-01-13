@@ -31,6 +31,8 @@ def paymentWebhook():
     if event['type'] == 'payment_intent.succeeded':
         user_email = event['data']['object']['receipt_email']
 
+        # This callback will also add the user to the paid database somehow on confirmation
+
         # Send an email here then return success
         # Send a custom email template
 
