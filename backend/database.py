@@ -12,10 +12,13 @@ class Database:
 
         mongo_url = f"mongodb+srv://{mongo_username}:{mongo_password}@cluster-main.lh2ft.mongodb.net/main?retryWrites=true&w=majority"
         cluster = MongoClient(mongo_url)
+        
         main = cluster['main']
+
         self.clients = main['clients']
         self.payments = main['payments']
         self.client_notifications = main['client_notifications']
+        self.payment_ids = main['payment_ids']
 
     def add_inquiry(self, first, last, email, inquiry):
         date = datetime.now()
@@ -99,13 +102,26 @@ class Database:
 
         return 1
 
+    def admin_display_inquiries(self):
+        new_inquiries = self.client_notifications.find()
+
+        if new_inquiries == None:
+            return None
+
+        return new_inquiries
+
+    def admin_delete_inquiry(self, email):
+        query = {'email': email}
+
+        find_inquiry = self.client_notifications.find_one(query)
+        if find_inquiry == None:
+            return 0
+
+        self.client_notifications.delete_one(query)
+
+        return 1
+
+    def create_payment_id(self, purchase, amount):
+        pass
+
 db = Database()
-
-first = "Ben"
-last = "Osborn"
-email = "test@test.com"
-inquiry = '''Hello Ben,
-Would you be able to help me with my business?
-Thanks!'''
-
-db.add_inquiry(first, last, email, inquiry)
