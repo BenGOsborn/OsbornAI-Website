@@ -23,7 +23,17 @@ def validateId():
 
     return jsonify({**{'success': True}, **payment_info}) # This has to return more
 
-# Ill need another function for creating these payment_id's
+@app.route('/create_payment_id', methods=['POST'], strict_slashes=False)
+def createPaymentId():
+    form_json = request.get_json()
+
+    purchase = form_json['purchase']
+    amount = form_json['amount']
+    currency = form_json['currency']
+
+    payment_id = db.admin_create_payment_id(purchase, amount, currency)
+
+    return jsonify({'success': True, 'payment_id': payment_id})
 
 @app.route('/pay', methods=['POST'], strict_slashes=False)
 def pay():

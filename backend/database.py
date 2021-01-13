@@ -124,8 +124,8 @@ class Database:
 
         return True
 
-    def admin_create_payment_id(self, purchase, amount):
-        payment_id = self.payment_ids.insert_one({'purchase': purchase, 'amount': amount, 'expiry': datetime.utcnow()})
+    def admin_create_payment_id(self, purchase, amount, currency):
+        payment_id = self.payment_ids.insert_one({'purchase': purchase, 'amount': amount, 'currency': currency, 'expiry': datetime.utcnow()})
 
         return payment_id
 
