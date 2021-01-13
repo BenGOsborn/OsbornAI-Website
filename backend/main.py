@@ -12,10 +12,17 @@ stripe.api_key = os.getenv('STRIPE_SECRET')
 
 # -------------------------- Admin login -------------------------------
 
+# This means for each of these routes I will need authentication to be able to access them
 @app.route('/login', methods=['POST'], strict_slashes=False)
 def login():
     form_json = request.get_json()
-    
+
+    username = form_json['username']
+    password = form_json['password']
+
+    success = db.admin_login(username, password)
+
+    return jsonify({'success': success})
 
 # -------------------------- Payment routes -----------------------------
 

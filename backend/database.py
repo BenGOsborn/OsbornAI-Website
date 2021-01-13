@@ -161,7 +161,7 @@ class Database:
         if user_info == None:
             return False
         
-        hashed_password = hashlib.sha512(password+salt).hexdigest()
+        hashed_password = hashlib.sha512((password+salt).encode('utf-8')).hexdigest()
         if hashed_password == user_info['password']:
             return True
         
