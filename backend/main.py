@@ -10,6 +10,13 @@ db = Database()
 
 stripe.api_key = os.getenv('STRIPE_SECRET')
 
+# -------------------------- Admin login -------------------------------
+
+@app.route('/login', methods=['POST'], strict_slashes=False)
+def login():
+    form_json = request.get_json()
+    
+
 # -------------------------- Payment routes -----------------------------
 
 @app.route('/load_payment_id', methods=['POST'], strict_slashes=False)

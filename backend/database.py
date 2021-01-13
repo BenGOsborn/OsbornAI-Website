@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from datetime import datetime, timedelta
 import dotenv
 import os
+import hashlib
 
 class Database:
     def __init__(self):
@@ -18,6 +19,7 @@ class Database:
         self.clients = main['clients']
         self.payments = main['payments']
         self.client_notifications = main['client_notifications']
+        self.admin_auth = main['admin_auth']
         self.payment_ids = main['payment_ids']
         self.payment_ids.create_index("expiry", expireAfterSeconds=86400 * 7)
 
@@ -151,3 +153,16 @@ class Database:
             return False
 
         return payment_id_info
+
+    def admin_login(self, username, password):
+        salt = "oTaLtzyE2SvGIzGXnDqmGzdBpz0DP3xQROY0W5t4sKdTdX5PIg"
+        user_info = self.admin_auth.find_one({'username': username})
+
+        if user_info == None:
+            return False
+        
+        hashed_password = hashlib.sha512(password+salt).hexdigest()
+        if hashed_password == user_info['password']:
+            return True
+        
+        return False
