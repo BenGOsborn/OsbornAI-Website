@@ -12,16 +12,17 @@ class Database:
 
         mongo_url = f"mongodb+srv://{mongo_username}:{mongo_password}@cluster-main.lh2ft.mongodb.net/main?retryWrites=true&w=majority"
         cluster = MongoClient(mongo_url)
-        
+
         main = cluster['main']
 
         self.clients = main['clients']
         self.payments = main['payments']
         self.client_notifications = main['client_notifications']
         self.payment_ids = main['payment_ids']
+        self.payment_ids.create_index("expiry", expireAfterSeconds=86400 * 7)
 
     def add_inquiry(self, first, last, email, inquiry):
-        date = datetime.now()
+        date = datetime.utcnow()
 
         existing_user = self.clients.find_one({'email': email})
 
@@ -73,7 +74,7 @@ class Database:
         return 1
 
     def add_payment(self, first, last, email, purchase, amount):
-        date = datetime.now()
+        date = datetime.utcnow()
 
         paid_user = self.payments.find_one({'email': email})
 
@@ -102,7 +103,7 @@ class Database:
 
         return 1
 
-    def admin_display_inquiries(self):
+    def admin_view_inquiry_notifications(self):
         new_inquiries = self.client_notifications.find()
 
         if new_inquiries == None:
@@ -110,7 +111,7 @@ class Database:
 
         return new_inquiries
 
-    def admin_delete_inquiry(self, email):
+    def admin_delete_inquiry_notification(self, email):
         query = {'email': email}
 
         find_inquiry = self.client_notifications.find_one(query)
@@ -121,7 +122,25 @@ class Database:
 
         return 1
 
-    def create_payment_id(self, purchase, amount):
-        pass
+    def admin_create_payment_id(self, purchase, amount):
+        payment_id = self.payment_ids.insert_one({'purchase': purchase, 'amount': amount, 'expiry': datetime.utcnow()})
+
+        return payment_id
+
+    def admin_delete_payment_id(self, payment_id):
+        id_exists = self.payment_ids.find_one({'_id': payment_id})
+
+        if id_exists == None:
+            return 0
+
+        self.payment_ids.delete_one({'_id': payment_id})
+
+        return 1
+
+    def admin_view_payment_ids(self):
+        payment_ids = self.payment_ids.find()
+
+        return payment_ids
 
 db = Database()
+db.admin_create_payment_id('item', 10)

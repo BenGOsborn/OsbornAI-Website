@@ -1,8 +1,11 @@
 from flask import Flask, jsonify, request
 import stripe
 import os
+from database import Database
 
 app = Flask(__name__)
+
+db = Database()
 
 stripe.api_key = os.getenv('STRIPE_SECRET')
 
