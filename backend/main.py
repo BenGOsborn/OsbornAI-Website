@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import stripe
 import os
 from database import Database
+import json
 
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ stripe.api_key = os.getenv('STRIPE_SECRET')
 
 # -------------------------- Payment routes -----------------------------
 
-@app.route('/validate_payment_id', methods=['POST'], strict_slashes=False)
+@app.route('/load_payment_id', methods=['POST'], strict_slashes=False)
 def validateId():
     form_json = request.get_json()
     payment_id = form_json['payment_id']
@@ -20,11 +21,15 @@ def validateId():
     if payment_info == False:
         return jsonify({'success': False})
 
-    return jsonify({'success': True})
+    return jsonify({**{'success': True}, **payment_info}) # This has to return more
+
+# Ill need another function for creating these payment_id's
 
 @app.route('/pay', methods=['POST'], strict_slashes=False)
 def pay():
     form_json = request.get_json()
+    first = form_json['first']
+    last = form_json['last']
     email = form_json['email']
     payment_id = form_json['payment_id']
 
@@ -33,12 +38,23 @@ def pay():
         return jsonify({'success': False})
 
     amount = payment_info['amount'] * 100
-    purchase = payment_info['purchase']
+    currency = payment_info['currency']
+
+    # I'll have to check to make sure stripe doesnt send strange receipts
+    desc_json = json.dumps({
+        'payment_id': payment_id,
+        'first': first,
+        'last': last,
+        'email': email,
+        'purchase': payment_info['purchase'],
+        'amount': amount,
+        'currency': currency
+    })
 
     intent = stripe.PaymentIntent.create(
-        amount=amount * 100,
-        description=purchase,
-        currency='aud',
+        amount=amount,
+        description=desc_json,
+        currency=currency,
         receipt_email=email
     )
 
@@ -49,18 +65,27 @@ def paymentWebhook():
     form_json = request.get_json()
 
     if form_json['type'] == 'payment_intent.succeeded':
-        user_email = form_json['data']['object']['receipt_email']
+        data_object = form_json['data']['object']
+        receipt_info_json = data_object['description']
+        receipt_info = json.loads(receipt_info_json)
 
-        # This callback will also add the user to the paid database somehow on confirmation
+        payment_id = receipt_info['payment_id']
+        first = receipt_info['first']
+        last = receipt_info['last']
+        email = receipt_info['email']
+        purchase = receipt_info['purchase']
+        amount = receipt_info['amount']
+        currency = receipt_info['currency']
 
-        # Send an email here then return success
-        # Send a custom email template
+        db.add_payment(first, last, email, payment_id, purchase, amount, currency)
 
-        # I need to find a way to create some sort of receipt which can then be emailed with HTML - this is the web callback
+        db.admin_delete_payment_id(payment_id) 
 
         return jsonify({'success': True})
 
     else:
+        # What am I going to do if this is false?
+
         return jsonify({'success': False})
 
 # ------------------- Inquiry routes -----------------------

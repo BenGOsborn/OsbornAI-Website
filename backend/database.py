@@ -73,35 +73,37 @@ class Database:
 
         return True
 
-    def add_payment(self, first, last, email, purchase, amount):
+    def add_payment(self, first, last, email, payment_id, purchase, amount, currency):
         date = datetime.utcnow()
 
         paid_user = self.payments.find_one({'email': email})
+
+        push_doc = {
+            'payment_id': payment_id,
+            'purchase_date': date,
+            'purchase': purchase,
+            'amount': amount,
+            'currency': currency
+        }
 
         if paid_user == None:
             document = {
                 'first': first,
                 'last': last,
                 'email': email,
-                'payments': [
-                    {
-                        'purchase_date': date,
-                        'purchase': purchase,
-                        'amount': amount
-                    }
-                ]
+                'payments': [push_doc]
             }
 
-            self.payments.inset_one(document)
+            self.payments.insert_one(document)
 
             return True
 
         self.payments.update_one(
             {'email': email},
-            {'$push': {'payments': {'purchase_date': date, 'purchase': purchase, 'amount': amount}}}
+            {'$push': {'payments': push_doc}}
         )
 
-        return True
+        return True 
 
     def admin_view_inquiry_notifications(self):
         new_inquiries = self.client_notifications.find()
