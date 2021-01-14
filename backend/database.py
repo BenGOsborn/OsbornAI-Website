@@ -132,10 +132,10 @@ class Database:
     def admin_create_payment_id(self, purchase, amount, currency):
         payment_id = self.payment_ids.insert_one({'purchase': purchase, 'amount': amount, 'currency': currency, 'expiry': datetime.utcnow()})
 
-        return payment_id
+        return {'payment_id': payment_id.inserted_id, 'purchase': purchase, 'amount': amount, 'currency': currency}
 
     def admin_delete_payment_id(self, payment_id):
-        id_exists = self.payment_ids.find_one({'_id': payment_id})
+        id_exists = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
 
         if id_exists == None:
             return False
@@ -147,10 +147,10 @@ class Database:
     def admin_view_payment_ids(self):
         payment_ids = self.payment_ids.find()
 
-        return payment_ids
+        return list(payment_ids)
 
     def admin_view_payment_id_details(self, payment_id):
-        payment_id_info = self.payment_ids.find_one({'_id': payment_id})
+        payment_id_info = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
 
         if payment_id_info == None:
             return False

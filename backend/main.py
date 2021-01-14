@@ -18,7 +18,12 @@ db = Database()
 
 stripe.api_key = os.getenv('STRIPE_SECRET')
 
-# -------------------------- Admin login ------------------------------- GOOD
+# -------------------------- Helper Functions ---------------------------
+
+def sanitizeJSON(json_raw):
+    return json.loads(json.dumps(json_raw, default=str))
+
+# -------------------------- Admin login -------------------------------
 
 @app.route('/login', methods=['POST'], strict_slashes=False)
 def login():
@@ -69,7 +74,14 @@ def validateId():
     if payment_info == False:
         return jsonify({'success': False})
 
-    return jsonify({**{'success': True}, **payment_info}) # This has to return more
+    return jsonify({**{'success': True}, **sanitizeJSON(payment_info)})
+
+@app.route('/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
+@checkToken
+def viewValidPaymentIds():
+    ids = db.admin_view_payment_ids()
+
+    return jsonify({'success': True, 'payment_ids': sanitizeJSON(ids)})
 
 @app.route('/create_payment_id', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -82,9 +94,9 @@ def createPaymentId():
 
     payment_id = db.admin_create_payment_id(purchase, amount, currency)
 
-    return jsonify({'success': True, 'payment_id': payment_id})
+    return jsonify({**{'success': True}, **sanitizeJSON(payment_id)})
 
-@app.route('/pay', methods=['POST'], strict_slashes=False)
+@app.route('/pay', methods=['POST'], strict_slashes=False) # Untested
 def pay():
     form_json = request.form
     first = form_json['first']
@@ -119,7 +131,7 @@ def pay():
 
     return jsonify({'success': True, 'client_secret': intent['client_secret']})
 
-@app.route('/payment_webook', methods=['POST'], strict_slashes=False)
+@app.route('/payment_webook', methods=['POST'], strict_slashes=False) # Untested
 def paymentWebhook():
     form_json = request.form
 
@@ -147,7 +159,7 @@ def paymentWebhook():
 
         return jsonify({'success': False})
 
-# ------------------- Inquiry routes ----------------------- GOOD
+# ------------------- Inquiry routes -----------------------
 
 @app.route('/add_inquiry', methods=['POST'], strict_slashes=False)
 def addInquiry():
@@ -170,16 +182,14 @@ def viewInquiryNotifications():
     if inquiries == False:
         return jsonify({'success': False})
 
-    inquiries_sanitized = json.loads(json.dumps(inquiries, default=str))
-
-    return jsonify({'success': True, 'inquiries': inquiries_sanitized})
+    return jsonify({'success': True, 'inquiries': sanitizeJSON(inquiries)})
 
 @app.route('/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
 @checkToken
 def deleteInquiryNotification():
     form_json = request.form
 
-    inquiry_notification_id = form_json['inquiry_notification_id'] # This will come from the '_id'
+    inquiry_notification_id = form_json['inquiry_notification_id']
 
     success = db.admin_delete_inquiry_notification(inquiry_notification_id)
 
