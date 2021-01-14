@@ -24,7 +24,8 @@ class Database:
         self.admin_auth = main['admin_auth']
         self.payment_ids = main['payment_ids']
         
-        self.payment_ids.create_index("expiry", expireAfterSeconds=86400 * 7)
+        self.expires_in = 86400 * 7
+        self.payment_ids.create_index("timeCreated", expireAfterSeconds=self.expires_in)
 
     def add_inquiry(self, first, last, email, inquiry):
         date = datetime.utcnow()
@@ -130,9 +131,10 @@ class Database:
         return True
 
     def admin_create_payment_id(self, purchase, amount, currency):
-        payment_id = self.payment_ids.insert_one({'purchase': purchase, 'amount': amount, 'currency': currency, 'expiry': datetime.utcnow()})
+        document = {'purchase': purchase, 'amount': amount, 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
+        payment_id = self.payment_ids.insert_one(document)
 
-        return {'payment_id': payment_id.inserted_id, 'purchase': purchase, 'amount': amount, 'currency': currency}
+        return {**{'payment_id': payment_id.inserted_id}, **document}
 
     def admin_delete_payment_id(self, payment_id):
         id_exists = self.payment_ids.find_one({'_id': ObjectId(payment_id)})

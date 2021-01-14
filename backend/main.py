@@ -92,7 +92,7 @@ def createPaymentId():
     amount = form_json['amount']
     currency = form_json['currency']
 
-    payment_id = db.admin_create_payment_id(purchase, amount, currency)
+    payment_id = db.admin_create_payment_id(purchase, amount, currency) # I want this to return the expiry date as well
 
     return jsonify({**{'success': True}, **sanitizeJSON(payment_id)})
 
