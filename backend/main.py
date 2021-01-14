@@ -172,7 +172,10 @@ def addInquiry():
 
     success = db.add_inquiry(first, last, email, inquiry)
 
-    return jsonify({'success': success})
+    if success != True:
+        return jsonify({'success': False, 'last_inquiry': success})
+
+    return jsonify({'success': True})
 
 @app.route('/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
 @checkToken

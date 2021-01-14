@@ -2,26 +2,23 @@ import { useState, useEffect } from 'react';
 import emailjs from 'emailjs-com';
 import '../pages/form.css';
 
-const hookStyle = {
-    fontSize: 23
-};
-
-const followUpStyle = {
-    fontSize: 18
-};
-
 const Book = () => {
     const [display, setDisplay] = useState(0);
+    const [loading, setLoading] = useState(true);
+
+    // Lets design a new thought process
+    //  First we will check if a token exists on the front end
+    //  If the token exists on the front end, we will do a comparison of that token, and if that token is more than 10 days ago then we will go and show the form
+    //  If the token does not exist, then we will also show the form
 
     useEffect(() => {
         const cdDateRaw = localStorage.getItem('Cooldown');
         const cdDate = JSON.parse(cdDateRaw);
 
+        // Mongo date to date object?
+
         if (cdDate === null) {
             setDisplay(0);
-
-        // Instead of reading a token we will make an axios request to the server to determine if it is ok to make a reuqest then
-        // This means we will need some sort of loading state which will allow us to display loading intead
         } else {
             const curDate = new Date().getTime();
             if (curDate >= cdDate) {
@@ -30,8 +27,15 @@ const Book = () => {
                 setDisplay(1);
             }
         }
-
+        
     }, []);
+
+    const sendInquiry = (e) => {
+        e.preventDefault();
+
+        // Send an axios request here
+
+    }; 
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -43,7 +47,7 @@ const Book = () => {
             setDisplay(1);
 
         }, (error) => {
-            window.M.toast({html: 'Inquiry failed, please try again!', displayLength: 50000});
+            window.M.toast({html: 'Inquiry failed, please try again!', displayLength: 5000});
             setDisplay(0);
 
         });
@@ -88,11 +92,11 @@ const Book = () => {
             <br />
             <br />
             <b>
-                <p style={hookStyle}>
+                <p style={{fontSize: 23}}>
                     Ready to take the next step for your business?
                 </p>
             </b>
-            <p style={followUpStyle}>
+            <p style={{fontSize: 18}}>
                 Inquire about a consult below so we can get started. We look forward to working with you!
             </p>
             {isDisplayed()}

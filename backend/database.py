@@ -65,11 +65,10 @@ class Database:
 
             return True
         
-        for inquiry in existing_user['inquiries']:
-            inquiry_date = inquiry['inquiry_date']
-            days_since = (date - inquiry_date).days
-            if days_since < 10:
-                return False
+        # Check this returns what we want
+        inquiry_dates = sorted([inquiry for inquiry in existing_user['inquiries']])
+        if (date - inquiry_dates[-1]).days < 10:
+            return inquiry_dates[-1]
 
         self.clients.update_one(
             {'email': email},
