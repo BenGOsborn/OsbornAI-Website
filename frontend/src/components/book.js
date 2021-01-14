@@ -20,6 +20,8 @@ const Book = () => {
         if (cdDate === null) {
             setDisplay(0);
 
+        // Instead of reading a token we will make an axios request to the server to determine if it is ok to make a reuqest then
+        // This means we will need some sort of loading state which will allow us to display loading intead
         } else {
             const curDate = new Date().getTime();
             if (curDate >= cdDate) {
