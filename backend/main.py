@@ -18,7 +18,7 @@ db = Database()
 
 stripe.api_key = os.getenv('STRIPE_SECRET')
 
-# -------------------------- Admin login -------------------------------
+# -------------------------- Admin login ------------------------------- GOOD
 
 @app.route('/login', methods=['POST'], strict_slashes=False)
 def login():
@@ -46,7 +46,7 @@ def checkToken(f):
                 
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
         
-        except Exception as e:
+        except:
             return jsonify({'success': False})
         
         return f(*args, **kwargs)
@@ -147,7 +147,7 @@ def paymentWebhook():
 
         return jsonify({'success': False})
 
-# ------------------- Inquiry routes -----------------------
+# ------------------- Inquiry routes ----------------------- GOOD
 
 @app.route('/add_inquiry', methods=['POST'], strict_slashes=False)
 def addInquiry():
@@ -170,7 +170,9 @@ def viewInquiryNotifications():
     if inquiries == False:
         return jsonify({'success': False})
 
-    return jsonify({'success': True, 'inquiries': inquiries})
+    inquiries_sanitized = json.loads(json.dumps(inquiries, default=str))
+
+    return jsonify({'success': True, 'inquiries': inquiries_sanitized})
 
 @app.route('/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
 @checkToken

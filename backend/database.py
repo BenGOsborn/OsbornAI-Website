@@ -1,8 +1,10 @@
 from pymongo import MongoClient
+import json
 from datetime import datetime, timedelta
 import dotenv
 import os
 import hashlib
+from bson import ObjectId
 
 class Database:
     def __init__(self):
@@ -21,6 +23,7 @@ class Database:
         self.client_notifications = main['client_notifications']
         self.admin_auth = main['admin_auth']
         self.payment_ids = main['payment_ids']
+        
         self.payment_ids.create_index("expiry", expireAfterSeconds=86400 * 7)
 
     def add_inquiry(self, first, last, email, inquiry):
@@ -113,10 +116,10 @@ class Database:
         if new_inquiries == None:
             return False
 
-        return new_inquiries
+        return list(new_inquiries)
 
     def admin_delete_inquiry_notification(self, inquiry_notification_id):
-        query = {'_id': inquiry_notification_id}
+        query = {'_id': ObjectId(inquiry_notification_id)}
 
         find_inquiry = self.client_notifications.find_one(query)
         if find_inquiry == None:
