@@ -22,7 +22,7 @@ stripe.api_key = os.getenv('STRIPE_SECRET')
 
 @app.route('/login', methods=['POST'], strict_slashes=False)
 def login():
-    form_json = request.get_json()
+    form_json = request.form
 
     username = form_json['username']
     password = form_json['password']
@@ -32,32 +32,37 @@ def login():
     if not success:
         return jsonify({'success': False})
 
-    token = jwt.encode({'username': username, 'exp': datetime.utcnow() + timedelta(days=1)}, app.config['SECRET_KEY'])
+    token = jwt.encode({'username': username, 'exp': datetime.utcnow() + timedelta(days=1)}, app.config['SECRET_KEY'], algorithm="HS256")
 
-    return jsonify({'success': success, 'token': token.decode('utf-8')})
+    return jsonify({'success': True, 'token': token})
 
 def checkToken(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        form_json = request.get_json()
+        form_json = request.form
 
         try:
             token = form_json['token']
                 
-            data = jwt.decode(token, app.config['SECRET_KEY'])
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
         
-        except:
+        except Exception as e:
             return jsonify({'success': False})
         
         return f(*args, **kwargs)
     
     return decorated
 
+@app.route('/validate_token', methods=['POST'], strict_slashes=False)
+@checkToken
+def validateToken():
+    return jsonify({'success': True})
+
 # -------------------------- Payment routes -----------------------------
 
 @app.route('/load_payment_id', methods=['POST'], strict_slashes=False)
 def validateId():
-    form_json = request.get_json()
+    form_json = request.form
     payment_id = form_json['payment_id']
 
     payment_info = db.admin_view_payment_id_details(payment_id)
@@ -69,7 +74,7 @@ def validateId():
 @app.route('/create_payment_id', methods=['POST'], strict_slashes=False)
 @checkToken
 def createPaymentId():
-    form_json = request.get_json()
+    form_json = request.form
 
     purchase = form_json['purchase']
     amount = form_json['amount']
@@ -81,7 +86,7 @@ def createPaymentId():
 
 @app.route('/pay', methods=['POST'], strict_slashes=False)
 def pay():
-    form_json = request.get_json()
+    form_json = request.form
     first = form_json['first']
     last = form_json['last']
     email = form_json['email']
@@ -116,7 +121,7 @@ def pay():
 
 @app.route('/payment_webook', methods=['POST'], strict_slashes=False)
 def paymentWebhook():
-    form_json = request.get_json()
+    form_json = request.form
 
     if form_json['type'] == 'payment_intent.succeeded':
         data_object = form_json['data']['object']
@@ -146,7 +151,7 @@ def paymentWebhook():
 
 @app.route('/add_inquiry', methods=['POST'], strict_slashes=False)
 def addInquiry():
-    form_json = request.json()
+    form_json = request.form
 
     first = form_json['first']
     last = form_json['last']
@@ -170,7 +175,7 @@ def viewInquiryNotifications():
 @app.route('/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
 @checkToken
 def deleteInquiryNotification():
-    form_json = request.get_json()
+    form_json = request.form
 
     inquiry_notification_id = form_json['inquiry_notification_id'] # This will come from the '_id'
 
@@ -179,4 +184,4 @@ def deleteInquiryNotification():
     return jsonify({'success': success})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(debug=True)
