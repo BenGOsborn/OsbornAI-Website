@@ -1,39 +1,37 @@
 import { useState, useEffect } from 'react';
-import emailjs from 'emailjs-com';
 import '../pages/form.css';
+import axios from 'axios';
 
 const Book = () => {
     const [display, setDisplay] = useState(0);
-    const [loading, setLoading] = useState(true);
-
-    // Lets design a new thought process
-    //  First we will check if a token exists on the front end
-    //  If the token exists on the front end, we will do a comparison of that token, and if that token is more than 10 days ago then we will go and show the form
-    //  If the token does not exist, then we will also show the form
 
     useEffect(() => {
-        const cdDateRaw = localStorage.getItem('Cooldown');
-        const cdDate = JSON.parse(cdDateRaw);
+        const last_inquiry_raw = localStorage.getItem('last_inquiry');
+        const last_inquiry = JSON.parse(last_inquiry_raw); // Does this get converted to a date in milliseconds?
 
-        // Mongo date to date object?
-
-        if (cdDate === null) {
+        if (last_inquiry === null) {
             setDisplay(0);
         } else {
-            const curDate = new Date().getTime();
-            if (curDate >= cdDate) {
+            const current_date = new Date().getTime();
+            const days_since = (current_date - last_inquiry) / 8.64e7
+            if (days_since < 10) {
                 setDisplay(0);
             } else {
                 setDisplay(1);
             }
         }
-        
     }, []);
 
     const sendInquiry = (e) => {
         e.preventDefault();
 
-        // Send an axios request here
+        axios.get("https://osbornai.herokuapp.com/add_inquiry")
+        .then(res => {
+            const form = res.data;
+            const last_inquiry = new Date(form.last_inquiry);
+            // Now we'll set the token to be this last inquiry date, and then we'll have to do another setDisplay to update it
+            // We should also store the days left in a state variable
+        });
 
     }; 
 
