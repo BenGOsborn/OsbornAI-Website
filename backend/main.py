@@ -3,8 +3,16 @@ import stripe
 import os
 from database import Database
 import json
+import jwt
+from datetime import datetime, timedelta
+import dotenv
+from functools import wraps
+
+dotenv.load_dotenv()
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 db = Database()
 
@@ -12,7 +20,6 @@ stripe.api_key = os.getenv('STRIPE_SECRET')
 
 # -------------------------- Admin login -------------------------------
 
-# This means for each of these routes I will need authentication to be able to access them
 @app.route('/login', methods=['POST'], strict_slashes=False)
 def login():
     form_json = request.get_json()
@@ -22,7 +29,29 @@ def login():
 
     success = db.admin_login(username, password)
 
-    return jsonify({'success': success})
+    if not success:
+        return jsonify({'success': False})
+
+    token = jwt.encode({'username': username, 'exp': datetime.utcnow() + timedelta(days=1)}, app.config['SECRET_KEY'])
+
+    return jsonify({'success': success, 'token': token.decode('utf-8')})
+
+def checkToken(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        form_json = request.get_json()
+
+        try:
+            token = form_json['token']
+                
+            data = jwt.decode(token, app.config['SECRET_KEY'])
+        
+        except:
+            return jsonify({'success': False})
+        
+        return f(*args, **kwargs)
+    
+    return decorated
 
 # -------------------------- Payment routes -----------------------------
 
@@ -38,6 +67,7 @@ def validateId():
     return jsonify({**{'success': True}, **payment_info}) # This has to return more
 
 @app.route('/create_payment_id', methods=['POST'], strict_slashes=False)
+@checkToken
 def createPaymentId():
     form_json = request.get_json()
 
@@ -128,6 +158,7 @@ def addInquiry():
     return jsonify({'success': success})
 
 @app.route('/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
+@checkToken
 def viewInquiryNotifications():
     inquiries = db.admin_view_inquiry_notifications()
 
@@ -137,6 +168,7 @@ def viewInquiryNotifications():
     return jsonify({'success': True, 'inquiries': inquiries})
 
 @app.route('/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
+@checkToken
 def deleteInquiryNotification():
     form_json = request.get_json()
 
