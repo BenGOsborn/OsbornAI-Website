@@ -1,4 +1,3 @@
-import Book from './book';
 import { Link } from 'react-scroll';
 
 const Footer = () => {
@@ -7,9 +6,6 @@ const Footer = () => {
 
     return (
         <div className="Footer">
-            <div class="container">
-                <Book />
-            </div>
             <footer class="page-footer grey darken-4">
                 <div class="container center">
                     <div class="container">

@@ -1,29 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 
-import Header from './components/header';
-import Home from './pages/home';
-import ScrollToTop from './scroll-to-top';
-
-import Articles from './pages/articles-page';
-import Article from './pages/article';
-
-import NotFound from './pages/not-found';
-import Footer from './components/footer';
+import App from './app';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <ScrollToTop />
-      <Header />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/articles" exact component={Articles} />
-        <Route path="/articles/:id" exact component={Article} />
-        <Route path="*" component={NotFound} />
-      </Switch>
-      <Footer />
+      <App />
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
