@@ -66,7 +66,7 @@ class Database:
             return True
         
         # Check this returns what we want
-        inquiry_dates = sorted([inquiry for inquiry in existing_user['inquiries']])
+        inquiry_dates = sorted([inquiry['inquiry_date'] for inquiry in existing_user['inquiries']])
         if (date - inquiry_dates[-1]).days < 10:
             return inquiry_dates[-1]
 

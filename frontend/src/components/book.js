@@ -2,21 +2,21 @@ import { useState, useEffect } from 'react';
 import '../pages/form.css';
 import axios from 'axios';
 
-const sendEmail = (e) => {
-    e.preventDefault();
+// const sendEmail = (e) => {
+//     e.preventDefault();
 
-    emailjs.sendForm('service_cxarmib', 'template-main-id', e.target, 'user_y82ZwKg2eIg9LO4L0jaRq')
-    .then((result) => {
-        window.M.toast({html: 'Inquiry sent!', displayLength: 5000});
-        localStorage.setItem('Cooldown', JSON.stringify(new Date().getTime() + 10 * 8.64e7)); // This should actually be a date in the future
-        setDisplay(1);
+//     emailjs.sendForm('service_cxarmib', 'template-main-id', e.target, 'user_y82ZwKg2eIg9LO4L0jaRq')
+//     .then((result) => {
+//         window.M.toast({html: 'Inquiry sent!', displayLength: 5000});
+//         localStorage.setItem('Cooldown', JSON.stringify(new Date().getTime() + 10 * 8.64e7)); // This should actually be a date in the future
+//         setDisplay(1);
 
-    }, (error) => {
-        window.M.toast({html: 'Inquiry failed, please try again!', displayLength: 5000});
-        setDisplay(0);
+//     }, (error) => {
+//         window.M.toast({html: 'Inquiry failed, please try again!', displayLength: 5000});
+//         setDisplay(0);
 
-    });
-};
+//     });
+// };
 
 const Book = () => {
     const [daysSince, setDaysSince] = useState(0);
@@ -26,7 +26,7 @@ const Book = () => {
     const [email, setEmail] = useState(null);
     const [inquiry, setInquiry] = useState(null);
 
-    const daysSince = (last_inquiry_raw) => {
+    const getDaysSince = (last_inquiry_raw) => {
         const current_date = new Date().getTime();
         const last_inquiry = new Date(last_inquiry_raw);
         const days_since = parseInt((current_date - last_inquiry) / 8.64e7) + 1;
@@ -40,7 +40,7 @@ const Book = () => {
         if (last_inquiry_raw === null) {
             setDaysSince(0);
         } else {
-            const days_since = daysSince(last_inquiry_raw);
+            const days_since = getDaysSince(last_inquiry_raw);
             setDaysSince(days_since);
         }
     }, []);
@@ -48,16 +48,28 @@ const Book = () => {
     const sendInquiry = (e) => {
         e.preventDefault();
 
-        axios.post("https://osbornai.herokuapp.com/add_inquiry", {'first': first, 'last': last, 'email': email, 'inquiry': inquiry})
+        const data = {
+            first: first, 
+            last: last, 
+            email: email, 
+            inquiry: inquiry
+        }
+
+        axios.get("https://osbornai.herokuapp.com/add_inquiry", data)
         .then(res => {
             const form = res.data;
 
             const last_inquiry = form.last_inquiry;
             localStorage.setItem('last_inquiry', last_inquiry);
 
-            const days_since = daysSince(last_inquiry);
+            const days_since = getDaysSince(last_inquiry);
             setDaysSince(days_since);
+        })
+        .catch((error) => {
+            console.log("Error!");
+            console.log(error.response);
         });
+
     }; 
 
     // Have this update on the display change

@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import stripe
 import os
 from database import Database
@@ -11,6 +12,7 @@ from functools import wraps
 dotenv.load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
@@ -164,6 +166,7 @@ def paymentWebhook():
 @app.route('/add_inquiry', methods=['POST'], strict_slashes=False)
 def addInquiry():
     form_json = request.form
+    print(form_json)
 
     first = form_json['first']
     last = form_json['last']
