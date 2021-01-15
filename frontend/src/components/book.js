@@ -3,22 +3,6 @@ import '../form.css';
 import axios from 'axios';
 import FormData from 'form-data';
 
-// const sendEmail = (e) => {
-//     e.preventDefault();
-
-//     emailjs.sendForm('service_cxarmib', 'template-main-id', e.target, 'user_y82ZwKg2eIg9LO4L0jaRq')
-//     .then((result) => {
-//         window.M.toast({html: 'Inquiry sent!', displayLength: 5000});
-//         localStorage.setItem('Cooldown', JSON.stringify(new Date().getTime() + 10 * 8.64e7)); // This should actually be a date in the future
-//         setDisplay(1);
-
-//     }, (error) => {
-//         window.M.toast({html: 'Inquiry failed, please try again!', displayLength: 5000});
-//         setDisplay(0);
-
-//     });
-// };
-
 const Book = () => {
     const [daysSince, setDaysSince] = useState(10);
 
@@ -67,8 +51,14 @@ const Book = () => {
             const days_since = getDaysSince(last_inquiry);
             setDaysSince(days_since);
         })
-        .catch((error) => {
-            console.error(error.response);
+        .catch((err) => {
+            const form = err.response.data;
+
+            const last_inquiry = form.last_inquiry;
+            localStorage.setItem('last_inquiry', last_inquiry);
+
+            const days_since = getDaysSince(last_inquiry);
+            setDaysSince(days_since);
         });
     }; 
 

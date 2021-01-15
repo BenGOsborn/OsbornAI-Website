@@ -7,7 +7,7 @@ import ScrollToTop from './scroll-to-top';
 import Articles from './pages/articles-page';
 import Article from './pages/article';
 
-import AdminLogin from './pages/admin-login';
+import Admin from './pages/admin';
 
 import NotFound from './pages/not-found';
 
@@ -15,11 +15,11 @@ import Book from './components/book';
 import Footer from './components/footer';
 
 const exclusion_array = [
-    '/admin/login',
+    '/admin',
+    '/admin/'
 ];
 
 const App = ({ location }) => {
-    console.log(location.pathname);
     return (
         <>
             <ScrollToTop />
@@ -28,10 +28,11 @@ const App = ({ location }) => {
                 <Route path="/" exact component={Home} />
                 <Route path="/articles" exact component={Articles} />
                 <Route path="/articles/:id" exact component={Article} />
-                <Route path="/admin/login" exact component={AdminLogin} />
+                <Route path="/admin" exact component={Admin} />
                 <Route path="*" component={NotFound} />
             </Switch>
-            {exclusion_array.indexOf(location.pathname) < 0 && <><Book /><Footer /></>}
+            {exclusion_array.indexOf(location.pathname) < 0 && <Book />}
+            <Footer />
         </>
     );
 };

@@ -27,7 +27,7 @@ def sanitizeJSON(json_raw):
 
 # -------------------------- Admin login -------------------------------
 
-@app.route('/admin_login', methods=['POST'], strict_slashes=False)
+@app.route('/admin/login', methods=['POST'], strict_slashes=False)
 def login():
     form_json = request.form
 
@@ -37,7 +37,7 @@ def login():
     success = db.admin_login(username, password)
 
     if not success:
-        return jsonify({'success': False}), 200
+        return jsonify({'success': False}), 400
 
     token = jwt.encode({'username': username, 'exp': datetime.utcnow() + timedelta(days=1)}, app.config['SECRET_KEY'], algorithm="HS256")
 
@@ -54,13 +54,13 @@ def checkToken(f):
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
         
         except:
-            return jsonify({'success': False}), 200
+            return jsonify({'success': False}), 400
         
         return f(*args, **kwargs)
     
     return decorated
 
-@app.route('/validate_token', methods=['POST'], strict_slashes=False)
+@app.route('/admin/validate_token', methods=['POST'], strict_slashes=False)
 @checkToken
 def validateToken():
     return jsonify({'success': True}), 200
@@ -74,18 +74,18 @@ def validateId():
 
     payment_info = db.admin_view_payment_id_details(payment_id)
     if payment_info == False:
-        return jsonify({'success': False}), 200
+        return jsonify({'success': False}), 400
 
     return jsonify({**{'success': True}, **sanitizeJSON(payment_info)}), 200
 
-@app.route('/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
+@app.route('/admin/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
 @checkToken
 def viewValidPaymentIds():
     ids = db.admin_view_payment_ids()
 
     return jsonify({'success': True, 'payment_ids': sanitizeJSON(ids)}), 200
 
-@app.route('/create_payment_id', methods=['POST'], strict_slashes=False)
+@app.route('/admin/create_payment_id', methods=['POST'], strict_slashes=False)
 @checkToken
 def createPaymentId():
     form_json = request.form
@@ -108,7 +108,7 @@ def pay():
 
     payment_info = db.admin_view_payment_id_details(payment_id)
     if payment_info == False:
-        return jsonify({'success': False})
+        return jsonify({'success': False}), 400
 
     amount = payment_info['amount'] * 100
     currency = payment_info['currency']
@@ -157,9 +157,9 @@ def paymentWebhook():
         return jsonify({'success': True}), 200
 
     else:
-        # What am I going to do if this is false?
+        # What will happen if this is false?
 
-        return jsonify({'success': False}), 200
+        return jsonify({'success': False}), 400
 
 # ------------------- Inquiry routes -----------------------
 
@@ -175,21 +175,21 @@ def addInquiry():
     success = db.add_inquiry(first, last, email, inquiry)
 
     if success != True:
-        return jsonify({'success': False, 'last_inquiry': success}), 200
+        return jsonify({'success': False, 'last_inquiry': success}), 400
 
     return jsonify({'success': True, 'last_inquiry': datetime.utcnow()}), 200
 
-@app.route('/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
+@app.route('/admin/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
 @checkToken
 def viewInquiryNotifications():
     inquiries = db.admin_view_inquiry_notifications()
 
     if inquiries == False:
-        return jsonify({'success': False}), 200
+        return jsonify({'success': False}), 400
 
     return jsonify({'success': True, 'inquiries': sanitizeJSON(inquiries)}), 200
 
-@app.route('/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
+@app.route('/admin/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
 @checkToken
 def deleteInquiryNotification():
     form_json = request.form
