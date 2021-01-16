@@ -20,6 +20,13 @@ db = Database()
 
 stripe.api_key = os.getenv('STRIPE_SECRET')
 
+# -------------------------- Custom error codes -----------------
+
+error_code_token = 24
+error_code_param = 25
+error_code_other = 26
+# Send through the error return message as well
+
 # -------------------------- Helper Functions ---------------------------
 
 def sanitizeJSON(json_raw):
@@ -31,17 +38,21 @@ def sanitizeJSON(json_raw):
 def login():
     form_json = request.form
 
-    username = form_json['username']
-    password = form_json['password']
+    try:
+        username = form_json['username']
+        password = form_json['password']
 
-    success = db.admin_login(username, password)
+        success = db.admin_login(username, password)
 
-    if not success:
-        return jsonify({'success': False}), 400
+        if not success:
+            return jsonify({'success': False, 'error_code': error_code_failed}), 400
 
-    token = jwt.encode({'username': username, 'exp': datetime.utcnow() + timedelta(days=1)}, app.config['SECRET_KEY'], algorithm="HS256")
+        token = jwt.encode({'username': username, 'exp': datetime.utcnow() + timedelta(days=1)}, app.config['SECRET_KEY'], algorithm="HS256")
 
-    return jsonify({'success': True, 'token': token}), 200
+        return jsonify({'success': True, 'token': token}), 200
+
+    except:
+        return jsonify({'success': False, 'error_code': error_code_other}), 400 # I could also send through the error code
 
 def checkToken(f):
     @wraps(f)
@@ -51,10 +62,10 @@ def checkToken(f):
         try:
             token = form_json['token']
                 
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+            jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
         
         except:
-            return jsonify({'success': False}), 400
+            return jsonify({'success': False, 'error_code': error_code_token}), 400
         
         return f(*args, **kwargs)
     
@@ -70,13 +81,18 @@ def validateToken():
 @app.route('/load_payment_id', methods=['POST'], strict_slashes=False)
 def validateId():
     form_json = request.form
-    payment_id = form_json['payment_id']
 
-    payment_info = db.admin_view_payment_id_details(payment_id)
-    if payment_info == False:
-        return jsonify({'success': False}), 400
+    try:
+        payment_id = form_json['payment_id']
 
-    return jsonify({**{'success': True}, **sanitizeJSON(payment_info)}), 200
+        payment_info = db.admin_view_payment_id_details(payment_id)
+        if payment_info == False:
+            return jsonify({'success': False}), 400
+
+        return jsonify({**{'success': True}, **sanitizeJSON(payment_info)}), 200
+
+    except:
+        return jsonify({'success': False, 'error_code': error_code_param})
 
 @app.route('/admin/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
 @checkToken
