@@ -27,6 +27,7 @@ class Database:
         self.expires_in = 86400 * 7
         self.payment_ids.create_index("timeCreated", expireAfterSeconds=self.expires_in)
 
+    # No try catches
     def add_inquiry(self, first, last, email, inquiry):
         date = datetime.utcnow()
 
@@ -78,6 +79,7 @@ class Database:
 
         return True
 
+    # No try catches
     def add_payment(self, first, last, email, payment_id, purchase, amount, currency):
         date = datetime.utcnow()
 
@@ -113,15 +115,12 @@ class Database:
     def admin_view_inquiry_notifications(self):
         new_inquiries = self.client_notifications.find()
 
-        if new_inquiries == None:
-            return False
-
         return list(new_inquiries)[::-1]
 
     def admin_delete_inquiry_notification(self, inquiry_notification_id):
         query = {'_id': ObjectId(inquiry_notification_id)}
-
         find_inquiry = self.client_notifications.find_one(query)
+
         if find_inquiry == None:
             return False
 
@@ -136,25 +135,25 @@ class Database:
         return {**{'payment_id': payment_id.inserted_id}, **document}
 
     def admin_delete_payment_id(self, payment_id):
-        id_exists = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
+        query = {'_id': ObjectId(payment_id)}
+        id_exists = self.payment_ids.find_one(query)
 
         if id_exists == None:
             return False
 
-        self.payment_ids.delete_one({'_id': payment_id})
+        self.payment_ids.delete_one(query)
 
         return True
 
+    # What happens if there are no documents? Same for view inquiry notifications method
     def admin_view_payment_ids(self):
         payment_ids = self.payment_ids.find()
 
         return list(payment_ids)[::-1]
 
+    # This returns none now - this needs to be fixed
     def admin_view_payment_id_details(self, payment_id):
         payment_id_info = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
-
-        if payment_id_info == None:
-            return False
 
         return payment_id_info
 
