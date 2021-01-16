@@ -23,9 +23,10 @@ stripe.api_key = os.getenv('STRIPE_SECRET')
 # -------------------------- Custom error codes -----------------
 
 error_code_token = 24
-error_code_param = 25
+error_code_failed = 25
 error_code_other = 26
-# Send through the error return message as well
+# Might also want to change the names from payment_id to just regular _id as thats what it will be being sent back as MAYBE
+# Add better try catch/error handling statements for the database
 
 # -------------------------- Helper Functions ---------------------------
 
@@ -36,36 +37,40 @@ def sanitizeJSON(json_raw):
 
 @app.route('/admin/login', methods=['POST'], strict_slashes=False)
 def login():
-    form_json = request.form
-
     try:
+        form_json = request.form
+
         username = form_json['username']
         password = form_json['password']
 
         success = db.admin_login(username, password)
 
         if not success:
-            return jsonify({'success': False, 'error_code': error_code_failed}), 400
+            return jsonify({'success': False, 'error_code': error_code_failed, 'error': "Could not authenticate credentials!"}), 400
 
         token = jwt.encode({'username': username, 'exp': datetime.utcnow() + timedelta(days=1)}, app.config['SECRET_KEY'], algorithm="HS256")
 
         return jsonify({'success': True, 'token': token}), 200
 
-    except:
-        return jsonify({'success': False, 'error_code': error_code_other}), 400 # I could also send through the error code
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400 # I could also send through the error code
 
 def checkToken(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        form_json = request.form
-
         try:
+            form_json = request.form
+
             token = form_json['token']
+
+        except Exception as e:
+            return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
                 
+        try:
             jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
         
-        except:
-            return jsonify({'success': False, 'error_code': error_code_token}), 400
+        except Exception as e:
+            return jsonify({'success': False, 'error_code': error_code_token, 'error': e}), 400
         
         return f(*args, **kwargs)
     
@@ -80,19 +85,19 @@ def validateToken():
 
 @app.route('/load_payment_id', methods=['POST'], strict_slashes=False)
 def validateId():
-    form_json = request.form
-
     try:
+        form_json = request.form
+
         payment_id = form_json['payment_id']
 
         payment_info = db.admin_view_payment_id_details(payment_id)
         if payment_info == False:
-            return jsonify({'success': False}), 400
+            return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"Payment info for id '{payment_id}' does not exist!"}), 400
 
         return jsonify({**{'success': True}, **sanitizeJSON(payment_info)}), 200
 
-    except:
-        return jsonify({'success': False, 'error_code': error_code_param})
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
 
 @app.route('/admin/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -104,104 +109,123 @@ def viewValidPaymentIds():
 @app.route('/admin/create_payment_id', methods=['POST'], strict_slashes=False)
 @checkToken
 def createPaymentId():
-    form_json = request.form
+    try:
+        form_json = request.form
 
-    purchase = form_json['purchase']
-    amount = int(form_json['amount'])
-    currency = form_json['currency']
+        purchase = form_json['purchase']
+        amount = float(form_json['amount'])
+        currency = form_json['currency']
 
-    valid_currencies = ['aud', 'usd']
-    if currency not in valid_currencies:
-        return jsonify({'success': False}), 400
+        valid_currencies = ['aud', 'usd']
+        if currency not in valid_currencies:
+            return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"'{currency}' is not a valid currency!"}), 400
 
-    if amount < 0:
-        return jsonify({'success': False}), 400
+        if amount < 0:
+            return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"Amount must be greater than 0!"}), 400
 
-    payment_id = db.admin_create_payment_id(purchase, amount, currency) # I want this to return the expiry date as well
+        payment_id = db.admin_create_payment_id(purchase, amount, currency) # I want this to return the expiry date as well
 
-    return jsonify({**{'success': True}, **sanitizeJSON(payment_id)}), 200
+        return jsonify({**{'success': True}, **sanitizeJSON(payment_id)}), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
 
 @app.route('/pay', methods=['POST'], strict_slashes=False) # Untested
 def pay():
-    form_json = request.form
+    try:
+        form_json = request.form
 
-    first = form_json['first']
-    last = form_json['last']
-    email = form_json['email']
-    payment_id = form_json['payment_id']
+        first = form_json['first']
+        last = form_json['last']
+        email = form_json['email']
+        payment_id = form_json['payment_id']
 
-    payment_info = db.admin_view_payment_id_details(payment_id)
-    if payment_info == False:
-        return jsonify({'success': False}), 400
+        payment_info = db.admin_view_payment_id_details(payment_id)
+        if payment_info == False:
+            return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"Payment id '{payment_id}' is invalid!"}), 400
 
-    amount = payment_info['amount'] * 100
-    currency = payment_info['currency']
+        amount = payment_info['amount'] * 100
+        currency = payment_info['currency']
 
-    # I'll have to check to make sure stripe doesnt send strange receipts
-    desc_json = json.dumps({
-        'payment_id': payment_id,
-        'first': first,
-        'last': last,
-        'email': email,
-        'purchase': payment_info['purchase'],
-        'amount': amount,
-        'currency': currency
-    })
+        # I'll have to check to make sure stripe doesnt send strange receipts
+        # I'll also have to make sure this information gets sent through properly
+        desc_json = json.dumps({
+            'payment_id': payment_id,
+            'first': first,
+            'last': last,
+            'email': email,
+            'purchase': payment_info['purchase'],
+            'amount': amount,
+            'currency': currency
+        })
 
-    intent = stripe.PaymentIntent.create(
-        amount=amount,
-        description=desc_json,
-        currency=currency,
-        receipt_email=email
-    )
+        intent = stripe.PaymentIntent.create(
+            amount=amount,
+            description=desc_json,
+            currency=currency,
+            receipt_email=email
+        )
 
-    return jsonify({'success': True, 'client_secret': intent['client_secret']}), 200
+        return jsonify({'success': True, 'client_secret': intent['client_secret']}), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
 
 @app.route('/payment_webook', methods=['POST'], strict_slashes=False) # Untested
 def paymentWebhook():
-    form_json = request.form
+    try:
+        form_json = request.form
 
-    if form_json['type'] == 'payment_intent.succeeded':
-        data_object = form_json['data']['object']
-        receipt_info_json = data_object['description']
-        receipt_info = json.loads(receipt_info_json)
+        if form_json['type'] == 'payment_intent.succeeded':
+            data_object = form_json['data']['object']
+            receipt_info_json = data_object['description']
+            receipt_info = json.loads(receipt_info_json)
 
-        payment_id = receipt_info['payment_id']
-        first = receipt_info['first']
-        last = receipt_info['last']
-        email = receipt_info['email']
-        purchase = receipt_info['purchase']
-        amount = receipt_info['amount']
-        currency = receipt_info['currency']
+            payment_id = receipt_info['payment_id']
+            first = receipt_info['first']
+            last = receipt_info['last']
+            email = receipt_info['email']
+            purchase = receipt_info['purchase']
+            amount = receipt_info['amount']
+            currency = receipt_info['currency']
 
-        db.add_payment(first, last, email, payment_id, purchase, amount, currency)
+            db.add_payment(first, last, email, payment_id, purchase, amount, currency)
 
-        db.admin_delete_payment_id(payment_id) 
+            success = db.admin_delete_payment_id(payment_id) 
+            if not success:
+                return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"Failed to delete id '{payment_id}' from the database!"}), 400
 
-        return jsonify({'success': True}), 200
+            return jsonify({'success': True}), 200
 
-    else:
-        # What will happen if this is false?
+        else:
+            # What will happen if this is false?
 
-        return jsonify({'success': False}), 400
+            return jsonify({'success': False, 'error_code': error_code_failed, 'error': "Payment did not succeed!"}), 400
+
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
 
 # ------------------- Inquiry routes -----------------------
 
 @app.route('/add_inquiry', methods=['POST'], strict_slashes=False)
 def addInquiry():
-    form_json = request.form
+    try:
+        form_json = request.form
 
-    first = form_json['first']
-    last = form_json['last']
-    email = form_json['email']
-    inquiry = form_json['inquiry']
+        first = form_json['first']
+        last = form_json['last']
+        email = form_json['email']
+        inquiry = form_json['inquiry']
 
-    success = db.add_inquiry(first, last, email, inquiry)
+        success = db.add_inquiry(first, last, email, inquiry)
 
-    if success != True:
-        return jsonify({'success': False, 'last_inquiry': success}), 400
+        if success != True:
+            return jsonify({'success': False, 'last_inquiry': success, 'error_code': error_code_failed, 'error': "Could not add inquiry!"}), 400
 
-    return jsonify({'success': True, 'last_inquiry': datetime.utcnow()}), 200
+        return jsonify({'success': True, 'last_inquiry': datetime.utcnow()}), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
 
 @app.route('/admin/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -209,20 +233,24 @@ def viewInquiryNotifications():
     inquiries = db.admin_view_inquiry_notifications()
 
     if inquiries == False:
-        return jsonify({'success': False}), 400
+        return jsonify({'success': False, 'error_code': error_code_failed, 'error': "Failed to load inquiries!"}), 400
 
     return jsonify({'success': True, 'inquiries': sanitizeJSON(inquiries)}), 200
 
 @app.route('/admin/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
 @checkToken
 def deleteInquiryNotification():
-    form_json = request.form
+    try:
+        form_json = request.form
 
-    inquiry_notification_id = form_json['inquiry_notification_id']
+        inquiry_notification_id = form_json['inquiry_notification_id']
 
-    success = db.admin_delete_inquiry_notification(inquiry_notification_id)
+        success = db.admin_delete_inquiry_notification(inquiry_notification_id)
 
-    return jsonify({'success': success}), 200
+        return jsonify({'success': success}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
 
 if __name__ == '__main__':
     app.run()
