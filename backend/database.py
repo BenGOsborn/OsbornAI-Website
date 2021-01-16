@@ -116,7 +116,7 @@ class Database:
         if new_inquiries == None:
             return False
 
-        return list(new_inquiries)
+        return list(new_inquiries)[::-1]
 
     def admin_delete_inquiry_notification(self, inquiry_notification_id):
         query = {'_id': ObjectId(inquiry_notification_id)}
@@ -148,7 +148,7 @@ class Database:
     def admin_view_payment_ids(self):
         payment_ids = self.payment_ids.find()
 
-        return list(payment_ids)
+        return list(payment_ids)[::-1]
 
     def admin_view_payment_id_details(self, payment_id):
         payment_id_info = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
