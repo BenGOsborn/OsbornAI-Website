@@ -91,8 +91,15 @@ def createPaymentId():
     form_json = request.form
 
     purchase = form_json['purchase']
-    amount = form_json['amount']
+    amount = int(form_json['amount'])
     currency = form_json['currency']
+
+    valid_currencies = ['aud', 'usd']
+    if currency not in valid_currencies:
+        return jsonify({'success': False}), 400
+
+    if amount < 0:
+        return jsonify({'success': False}), 400
 
     payment_id = db.admin_create_payment_id(purchase, amount, currency) # I want this to return the expiry date as well
 
@@ -101,6 +108,7 @@ def createPaymentId():
 @app.route('/pay', methods=['POST'], strict_slashes=False) # Untested
 def pay():
     form_json = request.form
+
     first = form_json['first']
     last = form_json['last']
     email = form_json['email']

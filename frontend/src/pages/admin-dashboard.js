@@ -9,8 +9,13 @@ const AdminDashboard = () => {
     const [notifications, setNotifications] = useState([]);
     const [paymentIds, setPaymentIds] = useState([]);
 
+    const [purchase, setPurchase] = useState('');
+    const [amount, setAmount] = useState(0);
+    const [currency, setCurrency] = useState('aud');
+
     useEffect(() => {
         const token = localStorage.getItem('token');
+
 
         const token_form = new FormData();
         token_form.append('token', token)
@@ -39,6 +44,26 @@ const AdminDashboard = () => {
         
 
     }, []);
+
+    const deleteNotification = (e, id) => {
+        e.preventDefault();
+
+        const token = localStorage.getItem('token');
+
+        const delete_form = new FormData();
+        delete_form.append('token', token);
+        delete_form.append('inquiry_notification_id', id);
+
+        axios.post('https://osbornai.herokuapp.com/admin/delete_inquiry_notification', delete_form)
+        .then((res) => {
+            // We are going to filter out the ID that has this
+            const new_notifications = notifications.filter((notification) => {return notification._id !== id});
+            setNotifications(new_notifications);
+        })
+        .catch((err) => {
+            console.log(err.response.data);
+        });
+    };
 
     const displayInquiryNotifications = () => {
         // Operations: View, Delete
@@ -106,9 +131,8 @@ const AdminDashboard = () => {
                                         </div>
                                     </div>
                                     <div class="card-action center">
-                                        <button class="btn blue darken-1 waves-effect waves-light">
+                                        <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {deleteNotification(e, notification._id)}}>
                                             Delete
-                                            {/* Maybe have some sort of confirmation on these buttons */}
                                         </button>
                                     </div>
                                 </div>
@@ -120,13 +144,65 @@ const AdminDashboard = () => {
         );
     };
 
+    const newPaymentId = (e) => {
+        e.preventDefault();
+
+        const token = localStorage.getItem('token');
+
+        const payment_form = new FormData();
+        payment_form.append('token', token);
+        payment_form.append('purchase', purchase);
+        payment_form.append('amount', amount);
+        payment_form.append('currency', currency);
+
+        axios.post('https://osbornai.herokuapp.com/admin/create_payment_id', payment_form)
+        .then((res) => {
+            const form = res.data;
+
+            setPaymentIds([form].concat(paymentIds));
+
+            e.target.reset();
+        })
+        .catch((err) => {
+            // I need to have better error messages for the response codes
+            console.log(err.response.data);
+            window.location.reload();
+        });
+    };
+
     const displayPaymentIds = () => {
-        // First we want to have a new one session
         return (
             <>
+                <h4 class="center">Create a new payment ID</h4>
+                <form onSubmit={newPaymentId} id="sendForm">
+                    <div class="input-field">
+                        <textarea class="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={(e) => {setPurchase(e.target.value)}} />
+                        <input type="number" min={0} placeholder="Amount" name="amount" required={true} onChange={(e) => {setAmount(e.target.value)}} />
+                        <select class="browser-default" name="currency" onChange={(e) => {setCurrency(e.target.value)}}>
+                            <option value="aud">AUD</option>
+                            <option value="usd">USD</option>
+                        </select>
+                    </div>
+                </form>
+                <button class="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
+                    Send
+                    <i class="material-icons right">send</i>
+                </button>
                 <h4 class="center">Payment ID's</h4>
                 {paymentIds.length === 0 ? 
-                <li></li>
+                <li>
+                    <br />
+                    <h5 class="center">There are no current payment ID's!</h5>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </li>
                 :paymentIds.map((payment_id) => {
                     return (
                         <li key={payment_id._id}>
@@ -181,12 +257,16 @@ const AdminDashboard = () => {
                 <br />
                 <br />
                 <div class="row">
-                    <ul class="col s12 m12 l6">
-                        {displayInquiryNotifications()}
-                    </ul>
-                    <ul class="col s12 m12 l6">
-                        {displayPaymentIds()}
-                    </ul>
+                    <div class="col s12 m12 l6">
+                        <ul class="container">
+                            {displayInquiryNotifications()}
+                        </ul>
+                    </div>
+                    <div class="col s12 m12 l6">
+                        <ul class="container">
+                            {displayPaymentIds()}
+                        </ul>
+                    </div>
                 </div>
                 <br />
                 <br />
