@@ -121,7 +121,34 @@ const AdminDashboard = () => {
     };
 
     const displayPaymentIds = () => {
-
+        // First we want to have a new one session
+        return (
+            <>
+                <h4 class="center">Payment ID's</h4>
+                {paymentIds.length === 0 ? 
+                <li></li>
+                :paymentIds.map((payment_id) => {
+                    return (
+                        <li key={payment_id._id}>
+                            <div class="card">
+                                <div class="card-content">
+                                    <b>Payment ID:</b> {payment_id._id}
+                                    <br />
+                                    <b>Purchase:</b> {payment_id.purchase}
+                                    <br />
+                                    <b>Amount:</b> {payment_id.amount}
+                                    <br />
+                                    <b>Currency:</b> {payment_id.currency}
+                                    <br />
+                                    <b>Expires in:</b> {parseInt((new Date(payment_id.expiry) - new Date().getTime()) / 8.64e7) + 1}
+                                </div>
+                            </div>
+                        </li>
+                    );
+                })
+                }
+            </>
+        );
     };
 
     return (
