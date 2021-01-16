@@ -41,10 +41,53 @@ const AdminDashboard = () => {
     }, []);
 
     const displayInquiryNotifications = () => {
-        // Operations: View, Delete, 
+        // Operations: View, Delete
+
+        return (
+            <>
+                {/* If there is none then I want to return "There are no new cards!" */}
+                {/* I also dont want to render all of their previous inquiries, maybe Ill just render the first three */}
+                <h4 class="center">New Notifications</h4> 
+                {notifications.map((notification) => {
+                    return (
+                        <li key={notification._id}>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div className="Name">
+                                        <b>Name:</b> {notification.first} {notification.last}
+                                    </div>
+                                    <div className="Email">
+                                        <b>Email:</b> {notification.email}
+                                    </div>
+                                    <div className="NewInquiry">
+                                        {/* Maybe I want to convert UTC to Australian time */}
+                                        {/* I need better formatting of this date */}
+                                        <b>Inquiry date:</b> {notification.new_inquiry.inquiry_date} 
+                                        <br />
+                                        <b>Inquiry:</b> {notification.new_inquiry.inquiry}
+                                    </div>
+                                    <div className="PreviousInquiries">
+                                        <b>Previous inquiries:</b>
+                                        <br />
+                                        {/* If there are none then we will return a "Null" message */}
+                                        {notification.previous_inquiries}
+                                    </div>
+                                    <div className="UserSpendings">
+                                        <b>Total spent:</b> ${notification.user_spent}
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    {/* I also need a delete button down here */}
+                                </div>
+                            </div>
+                        </li>
+                    );
+                })}
+            </>
+        );
     };
 
-    const displayPaymentLinks = () => {
+    const displayPaymentIds = () => {
 
     };
 
@@ -70,8 +113,24 @@ const AdminDashboard = () => {
                 </div>
             </header>
             <div class="container">
-                {/* Store my two seperate dashboard views in their own seperate cols in a row */}
-                <h1>Hello</h1>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="row">
+                    <ul class="col s12 m12 l6">
+                        {displayInquiryNotifications()}
+                    </ul>
+                    <ul class="col s12 m12 l6">
+                        {displayPaymentIds()}
+                    </ul>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
         </div>
     );

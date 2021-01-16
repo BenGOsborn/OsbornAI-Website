@@ -43,7 +43,7 @@ class Database:
             'last': last,
             'email': email,
             'new_inquiry': {'inquiry_date': date, 'inquiry': inquiry},
-            'previous_inquiries': existing_user['inquiries'] if existing_user != None else None,
+            'previous_inquiries': existing_user['inquiries'] if existing_user != None else [],
             'user_spent': user_spent
         }
 

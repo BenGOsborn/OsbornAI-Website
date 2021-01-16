@@ -9,6 +9,8 @@ const Admin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [render, setRender] = useState(null);
+    // Might just set the token in the state
+    // Combine the states into one so I can change the page at will
 
     useEffect(() => {
         const local_token = localStorage.getItem('token');
