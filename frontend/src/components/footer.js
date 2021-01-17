@@ -1,8 +1,27 @@
 import { Link } from 'react-scroll';
+import { Link as WebLink, useLocation } from 'react-router-dom';
 
 const Footer = () => {
     const date = new Date();
     const year = date.getFullYear();
+
+    const url = useLocation().pathname;
+
+    const copyright = () => {
+        if (url === "/") {
+            return (
+                <Link href="/" to="Top" smooth={true} duration={400} style={{fontSize: 14, color: 'white'}}>
+                    © Copyright OsbornAI {year}
+                </Link>
+            );
+        } else {
+            return (
+                <WebLink to="/" style={{fontSize: 14, color: 'white'}}>
+                    © Copyright OsbornAI {year}
+                </WebLink>
+            );
+        }
+    };
 
     return (
         <div className="Footer">
@@ -18,9 +37,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <br />
-                    <div style={{fontSize: 14}}>
-                        © Copyright OsbornAI {year}
-                    </div>
+                    {copyright()}
                 </div>
             </footer>
         </div>

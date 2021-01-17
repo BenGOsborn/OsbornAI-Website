@@ -116,7 +116,11 @@ class Database:
         return list(new_inquiries)[::-1]
 
     def admin_delete_inquiry_notification(self, inquiry_notification_id):
-        query = {'_id': ObjectId(inquiry_notification_id)}
+        try:
+            query = {'_id': ObjectId(inquiry_notification_id)} # Create a try block for this ObjectId
+        except:
+            return False
+
         find_inquiry = self.client_notifications.find_one(query)
 
         if find_inquiry == None:
@@ -133,7 +137,11 @@ class Database:
         return {**{'payment_id': payment_id.inserted_id}, **document}
 
     def admin_delete_payment_id(self, payment_id):
-        query = {'_id': ObjectId(payment_id)}
+        try:
+            query = {'_id': ObjectId(payment_id)}
+        except:
+            return False
+
         id_exists = self.payment_ids.find_one(query)
 
         if id_exists == None:
@@ -149,7 +157,12 @@ class Database:
         return list(payment_ids)[::-1]
 
     def admin_view_payment_id_details(self, payment_id):
-        payment_id_info = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
+        try:
+            query = {'_id': ObjectId(payment_id)}
+        except:
+            return False
+
+        payment_id_info = self.payment_ids.find_one(query)
 
         return payment_id_info
 

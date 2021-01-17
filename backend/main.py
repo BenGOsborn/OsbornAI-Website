@@ -96,6 +96,9 @@ def validateId():
         if payment_info == None:
             return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"Payment info for id '{payment_id}' does not exist!"}), 400
 
+        if payment_info == False:
+            return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"Bad payment id!"}), 400
+
         return jsonify({**{'success': True}, **sanitizeJSON(payment_info)}), 200
 
     except Exception as e:

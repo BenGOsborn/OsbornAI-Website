@@ -88,8 +88,27 @@ const Admin = () => {
         if (render === 0) {
             return (
                 <div class="container center">
-                    <div className="Top" />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     <h4 style={{color: '#039be5'}}>Loading...</h4>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </div>
             );
         } else if (render === 1) {
@@ -121,10 +140,14 @@ const Admin = () => {
 
             return (
                 <div className="Login">
-                    <div className="Top" /> 
                     <div class="container center">
                         <div class="container">
                             <div class="container">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
                                 <h1>Admin Login</h1>
                                 <form onSubmit={sendLogin} id="sendForm">
                                     <div class="input-field">
@@ -136,6 +159,11 @@ const Admin = () => {
                                     Login
                                     <i class="material-icons right">send</i>
                                 </button>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
                             </div>
                         </div>
                     </div>
@@ -153,7 +181,6 @@ const Admin = () => {
 
                 axios.post('https://osbornai.herokuapp.com/admin/delete_inquiry_notification', delete_form)
                 .then((res) => {
-                    // This might be broken and might not update the rest of the component as there is no reason for the component to re-render
                     const filtered_notifications = notifications.filter((notification) => {return notification._id !== id});
                     setNotifications(filtered_notifications);
                 })
@@ -206,71 +233,72 @@ const Admin = () => {
                     <div class="container">
                         <div class="row">
                             <div class="col s12 m12 l6">
-                                <ul class="container">
-                                    {/* Can I have this inside of the LI class???? */}
+                                <div class="container">
                                     <h4 class="center">New Inquiries</h4> 
-                                    {notifications.length === 0 ? 
-                                        <li>
-                                            <h5 class="center">There are no new inquiries!</h5>
-                                        </li>
-                                        :notifications.map((notification) => {
-                                            return (
-                                                <li key={notification._id}>
-                                                    <div class="card">
-                                                        <div class="card-content">
-                                                            <div className="Name">
-                                                                <b>Name:</b> {notification.first} {notification.last}
+                                    <br />
+                                    <ul>
+                                        {notifications.length === 0 ? 
+                                            <li>
+                                                <h5 class="center">There are no new inquiries!</h5>
+                                            </li>
+                                            :notifications.map((notification) => {
+                                                return (
+                                                    <li key={notification._id}>
+                                                        <div class="card">
+                                                            <div class="card-content">
+                                                                <div className="Name">
+                                                                    <b>Name:</b> {notification.first} {notification.last}
+                                                                </div>
+                                                                <div className="Email">
+                                                                    <b>Email:</b> {notification.email}
+                                                                </div>
+                                                                <div className="NewInquiry">
+                                                                    <b>Inquiry date:</b> {notification.new_inquiry.inquiry_date} 
+                                                                    <br />
+                                                                    <b>Inquiry:</b> 
+                                                                    <br />
+                                                                    {notification.new_inquiry.inquiry}
+                                                                </div>
+                                                                <div className="PreviousInquiries">
+                                                                    <b>Previous inquiries:</b>
+                                                                    <br />
+                                                                    <ul>
+                                                                        {notification.previous_inquiries.slice(0, 3).map((prev_inquiry) => {
+                                                                            return (
+                                                                                <li id={Math.random().toString(36).substring(7)}>
+                                                                                    <div className="PreviousInquiryDate">
+                                                                                        <b>Previous inquiry date:</b> {prev_inquiry.inquiry_date}
+                                                                                        <br />
+                                                                                        <b>Inquiry: </b>
+                                                                                        <br />
+                                                                                        <b>Previous inquiry</b> 
+                                                                                        <br />
+                                                                                        {prev_inquiry.inquiry}
+                                                                                    </div>
+                                                                                </li>
+                                                                            );
+                                                                        })}
+                                                                    </ul>
+                                                                </div>
+                                                                <div className="UserSpendings">
+                                                                    <b>Total spent:</b> ${notification.user_spent}
+                                                                </div>
                                                             </div>
-                                                            <div className="Email">
-                                                                <b>Email:</b> {notification.email}
-                                                            </div>
-                                                            <div className="NewInquiry">
-                                                                <b>Inquiry date:</b> {notification.new_inquiry.inquiry_date} 
-                                                                <br />
-                                                                <b>Inquiry:</b> 
-                                                                <br />
-                                                                {notification.new_inquiry.inquiry}
-                                                            </div>
-                                                            <div className="PreviousInquiries">
-                                                                <b>Previous inquiries:</b>
-                                                                <br />
-                                                                <ul>
-                                                                    {notification.previous_inquiries.slice(0, 3).map((prev_inquiry) => {
-                                                                        return (
-                                                                            <li id={Math.random().toString(36).substring(7)}>
-                                                                                <div className="PreviousInquiryDate">
-                                                                                    <b>Previous inquiry date:</b> {prev_inquiry.inquiry_date}
-                                                                                    <br />
-                                                                                    <b>Inquiry: </b>
-                                                                                    <br />
-                                                                                    <b>Previous inquiry</b> 
-                                                                                    <br />
-                                                                                    {prev_inquiry.inquiry}
-                                                                                </div>
-                                                                            </li>
-                                                                        );
-                                                                    })}
-                                                                </ul>
-                                                            </div>
-                                                            <div className="UserSpendings">
-                                                                <b>Total spent:</b> ${notification.user_spent}
+                                                            <div class="card-action center">
+                                                                <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {deleteNotification(e, notification._id)}}>
+                                                                    Delete
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                        <div class="card-action center">
-                                                            <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {deleteNotification(e, notification._id)}}>
-                                                                Delete
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            );
-                                        })
-                                    }
-                                </ul>
+                                                    </li>
+                                                );
+                                            })
+                                        }
+                                    </ul>
+                                </div>
                             </div>
                             <div class="col s12 m12 l6">
-                                <ul class="container">
-                                    {/* Can I have this inside of the LI class???? */}
+                                <div class="container">
                                     <h4 class="center">Create a new payment ID</h4>
                                     <form onSubmit={newPaymentId} id="sendForm">
                                         <div class="input-field">
@@ -286,32 +314,39 @@ const Admin = () => {
                                         Send
                                         <i class="material-icons right">send</i>
                                     </button>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
                                     <h4 class="center">Payment ID's</h4>
-                                    {paymentIds.length === 0 ? 
-                                    <li>
-                                        <h5 class="center">There are no current payment ID's!</h5>
-                                    </li>
-                                    :paymentIds.map((payment_id) => {
-                                        return (
-                                            <li key={payment_id._id}>
-                                                <div class="card">
-                                                    <div class="card-content">
-                                                        <b>Payment ID:</b> {payment_id._id}
-                                                        <br />
-                                                        <b>Purchase:</b> {payment_id.purchase}
-                                                        <br />
-                                                        <b>Amount:</b> {payment_id.amount}
-                                                        <br />
-                                                        <b>Currency:</b> {payment_id.currency}
-                                                        <br />
-                                                        <b>Expires in:</b> {parseInt((new Date(payment_id.expiry) - new Date().getTime()) / 8.64e7) + 1}
+                                    <br />
+                                    <ul>
+                                        {paymentIds.length === 0 ? 
+                                        <li>
+                                            <h5 class="center">There are no current payment ID's!</h5>
+                                        </li>
+                                        :paymentIds.map((payment_id) => {
+                                            return (
+                                                <li key={payment_id._id}>
+                                                    <div class="card">
+                                                        <div class="card-content">
+                                                            <b>Payment ID:</b> {payment_id._id}
+                                                            <br />
+                                                            <b>Purchase:</b> {payment_id.purchase}
+                                                            <br />
+                                                            <b>Amount:</b> {payment_id.amount}
+                                                            <br />
+                                                            <b>Currency:</b> {payment_id.currency}
+                                                            <br />
+                                                            <b>Expires in:</b> {parseInt((new Date(payment_id.expiry) - new Date().getTime()) / 8.64e7) + 1}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        );
-                                    })
-                                    }
-                                </ul>
+                                                </li>
+                                            );
+                                        })
+                                        }
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -322,7 +357,21 @@ const Admin = () => {
 
     return (
         <div className="Admin">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             {isDisplayed()}
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
     );
 };

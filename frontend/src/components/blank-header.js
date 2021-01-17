@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import headerLogo from './header-logo.png';
 
-const AdminHeader = () => {
+const BlankHeader = () => {
     return (
-        <div className="AdminHeader">
+        <div className="BlankHeader">
             <div className="Top" />
             <header>
                 <div class="navbar-fixed">
@@ -27,4 +27,4 @@ const AdminHeader = () => {
     );
 };
 
-export default AdminHeader;
+export default BlankHeader;
