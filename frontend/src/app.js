@@ -7,6 +7,7 @@ import ScrollToTop from './scroll-to-top';
 import Articles from './pages/articles-page';
 import Article from './pages/article';
 
+import AdminHeader from './components/admin-header';
 import Admin from './pages/admin';
 
 import NotFound from './pages/not-found';
@@ -24,6 +25,7 @@ const App = ({ location }) => {
         <>
             <ScrollToTop />
             {exclusion_array.indexOf(location.pathname) < 0 && <Header />}
+            {exclusion_array.indexOf(location.pathname) >= 0 && <AdminHeader />}
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/articles" exact component={Articles} />

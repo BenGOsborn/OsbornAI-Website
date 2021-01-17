@@ -1,21 +1,25 @@
 import { useState, useEffect } from 'react'; import '../form.css';
 import axios from 'axios';
 import FormData from 'form-data';
-import AdminDashboard from './admin-dashboard';
 
-// This component will be ran before every single login and will take in the prop of the component and then will render it
-// If the login is successful then it will render the component, if not then it will not render the component
 const Admin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [render, setRender] = useState(null);
-    // Might just set the token in the state
-    // Combine the states into one so I can change the page at will
+    const [token, setToken] = useState(null);
+    const [render, setRender] = useState(0); // 0 = Loading, 1 = Login, 2 = Dashboard
 
+    const [notifications, setNotifications] = useState([]);
+    const [paymentIds, setPaymentIds] = useState([]);
+
+    const [purchase, setPurchase] = useState('');
+    const [amount, setAmount] = useState(0);
+    const [currency, setCurrency] = useState('aud');
+
+    // This is going to be our initial load that will either authenticate a token or require a login
     useEffect(() => {
         const local_token = localStorage.getItem('token');
         if (local_token === null) {
-            setRender(false);
+            setRender(1);
             return
         }
 
@@ -24,121 +28,103 @@ const Admin = () => {
         
         axios.post('https://osbornai.herokuapp.com/admin/validate_token', form)
         .then((res) => {
-            const form = res.data;
+            setToken(local_token);
 
-            if (form.success !== true) {
-                setRender(false);
-                return
-            }
-
-            setRender(true);
+            setRender(2);
         })
         .catch((err) => {
-            setRender(false);
+            console.log(err.response);
+
+            setRender(1);
         });
     }, []);
 
-    const sendLogin = (e) => {
-        e.preventDefault();
+    // This is going to track the render component and whenever it is called then we are going to make a call to the api to change it
+    useEffect(() => {
+        if (render === 2) {
+            const token_form = new FormData();
+            token_form.append('token', token)
 
-        const form = new FormData();
-        form.append('username', username);
-        form.append('password', password);
+            axios.post('https://osbornai.herokuapp.com/admin/view_inquiry_notifications', token_form)
+            .then((res) => {
+                const form = res.data;
 
-        axios.post("https://osbornai.herokuapp.com/admin/login", form)
-        .then((res) => {
-            const form = res.data;
+                setNotifications(form.inquiries);
+            })
+            .catch((err) => {
+                const form = err.response.data;
 
-            const success = form.success;
-            const token = form.token;
-            if (success !== true || token === null) {
-                setRender(false);
-                e.target.reset();
-                return
-            }
+                if (parseInt(form.error_code) === 24) {
+                    setToken(null);
 
-            localStorage.setItem('token', token);
-            setRender(true);
-        })
-        .catch((err) => {
-            setRender(false);
-            e.target.reset();
-        });
-    };
+                    setRender(1);
+                } else {
+                    console.log(`Error code ${form.error_code}: '${form.error}'`);
+                }
+            });
 
+            axios.post('https://osbornai.herokuapp.com/admin/view_valid_payment_ids', token_form)
+            .then((res) => {
+                const form = res.data;
+
+                setPaymentIds(form.payment_ids);
+            })
+            .catch((err) => {
+                const form = err.response.data;
+
+                if (parseInt(form.error_code) === 24) {
+                    setToken(null);
+
+                    setRender(1);
+                } else {
+                    console.log(`Error code ${form.error_code}: '${form.error}'`);
+                }
+            });
+        }
+    }, [render]);
+
+    // So now this logic will determine what we will show and if it will be our main component
     const isDisplayed = () => {
-        if (render === null) {
+        if (render === 0) {
             return (
                 <div class="container center">
                     <div className="Top" />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                     <h4 style={{color: '#039be5'}}>Loading...</h4>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                 </div>
             );
-        } else if (render === true) {
+        } else if (render === 1) {
+            const sendLogin = (e) => {
+                e.preventDefault();
+
+                const form = new FormData();
+                form.append('username', username);
+                form.append('password', password);
+
+                axios.post("https://osbornai.herokuapp.com/admin/login", form)
+                .then((res) => {
+                    const form = res.data;
+
+                    const token = form.token;
+                    localStorage.setItem('token', token);
+                    setToken(token);
+
+                    setRender(2);
+                })
+                .catch((err) => {
+                    e.target.reset();
+
+                    console.log(err.response);
+
+                    setRender(1);
+                });
+            };
+
             return (
-                <>
-                    <AdminDashboard />
-                </>
-            );
-        } else {
-            return (
-                <div className="AdminLogin">
+                <div className="Login">
                     <div className="Top" /> 
                     <div class="container center">
                         <div class="container">
                             <div class="container">
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
                                 <h1>Admin Login</h1>
                                 <form onSubmit={sendLogin} id="sendForm">
                                     <div class="input-field">
@@ -150,21 +136,182 @@ const Admin = () => {
                                     Login
                                     <i class="material-icons right">send</i>
                                 </button>
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        } else {
+            const deleteNotification = (e, id) => {
+                e.preventDefault();
+
+                const token = localStorage.getItem('token');
+
+                const delete_form = new FormData();
+                delete_form.append('token', token);
+                delete_form.append('inquiry_notification_id', id);
+
+                axios.post('https://osbornai.herokuapp.com/admin/delete_inquiry_notification', delete_form)
+                .then((res) => {
+                    // This might be broken and might not update the rest of the component as there is no reason for the component to re-render
+                    const filtered_notifications = notifications.filter((notification) => {return notification._id !== id});
+                    setNotifications(filtered_notifications);
+                })
+                .catch((err) => {
+                    const form = err.response.data;
+
+                    if (parseInt(form.error_code) === 24) {
+                        setToken(null);
+
+                        setRender(1);
+                    } else {
+                        console.log(`Error code ${form.error_code}: '${form.error}'`);
+                    }
+                });
+            };
+
+            const newPaymentId = (e) => {
+                e.preventDefault();
+
+                const payment_form = new FormData();
+                payment_form.append('token', token);
+                payment_form.append('purchase', purchase);
+                payment_form.append('amount', amount);
+                payment_form.append('currency', currency);
+
+                axios.post('https://osbornai.herokuapp.com/admin/create_payment_id', payment_form)
+                .then((res) => {
+                    const form = res.data;
+
+                    const new_paymentIds = [form].concat(paymentIds);
+                    setPaymentIds(new_paymentIds);
+
+                    e.target.reset();
+                })
+                .catch((err) => {
+                    const form = err.response.data;
+
+                    if (parseInt(form.error_code) === 24) {
+                        setToken(null);
+
+                        setRender(1);
+                    } else {
+                        console.log(`Error code ${form.error_code}: '${form.error}'`);
+                    }
+                });
+            };
+
+            return (
+                <div className="Dashboard">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12 m12 l6">
+                                <ul class="container">
+                                    {/* Can I have this inside of the LI class???? */}
+                                    <h4 class="center">New Inquiries</h4> 
+                                    {notifications.length === 0 ? 
+                                        <li>
+                                            <h5 class="center">There are no new inquiries!</h5>
+                                        </li>
+                                        :notifications.map((notification) => {
+                                            return (
+                                                <li key={notification._id}>
+                                                    <div class="card">
+                                                        <div class="card-content">
+                                                            <div className="Name">
+                                                                <b>Name:</b> {notification.first} {notification.last}
+                                                            </div>
+                                                            <div className="Email">
+                                                                <b>Email:</b> {notification.email}
+                                                            </div>
+                                                            <div className="NewInquiry">
+                                                                <b>Inquiry date:</b> {notification.new_inquiry.inquiry_date} 
+                                                                <br />
+                                                                <b>Inquiry:</b> 
+                                                                <br />
+                                                                {notification.new_inquiry.inquiry}
+                                                            </div>
+                                                            <div className="PreviousInquiries">
+                                                                <b>Previous inquiries:</b>
+                                                                <br />
+                                                                <ul>
+                                                                    {notification.previous_inquiries.slice(0, 3).map((prev_inquiry) => {
+                                                                        return (
+                                                                            <li id={Math.random().toString(36).substring(7)}>
+                                                                                <div className="PreviousInquiryDate">
+                                                                                    <b>Previous inquiry date:</b> {prev_inquiry.inquiry_date}
+                                                                                    <br />
+                                                                                    <b>Inquiry: </b>
+                                                                                    <br />
+                                                                                    <b>Previous inquiry</b> 
+                                                                                    <br />
+                                                                                    {prev_inquiry.inquiry}
+                                                                                </div>
+                                                                            </li>
+                                                                        );
+                                                                    })}
+                                                                </ul>
+                                                            </div>
+                                                            <div className="UserSpendings">
+                                                                <b>Total spent:</b> ${notification.user_spent}
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-action center">
+                                                            <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {deleteNotification(e, notification._id)}}>
+                                                                Delete
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            );
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col s12 m12 l6">
+                                <ul class="container">
+                                    {/* Can I have this inside of the LI class???? */}
+                                    <h4 class="center">Create a new payment ID</h4>
+                                    <form onSubmit={newPaymentId} id="sendForm">
+                                        <div class="input-field">
+                                            <textarea class="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={(e) => {setPurchase(e.target.value)}} />
+                                            <input type="number" min={0} placeholder="Amount" name="amount" required={true} onChange={(e) => {setAmount(e.target.value)}} />
+                                            <select class="browser-default" name="currency" onChange={(e) => {setCurrency(e.target.value)}}>
+                                                <option value="aud">AUD</option>
+                                                <option value="usd">USD</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                    <button class="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
+                                        Send
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                    <h4 class="center">Payment ID's</h4>
+                                    {paymentIds.length === 0 ? 
+                                    <li>
+                                        <h5 class="center">There are no current payment ID's!</h5>
+                                    </li>
+                                    :paymentIds.map((payment_id) => {
+                                        return (
+                                            <li key={payment_id._id}>
+                                                <div class="card">
+                                                    <div class="card-content">
+                                                        <b>Payment ID:</b> {payment_id._id}
+                                                        <br />
+                                                        <b>Purchase:</b> {payment_id.purchase}
+                                                        <br />
+                                                        <b>Amount:</b> {payment_id.amount}
+                                                        <br />
+                                                        <b>Currency:</b> {payment_id.currency}
+                                                        <br />
+                                                        <b>Expires in:</b> {parseInt((new Date(payment_id.expiry) - new Date().getTime()) / 8.64e7) + 1}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        );
+                                    })
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -174,9 +321,9 @@ const Admin = () => {
     };
 
     return (
-        <>
+        <div className="Admin">
             {isDisplayed()}
-        </>
+        </div>
     );
 };
 

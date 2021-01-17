@@ -4,7 +4,7 @@ import axios from 'axios';
 import FormData from 'form-data';
 
 const Book = () => {
-    const [daysSince, setDaysSince] = useState(10);
+    const [daysSince, setDaysSince] = useState(Infinity);
 
     const [first, setFirst] = useState(null);
     const [last, setLast] = useState(null);
@@ -54,11 +54,16 @@ const Book = () => {
         .catch((err) => {
             const form = err.response.data;
 
-            const last_inquiry = form.last_inquiry;
-            localStorage.setItem('last_inquiry', last_inquiry);
+            if (parseInt(form.error_code) === 25) {
+                const last_inquiry = form.last_inquiry;
+                localStorage.setItem('last_inquiry', last_inquiry);
 
-            const days_since = getDaysSince(last_inquiry);
-            setDaysSince(days_since);
+                const days_since = getDaysSince(last_inquiry);
+                setDaysSince(days_since);
+            } else {
+                console.log(`Error code ${form.error_code}: '${form.error}'`);
+                setDaysSince(Infinity);
+            }
         });
     }; 
 

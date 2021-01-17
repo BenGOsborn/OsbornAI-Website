@@ -25,9 +25,6 @@ stripe.api_key = os.getenv('STRIPE_SECRET')
 error_code_token = 24
 error_code_failed = 25
 error_code_other = 26
-# Might also want to change the names from payment_id to just regular _id as thats what it will be being sent back as MAYBE
-# Add better try catch/error handling statements for the database
-# Add try and except for all
 
 # -------------------------- Helper Functions ---------------------------
 
@@ -230,7 +227,8 @@ def addInquiry():
         success = db.add_inquiry(first, last, email, inquiry)
 
         if success != True:
-            return jsonify({'success': False, 'last_inquiry': success, 'error_code': error_code_failed, 'error': "Could not add inquiry!"}), 400
+            last_inquiry = success
+            return jsonify({'success': False, 'last_inquiry': last_inquiry, 'error_code': error_code_failed, 'error': "Could not add inquiry!"}), 400
 
         return jsonify({'success': True, 'last_inquiry': datetime.utcnow()}), 200
 
