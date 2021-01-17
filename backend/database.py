@@ -27,7 +27,6 @@ class Database:
         self.expires_in = 86400 * 7
         self.payment_ids.create_index("timeCreated", expireAfterSeconds=self.expires_in)
 
-    # No try catches
     def add_inquiry(self, first, last, email, inquiry):
         date = datetime.utcnow()
 
@@ -79,7 +78,6 @@ class Database:
 
         return True
 
-    # No try catches
     def add_payment(self, first, last, email, payment_id, purchase, amount, currency):
         date = datetime.utcnow()
 
@@ -145,13 +143,11 @@ class Database:
 
         return True
 
-    # What happens if there are no documents? Same for view inquiry notifications method
     def admin_view_payment_ids(self):
         payment_ids = self.payment_ids.find()
 
         return list(payment_ids)[::-1]
 
-    # This returns none now - this needs to be fixed
     def admin_view_payment_id_details(self, payment_id):
         payment_id_info = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
 

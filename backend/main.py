@@ -27,13 +27,14 @@ error_code_failed = 25
 error_code_other = 26
 # Might also want to change the names from payment_id to just regular _id as thats what it will be being sent back as MAYBE
 # Add better try catch/error handling statements for the database
+# Add try and except for all
 
 # -------------------------- Helper Functions ---------------------------
 
 def sanitizeJSON(json_raw):
     return json.loads(json.dumps(json_raw, default=str))
 
-# -------------------------- Admin login -------------------------------
+# -------------------------- Admin auth -------------------------------
 
 @app.route('/admin/login', methods=['POST'], strict_slashes=False)
 def login():
@@ -79,7 +80,11 @@ def checkToken(f):
 @app.route('/admin/validate_token', methods=['POST'], strict_slashes=False)
 @checkToken
 def validateToken():
-    return jsonify({'success': True}), 200
+    try:
+        return jsonify({'success': True}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
 
 # -------------------------- Payment routes -----------------------------
 
@@ -91,7 +96,7 @@ def validateId():
         payment_id = form_json['payment_id']
 
         payment_info = db.admin_view_payment_id_details(payment_id)
-        if payment_info == False:
+        if payment_info == None:
             return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"Payment info for id '{payment_id}' does not exist!"}), 400
 
         return jsonify({**{'success': True}, **sanitizeJSON(payment_info)}), 200
@@ -102,9 +107,13 @@ def validateId():
 @app.route('/admin/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
 @checkToken
 def viewValidPaymentIds():
-    ids = db.admin_view_payment_ids()
+    try:
+        ids = db.admin_view_payment_ids()
 
-    return jsonify({'success': True, 'payment_ids': sanitizeJSON(ids)}), 200
+        return jsonify({'success': True, 'payment_ids': sanitizeJSON(ids)}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
 
 @app.route('/admin/create_payment_id', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -132,6 +141,7 @@ def createPaymentId():
 
 @app.route('/pay', methods=['POST'], strict_slashes=False) # Untested
 def pay():
+    # Maybe I should have an option for processing payments of 0
     try:
         form_json = request.form
 
@@ -141,7 +151,7 @@ def pay():
         payment_id = form_json['payment_id']
 
         payment_info = db.admin_view_payment_id_details(payment_id)
-        if payment_info == False:
+        if payment_info == None:
             return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"Payment id '{payment_id}' is invalid!"}), 400
 
         amount = payment_info['amount'] * 100
@@ -230,12 +240,13 @@ def addInquiry():
 @app.route('/admin/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
 @checkToken
 def viewInquiryNotifications():
-    inquiries = db.admin_view_inquiry_notifications()
+    try:
+        inquiries = db.admin_view_inquiry_notifications()
 
-    if inquiries == False:
-        return jsonify({'success': False, 'error_code': error_code_failed, 'error': "Failed to load inquiries!"}), 400
-
-    return jsonify({'success': True, 'inquiries': sanitizeJSON(inquiries)}), 200
+        return jsonify({'success': True, 'inquiries': sanitizeJSON(inquiries)}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': error_code_other, 'error': e}), 400
 
 @app.route('/admin/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -246,6 +257,8 @@ def deleteInquiryNotification():
         inquiry_notification_id = form_json['inquiry_notification_id']
 
         success = db.admin_delete_inquiry_notification(inquiry_notification_id)
+        if not success:
+            return jsonify({'success': False, 'error_code': error_code_failed, 'error': f"Could not delete inquiry with id '{inquiry_notification_id}'!"}), 400
 
         return jsonify({'success': success}), 200
     
