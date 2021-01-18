@@ -301,15 +301,23 @@ const Admin = () => {
                                                                 <br />
                                                                 {notification.inquiry}
                                                                 <br />
+                                                                <b>Total spent:</b>
+                                                                <br />
+                                                                ${notification.user_spent}
+                                                                <br />
                                                                     <b>Previous inquiries:</b>
+                                                                    <br />
                                                                     <ul>
-                                                                        {notification.prev_inquiries.slice(0, 3).map((prev_inquiry) => {
+                                                                        {notification.prev_inquiries.slice(0, 2).map((prev_inquiry) => {
                                                                             return (
                                                                                 <li id={Math.random().toString(36).substring(7)}>
-                                                                                    <div className="PreviousInquiryDate">
-                                                                                        <b>Previous inquiry date:</b> {prev_inquiry.inquiry_date}
+                                                                                    <br />
+                                                                                    <div class="container">
+                                                                                        <b>Previous inquiry date:</b>
                                                                                         <br />
-                                                                                        <b>Inquiry:</b>
+                                                                                        {prev_inquiry.inquiry_date}
+                                                                                        <br />
+                                                                                        <b>Previous inquiry:</b>
                                                                                         <br />
                                                                                         {prev_inquiry.inquiry}
                                                                                     </div>
@@ -317,7 +325,6 @@ const Admin = () => {
                                                                             );
                                                                         })}
                                                                     </ul>
-                                                                <b>Total spent:</b> ${notification.user_spent}
                                                             </div>
                                                             <div class="card-action center">
                                                                 <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {deleteNotification(e, notification._id)}}>
@@ -338,7 +345,7 @@ const Admin = () => {
                                     <form onSubmit={newPaymentId} id="sendForm">
                                         <div class="input-field">
                                             <textarea class="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={(e) => {setPurchase(e.target.value)}} />
-                                            <input type="number" min={0} placeholder="Amount" name="amount" required={true} onChange={(e) => {setAmount(e.target.value)}} />
+                                            <input type="number" min={0} step={0.01} placeholder="Amount" name="amount" required={true} onChange={(e) => {setAmount(e.target.value)}} />
                                             <select class="browser-default" name="currency" onChange={(e) => {setCurrency(e.target.value)}}>
                                                 <option value="aud">AUD</option>
                                                 <option value="usd">USD</option>
@@ -368,17 +375,29 @@ const Admin = () => {
                                                 <li key={payment_details._id}>
                                                     <div class="card">
                                                         <div class="card-content">
-                                                            <b>Payment URL:</b> <Link to={href}>{payment_url}</Link>
+                                                            <b>Payment URL:</b>
                                                             <br />
-                                                            <b>Payment ID:</b> {payment_details._id}
+                                                            <Link to={href}>{payment_url}</Link>
                                                             <br />
-                                                            <b>Purchase:</b> {payment_details.purchase}
+                                                            <b>Payment ID:</b>
                                                             <br />
-                                                            <b>Amount:</b> ${payment_details.amount}
+                                                            {payment_details._id}
                                                             <br />
-                                                            <b>Currency:</b> {payment_details.currency}
+                                                            <b>Purchase:</b>
+                                                            <div style={{whiteSpace: 'pre-line'}}>
+                                                                {payment_details.purchase}
+                                                            </div>
+                                                            <b>Amount:</b>
                                                             <br />
-                                                            <b>Expires in:</b> {parseInt((new Date(payment_details.expiry) - new Date().getTime()) / 8.64e7) + 1} days
+                                                            ${payment_details.amount}
+                                                            <br />
+                                                            <b>Currency:</b>
+                                                            <br />
+                                                            {payment_details.currency.toUpperCase()}
+                                                            <br />
+                                                            <b>Expiry:</b>
+                                                            <br />
+                                                            {parseInt((new Date(payment_details.expiry) - new Date().getTime()) / 8.64e7) + 1} days
                                                         </div>
                                                     </div>
                                                 </li>

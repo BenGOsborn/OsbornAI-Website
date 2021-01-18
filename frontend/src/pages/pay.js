@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import FormData from 'form-data';
 import axios from 'axios';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import PayNotFound from './pay-not-found';
 
 const Pay = (props) => {
@@ -49,23 +51,27 @@ const Pay = (props) => {
             );
         } else {
             return (
-                <div class="container">
+                <div class="container center" style={{fontSize: 18}}>
                     <div class="container">
+                        <h4>Purchase Information:</h4>
+                        <br />
                         <div class="container">
-                            <h4 class="center">Purchase Information:</h4>
-                            <br />
                             <b>Payment ID:</b> 
                             <br />
                             {paymentDetails._id}
                             <br />
                             <b>Purchase:</b> 
-                            <br />
-                            {paymentDetails.purchase}
-                            <br />
+                            <div style={{whiteSpace: 'pre-line'}}>
+                                {paymentDetails.purchase}
+                            </div>
                             <b>Amount:</b> 
                             <br />
                             ${paymentDetails.amount} {paymentDetails.currency.toUpperCase()}
                         </div>
+                    </div>
+                    <br />
+                    <div class="container">
+                        <h4>Your Details:</h4>
                     </div>
                 </div>
             );
