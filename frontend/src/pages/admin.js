@@ -17,6 +17,8 @@ const Admin = () => {
 
     // This is going to be our initial load that will either authenticate a token or require a login
     useEffect(() => {
+        setRender(0);
+
         const local_token = localStorage.getItem('token');
         if (local_token === null) {
             setRender(1);
@@ -113,6 +115,8 @@ const Admin = () => {
             );
         } else if (render === 1) {
             const sendLogin = (e) => {
+                setRender(0);
+
                 e.preventDefault();
 
                 const form = new FormData();

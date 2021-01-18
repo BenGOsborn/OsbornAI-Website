@@ -6,6 +6,12 @@ import os
 import hashlib
 from bson import ObjectId
 
+class ErrorCodes:
+    error_code_token = 24
+    error_code_failed = 25
+    error_code_other = 26
+
+# This will be responsible for creating the custom error responses that can then be sent back through the server
 class Database:
     def __init__(self):
         dotenv.load_dotenv()
@@ -28,153 +34,139 @@ class Database:
         self.payment_ids.create_index("timeCreated", expireAfterSeconds=self.expires_in)
 
     def add_inquiry(self, first, last, email, inquiry):
-        date = datetime.utcnow()
+        try:
+            date = datetime.utcnow()
 
-        existing_user = self.clients.find_one({'email': email})
+            prev_inquiries = self.clients.find({'email': email})
 
-        paid_user = self.payments.find_one({'email': email})
-        if paid_user == None:
-            user_spent = 0
-        else:
-            user_spent = sum(payment['amount'] for payment in paid_user['payments'])
+            # This has to be ordered from the top to the back though
+            # I should rather sort it and then add it
+            for prev_inquiry in prev_inquiries:
+                prev_inquiry_date = prev_inquiry['inquiry_date']
+                if (date - prev_inquiry_date) < 10:
+                    return {'success': False, 'error_code': ErrorCodes.error_code_failed, 
+                            'error': "Inquiry has already been made by the user within 10 days!", 'prev_inquiry_date': prev_inquiry_date}
 
-        notification_document = {
-            'first': first,
-            'last': last,
-            'email': email,
-            'new_inquiry': {'inquiry_date': date, 'inquiry': inquiry},
-            'previous_inquiries': existing_user['inquiries'] if existing_user != None else [],
-            'user_spent': user_spent
-        }
-
-        if existing_user == None:
-            document = {
+            client_document = {
                 'first': first,
                 'last': last,
                 'email': email,
-                'inquiries': [
-                    {
-                        'inquiry_date': date,
-                        'inquiry': inquiry
-                    }
-                ]
+                'inquiry': inquiry,
+                'inquiry_date': date
             }
 
-            self.clients.insert_one(document)
-            self.client_notifications.insert_one(notification_document)
+            self.clients.insert_one(client_document)
 
-            return True
-        
-        # Check this returns what we want
-        inquiry_dates = sorted([inquiry['inquiry_date'] for inquiry in existing_user['inquiries']])
-        if (date - inquiry_dates[-1]).days < 10:
-            return inquiry_dates[-1]
+            prev_user_spendings = self.payments.find({'email': email})
+            user_spent = sum(float(payment['amount']) for payment in prev_user_spendings)
 
-        self.clients.update_one(
-            {'email': email},
-            {'$push': {'inquiries': {'inquiry_date': date, 'inquiry': inquiry}}}
-        )
-        self.client_notifications.insert_one(notification_document)
+            client_notification_document = {
+                'first': first,
+                'last': last,
+                'email': email,
+                'inquiry': inquiry,
+                'inquiry_date': date,
+                'prev_inquiries': prev_inquiries[::-1],
+                'user_spent': user_spent
+            }
 
-        return True
+            self.client_notifications.insert_one(client_notification_document)
+
+            return {'success': True, 'prev_inquiry_date': date}
+
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e, 'prev_inquiry_date': None}
 
     def add_payment(self, first, last, email, payment_id, purchase, amount, currency):
-        date = datetime.utcnow()
-
-        paid_user = self.payments.find_one({'email': email})
-
-        push_doc = {
-            'payment_id': payment_id,
-            'purchase_date': date,
-            'purchase': purchase,
-            'amount': amount,
-            'currency': currency
-        }
-
-        if paid_user == None:
+        try:
             document = {
                 'first': first,
                 'last': last,
                 'email': email,
-                'payments': [push_doc]
+                'payment_id': payment_id,
+                'purchase_date': datetime.utcnow(),
+                'purchase': purchase,
+                'amount': float(amount),
+                'currency': currency
             }
 
             self.payments.insert_one(document)
 
-            return True
-
-        self.payments.update_one(
-            {'email': email},
-            {'$push': {'payments': push_doc}}
-        )
-
-        return True 
+            return {'success': True} 
+        
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
 
     def admin_view_inquiry_notifications(self):
-        new_inquiries = self.client_notifications.find()
+        try:
+            new_inquiries = self.client_notifications.find()
 
-        return list(new_inquiries)[::-1]
+            return {'success': True, 'inquiry_notifications': list(new_inquiries)[::-1]}
+        
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
 
     def admin_delete_inquiry_notification(self, inquiry_notification_id):
         try:
-            query = {'_id': ObjectId(inquiry_notification_id)} # Create a try block for this ObjectId
-        except:
-            return False
+            self.client_notifications.delete_one({'_id': ObjectId(inquiry_notification_id)})
 
-        find_inquiry = self.client_notifications.find_one(query)
-
-        if find_inquiry == None:
-            return False
-
-        self.client_notifications.delete_one(query)
-
-        return True
+            return {'success': True}
+        
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
 
     def admin_create_payment_id(self, purchase, amount, currency):
-        document = {'purchase': purchase, 'amount': amount, 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
-        payment_id = self.payment_ids.insert_one(document)
+        try:
+            document = {'purchase': purchase, 'amount': amount, 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
+            payment_id = self.payment_ids.insert_one(document)
 
-        return {**{'payment_id': payment_id.inserted_id}, **document}
+            payment_details = {**{'payment_id': payment_id.inserted_id}, **document}
+
+            return {'success': True, 'payment_details': payment_details}
+
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
 
     def admin_delete_payment_id(self, payment_id):
         try:
-            query = {'_id': ObjectId(payment_id)}
-        except:
-            return False
+            self.payment_ids.delete_one({'_id': ObjectId(payment_id)})
 
-        id_exists = self.payment_ids.find_one(query)
-
-        if id_exists == None:
-            return False
-
-        self.payment_ids.delete_one(query)
-
-        return True
+            return {'success': True}
+        
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
 
     def admin_view_payment_ids(self):
-        payment_ids = self.payment_ids.find()
+        try:
+            payment_ids = self.payment_ids.find()
 
-        return list(payment_ids)[::-1]
+            return {'success': True, 'payment_ids': list(payment_ids)[::-1]}
+        
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
 
     def admin_view_payment_id_details(self, payment_id):
         try:
-            query = {'_id': ObjectId(payment_id)}
-        except:
-            return False
+            payment_id_info = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
 
-        payment_id_info = self.payment_ids.find_one(query)
-
-        return payment_id_info
+            return {'success': True, 'payment_id_info': payment_id_info}
+        
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
 
     def admin_login(self, username, password):
-        salt = "oTaLtzyE2SvGIzGXnDqmGzdBpz0DP3xQROY0W5t4sKdTdX5PIg"
-        user_info = self.admin_auth.find_one({'username': username})
+        try:
+            salt = "oTaLtzyE2SvGIzGXnDqmGzdBpz0DP3xQROY0W5t4sKdTdX5PIg"
+            user_info = self.admin_auth.find_one({'username': username})
 
-        if user_info == None:
-            return False
-        
-        hashed_password = hashlib.sha512((password+salt).encode('utf-8')).hexdigest()
-        if hashed_password == user_info['password']:
-            return True
-        
-        return False
+            if user_info == None:
+                return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Authentication failed!"} 
+            
+            hashed_password = hashlib.sha512((password+salt).encode('utf-8')).hexdigest()
+            if hashed_password == user_info['password']:
+                return {'success': True}
+            
+            return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Authentication failed!"}
+
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}

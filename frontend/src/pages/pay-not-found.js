@@ -1,7 +1,3 @@
-import { HashLink } from 'react-router-hash-link';
-import { Link } from 'react-scroll';
-import { Link as RouteLink } from 'react-router-dom';
-
 const PayBlank = () => {
     return (
         <div className="PayNotFound">
