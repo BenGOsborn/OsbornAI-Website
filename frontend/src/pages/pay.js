@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import FormData from 'form-data';
 import axios from 'axios';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import PayNotFound from './pay-not-found';
 
 const Pay = (props) => {
