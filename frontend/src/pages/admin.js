@@ -285,22 +285,23 @@ const Admin = () => {
                                                     <li key={notification._id}>
                                                         <div class="card">
                                                             <div class="card-content">
-                                                                <div className="Name">
-                                                                    <b>Name:</b> {notification.first} {notification.last}
-                                                                </div>
-                                                                <div className="Email">
-                                                                    <b>Email:</b> {notification.email}
-                                                                </div>
-                                                                <div className="NewInquiry">
-                                                                    <b>Inquiry date:</b> {notification.inquiry_date} 
-                                                                    <br />
-                                                                    <b>Inquiry:</b> 
-                                                                    <br />
-                                                                    {notification.inquiry}
-                                                                </div>
-                                                                <div className="PreviousInquiries">
+                                                                <b>Name:</b> 
+                                                                <br />
+                                                                {notification.first} {notification.last}
+                                                                <br />
+                                                                <b>Email:</b>
+                                                                <br />
+                                                                {notification.email}
+                                                                <br />
+                                                                <b>Inquiry date:</b>
+                                                                <br />
+                                                                {notification.inquiry_date} 
+                                                                <br />
+                                                                <b>Inquiry:</b> 
+                                                                <br />
+                                                                {notification.inquiry}
+                                                                <br />
                                                                     <b>Previous inquiries:</b>
-                                                                    <br />
                                                                     <ul>
                                                                         {notification.prev_inquiries.slice(0, 3).map((prev_inquiry) => {
                                                                             return (
@@ -316,10 +317,7 @@ const Admin = () => {
                                                                             );
                                                                         })}
                                                                     </ul>
-                                                                </div>
-                                                                <div className="UserSpendings">
-                                                                    <b>Total spent:</b> ${notification.user_spent}
-                                                                </div>
+                                                                <b>Total spent:</b> ${notification.user_spent}
                                                             </div>
                                                             <div class="card-action center">
                                                                 <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {deleteNotification(e, notification._id)}}>

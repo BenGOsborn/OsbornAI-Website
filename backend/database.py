@@ -39,8 +39,6 @@ class Database:
 
             prev_inquiries = self.clients.find({'email': email})
 
-            # This has to be ordered from the top to the back though
-            # I should rather sort it and then add it
             prev_inquiries_sorted = sorted([prev_inquiry['inquiry_date'] for prev_inquiry in prev_inquiries])
             if len(prev_inquiries_sorted) != 0:
                 closest_prev_inquiry = prev_inquiries_sorted[-1]
@@ -61,6 +59,8 @@ class Database:
             prev_user_spendings = self.payments.find({'email': email})
             user_spent = sum(float(payment['amount']) for payment in prev_user_spendings)
 
+            print({'prev_inquirieis': list(prev_inquiries)[::-1]})
+
             client_notification_document = {
                 'first': first,
                 'last': last,
@@ -70,8 +70,6 @@ class Database:
                 'prev_inquiries': list(prev_inquiries)[::-1],
                 'user_spent': user_spent
             }
-
-            print(client_notification_document)
 
             self.client_notifications.insert_one(client_notification_document)
 

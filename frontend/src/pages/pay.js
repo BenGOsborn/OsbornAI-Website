@@ -38,40 +38,7 @@ const Pay = (props) => {
         if (render === 0) {
             return (
                 <div class="container center">
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                     <h4 style={{color: '#039be5'}}>Loading...</h4>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                 </div>
             );
         } else if (render === 1) {
@@ -84,11 +51,21 @@ const Pay = (props) => {
             return (
                 <div class="container">
                     <div class="container">
-                        <b>Payment ID:</b> {paymentDetails._id}
-                        <br />
-                        <b>Purchase:</b> {paymentDetails.purchase}
-                        <br />
-                        <b>Amount:</b> ${paymentDetails.amount}
+                        <div class="container">
+                            <h4 class="center">Purchase Information:</h4>
+                            <br />
+                            <b>Payment ID:</b> 
+                            <br />
+                            {paymentDetails._id}
+                            <br />
+                            <b>Purchase:</b> 
+                            <br />
+                            {paymentDetails.purchase}
+                            <br />
+                            <b>Amount:</b> 
+                            <br />
+                            ${paymentDetails.amount} {paymentDetails.currency.toUpperCase()}
+                        </div>
                     </div>
                 </div>
             );
