@@ -383,6 +383,10 @@ const Admin = () => {
                                                             <br />
                                                             {payment_details._id}
                                                             <br />
+                                                            <b>Name:</b>
+                                                            <br />
+                                                            {payment_details.name}
+                                                            <br />
                                                             <b>Purchase:</b>
                                                             <div style={{whiteSpace: 'pre-line'}}>
                                                                 {payment_details.purchase}

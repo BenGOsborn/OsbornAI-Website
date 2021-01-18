@@ -116,7 +116,7 @@ class Database:
 
     def admin_create_payment_id(self, purchase, amount, currency):
         try:
-            document = {'purchase': purchase, 'amount': amount, 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
+            document = {'name': "OsbornAI Payment", 'purchase': purchase, 'amount': amount, 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
             payment_id = self.payment_ids.insert_one(document)
 
             payment_details = {**{'payment_id': payment_id.inserted_id}, **document}
