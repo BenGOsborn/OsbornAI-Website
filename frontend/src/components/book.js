@@ -11,8 +11,6 @@ const Book = () => {
     const [email, setEmail] = useState(null);
     const [inquiry, setInquiry] = useState(null);
 
-    const cooldown = 10;
-
     const getDaysSince = (last_inquiry_raw) => {
         const current_date = new Date().getTime();
         const last_inquiry = new Date(last_inquiry_raw);
@@ -22,12 +20,12 @@ const Book = () => {
     };
 
     useEffect(() => {
-        const last_inquiry_raw = localStorage.getItem('last_inquiry');
+        const prev_inquiry_date = localStorage.getItem('prev_inquiry_date');
 
-        if (last_inquiry_raw === null) {
-            setDaysSince(cooldown);
+        if (prev_inquiry_date === null) {
+            setDaysSince(10);
         } else {
-            const days_since = getDaysSince(last_inquiry_raw);
+            const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
         }
     }, []);
@@ -45,36 +43,38 @@ const Book = () => {
         .then(res => {
             const form = res.data;
 
-            const last_inquiry = form.last_inquiry;
-            localStorage.setItem('last_inquiry', last_inquiry);
+            const prev_inquiry_date = form.prev_inquiry_date;
+            localStorage.setItem('prev_inquiry_date', prev_inquiry_date);
 
-            const days_since = getDaysSince(last_inquiry);
+            const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
         })
         .catch((err) => {
             const form = err.response.data;
 
             if (parseInt(form.error_code) === 25) {
-                const last_inquiry = form.last_inquiry;
-                localStorage.setItem('last_inquiry', last_inquiry);
+                const prev_inquiry_date = form.prev_inquiry_date;
+                localStorage.setItem('prev_inquiry_date', prev_inquiry_date);
 
-                const days_since = getDaysSince(last_inquiry);
+                const days_since = getDaysSince(prev_inquiry_date);
                 setDaysSince(days_since);
             } else {
                 console.log(`Error code ${form.error_code}: '${form.error}'`);
                 setDaysSince(Infinity);
             }
+            
+            e.target.reset();
         });
     }; 
 
     const isDisplayed = () => {
-        if (daysSince < cooldown) {
+        if (daysSince < 10) {
             return (
                 <div className="Displayed">
                     <div class="container">
                         <br />
                         <p style={{color: '#1E88E5', fontWeight: 'bold'}} class="flow-text">
-                            We'll contact you shortly! You may reinquire in {cooldown - daysSince} days.
+                            We'll contact you shortly! You may reinquire in {10 - daysSince} days.
                         </p>
                     </div>
                 </div>

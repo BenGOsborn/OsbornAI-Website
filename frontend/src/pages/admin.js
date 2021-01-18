@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'; import '../form.css';
 import axios from 'axios';
 import FormData from 'form-data';
+import { Link } from 'react-router-dom';
 
 const Admin = () => {
     const [username, setUsername] = useState('');
@@ -21,6 +22,7 @@ const Admin = () => {
 
         const local_token = localStorage.getItem('token');
         if (local_token === null) {
+            setToken(null);
             setRender(1);
             return
         }
@@ -35,9 +37,16 @@ const Admin = () => {
             setRender(2);
         })
         .catch((err) => {
-            console.log(err.response);
+            const form = err.response.data;
 
-            setRender(1);
+            if (parseInt(form.error_code) === 24) {
+                setToken(null);
+                setRender(1);
+            } else {
+                console.log(`Error code ${form.error_code}: '${form.error}'`);
+                setToken(null);
+                setRender(1);
+            }
         });
     }, []);
 
@@ -51,7 +60,7 @@ const Admin = () => {
             .then((res) => {
                 const form = res.data;
 
-                setNotifications(form.inquiries);
+                setNotifications(form.inquiry_notifications);
             })
             .catch((err) => {
                 const form = err.response.data;
@@ -59,9 +68,14 @@ const Admin = () => {
                 if (parseInt(form.error_code) === 24) {
                     setToken(null);
 
+                    setNotifications([]);
+
                     setRender(1);
                 } else {
                     console.log(`Error code ${form.error_code}: '${form.error}'`);
+                    setToken(null);
+
+                    setNotifications([]);
                 }
             });
 
@@ -77,9 +91,14 @@ const Admin = () => {
                 if (parseInt(form.error_code) === 24) {
                     setToken(null);
 
+                    setPaymentIds([]);
+
                     setRender(1);
                 } else {
                     console.log(`Error code ${form.error_code}: '${form.error}'`);
+                    setToken(null);
+
+                    setPaymentIds([]);
                 }
             });
         }
@@ -134,12 +153,12 @@ const Admin = () => {
                     setRender(2);
                 })
                 .catch((err) => {
-                    e.target.reset();
-
                     console.log(err.response);
 
                     setRender(1);
                 });
+
+                e.target.reset();
             };
 
             return (
@@ -194,9 +213,17 @@ const Admin = () => {
                     if (parseInt(form.error_code) === 24) {
                         setToken(null);
 
+                        setNotifications([]);
+
                         setRender(1);
                     } else {
                         console.log(`Error code ${form.error_code}: '${form.error}'`);
+
+                        setToken(null);
+
+                        setNotifications([]);
+
+                        setRender(1);
                     }
                 });
             };
@@ -216,8 +243,6 @@ const Admin = () => {
 
                     const new_paymentIds = [form].concat(paymentIds);
                     setPaymentIds(new_paymentIds);
-
-                    e.target.reset();
                 })
                 .catch((err) => {
                     const form = err.response.data;
@@ -225,11 +250,21 @@ const Admin = () => {
                     if (parseInt(form.error_code) === 24) {
                         setToken(null);
 
+                        setPaymentIds([]);
+
                         setRender(1);
                     } else {
                         console.log(`Error code ${form.error_code}: '${form.error}'`);
+
+                        setToken(null);
+
+                        setPaymentIds([]);
+
+                        setRender(1);
                     }
                 });
+
+                e.target.reset();
             };
 
             return (
@@ -257,25 +292,23 @@ const Admin = () => {
                                                                     <b>Email:</b> {notification.email}
                                                                 </div>
                                                                 <div className="NewInquiry">
-                                                                    <b>Inquiry date:</b> {notification.new_inquiry.inquiry_date} 
+                                                                    <b>Inquiry date:</b> {notification.inquiry_date} 
                                                                     <br />
                                                                     <b>Inquiry:</b> 
                                                                     <br />
-                                                                    {notification.new_inquiry.inquiry}
+                                                                    {notification.inquiry}
                                                                 </div>
                                                                 <div className="PreviousInquiries">
                                                                     <b>Previous inquiries:</b>
                                                                     <br />
                                                                     <ul>
-                                                                        {notification.previous_inquiries.slice(0, 3).map((prev_inquiry) => {
+                                                                        {notification.prev_inquiries.slice(0, 3).map((prev_inquiry) => {
                                                                             return (
                                                                                 <li id={Math.random().toString(36).substring(7)}>
                                                                                     <div className="PreviousInquiryDate">
                                                                                         <b>Previous inquiry date:</b> {prev_inquiry.inquiry_date}
                                                                                         <br />
-                                                                                        <b>Inquiry: </b>
-                                                                                        <br />
-                                                                                        <b>Previous inquiry</b> 
+                                                                                        <b>Inquiry:</b>
                                                                                         <br />
                                                                                         {prev_inquiry.inquiry}
                                                                                     </div>
@@ -329,20 +362,25 @@ const Admin = () => {
                                         <li>
                                             <h5 class="center">There are no current payment ID's!</h5>
                                         </li>
-                                        :paymentIds.map((payment_id) => {
+                                        :paymentIds.map((payment_details) => {
+                                            const href = `/pay/${payment_details._id}`;
+                                            const payment_url = `${window.location.href.slice(0, -6)}${href}`
+
                                             return (
-                                                <li key={payment_id._id}>
+                                                <li key={payment_details._id}>
                                                     <div class="card">
                                                         <div class="card-content">
-                                                            <b>Payment ID:</b> {payment_id._id}
+                                                            <b>Payment URL:</b> <Link to={href}>{payment_url}</Link>
                                                             <br />
-                                                            <b>Purchase:</b> {payment_id.purchase}
+                                                            <b>Payment ID:</b> {payment_details._id}
                                                             <br />
-                                                            <b>Amount:</b> {payment_id.amount}
+                                                            <b>Purchase:</b> {payment_details.purchase}
                                                             <br />
-                                                            <b>Currency:</b> {payment_id.currency}
+                                                            <b>Amount:</b> ${payment_details.amount}
                                                             <br />
-                                                            <b>Expires in:</b> {parseInt((new Date(payment_id.expiry) - new Date().getTime()) / 8.64e7) + 1}
+                                                            <b>Currency:</b> {payment_details.currency}
+                                                            <br />
+                                                            <b>Expires in:</b> {parseInt((new Date(payment_details.expiry) - new Date().getTime()) / 8.64e7) + 1} days
                                                         </div>
                                                     </div>
                                                 </li>

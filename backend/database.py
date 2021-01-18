@@ -41,11 +41,12 @@ class Database:
 
             # This has to be ordered from the top to the back though
             # I should rather sort it and then add it
-            for prev_inquiry in prev_inquiries:
-                prev_inquiry_date = prev_inquiry['inquiry_date']
-                if (date - prev_inquiry_date) < 10:
+            prev_inquiries_sorted = sorted([prev_inquiry['inquiry_date'] for prev_inquiry in prev_inquiries])
+            if len(prev_inquiries_sorted) != 0:
+                closest_prev_inquiry = prev_inquiries_sorted[-1]
+                if (date - closest_prev_inquiry).days < 10:
                     return {'success': False, 'error_code': ErrorCodes.error_code_failed, 
-                            'error': "Inquiry has already been made by the user within 10 days!", 'prev_inquiry_date': prev_inquiry_date}
+                            'error': "Inquiry has already been made by the user within 10 days!", 'prev_inquiry_date': closest_prev_inquiry}
 
             client_document = {
                 'first': first,
@@ -66,16 +67,18 @@ class Database:
                 'email': email,
                 'inquiry': inquiry,
                 'inquiry_date': date,
-                'prev_inquiries': prev_inquiries[::-1],
+                'prev_inquiries': list(prev_inquiries)[::-1],
                 'user_spent': user_spent
             }
+
+            print(client_notification_document)
 
             self.client_notifications.insert_one(client_notification_document)
 
             return {'success': True, 'prev_inquiry_date': date}
 
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e, 'prev_inquiry_date': None}
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e), 'prev_inquiry_date': None}
 
     def add_payment(self, first, last, email, payment_id, purchase, amount, currency):
         try:
@@ -95,7 +98,7 @@ class Database:
             return {'success': True} 
         
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_view_inquiry_notifications(self):
         try:
@@ -104,7 +107,7 @@ class Database:
             return {'success': True, 'inquiry_notifications': list(new_inquiries)[::-1]}
         
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_delete_inquiry_notification(self, inquiry_notification_id):
         try:
@@ -113,7 +116,7 @@ class Database:
             return {'success': True}
         
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_create_payment_id(self, purchase, amount, currency):
         try:
@@ -125,7 +128,7 @@ class Database:
             return {'success': True, 'payment_details': payment_details}
 
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_delete_payment_id(self, payment_id):
         try:
@@ -134,7 +137,7 @@ class Database:
             return {'success': True}
         
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_view_payment_ids(self):
         try:
@@ -143,7 +146,7 @@ class Database:
             return {'success': True, 'payment_ids': list(payment_ids)[::-1]}
         
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_view_payment_id_details(self, payment_id):
         try:
@@ -152,7 +155,7 @@ class Database:
             return {'success': True, 'payment_id_info': payment_id_info}
         
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_login(self, username, password):
         try:
@@ -169,4 +172,4 @@ class Database:
             return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Authentication failed!"}
 
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': e}
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
