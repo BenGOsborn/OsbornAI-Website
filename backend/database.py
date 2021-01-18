@@ -37,7 +37,7 @@ class Database:
         try:
             date = datetime.utcnow()
 
-            prev_inquiries = self.clients.find({'email': email})
+            prev_inquiries = list(self.clients.find({'email': email}))
 
             prev_inquiries_sorted = sorted([prev_inquiry['inquiry_date'] for prev_inquiry in prev_inquiries])
             if len(prev_inquiries_sorted) != 0:
@@ -59,15 +59,13 @@ class Database:
             prev_user_spendings = self.payments.find({'email': email})
             user_spent = sum(float(payment['amount']) for payment in prev_user_spendings)
 
-            print({'prev_inquirieis': list(prev_inquiries)[::-1]})
-
             client_notification_document = {
                 'first': first,
                 'last': last,
                 'email': email,
                 'inquiry': inquiry,
                 'inquiry_date': date,
-                'prev_inquiries': list(prev_inquiries)[::-1],
+                'prev_inquiries': list(prev_inquiries)[::-1], # This will not print out for some reason
                 'user_spent': user_spent
             }
 
@@ -100,9 +98,9 @@ class Database:
 
     def admin_view_inquiry_notifications(self):
         try:
-            new_inquiries = self.client_notifications.find()
+            new_inquiries = list(self.client_notifications.find())[::-1]
 
-            return {'success': True, 'inquiry_notifications': list(new_inquiries)[::-1]}
+            return {'success': True, 'inquiry_notifications': new_inquiries}
         
         except Exception as e:
             return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
@@ -139,9 +137,9 @@ class Database:
 
     def admin_view_payment_ids(self):
         try:
-            payment_ids = self.payment_ids.find()
+            payment_ids = list(self.payment_ids.find())[::-1]
 
-            return {'success': True, 'payment_ids': list(payment_ids)[::-1]}
+            return {'success': True, 'payment_ids': payment_ids}
         
         except Exception as e:
             return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
