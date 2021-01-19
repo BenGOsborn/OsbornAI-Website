@@ -88,7 +88,7 @@ const Pay = (props) => {
                     <br />
                     {/* This is the TEST Stripe key */}
                     {/* Investigate Stripe console errors */}
-                    <StripeCheckout stripeKey="pk_test_51I8LX2C7YoItP8TeLj1WrEorqgKQ333kNQZSAypFzpN51gl16F82gS7p3P7O0ZbiYN1qUcg2z3MjtHdFQ29j48So00dlT7UlYc" 
+                    <StripeCheckout stripeKey="pk_live_51I8LX2C7YoItP8TecbnnNAlWuANCjN2bQBfUpdu9yoaYwLoNrVZ480oNqCQyOlZSfNPxeb0GemzaQBSSVLG6pX9w00gPrfeZeS" 
                         name={paymentDetails.name}
                         description={paymentDetails.purchase}
                         amount={paymentDetails.amount * 100}
@@ -111,7 +111,7 @@ const Pay = (props) => {
         } else if (render === 4) {
             return (
                 <div class="container center">
-                    <h4 style={{color: "1E88E5"}}>Payment succeeded!</h4>
+                    <h4 style={{color: "#039be5"}}>Payment succeeded!</h4>
                 </div>
             );
         } else {
