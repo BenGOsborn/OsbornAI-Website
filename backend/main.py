@@ -136,22 +136,23 @@ def pay():
     try:
         form_json = request.form
 
-        payment_token = form_json['token']
+        payment_token_json = form_json['token']
         payment_id = form_json['payment_id']
 
         success = app.config['DB'].admin_view_payment_id_details(payment_id)
         if not success['success']:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
         
-        # Something is broken with this
+        payment_token = json.loads(payment_token_json)
         payment_id_info = success['payment_id_info']
+
         amount = payment_id_info['amount'] * 100
         description = payment_id_info['purchase']
         currency = payment_id_info['currency']
         receipt_email = payment_token['card']['name']
 
         payment_intent = stripe.PaymentIntent.create(
-            amount=amount,
+            amount=int(amount),
             description=description,
             currency=currency,
             receipt_email=receipt_email

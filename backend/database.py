@@ -115,7 +115,8 @@ class Database:
             if float(amount) < 0:
                 return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Amount cannot be negative!"}
 
-            document = {'name': "OsbornAI Payment", 'purchase': purchase, 'amount': float(amount), 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
+            # I want the amount to be rounded
+            document = {'name': "OsbornAI Payment", 'purchase': purchase, 'amount': round(float(amount), 2), 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
             payment_id = self.payment_ids.insert_one(document)
 
             payment_details = {**{'payment_id': payment_id.inserted_id}, **document}

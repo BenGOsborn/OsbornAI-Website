@@ -37,13 +37,11 @@ const Pay = (props) => {
 
     const handleToken = (token) => {
         const payment_form = new FormData();
-        payment_form.append('token', token);
+        payment_form.append('token', JSON.stringify(token));
         payment_form.append('payment_id', paymentDetails._id);
 
         axios.post('https://osbornai.herokuapp.com/pay', payment_form)
         .then((res) => {
-            const form = res.data;
-
             setRender(4);
         })
         .catch((err) => {
