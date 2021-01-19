@@ -58,13 +58,49 @@ const Pay = (props) => {
         if (render === 0) {
             return (
                 <div class="container center">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     <h4 style={{color: '#039be5'}}>Loading...</h4>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </div>
             );
         } else if (render === 2 || render === 3) {
             return (
                 <div class="container center" style={{fontSize: 18}}>
                     <div class="container">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                         <h4>Purchase Information:</h4>
                         <br />
                         <div class="container">
@@ -104,12 +140,54 @@ const Pay = (props) => {
                         Transaction failed! Please try again!
                     </h5>
                     :null}
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </div>
             );
         } else if (render === 4) {
             return (
                 <div class="container center">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     <h4 style={{color: "#039be5"}}>Payment succeeded!</h4>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </div>
             );
         } else {
@@ -123,7 +201,10 @@ const Pay = (props) => {
 
     return (
         <div className="Pay">
+            <br />
             {isDisplayed()}
+            <br />
+            <br />
         </div>
     );
 };
