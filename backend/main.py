@@ -161,20 +161,31 @@ def pay():
         payment_success = True
 
         success = app.config['DB'].add_payment(payment_id_info, payment_token, payment_intent)
-        if not success:
+        if not success['success']:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
 
         success = app.config['DB'].admin_delete_payment_id(payment_id)
-        if not success:
+        if not success['success']:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
-
-        # Now we also have to go and send them a receipt email
-        # Does this get sent automatically?
 
         return jsonify({'success': True, 'payment_success': payment_success}), 200
 
     except Exception as e:
         return jsonify({'success': False, 'payment_success': payment_success, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+
+@app.route('/admin/view_payments', methods=['POST'], strict_slashes=False)
+@checkToken
+def viewPayments():
+    try:
+        success = app.config['DB'].admin_view_payments()
+
+        if not success['success']:
+            return jsonify({'success': False, 'error_code': success['error_code'], 'error': success['error']}), 400
+        
+        return jsonify({'success': True, 'payments': sanitizeJSON(success['payments'])}), 200
+
+    except Exception as e:
+        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 # ------------------- Inquiry routes -----------------------
 

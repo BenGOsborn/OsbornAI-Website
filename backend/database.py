@@ -87,6 +87,15 @@ class Database:
         except Exception as e:
             return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
+    def admin_view_payments(self):
+        try:
+            payments = list(self.payments.find())[::-1]
+
+            return {'success': True, 'payments': payments}
+
+        except Exception as e:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+
     def admin_view_inquiry_notifications(self):
         try:
             new_inquiries = list(self.client_notifications.find())[::-1]

@@ -11,6 +11,7 @@ const Admin = () => {
 
     const [notifications, setNotifications] = useState([]);
     const [paymentIds, setPaymentIds] = useState([]);
+    const [payments, setPayments] = useState([]); 
 
     const [purchase, setPurchase] = useState('');
     const [amount, setAmount] = useState(0);
@@ -98,10 +99,33 @@ const Admin = () => {
                     setPaymentIds([]);
                 }
             });
+
+            axios.post('https://osbornai.herokuapp.com/admin/view_payments', token_form)
+            .then((res) => {
+                const form = res.data;
+
+                setPayments(form.payments);
+            })
+            .catch((err) => {
+                const form = err.response.data;
+
+                if (parseInt(form.error_code) === 24) {
+                    setToken(null);
+
+                    setPayments([]);
+
+                    setRender(1);
+                } else {
+                    setToken(null);
+
+                    setPayments([]);
+
+                    setRender(1);
+                }
+            });
         }
     }, [render]);
 
-    // So now this logic will determine what we will show and if it will be our main component
     const isDisplayed = () => {
         if (render === 0) {
             return (
@@ -249,8 +273,6 @@ const Admin = () => {
 
                         setRender(1);
                     } else {
-                        console.log(`Error code ${form.error_code}: '${form.error}'`);
-
                         setToken(null);
 
                         setPaymentIds([]);
@@ -264,145 +286,188 @@ const Admin = () => {
 
             return (
                 <div className="Dashboard">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col s12 m12 l6">
-                                <div class="container">
-                                    <h4 class="center">New Inquiries</h4> 
-                                    <br />
-                                    <ul>
-                                        {notifications.length === 0 ? 
-                                            <li>
-                                                <h5 class="center">There are no new inquiries!</h5>
-                                            </li>
-                                            :notifications.map((notification) => {
-                                                return (
-                                                    <li key={notification._id}>
-                                                        <div class="card">
-                                                            <div class="card-content">
-                                                                <b>Name:</b> 
-                                                                <br />
-                                                                {notification.first} {notification.last}
-                                                                <br />
-                                                                <b>Email:</b>
-                                                                <br />
-                                                                {notification.email}
-                                                                <br />
-                                                                <b>Inquiry date:</b>
-                                                                <br />
-                                                                {notification.inquiry_date} 
-                                                                <br />
-                                                                <b>Inquiry:</b> 
-                                                                <br />
-                                                                {notification.inquiry}
-                                                                <br />
-                                                                <b>Total spent:</b>
-                                                                <br />
-                                                                ${notification.user_spent}
-                                                                <br />
-                                                                    <b>Previous inquiries:</b>
-                                                                    <br />
-                                                                    <ul>
-                                                                        {notification.prev_inquiries.slice(0, 2).map((prev_inquiry) => {
-                                                                            return (
-                                                                                <li id={Math.random().toString(36).substring(7)}>
-                                                                                    <br />
-                                                                                    <div class="container">
-                                                                                        <b>Previous inquiry date:</b>
-                                                                                        <br />
-                                                                                        {prev_inquiry.inquiry_date}
-                                                                                        <br />
-                                                                                        <b>Previous inquiry:</b>
-                                                                                        <br />
-                                                                                        {prev_inquiry.inquiry}
-                                                                                    </div>
-                                                                                </li>
-                                                                            );
-                                                                        })}
-                                                                    </ul>
-                                                            </div>
-                                                            <div class="card-action center">
-                                                                <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {deleteNotification(e, notification._id)}}>
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                );
-                                            })
-                                        }
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col s12 m12 l6">
-                                <div class="container">
-                                    <h4 class="center">Create a new payment ID</h4>
-                                    <form onSubmit={newPaymentId} id="sendForm">
-                                        <div class="input-field">
-                                            <textarea class="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={(e) => {setPurchase(e.target.value)}} />
-                                            <input type="number" min={0} step={0.01} placeholder="Amount" name="amount" required={true} onChange={(e) => {setAmount(e.target.value)}} />
-                                            <select class="browser-default" name="currency" onChange={(e) => {setCurrency(e.target.value)}}>
-                                                <option value="aud">AUD</option>
-                                                <option value="usd">USD</option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                    <button class="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
-                                        Send
-                                        <i class="material-icons right">send</i>
-                                    </button>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <h4 class="center">Payment ID's</h4>
-                                    <br />
-                                    <ul>
-                                        {paymentIds.length === 0 ? 
+                    <div class="row">
+                        <div class="col s12 m12 l4">
+                            <div class="container">
+                                <h4 class="center">New Inquiries</h4> 
+                                <br />
+                                <ul>
+                                    {notifications.length === 0 ? 
                                         <li>
-                                            <h5 class="center">There are no current payment ID's!</h5>
+                                            <h5 class="center">There are no new inquiries!</h5>
                                         </li>
-                                        :paymentIds.map((payment_details) => {
-                                            const href = `/pay/${payment_details._id}`;
-                                            const payment_url = `${window.location.href.slice(0, -6)}${href}`
-
+                                        :notifications.map((notification) => {
                                             return (
-                                                <li key={payment_details._id}>
+                                                <li key={notification._id}>
                                                     <div class="card">
                                                         <div class="card-content">
-                                                            <b>Payment URL:</b>
-                                                            <Link class="truncate" to={href} onClick={(e) => {e.preventDefault();navigator.clipboard.writeText(payment_url);window.M.toast({html: 'Copied URL to clipboard!', displayLength: 1000});}}>{payment_url}</Link>
-                                                            <b>Payment ID:</b>
+                                                            <b>Name:</b> 
                                                             <br />
-                                                            {payment_details._id}
+                                                            {notification.first} {notification.last}
                                                             <br />
-                                                            <b>Name:</b>
+                                                            <b>Email:</b>
                                                             <br />
-                                                            {payment_details.name}
+                                                            {notification.email}
                                                             <br />
-                                                            <b>Purchase:</b>
-                                                            <div style={{whiteSpace: 'pre-line'}}>
-                                                                {payment_details.purchase}
-                                                            </div>
-                                                            <b>Amount:</b>
+                                                            <b>Inquiry date:</b>
                                                             <br />
-                                                            ${payment_details.amount}
+                                                            {notification.inquiry_date} 
                                                             <br />
-                                                            <b>Currency:</b>
+                                                            <b>Inquiry:</b> 
                                                             <br />
-                                                            {payment_details.currency.toUpperCase()}
+                                                            {notification.inquiry}
                                                             <br />
-                                                            <b>Expiry:</b>
+                                                            <b>Total spent:</b>
                                                             <br />
-                                                            {parseInt((new Date(payment_details.expiry) - new Date().getTime()) / 8.64e7) + 1} days
+                                                            ${notification.user_spent}
+                                                            <br />
+                                                                <b>Previous inquiries:</b>
+                                                                <br />
+                                                                <ul>
+                                                                    {notification.prev_inquiries.slice(0, 2).map((prev_inquiry) => {
+                                                                        return (
+                                                                            <li id={Math.random().toString(36).substring(7)}>
+                                                                                <br />
+                                                                                <div class="container">
+                                                                                    <b>Previous inquiry date:</b>
+                                                                                    <br />
+                                                                                    {prev_inquiry.inquiry_date}
+                                                                                    <br />
+                                                                                    <b>Previous inquiry:</b>
+                                                                                    <br />
+                                                                                    {prev_inquiry.inquiry}
+                                                                                </div>
+                                                                            </li>
+                                                                        );
+                                                                    })}
+                                                                </ul>
+                                                        </div>
+                                                        <div class="card-action center">
+                                                            <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {deleteNotification(e, notification._id)}}>
+                                                                Delete
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </li>
                                             );
                                         })
-                                        }
-                                    </ul>
-                                </div>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col s12 m12 l4">
+                            <div class="container">
+                                <h4 class="center">Recent Payments</h4>
+                                <br />
+                                <ul>
+                                    {payments.length === 0 ?
+                                    <li>
+                                        <h5 class="center">There are no payments available!</h5>
+                                    </li>
+                                    :payments.map((payment) => {
+                                        console.log(payment);
+
+                                        return (
+                                            <li key={payment.payment_id_details._id}>
+                                                <div class="card">
+                                                    <div class="card-content">
+                                                        <b>Payment ID:</b>
+                                                        <br />
+                                                        {payment.payment_id_details._id}
+                                                        <br />
+                                                        <b>Client email:</b>
+                                                        <br />
+                                                        {payment.stripe_token.email}
+                                                        <br />
+                                                        <b>Amount:</b>
+                                                        <br />
+                                                        ${payment.payment_id_details.amount} {payment.payment_id_details.currency.toUpperCase()}
+                                                        <br />
+                                                        <b>Purchase date:</b>
+                                                        <br />
+                                                        {new Date(payment.payment_intent.created * 1000).toJSON()}
+                                                        <br />
+                                                        <b>Purchase:</b>
+                                                        <div style={{whiteSpace: 'pre-line'}}>
+                                                            {payment.payment_id_details.purchase}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        );
+                                    })
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col s12 m12 l4">
+                            <div class="container">
+                                <h4 class="center">Create a new payment ID</h4>
+                                <form onSubmit={newPaymentId} id="sendForm">
+                                    <div class="input-field">
+                                        <textarea class="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={(e) => {setPurchase(e.target.value)}} />
+                                        <input type="number" min={0} step={0.01} placeholder="Amount" name="amount" required={true} onChange={(e) => {setAmount(e.target.value)}} />
+                                        <select class="browser-default" name="currency" onChange={(e) => {setCurrency(e.target.value)}}>
+                                            <option value="aud">AUD</option>
+                                            <option value="usd">USD</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <button class="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
+                                    Send
+                                    <i class="material-icons right">send</i>
+                                </button>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <h4 class="center">Payment ID's</h4>
+                                <br />
+                                <ul>
+                                    {paymentIds.length === 0 ? 
+                                    <li>
+                                        <h5 class="center">There are no current payment ID's!</h5>
+                                    </li>
+                                    :paymentIds.map((payment_details) => {
+                                        const href = `/pay/${payment_details._id}`;
+                                        const payment_url = `${window.location.href.slice(0, -6)}${href}`
+
+                                        return (
+                                            <li key={payment_details._id}>
+                                                <div class="card">
+                                                    <div class="card-content">
+                                                        <b>Payment URL:</b>
+                                                        <Link class="truncate" to={href} onClick={(e) => {e.preventDefault();navigator.clipboard.writeText(payment_url);window.M.toast({html: 'Copied URL to clipboard!', displayLength: 1000});}}>{payment_url}</Link>
+                                                        <b>Payment ID:</b>
+                                                        <br />
+                                                        {payment_details._id}
+                                                        <br />
+                                                        <b>Name:</b>
+                                                        <br />
+                                                        {payment_details.name}
+                                                        <br />
+                                                        <b>Purchase:</b>
+                                                        <div style={{whiteSpace: 'pre-line'}}>
+                                                            {payment_details.purchase}
+                                                        </div>
+                                                        <b>Amount:</b>
+                                                        <br />
+                                                        ${payment_details.amount}
+                                                        <br />
+                                                        <b>Currency:</b>
+                                                        <br />
+                                                        {payment_details.currency.toUpperCase()}
+                                                        <br />
+                                                        <b>Expiry:</b>
+                                                        <br />
+                                                        {parseInt((new Date(payment_details.expiry) - new Date().getTime()) / 8.64e7) + 1} days
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        );
+                                    })
+                                    }
+                                </ul>
                             </div>
                         </div>
                     </div>
