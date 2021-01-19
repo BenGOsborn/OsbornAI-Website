@@ -6,8 +6,7 @@ import StripeCheckout from 'react-stripe-checkout';
 
 const Pay = (props) => {
     const [paymentDetails, setPaymentDetails] = useState({});
-    const [render, setRender] = useState(0); // 0 = Loading, 1 = Bad display, 2 = Display ID
-    const [paySuccess, setPaySuccess] = useState(0);
+    const [render, setRender] = useState(0); // 0 = Loading, 1 = Bad display, 2 = Display ID, 3 = Bad payment, 4 = Payment success 
 
     useEffect(() => {
         setRender(0);
@@ -59,21 +58,16 @@ const Pay = (props) => {
                     <h4 style={{color: '#039be5'}}>Loading...</h4>
                 </div>
             );
+        // Turn this into the else statement
         } else if (render === 1) {
             return (
                 <>
                     <PayNotFound />
                 </>
             );
-        } else {
+        } else if (render === 2 || render === 3) {
             return (
                 <div class="container center" style={{fontSize: 18}}>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                     <div class="container">
                         <h4>Purchase Information:</h4>
                         <br />
@@ -110,16 +104,12 @@ const Pay = (props) => {
                             <i class="material-icons right">local_grocery_store</i>
                         </button>
                     </StripeCheckout>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
+                </div>
+            );
+        } else if (render === 4) {
+            return (
+                <div class="container center">
+                    <h4 style={{color: "1E88E5"}}>Payment succeeded!</h4>
                 </div>
             );
         }

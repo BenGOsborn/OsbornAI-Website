@@ -149,7 +149,7 @@ def pay():
         currency = payment_id_info['currency']
         receipt_email = payment_token['card']['name']
 
-        intent = stripe.PaymentIntent.create(
+        payment_intent = stripe.PaymentIntent.create(
             amount=amount,
             description=description,
             currency=currency,
@@ -158,7 +158,7 @@ def pay():
 
         payment_success = True
 
-        success = app.config['DB'].add_payment(payment_id_info, payment_token)
+        success = app.config['DB'].add_payment(payment_id_info, payment_token, payment_intent)
         if not success:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
         
@@ -169,7 +169,7 @@ def pay():
         # Now we also have to go and send them a receipt email
         # Does this get sent automatically?
 
-        return jsonify({'success': True, 'payment_success': payment_success, 'client_secret': intent['client_secret']}), 200
+        return jsonify({'success': True, 'payment_success': payment_success}), 200
 
     except Exception as e:
         return jsonify({'success': False, 'payment_success': payment_success, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400

@@ -77,9 +77,9 @@ class Database:
         except Exception as e:
             return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e), 'prev_inquiry_date': None}
 
-    def add_payment(self, payment_id_details, stripe_token):
+    def add_payment(self, payment_id_details, stripe_token, payment_intent):
         try:
-            document = {**payment_id_details, **stripe_token}
+            document = {'payment_id_details': payment_id_details, 'stripe_token': stripe_token, 'payment_intent': payment_intent}
 
             self.payments.insert_one(document)
 
