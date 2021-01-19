@@ -17,6 +17,8 @@ const Admin = () => {
     const [amount, setAmount] = useState(0);
     const [currency, setCurrency] = useState('aud');
 
+    const display_size = 10;
+
     // This is going to be our initial load that will either authenticate a token or require a login
     useEffect(() => {
         setRender(0);
@@ -296,7 +298,7 @@ const Admin = () => {
                                         <li>
                                             <h5 class="center">There are no new inquiries!</h5>
                                         </li>
-                                        :notifications.map((notification) => {
+                                        :notifications.slice(0, display_size).map((notification) => {
                                             return (
                                                 <li key={notification._id}>
                                                     <div class="card">
@@ -324,7 +326,7 @@ const Admin = () => {
                                                                 <b>Previous inquiries:</b>
                                                                 <br />
                                                                 <ul>
-                                                                    {notification.prev_inquiries.slice(0, 2).map((prev_inquiry) => {
+                                                                    {notification.prev_inquiries.slice(0, display_size).map((prev_inquiry) => {
                                                                         return (
                                                                             <li id={Math.random().toString(36).substring(7)}>
                                                                                 <br />
@@ -364,7 +366,7 @@ const Admin = () => {
                                     <li>
                                         <h5 class="center">There are no payments available!</h5>
                                     </li>
-                                    :payments.map((payment) => {
+                                    :payments.slice(0, display_size).map((payment) => {
                                         console.log(payment);
 
                                         return (
@@ -428,7 +430,7 @@ const Admin = () => {
                                     <li>
                                         <h5 class="center">There are no current payment ID's!</h5>
                                     </li>
-                                    :paymentIds.map((payment_details) => {
+                                    :paymentIds.slice(0, display_size).map((payment_details) => {
                                         const href = `/pay/${payment_details._id}`;
                                         const payment_url = `${window.location.href.slice(0, -6)}${href}`
 
