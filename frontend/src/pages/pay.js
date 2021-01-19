@@ -40,14 +40,21 @@ const Pay = (props) => {
         payment_form.append('token', token);
         payment_form.append('payment_id', paymentDetails._id);
 
-        axios.post('https://osbornai.herokuapp.com/admin/create_payment_id', payment_form)
+        axios.post('https://osbornai.herokuapp.com/pay', payment_form)
         .then((res) => {
             const form = res.data;
 
-            // What are the callbacks going to do?
+            setRender(4);
         })
         .catch((err) => {
             const form = err.response.data;
+
+            if (form.payment_success === true) {
+                setRender(4);
+            } else {
+                console.log(`Error code ${form.error_code}: '${form.error}'`);
+                setRender(3);
+            }
         });
     };
 
@@ -57,13 +64,6 @@ const Pay = (props) => {
                 <div class="container center">
                     <h4 style={{color: '#039be5'}}>Loading...</h4>
                 </div>
-            );
-        // Turn this into the else statement
-        } else if (render === 1) {
-            return (
-                <>
-                    <PayNotFound />
-                </>
             );
         } else if (render === 2 || render === 3) {
             return (
@@ -104,6 +104,12 @@ const Pay = (props) => {
                             <i class="material-icons right">local_grocery_store</i>
                         </button>
                     </StripeCheckout>
+                    <br />
+                    {render === 3 ?
+                    <h5 style={{color: 'red'}}>
+                        Transaction failed! Please try again!
+                    </h5>
+                    :null}
                 </div>
             );
         } else if (render === 4) {
@@ -111,6 +117,12 @@ const Pay = (props) => {
                 <div class="container center">
                     <h4 style={{color: "1E88E5"}}>Payment succeeded!</h4>
                 </div>
+            );
+        } else {
+            return (
+                <>
+                    <PayNotFound />
+                </>
             );
         }
     };

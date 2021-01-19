@@ -142,10 +142,11 @@ def pay():
         success = app.config['DB'].admin_view_payment_id_details(payment_id)
         if not success['success']:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
-
+        
+        # Something is broken with this
         payment_id_info = success['payment_id_info']
         amount = payment_id_info['amount'] * 100
-        description = payment_id_info['description']
+        description = payment_id_info['purchase']
         currency = payment_id_info['currency']
         receipt_email = payment_token['card']['name']
 
@@ -161,11 +162,11 @@ def pay():
         success = app.config['DB'].add_payment(payment_id_info, payment_token, payment_intent)
         if not success:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
-        
+
         success = app.config['DB'].admin_delete_payment_id(payment_id)
         if not success:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
-        
+
         # Now we also have to go and send them a receipt email
         # Does this get sent automatically?
 
