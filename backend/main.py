@@ -116,15 +116,8 @@ def createPaymentId():
         form_json = request.form
 
         purchase = form_json['purchase']
-        amount = float(form_json['amount'])
+        amount = form_json['amount']
         currency = form_json['currency']
-
-        valid_currencies = ['aud', 'usd']
-        if currency not in valid_currencies:
-            return jsonify({'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': f"'{currency}' is not a valid currency!"}), 400
-
-        if amount < 0:
-            return jsonify({'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': f"Amount must be greater than 0!"}), 400
 
         success = app.config['DB'].admin_create_payment_id(purchase, amount, currency)
 
@@ -136,10 +129,10 @@ def createPaymentId():
     except Exception as e:
         return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
-# I want to store the stripe payment id as well
-# How am I going to handle receipts for this
 @app.route('/pay', methods=['POST'], strict_slashes=False)
 def pay():
+    payment_success = False
+
     try:
         form_json = request.form
 
@@ -148,7 +141,7 @@ def pay():
 
         success = app.config['DB'].admin_view_payment_id_details(payment_id)
         if not success['success']:
-            return jsonify({'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': f"Payment id '{payment_id}' is invalid!"}), 400
+            return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
 
         payment_id_info = success['payment_id_info']
         amount = payment_id_info['amount'] * 100
@@ -156,7 +149,6 @@ def pay():
         currency = payment_id_info['currency']
         receipt_email = payment_token['card']['name']
 
-        # I might have to add some more information about the payment on the front end about what the person is buying
         intent = stripe.PaymentIntent.create(
             amount=amount,
             description=description,
@@ -164,12 +156,23 @@ def pay():
             receipt_email=receipt_email
         )
 
-        # Now I have to modify the add payment callback
+        payment_success = True
 
-        return jsonify({'success': True, 'client_secret': intent['client_secret']}), 200
+        success = app.config['DB'].add_payment(payment_id_info, payment_token)
+        if not success:
+            return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
+        
+        success = app.config['DB'].admin_delete_payment_id(payment_id)
+        if not success:
+            return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
+        
+        # Now we also have to go and send them a receipt email
+        # Does this get sent automatically?
+
+        return jsonify({'success': True, 'payment_success': payment_success, 'client_secret': intent['client_secret']}), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        return jsonify({'success': False, 'payment_success': payment_success, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 # ------------------- Inquiry routes -----------------------
 

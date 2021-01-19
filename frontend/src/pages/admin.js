@@ -377,7 +377,7 @@ const Admin = () => {
                                                         <div class="card-content">
                                                             <b>Payment URL:</b>
                                                             <br />
-                                                            <Link to={href}>{payment_url}</Link>
+                                                            <Link to={href} onClick={(e) => {e.preventDefault();navigator.clipboard.writeText(payment_url);window.M.toast({html: 'Copied URL to clipboard!', displayLength: 1000});}}>{payment_url}</Link>
                                                             <br />
                                                             <b>Payment ID:</b>
                                                             <br />

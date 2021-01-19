@@ -56,6 +56,7 @@ class Database:
 
             self.clients.insert_one(client_document)
 
+            # This section here will require fixing
             prev_user_spendings = self.payments.find({'email': email})
             user_spent = sum(float(payment['amount']) for payment in prev_user_spendings)
 
@@ -65,7 +66,7 @@ class Database:
                 'email': email,
                 'inquiry': inquiry,
                 'inquiry_date': date,
-                'prev_inquiries': list(prev_inquiries)[::-1], # This will not print out for some reason
+                'prev_inquiries': list(prev_inquiries)[::-1],
                 'user_spent': user_spent
             }
 
@@ -76,18 +77,9 @@ class Database:
         except Exception as e:
             return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e), 'prev_inquiry_date': None}
 
-    def add_payment(self, first, last, email, payment_id, purchase, amount, currency):
+    def add_payment(self, payment_id_details, stripe_token):
         try:
-            document = {
-                'first': first,
-                'last': last,
-                'email': email,
-                'payment_id': payment_id,
-                'purchase_date': datetime.utcnow(),
-                'purchase': purchase,
-                'amount': float(amount),
-                'currency': currency
-            }
+            document = {**payment_id_details, **stripe_token}
 
             self.payments.insert_one(document)
 
@@ -116,7 +108,14 @@ class Database:
 
     def admin_create_payment_id(self, purchase, amount, currency):
         try:
-            document = {'name': "OsbornAI Payment", 'purchase': purchase, 'amount': amount, 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
+            valid_currencies = ['aud', 'usd']
+            if currency not in valid_currencies:
+                return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Not a valid currency!"}
+            
+            if float(amount) < 0:
+                return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Amount cannot be negative!"}
+
+            document = {'name': "OsbornAI Payment", 'purchase': purchase, 'amount': float(amount), 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
             payment_id = self.payment_ids.insert_one(document)
 
             payment_details = {**{'payment_id': payment_id.inserted_id}, **document}

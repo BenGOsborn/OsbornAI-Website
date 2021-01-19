@@ -7,6 +7,7 @@ import StripeCheckout from 'react-stripe-checkout';
 const Pay = (props) => {
     const [paymentDetails, setPaymentDetails] = useState({});
     const [render, setRender] = useState(0); // 0 = Loading, 1 = Bad display, 2 = Display ID
+    const [paySuccess, setPaySuccess] = useState(0);
 
     useEffect(() => {
         setRender(0);
@@ -40,16 +41,15 @@ const Pay = (props) => {
         payment_form.append('token', token);
         payment_form.append('payment_id', paymentDetails._id);
 
-        console.log(token);
-        // axios.post('https://osbornai.herokuapp.com/admin/create_payment_id', payment_form)
-        // .then((res) => {
-        //     const form = res.data;
+        axios.post('https://osbornai.herokuapp.com/admin/create_payment_id', payment_form)
+        .then((res) => {
+            const form = res.data;
 
-        //     // What are the callbacks going to do?
-        // })
-        // .catch((err) => {
-        //     const form = err.response.data;
-        // });
+            // What are the callbacks going to do?
+        })
+        .catch((err) => {
+            const form = err.response.data;
+        });
     };
 
     const isDisplayed = () => {
