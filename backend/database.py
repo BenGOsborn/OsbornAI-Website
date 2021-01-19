@@ -56,9 +56,8 @@ class Database:
 
             self.clients.insert_one(client_document)
 
-            # This section here will require fixing
-            prev_user_spendings = self.payments.find({'email': email})
-            user_spent = sum(float(payment['amount']) for payment in prev_user_spendings)
+            prev_user_spendings = list(self.payments.find({'stripe_token.email': email}))
+            user_spent = sum(payment['payment_id_details']['amount'] for payment in prev_user_spendings)
 
             client_notification_document = {
                 'first': first,

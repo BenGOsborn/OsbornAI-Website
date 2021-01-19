@@ -59,7 +59,6 @@ const Book = () => {
                 const days_since = getDaysSince(prev_inquiry_date);
                 setDaysSince(days_since);
             } else {
-                console.log(`Error code ${form.error_code}: '${form.error}'`);
                 setDaysSince(Infinity);
             }
             

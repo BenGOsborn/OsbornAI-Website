@@ -43,7 +43,6 @@ const Admin = () => {
                 setToken(null);
                 setRender(1);
             } else {
-                console.log(`Error code ${form.error_code}: '${form.error}'`);
                 setToken(null);
                 setRender(1);
             }
@@ -72,7 +71,6 @@ const Admin = () => {
 
                     setRender(1);
                 } else {
-                    console.log(`Error code ${form.error_code}: '${form.error}'`);
                     setToken(null);
 
                     setNotifications([]);
@@ -95,7 +93,6 @@ const Admin = () => {
 
                     setRender(1);
                 } else {
-                    console.log(`Error code ${form.error_code}: '${form.error}'`);
                     setToken(null);
 
                     setPaymentIds([]);
@@ -153,8 +150,6 @@ const Admin = () => {
                     setRender(2);
                 })
                 .catch((err) => {
-                    console.log(err.response);
-
                     setRender(1);
                 });
 
@@ -217,8 +212,6 @@ const Admin = () => {
 
                         setRender(1);
                     } else {
-                        console.log(`Error code ${form.error_code}: '${form.error}'`);
-
                         setToken(null);
 
                         setNotifications([]);

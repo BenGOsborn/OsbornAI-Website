@@ -29,7 +29,6 @@ const Pay = (props) => {
             if (parseInt(form.error_code) === 25) {
                 setRender(1);
             } else {
-                console.log(`Error code ${form.error_code}: '${form.error}'`);
                 setRender(1);
             }
         });
@@ -50,7 +49,6 @@ const Pay = (props) => {
             if (form.payment_success === true) {
                 setRender(4);
             } else {
-                console.log(`Error code ${form.error_code}: '${form.error}'`);
                 setRender(3);
             }
         });
