@@ -86,8 +86,6 @@ const Pay = (props) => {
                         </div>
                     </div>
                     <br />
-                    {/* This is the TEST Stripe key */}
-                    {/* Investigate Stripe console errors */}
                     <StripeCheckout stripeKey="pk_live_51I8LX2C7YoItP8TecbnnNAlWuANCjN2bQBfUpdu9yoaYwLoNrVZ480oNqCQyOlZSfNPxeb0GemzaQBSSVLG6pX9w00gPrfeZeS" 
                         name={paymentDetails.name}
                         description={paymentDetails.purchase}
