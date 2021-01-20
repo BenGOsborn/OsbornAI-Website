@@ -86,8 +86,6 @@ const Admin = () => {
 
                     setRender(1);
                 } else {
-                    setToken(null);
-
                     setNotifications([]);
                 }
             });
@@ -108,8 +106,6 @@ const Admin = () => {
 
                     setRender(1);
                 } else {
-                    setToken(null);
-
                     setPaymentIds([]);
                 }
             });
@@ -130,11 +126,7 @@ const Admin = () => {
 
                     setRender(1);
                 } else {
-                    setToken(null);
-
                     setPayments([]);
-
-                    setRender(1);
                 }
             });
         }
@@ -252,11 +244,7 @@ const Admin = () => {
 
                         setRender(1);
                     } else {
-                        setToken(null);
-
                         setNotifications([]);
-
-                        setRender(1);
                     }
                 });
             };
@@ -287,11 +275,7 @@ const Admin = () => {
 
                         setRender(1);
                     } else {
-                        setToken(null);
-
                         setPaymentIds([]);
-
-                        setRender(1);
                     }
                 });
 
