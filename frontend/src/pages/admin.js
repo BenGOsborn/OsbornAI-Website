@@ -42,7 +42,7 @@ const Admin = () => {
         .catch((err) => {
             const form = err.response.data;
 
-            if (parseInt(form.error_code) === 24) {
+            if (form.error_code === 24) {
                 setToken(null);
                 setRender(1);
             } else {
@@ -79,7 +79,7 @@ const Admin = () => {
             .catch((err) => {
                 const form = err.response.data;
 
-                if (parseInt(form.error_code) === 24) {
+                if (form.error_code === 24) {
                     setToken(null);
 
                     setNotifications([]);
@@ -101,7 +101,7 @@ const Admin = () => {
             .catch((err) => {
                 const form = err.response.data;
 
-                if (parseInt(form.error_code) === 24) {
+                if (form.error_code === 24) {
                     setToken(null);
 
                     setPaymentIds([]);
@@ -123,7 +123,7 @@ const Admin = () => {
             .catch((err) => {
                 const form = err.response.data;
 
-                if (parseInt(form.error_code) === 24) {
+                if (form.error_code === 24) {
                     setToken(null);
 
                     setPayments([]);
@@ -245,7 +245,7 @@ const Admin = () => {
                 .catch((err) => {
                     const form = err.response.data;
 
-                    if (parseInt(form.error_code) === 24) {
+                    if (form.error_code === 24) {
                         setToken(null);
 
                         setNotifications([]);
@@ -280,7 +280,7 @@ const Admin = () => {
                 .catch((err) => {
                     const form = err.response.data;
 
-                    if (parseInt(form.error_code) === 24) {
+                    if (form.error_code === 24) {
                         setToken(null);
 
                         setPaymentIds([]);
@@ -314,7 +314,7 @@ const Admin = () => {
                                             return (
                                                 <li key={notification._id}>
                                                     <div class="card">
-                                                        <div class="card-content">
+                                                        <div class="card-content truncate">
                                                             <b>Name:</b> 
                                                             <br />
                                                             {notification.first} {notification.last}
@@ -382,7 +382,7 @@ const Admin = () => {
                                         return (
                                             <li key={payment.payment_id_details._id}>
                                                 <div class="card">
-                                                    <div class="card-content">
+                                                    <div class="card-content truncate">
                                                         <b>Payment ID:</b>
                                                         <br />
                                                         {payment.payment_id_details._id}
@@ -451,9 +451,11 @@ const Admin = () => {
                                         return (
                                             <li key={payment_details._id}>
                                                 <div class="card">
-                                                    <div class="card-content">
+                                                    <div class="card-content truncate">
                                                         <b>Payment URL:</b>
-                                                        <Link class="truncate" to={href} onClick={(e) => {e.preventDefault();navigator.clipboard.writeText(payment_url);window.M.toast({html: 'Copied URL to clipboard!', displayLength: 1000});}}>{payment_url}</Link>
+                                                        <br />
+                                                        <Link to={href} onClick={(e) => {e.preventDefault();navigator.clipboard.writeText(payment_url);window.M.toast({html: 'Copied URL to clipboard!', displayLength: 1000});}}>{payment_url}</Link>
+                                                        <br />
                                                         <b>Payment ID:</b>
                                                         <br />
                                                         {payment_details._id}

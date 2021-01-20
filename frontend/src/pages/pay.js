@@ -26,7 +26,7 @@ const Pay = (props) => {
         .catch((err) => {
             const form = err.response.data;
 
-            if (parseInt(form.error_code) === 25) {
+            if (form.error_code === 25) {
                 setRender(1);
             } else {
                 setRender(1);
@@ -122,7 +122,7 @@ const Pay = (props) => {
                         </div>
                     </div>
                     <br />
-                    <StripeCheckout stripeKey="pk_test_51I8LX2C7YoItP8TeLj1WrEorqgKQ333kNQZSAypFzpN51gl16F82gS7p3P7O0ZbiYN1qUcg2z3MjtHdFQ29j48So00dlT7UlYc" 
+                    <StripeCheckout stripeKey="pk_live_51I8LX2C7YoItP8TecbnnNAlWuANCjN2bQBfUpdu9yoaYwLoNrVZ480oNqCQyOlZSfNPxeb0GemzaQBSSVLG6pX9w00gPrfeZeS" 
                         name={paymentDetails.name}
                         description={paymentDetails.purchase}
                         amount={paymentDetails.amount * 100}
@@ -167,8 +167,7 @@ const Pay = (props) => {
                     <br />
                     <br />
                     <h4 style={{color: "#039be5"}}>Payment succeeded!</h4>
-                    <br />
-                    <br />
+                    <h5>Please check your email for further details!</h5>
                     <br />
                     <br />
                     <br />

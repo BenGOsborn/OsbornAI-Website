@@ -52,7 +52,7 @@ const Book = () => {
         .catch((err) => {
             const form = err.response.data;
 
-            if (parseInt(form.error_code) === 25) {
+            if (form.error_code === 25) {
                 const prev_inquiry_date = form.prev_inquiry_date;
                 localStorage.setItem('prev_inquiry_date', prev_inquiry_date);
 
