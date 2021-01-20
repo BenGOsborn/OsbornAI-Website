@@ -52,6 +52,18 @@ const Admin = () => {
         });
     }, []);
 
+    const parseDate = (date_raw) => {
+        const pad = (n, width, z) => {
+            z = z || '0';
+            n = n + '';
+            return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;  
+        };
+
+        const date = new Date(date_raw);
+
+        return `${pad(date.getDate(), 2)}/${pad(date.getMonth() + 1, 2)}/${pad(date.getFullYear(), 2)} at ${pad(date.getHours(), 2)}:${pad(date.getSeconds(), 2)}`;
+    };
+
     // This is going to track the render component and whenever it is called then we are going to make a call to the api to change it
     useEffect(() => {
         if (render === 2) {
@@ -313,7 +325,7 @@ const Admin = () => {
                                                             <br />
                                                             <b>Inquiry date:</b>
                                                             <br />
-                                                            {notification.inquiry_date} 
+                                                            {parseDate(notification.inquiry_date)} 
                                                             <br />
                                                             <b>Inquiry:</b> 
                                                             <br />
@@ -333,7 +345,7 @@ const Admin = () => {
                                                                                 <div class="container">
                                                                                     <b>Previous inquiry date:</b>
                                                                                     <br />
-                                                                                    {prev_inquiry.inquiry_date}
+                                                                                    {parseDate(prev_inquiry.inquiry_date)}
                                                                                     <br />
                                                                                     <b>Previous inquiry:</b>
                                                                                     <br />
@@ -367,8 +379,6 @@ const Admin = () => {
                                         <h5 class="center">There are no payments available!</h5>
                                     </li>
                                     :payments.slice(0, display_size).map((payment) => {
-                                        console.log(payment);
-
                                         return (
                                             <li key={payment.payment_id_details._id}>
                                                 <div class="card">
@@ -376,6 +386,10 @@ const Admin = () => {
                                                         <b>Payment ID:</b>
                                                         <br />
                                                         {payment.payment_id_details._id}
+                                                        <br />
+                                                        <b>Payment creation date:</b>
+                                                        <br />
+                                                        {parseDate(payment.payment_id_details.timeCreated)}
                                                         <br />
                                                         <b>Client email:</b>
                                                         <br />
@@ -387,7 +401,7 @@ const Admin = () => {
                                                         <br />
                                                         <b>Purchase date:</b>
                                                         <br />
-                                                        {new Date(payment.payment_intent.created * 1000).toJSON()}
+                                                        {parseDate(payment.payment_intent.created * 1000)}
                                                         <br />
                                                         <b>Purchase:</b>
                                                         <div style={{whiteSpace: 'pre-line'}}>
@@ -459,6 +473,10 @@ const Admin = () => {
                                                         <b>Currency:</b>
                                                         <br />
                                                         {payment_details.currency.toUpperCase()}
+                                                        <br />
+                                                        <b>Payment creation date:</b>
+                                                        <br />
+                                                        {parseDate(payment_details.timeCreated)}
                                                         <br />
                                                         <b>Expiry:</b>
                                                         <br />
