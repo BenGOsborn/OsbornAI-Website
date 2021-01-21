@@ -282,10 +282,10 @@ const Admin = () => {
 
             return (
                 <div className="Dashboard">
-                    <div class="row">
+                    <div class="row center">
                         <div class="col s12 m12 l4">
                             <div class="container">
-                                <h4 class="center">New Inquiries</h4> 
+                                <h4>New Inquiries</h4> 
                                 <br />
                                 <ul>
                                     {notifications.length === 0 ? 
@@ -338,7 +338,7 @@ const Admin = () => {
                                                                     })}
                                                                 </ul>
                                                         </div>
-                                                        <div class="card-action center">
+                                                        <div class="card-action">
                                                             <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {deleteNotification(e, notification._id)}}>
                                                                 Delete
                                                             </button>
@@ -353,12 +353,12 @@ const Admin = () => {
                         </div>
                         <div class="col s12 m12 l4">
                             <div class="container">
-                                <h4 class="center">Recent Payments</h4>
+                                <h4>Recent Payments</h4>
                                 <br />
                                 <ul>
                                     {payments.length === 0 ?
                                     <li>
-                                        <h5 class="center">There are no payments available!</h5>
+                                        <h5>There are no payments available!</h5>
                                     </li>
                                     :payments.slice(0, 5).map((payment) => {
                                         return (
@@ -400,7 +400,7 @@ const Admin = () => {
                         </div>
                         <div class="col s12 m12 l4">
                             <div class="container">
-                                <h4 class="center">Create a new payment ID</h4>
+                                <h4>Create a new payment ID</h4>
                                 <form onSubmit={newPaymentId} id="sendForm">
                                     <div class="input-field">
                                         <textarea class="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={(e) => {setPurchase(e.target.value)}} />
@@ -419,7 +419,7 @@ const Admin = () => {
                                 <br />
                                 <br />
                                 <br />
-                                <h4 class="center">Payment ID's</h4>
+                                <h4>Payment ID's</h4>
                                 <br />
                                 <ul>
                                     {paymentIds.length === 0 ? 
@@ -428,7 +428,13 @@ const Admin = () => {
                                     </li>
                                     :paymentIds.map((payment_details) => {
                                         const href = `/pay/${payment_details._id}`;
-                                        const payment_url = `${window.location.href.slice(0, -6)}${href}`
+
+                                        let payment_url = null;
+                                        if (window.location.href.endsWith('/')) {
+                                            payment_url = `${window.location.href.slice(0, -7)}${href}`;
+                                        } else {
+                                            payment_url = `${window.location.href.slice(0, -6)}${href}`;
+                                        }
 
                                         return (
                                             <li key={payment_details._id}>
