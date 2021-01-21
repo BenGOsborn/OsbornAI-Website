@@ -11,7 +11,6 @@ class ErrorCodes:
     error_code_failed = 25
     error_code_other = 26
 
-# This will be responsible for creating the custom error responses that can then be sent back through the server
 class Database:
     def __init__(self):
         dotenv.load_dotenv()
@@ -123,7 +122,6 @@ class Database:
             if float(amount) < 0:
                 return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Amount cannot be negative!"}
 
-            # I want the amount to be rounded
             document = {'name': "OsbornAI Payment", 'purchase': purchase, 'amount': round(float(amount), 2), 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
             payment_id = self.payment_ids.insert_one(document)
 
