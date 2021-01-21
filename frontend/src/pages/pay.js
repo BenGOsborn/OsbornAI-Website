@@ -24,13 +24,7 @@ const Pay = (props) => {
             setRender(2);
         })
         .catch((err) => {
-            const form = err.response.data;
-
-            if (form.error_code === 25) {
-                setRender(1);
-            } else {
-                setRender(1);
-            }
+            setRender(1);
         });
     }, [props.match.params.payment_id]);
 
