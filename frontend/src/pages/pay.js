@@ -4,6 +4,7 @@ import axios from 'axios';
 import PayNotFound from './pay-not-found';
 import StripeCheckout from 'react-stripe-checkout';
 import analytics from '../analytics';
+import { Helmet } from 'react-helmet';
 
 const Pay = (props) => {
     const [paymentDetails, setPaymentDetails] = useState({});
@@ -206,6 +207,13 @@ const Pay = (props) => {
             {isDisplayed()}
             <br />
             <br />
+            <Helmet>
+                <title>Payment Page - OsbornAI</title>
+                <meta name="description" content={`The official payment page for OsbornAI for the purchase ID ${paymentDetails._id}`} />
+                <meta name="keywords" content="payment, pay, osbornai, checkout, money" />
+                <meta name="author" content="OsbornAI" />
+                <meta name="robots" content="noindex, nofollow" />
+            </Helmet>
         </div>
     );
 };

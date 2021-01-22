@@ -3,6 +3,7 @@ import axios from 'axios';
 import FormData from 'form-data';
 import { Link } from 'react-router-dom';
 import analytics from '../analytics';
+import { Helmet } from 'react-helmet';
 
 const Admin = () => {
     const [username, setUsername] = useState('');
@@ -216,6 +217,11 @@ const Admin = () => {
                                 <br />
                                 <br />
                                 <br />
+                                <Helmet>
+                                    <title>Admin Login - OsbornAI</title>
+                                    <meta name="description" content="The admin login page for the admin dashboard of the OsbornAI website." />
+                                    <meta name="keywords" content="admin, dashboard, osbornai, login, analytics" />
+                                </Helmet>
                             </div>
                         </div>
                     </div>
@@ -485,6 +491,11 @@ const Admin = () => {
                             </div>
                         </div>
                     </div>
+                    <Helmet>
+                        <title>Admin Dashboard - OsbornAI</title>
+                        <meta name="description" content="The admin dashboard for the OsbornAI website." />
+                        <meta name="keywords" content="admin, dashboard, osbornai, payments, analytics" />
+                    </Helmet>
                 </div>
             );
         }
@@ -507,6 +518,10 @@ const Admin = () => {
             <br />
             <br />
             <br />
+            <Helmet>
+                <meta name="author" content="OsbornAI" />
+                <meta name="robots" content="noindex, nofollow" />
+            </Helmet>
         </div>
     );
 };
