@@ -436,7 +436,7 @@ const Admin = () => {
                                                         <br />
                                                         <b>Purchase date:</b>
                                                         <br />
-                                                        {parseDate(payment.payment_intent.created * 1000)}
+                                                        {parseDate(payment.charge.created * 1000)}
                                                         <br />
                                                         <b>Purchase:</b>
                                                         <div style={{whiteSpace: 'pre-line'}}>

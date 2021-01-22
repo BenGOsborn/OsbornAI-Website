@@ -150,9 +150,16 @@ def pay():
         description = payment_id_info['purchase']
         currency = payment_id_info['currency']
         receipt_email = payment_token['card']['name']
+        source = payment_token['id']
 
-        payment_intent = stripe.PaymentIntent.create(
+        customer = stripe.Customer.create(
+            email=receipt_email,
+            source=source
+        )
+
+        charge = stripe.Charge.create(
             amount=int(amount),
+            customer=customer,
             description=description,
             currency=currency,
             receipt_email=receipt_email
@@ -160,7 +167,7 @@ def pay():
 
         payment_success = True
 
-        success = app.config['DB'].add_payment(payment_id_info, payment_token, payment_intent)
+        success = app.config['DB'].add_payment(payment_id_info, payment_token, charge, customer)
         if not success['success']:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
 
