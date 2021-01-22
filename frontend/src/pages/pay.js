@@ -208,8 +208,8 @@ const Pay = (props) => {
             <br />
             <br />
             <Helmet>
-                <title>Payment Page - OsbornAI</title>
-                <meta name="description" content={`The official payment page for OsbornAI for the purchase ID ${paymentDetails._id}`} />
+                <title>Complete The Payment Process - OsbornAI</title>
+                <meta name="description" content={`Complete the payment process so that we can get started with your project! Payment ID: ${paymentDetails._id}`} />
                 <meta name="keywords" content="payment, pay, osbornai, checkout, money" />
                 <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />

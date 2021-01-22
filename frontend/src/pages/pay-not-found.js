@@ -22,7 +22,7 @@ const PayBlank = () => {
                     <br />
                     <br />
                     <h1>404 Error:</h1>
-                    <h3>Invalid payment ID!</h3>
+                    <h3>Invalid payment URL!</h3>
                     <h4>Please check the URL and try again!</h4>
                     <br />
                     <br />
@@ -42,9 +42,9 @@ const PayBlank = () => {
                 </div>
             </div>
             <Helmet>
-                <title>Invalid Payment ID - OsbornAI</title>
-                <meta name="description" content="This page is displayed when there is a bad payment ID!" />
-                <meta name="keywords" content="payment, pay, osbornai, checkout, money" />
+                <title>Invalid Payment URL - OsbornAI</title>
+                <meta name="description" content="This payment URL is invalid! Check the URL and try again!" />
+                <meta name="keywords" content="payment, pay, osbornai, checkout, invalid" />
                 <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />
             </Helmet>

@@ -84,10 +84,10 @@ const Articles = () => {
                 </div>
             </div>
             <Helmet>
-                <title>Articles - OsbornAI</title>
+                <title>Explore Our Articles - OsbornAI</title>
                 <meta name="author" content="OsbornAI" />
-                <meta name="description" content="A list of our existing articles containing the latest topics, news, and tutorials regarding all things data science!" />
-                <meta name="keywords" content="articles, data science, ai, machine learning, news, blog, tutorials" />
+                <meta name="description" content="The full list of our existing articles containing the latest topics, news, and tutorials regarding all things data science!" />
+                <meta name="keywords" content="articles, data science, ai, machine learning, news, blog, tutorials, osbornai" />
             </Helmet>
         </div>
     );

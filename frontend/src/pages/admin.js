@@ -219,7 +219,7 @@ const Admin = () => {
                                 <br />
                                 <Helmet>
                                     <title>Admin Login - OsbornAI</title>
-                                    <meta name="description" content="The admin login page for the admin dashboard of the OsbornAI website." />
+                                    <meta name="description" content="Log in using the admin credentials to view the admin dashboard." />
                                     <meta name="keywords" content="admin, dashboard, osbornai, login, analytics" />
                                 </Helmet>
                             </div>
@@ -493,7 +493,7 @@ const Admin = () => {
                     </div>
                     <Helmet>
                         <title>Admin Dashboard - OsbornAI</title>
-                        <meta name="description" content="The admin dashboard for the OsbornAI website." />
+                        <meta name="description" content="The admin dashboard containing the analytics regarding our business." />
                         <meta name="keywords" content="admin, dashboard, osbornai, payments, analytics" />
                     </Helmet>
                 </div>

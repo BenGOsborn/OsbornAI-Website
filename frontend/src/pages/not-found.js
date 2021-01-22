@@ -3,6 +3,7 @@ import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-scroll';
 import { Link as RouteLink } from 'react-router-dom';
 import analytics from '../analytics';
+import { Helmet } from 'react-helmet';
 
 const NotFound = () => {
     useEffect(() => {
@@ -31,16 +32,16 @@ const NotFound = () => {
                 <div class="row center" style={{fontSize: 20}}>
                     <b>
                         <div class="col s12 m12 l3">
-                            <HashLink class="btn blue darken-1" to="/#About" smooth={true}>ABOUT</HashLink>
+                            <HashLink to="/#About" smooth={true}>ABOUT</HashLink>
                         </div>
                         <div class="col s12 m12 l3">
-                            <HashLink class="btn blue darken-1" to="/#Services" smooth={true}>SERVICES</HashLink>
+                            <HashLink to="/#Services" smooth={true}>SERVICES</HashLink>
                         </div>
                         <div class="col s12 m12 l3">
-                            <RouteLink class="btn blue darken-1" to="/articles" smooth={true}>ARTICLES</RouteLink>
+                            <RouteLink to="/articles" smooth={true}>ARTICLES</RouteLink>
                         </div>
                         <div class="col s12 m12 l3">
-                            <Link class="btn blue darken-1" href="/" to="Book" smooth={true} duration={400}>BOOK A CONSULT</Link>
+                            <Link href="/" to="Book" smooth={true} duration={400}>BOOK A CONSULT</Link>
                         </div>
                     </b>
                 </div>
@@ -48,6 +49,13 @@ const NotFound = () => {
                 <br />
                 <br />
             </div>
+            <Helmet>
+                <title>Page Not Found - OsbornAI</title>
+                <meta name="description" content="The page you're looking for cannot be found!" />
+                <meta name="keywords" content="invalid url, invalid page, osbornai, bad page, invalid" />
+                <meta name="author" content="OsbornAI" />
+                <meta name="robots" content="noindex, nofollow" />
+            </Helmet>
         </div>
     );
 };
