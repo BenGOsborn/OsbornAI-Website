@@ -119,9 +119,6 @@ class Database:
             if currency not in valid_currencies:
                 return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Not a valid currency!"}
             
-            if float(amount) < 0:
-                return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Amount cannot be negative!"}
-            
             if float(amount) < 1:
                 return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Amount must be greater than or equal to $1!"}
 
