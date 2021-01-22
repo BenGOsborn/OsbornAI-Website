@@ -457,13 +457,7 @@ const Admin = () => {
                                 <form onSubmit={newPaymentId} id="sendForm">
                                     <div class="input-field">
                                         <textarea class="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={(e) => {setPurchase(e.target.value)}} />
-                                        <input type="number" min={1} step={0.01} placeholder="Amount" name="amount" required={true} onChange={(e) => {
-                                                if (e.target.value < 1) {
-                                                    setAmount(1);
-                                                } else {
-                                                    setAmount(e.target.value);
-                                                }
-                                            }} />
+                                        <input type="number" min={1} step={0.01} placeholder="Amount" name="amount" required={true} onChange={(e) => {setAmount(Math.max(1, e.target.value))}} />
                                         <select class="browser-default" name="currency" onChange={(e) => {setCurrency(e.target.value)}}>
                                             <option value="aud">AUD</option>
                                             <option value="usd">USD</option>
