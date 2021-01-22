@@ -73,6 +73,7 @@ class Database:
             return {'success': True, 'prev_inquiry_date': date}
 
         except Exception as e:
+            print(e.)
             return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e), 'prev_inquiry_date': None}
 
     def add_payment(self, payment_id_details, stripe_token, payment_intent):
