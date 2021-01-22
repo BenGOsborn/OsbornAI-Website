@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import '../form.css';
 import axios from 'axios';
 import FormData from 'form-data';
+import analytics from '../analytics';
 
 const Book = () => {
     const [daysSince, setDaysSince] = useState(Infinity);
@@ -20,6 +21,8 @@ const Book = () => {
     };
 
     useEffect(() => {
+        analytics.init();
+
         const prev_inquiry_date = localStorage.getItem('prev_inquiry_date');
 
         if (prev_inquiry_date === null) {
@@ -48,6 +51,8 @@ const Book = () => {
 
             const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
+
+            analytics.sendEvent({category: 'User', action: 'Inquired'});
         })
         .catch((err) => {
             const form = err.response.data;

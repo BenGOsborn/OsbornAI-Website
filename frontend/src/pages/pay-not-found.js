@@ -1,4 +1,12 @@
+import { useEffect } from 'react';
+import analytics from '../analytics';
+
 const PayBlank = () => {
+    useEffect(() => {
+        analytics.init();
+        analytics.sendPageview('/pay-not-found');
+    }, []);
+
     return (
         <div className="PayNotFound">
             <div class="container">

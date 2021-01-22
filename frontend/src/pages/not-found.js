@@ -1,8 +1,15 @@
+import { useEffect } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { Link } from 'react-scroll';
 import { Link as RouteLink } from 'react-router-dom';
+import analytics from '../analytics';
 
 const NotFound = () => {
+    useEffect(() => {
+        analytics.init();
+        analytics.sendPageview('/invalid-page'); // I want to determine the actual URL
+    }, []);
+
     return (
         <div className="NotFound">
             <div class="container">

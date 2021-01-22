@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'; import '../form.css';
 import axios from 'axios';
 import FormData from 'form-data';
 import { Link } from 'react-router-dom';
+import analytics from '../analytics';
 
 const Admin = () => {
     const [username, setUsername] = useState('');
@@ -19,6 +20,9 @@ const Admin = () => {
 
     // This is going to be our initial load that will either authenticate a token or require a login
     useEffect(() => {
+        analytics.init();
+        analytics.sendPageview('/admin');
+
         setRender(0);
 
         const local_token = localStorage.getItem('token');

@@ -3,12 +3,15 @@ import FormData from 'form-data';
 import axios from 'axios';
 import PayNotFound from './pay-not-found';
 import StripeCheckout from 'react-stripe-checkout';
+import analytics from '../analytics';
 
 const Pay = (props) => {
     const [paymentDetails, setPaymentDetails] = useState({});
     const [render, setRender] = useState(0); // 0 = Loading, 1 = Bad display, 2 = Display ID, 3 = Bad payment, 4 = Payment success 
 
     useEffect(() => {
+        analytics.init();
+
         setRender(0);
 
         const payment_id = props.match.params.payment_id;
@@ -22,6 +25,8 @@ const Pay = (props) => {
 
             setPaymentDetails(form);
             setRender(2);
+
+            analytics.sendPageview(`/pay/${payment_id}`);
         })
         .catch((err) => {
             setRender(1);
@@ -36,12 +41,15 @@ const Pay = (props) => {
         axios.post('https://osbornai.herokuapp.com/pay', payment_form)
         .then((res) => {
             setRender(4);
+
+            analytics.sendEvent({category: 'User', action: 'Paid', value: paymentDetails.amount});
         })
         .catch((err) => {
             const form = err.response.data;
 
             if (form.payment_success === true) {
                 setRender(4);
+                analytics.sendEvent({category: 'User', action: 'Paid', value: paymentDetails.amount});
             } else {
                 setRender(3);
             }
