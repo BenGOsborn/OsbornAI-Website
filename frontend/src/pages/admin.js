@@ -11,6 +11,8 @@ const Admin = () => {
     const [token, setToken] = useState(null);
     const [render, setRender] = useState(0); // 0 = Loading, 1 = Login, 2 = Dashboard
 
+    const [numDisplayed, setNumDisplayed] = useState(5);
+
     const [notifications, setNotifications] = useState([]);
     const [paymentIds, setPaymentIds] = useState([]);
     const [payments, setPayments] = useState([]); 
@@ -70,6 +72,12 @@ const Admin = () => {
     // This is going to track the render component and whenever it is called then we are going to make a call to the api to change it
     useEffect(() => {
         if (render === 2) {
+            if (token === null) {
+                setRender(1);
+
+                return;
+            }
+
             const token_form = new FormData();
             token_form.append('token', token)
 
@@ -133,7 +141,7 @@ const Admin = () => {
                 }
             });
         }
-    }, [render]);
+    }, [render, token]);
 
     const isDisplayed = () => {
         if (render === 0) {
@@ -293,6 +301,41 @@ const Admin = () => {
             return (
                 <div className="Dashboard">
                     <div class="row center">
+                        <div class="col s12 s12 l6">
+                            <div class="container">
+                                <div class="container">
+                                    <h5>Number Of Items Displayed</h5>
+                                    <br />
+                                    <select class="browser-default" name="numdisplayed" onChange={(e) => {setNumDisplayed(e.target.value)}}>
+                                        <option value={1}>1</option>
+                                        <option value={5} selected="selected">5</option>
+                                        <option value={10}>10</option>
+                                        <option value={Infinity}>All</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 s12 l6">
+                            <div class="container">
+                                <div class="container">
+                                    <h5>Logout</h5>
+                                    <br />
+                                    <button class="btn blue darken-1 waves-effect waves-light" onClick={(e) => {
+                                        e.preventDefault();
+
+                                        localStorage.removeItem('token');
+
+                                        setToken(null);
+                                    }}>
+                                        Logout
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row center">
                         <div class="col s12 m12 l4">
                             <div class="container">
                                 <h4>New Inquiries</h4> 
@@ -302,7 +345,7 @@ const Admin = () => {
                                         <li>
                                             <h5 class="center">There are no new inquiries!</h5>
                                         </li>
-                                        :notifications.map((notification) => {
+                                        :notifications.slice(0, numDisplayed).map((notification) => {
                                             return (
                                                 <li key={notification._id}>
                                                     <div class="card">
@@ -330,7 +373,7 @@ const Admin = () => {
                                                                 <b>Previous inquiries:</b>
                                                                 <br />
                                                                 <ul>
-                                                                    {notification.prev_inquiries.slice(0, 2).map((prev_inquiry) => {
+                                                                    {notification.prev_inquiries.slice(0, 3).map((prev_inquiry) => {
                                                                         return (
                                                                             <li id={Math.random().toString(36).substring(7)}>
                                                                                 <br />
@@ -370,7 +413,7 @@ const Admin = () => {
                                     <li>
                                         <h5>There are no payments available!</h5>
                                     </li>
-                                    :payments.slice(0, 5).map((payment) => {
+                                    :payments.slice(0, numDisplayed).map((payment) => {
                                         return (
                                             <li key={payment.payment_id_details._id}>
                                                 <div class="card">
@@ -436,7 +479,7 @@ const Admin = () => {
                                     <li>
                                         <h5 class="center">There are no current payment ID's!</h5>
                                     </li>
-                                    :paymentIds.map((payment_details) => {
+                                    :paymentIds.slice(0, numDisplayed).map((payment_details) => {
                                         const href = `/pay/${payment_details._id}`;
 
                                         let payment_url = null;
