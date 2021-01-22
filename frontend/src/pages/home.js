@@ -17,7 +17,6 @@ const Home = () => {
                         <br />
                         <br />
                         <br />
-
                         <div class="row center valign-wrapper hide-on-med-and-down">
                             <div class="col s12 m12 l6">
                                 <img class="responsive-img center" alt="Black and Gray Mining Rig"
