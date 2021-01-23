@@ -1,5 +1,5 @@
-# [OsbornAI official website](https://osbornai.com/#/)
-## This repository contains the source code for the official [OsbornAI website](https://osbornai.com/#/).
+# [OsbornAI official website](https://osbornai.com/)
+## This repository contains the source code for the official [OsbornAI website](https://osbornai.com/).
 
 <br />
 
