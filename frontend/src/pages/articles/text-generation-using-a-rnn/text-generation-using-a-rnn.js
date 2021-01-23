@@ -23,7 +23,7 @@ const RNNTextGeneration = () => {
                     dataset first so that our model will gain an understanding of the English language. Download this data and store it somewhere for use later. The second 
                     dataset we will be using will be the Alice In Wonderland book by Lewis Carroll, which was been uploaded for 
                     use <a href="https://gist.githubusercontent.com/phillipj/4944029/raw/75ba2243dd5ec2875f629bf5d79f6c1e4b5a8b46/alice_in_wonderland.txt" target="_blank" rel="noreferrer">here</a> by <a href="https://github.com/phillipj" target="_blank" rel="noreferrer">phillipj</a>. We
-                    will use this data to fine tune our model so that our model generates text in the style of that written in Alice In Wonderland. We don't have to worry about downloading
+                    will use this data to fine-tune our model so that our model generates text in the style of that written in Alice In Wonderland. We don't have to worry about downloading
                     this data.
                 </p>
                 <br />
@@ -44,7 +44,7 @@ const RNNTextGeneration = () => {
                     We will then read the contents from each file then save it to a list. Finally, we'll convert this list to a Pandas series for easy processing later.
                     <br />
                     <br />
-                    <Gist id="d17c1c32cde33560473617f9bbeddb55" />
+                    <Gist id="755b7d683e99cf95d3d0e9f32bf2b492" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -63,7 +63,7 @@ const RNNTextGeneration = () => {
                     series containing the cleaned documents in a variable named <i>text</i>.
                     <br />
                     <br />
-                    <Gist id="9bf74b90962f0c40947a877851c3728f" />
+                    <Gist id="5de77f878d496fa1c687edd186902c50" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -80,7 +80,7 @@ const RNNTextGeneration = () => {
                     We'll then go and apply this function to each document within our <i>text</i> series, and we'll store this result in a variable named <i>encoded</i>.
                     <br />
                     <br />
-                    <Gist id="c929a91aa34cb45acb92aa9dc526b3ae" />
+                    <Gist id="10f8c0f1a2c15af7a096f83e31b00c74" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -105,7 +105,7 @@ const RNNTextGeneration = () => {
                     and our <i>Y</i> list with the label for it's corresponding sequence. We will then shuffle this data, and then one-hot encode the characters within our data.
                     <br />
                     <br />
-                    <Gist id="516e8679f1606f96491f7f9aca48b97d" />
+                    <Gist id="945a631677835cf413944c5f819e2093" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -129,7 +129,7 @@ const RNNTextGeneration = () => {
                     We'll then go and print the length of our training set and validation set to observe the amount of data within each set.
                     <br />
                     <br />
-                    <Gist id="eae782c94e0a4c71160ba498cd61ce41" />
+                    <Gist id="9657cf65fc5fe984b18aad845a17be16" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -161,7 +161,7 @@ const RNNTextGeneration = () => {
                     0.0005 (5e-4), and track the accuracy metric.
                     <br />
                     <br />
-                    <Gist id="eea514e0563b6a7e70f5b274efe02a53" />
+                    <Gist id="3550a39f383650242d166aac94e0e396" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -187,7 +187,7 @@ const RNNTextGeneration = () => {
                     and the models predictions for the next <i>gen_length</i> characters that come after.
                     <br />
                     <br />
-                    <Gist id="419e402ad0caf9f9559aada04068a2b2" />
+                    <Gist id="4290fb7979d92f0af914f16011b24382" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -202,7 +202,7 @@ const RNNTextGeneration = () => {
                     with our <i>seed_text</i> to observe our models performance during training. We will repeat this loop 4 times, so that we perform 4 x 5 = 20 epochs.
                     <br />
                     <br />
-                    <Gist id="2eb84ee166806d505beb88dcc02706d7" />
+                    <Gist id="1fa449b31c72893a89acdef49246bde4" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -215,7 +215,7 @@ const RNNTextGeneration = () => {
                     Change the <i>model_path</i> variable to the name and directory you want to save your model to. Your model's name MUST end with <i>.h5</i>.
                     <br />
                     <br />
-                    <Gist id="67bd72628f39e88fe27095eb8f88242d" />
+                    <Gist id="917cedbcbe58519c9a9848a251c9918f" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -226,14 +226,14 @@ const RNNTextGeneration = () => {
                     evaluation loss and accuracy that you're happy with.
                     <br />
                     <br />
-                    <Gist id="a3667b340539d17b3fdd612f3dc82df2" />
+                    <Gist id="660208eac5459d1701f314a77307b7d6" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
-                    <b>Adapting the model to new data/Loading adaptation data</b>
+                    <b>Loading fine-tuning data (Alice's Adventures in Wonderland)</b>
                     <br />
                     <br />
-                    Now we're going to adapt our model to generate text in the style of Alice in Wonderland. 
+                    Now we're going to fine-tune our model to generate text in the style of Alice in Wonderland. 
                     <br />
                     <br />
                     We'll start off by scraping the book from the website using the requests library. We'll then remove the star pattern present within the book. Next
@@ -241,11 +241,11 @@ const RNNTextGeneration = () => {
                     our <i>char2num</i> dictionary.
                     <br />
                     <br />
-                    <Gist id="c8546f43389c1d6510842f3b4fb2a18c" />
+                    <Gist id="1a20324d7e0f58858406927ab69ec427" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
-                    <b>Creating our adaptation dataset</b>
+                    <b>Creating the dataset from the Alice in Wonderland novel</b>
                     <br />
                     <br />
                     Now we'll use our <i>createData</i> function on our <i>encoded_text</i> to make two new lists of data: <i>X</i> which contains the sequences of text,
@@ -253,11 +253,11 @@ const RNNTextGeneration = () => {
                     our <i>X</i> and <i>Y</i> lists.
                     <br />
                     <br />
-                    <Gist id="56942cb83a618c73f6158cd71d326cc1" />
+                    <Gist id="96b7cc01639dba662027ac7734e2aafc" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
-                    <b>Create training and validation set</b>
+                    <b>Create training and validation/testing set from Alice in Wonderland dataset</b>
                     <br />
                     <br />
                     Now we'll go and split our new data into a training set and a validation set. Once again we'll use 90% of the data for training, and the other 10%
@@ -267,44 +267,44 @@ const RNNTextGeneration = () => {
                     We'll then go and print out the size of our training set and validation set.
                     <br />
                     <br />
-                    <Gist id="b13b383dc47bc72960ddb10453faafb7" />
+                    <Gist id="5fa8a5a405359b42c739bcf0f0601ac3" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
-                    <b>Training adapted model</b>
+                    <b>Fine-tuning the base model to the new data</b>
                     <br />
                     <br />
-                    Now we're going to adapt our pre-trained model to the Alice in Wonderland data. We'll start off by declaring a <i>seed_text</i> variable, which the model 
+                    Now we're going to fine-tune our pre-trained model to the Alice in Wonderland data. We'll start off by declaring a <i>seed_text</i> variable, which the model 
                     will generate predictions with after it's finished training. We'll then go and use our <i>genSequence</i> function to predict the characters that come after 
                     our <i>seed_text</i>, which we'll print out to see what the model has generated.
                     <br />
                     <br />
-                    <Gist id="a430d2e8cd835433bac19b0ec9873673" />
+                    <Gist id="283479043bd528dcb655a9e962cfac39" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
-                    <b>Saving the adapted model</b>
+                    <b>Saving the fine-tuned model</b>
                     <br />
                     <br />
-                    Now we will go and save our adapted model to a file that can be loaded whenever we want to use it.
+                    Now we will go and save our fine-tuned model to a file that can be loaded whenever we want to use it.
                     <br />
                     <br />
                     Change the <i>alice_model_path</i> variable to the name and directory you want to save your new adapted model to. 
                     Your model's name MUST end with <i>.h5</i>..
                     <br />
                     <br />
-                    <Gist id="cc1f34e2dde32a94966a9e273d028070" />
+                    <Gist id="7288aa7cee192a70a7ad0b8ef2846fc3" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
-                    <b>Evaluating adapted model</b>
+                    <b>Evaluating fine-tuned model</b>
                     <br />
                     <br />
                     Finally we'll go and evaluate our model on our validation set. You should find that the adapted model's validation loss and accuracy are better than the 
                     original model.
                     <br />
                     <br />
-                    <Gist id="7c3b8eb4e7f5ee789fc59eec090f3c77" />
+                    <Gist id="c7a914a4499b5b1fe96259ee5e4f5b2e" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
