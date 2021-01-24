@@ -18,18 +18,18 @@ const DeepFakeFaceSwap = () => {
                 <br />
                 <br />
                 To start off with you're going to need a dataset which contains the faces of the person you want to swap the face of and the persons face you want to swap the face with.
-                For this tutorial, I will be swapping Donald Trump's face with Keanu Reeve's, however you can choose any two people you like. I have created a dataset containing 
-                around 4000 images of each celebrities face sourced from Google Images. All images sourced fall under the Creative Commons License so I will not be releasing this dataset 
-                as I do not own the rights to these images, however in an upcoming article I will be demonstrating how you can create a dataset like this one, so make sure to stick around!
+                For this tutorial, I will be swapping Donald Trump's face with Keanu Reeve's. I have created a dataset containing around 4000 images of each celebrities face sourced from Google Images. 
+                All the images I have sourced fall under the Creative Commons License, so I will not be releasing this dataset as I do not own the rights to these images, however in an upcoming article I will be 
+                demonstrating how you can create a dataset like this one for yourself, so make sure to stick around!
             </p>
             <br />
             <p class="flow-text" style={style}>
-                <b>Loading and pre-processing the images</b>
+                <b>Loading and preprocessing the images</b>
                 <br />
                 <br />
                 Before we load in our images, we have to process them first. To do this we'll create a function which will load all of the images in a directory, convert them to RGB,
-                resize them to be 64x64, and then store them in a list for further use. We will then normalize our images by converting our list of images to a numpy array, and then dividing the array
-                by 255, so that the pixels of each image are between 0 and 1.
+                resize them to be 64x64, and then store them in a list for further use. We will then normalize the values of the pixels that make up each images to be between 0 and 1 
+                by diving them by 255.
                 <br />
                 <br />
                 <Gist id="0c3815cfc29bb726ba9405aa414786dd" />
@@ -127,7 +127,7 @@ const DeepFakeFaceSwap = () => {
                 <b>Evaluating the model</b>
                 <br />
                 <br />
-                Now we will evaluate both model's using each model's respective validation/test data.
+                Now we will evaluate both model's using each model's respective validation/test data to see how well each model was learned during training.
                 <br />
                 <br />
                 <Gist id="f97cee553314d1e4df584108f3ca57f3" />
@@ -158,7 +158,8 @@ const DeepFakeFaceSwap = () => {
                 <b>Outroduction</b>
                 <br />
                 <br />
-                So now you know how to build your own face swap program that you can apply to whoevers face you want. As stated before, go and play around and experiment the model to make it do what you want it to do. Because after all, the best way to learn is by doing!
+                So now you know how to build your own face swap program that you can apply to whoevers face you want. As stated before, go and play around and experiment the model to make it do what you want it to do. 
+                Because after all, the best way to learn is by doing!
             </p>
         </div>
     );
