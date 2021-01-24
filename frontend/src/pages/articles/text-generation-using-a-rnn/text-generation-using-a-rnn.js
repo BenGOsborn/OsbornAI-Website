@@ -44,7 +44,7 @@ const RNNTextGeneration = () => {
                     We will then read the contents from each file then save it to a list. Finally, we'll convert this list to a Pandas series for easy processing later.
                     <br />
                     <br />
-                    <Gist id="755b7d683e99cf95d3d0e9f32bf2b492" />
+                    <Gist id="64b04ba0ca8a9107a017afa1bd6394ee" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -63,7 +63,7 @@ const RNNTextGeneration = () => {
                     series containing the cleaned documents in a variable named <i>text</i>.
                     <br />
                     <br />
-                    <Gist id="5de77f878d496fa1c687edd186902c50" />
+                    <Gist id="0e919d287678e2dd2255a447e2270a42" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -80,7 +80,7 @@ const RNNTextGeneration = () => {
                     We'll then go and apply this function to each document within our <i>text</i> series, and we'll store this result in a variable named <i>encoded</i>.
                     <br />
                     <br />
-                    <Gist id="10f8c0f1a2c15af7a096f83e31b00c74" />
+                    <Gist id="0bbbea8a263afd77aba705ac7291c074" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -105,7 +105,7 @@ const RNNTextGeneration = () => {
                     and our <i>Y</i> list with the label for it's corresponding sequence. We will then shuffle this data, and then one-hot encode the characters within our data.
                     <br />
                     <br />
-                    <Gist id="945a631677835cf413944c5f819e2093" />
+                    <Gist id="f158766244abd7b4d858f35a778cb0f5" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -129,7 +129,7 @@ const RNNTextGeneration = () => {
                     We'll then go and print the length of our training set and validation set to observe the amount of data within each set.
                     <br />
                     <br />
-                    <Gist id="9657cf65fc5fe984b18aad845a17be16" />
+                    <Gist id="02ac5eb3d9db94761cef44a980e2034e" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -161,7 +161,7 @@ const RNNTextGeneration = () => {
                     0.0005 (5e-4), and track the accuracy metric.
                     <br />
                     <br />
-                    <Gist id="3550a39f383650242d166aac94e0e396" />
+                    <Gist id="3cbd4a82b4558498413d65ba69d62072" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -187,22 +187,28 @@ const RNNTextGeneration = () => {
                     and the models predictions for the next <i>gen_length</i> characters that come after.
                     <br />
                     <br />
-                    <Gist id="4290fb7979d92f0af914f16011b24382" />
+                    <Gist id="262959e5e284209b78b9f82221dd23d6" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
                     <b>Model training</b>
                     <br />
                     <br />
+                    We will set the <i>epochs</i> to be 20, and then the <i>cycle_epochs</i> to be 5. This means that each training cycle we will do 5 epochs before using the newly trained 
+                    model to predict the next characters in a sequence. We will then set our <i>batch_size</i> during training to be 64. You can change this depending on the computation power 
+                    of the computer you are using. 
+                    <br />
+                    <br />
                     Now we're going to train our model. First of all we'll declare a <i>seed_text</i> variable. We will generate predictions from this text during training
                     to observe the models performance. 
                     <br />
                     <br />
-                    We'll train our model over 20 epochs. We'll set up a for loop that will fit out model over 5 epochs, then when these epochs are done we will use our <i>genSequence</i> function
-                    with our <i>seed_text</i> to observe our models performance during training. We will repeat this loop 4 times, so that we perform 4 x 5 = 20 epochs.
+                    Now we will create a for loop that will run for <i>training_loop_iterations</i> which will be the <i>epochs</i> divided by the <i>cycle_epochs</i>. We do this to assess 
+                    the models performance during training. For each training cycle we will train our model for 5 epochs, then we will use our <i>genSequence</i> function with our <i>seed_text</i> to 
+                    observe our models performance during training.
                     <br />
                     <br />
-                    <Gist id="1fa449b31c72893a89acdef49246bde4" />
+                    <Gist id="d0574942c21ee60afd4f491b5a388420" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -215,7 +221,7 @@ const RNNTextGeneration = () => {
                     Change the <i>model_path</i> variable to the name and directory you want to save your model to. Your model's name MUST end with <i>.h5</i>.
                     <br />
                     <br />
-                    <Gist id="917cedbcbe58519c9a9848a251c9918f" />
+                    <Gist id="5d8c44309ee44238f9c0385f24226e24" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -226,7 +232,7 @@ const RNNTextGeneration = () => {
                     evaluation loss and accuracy that you're happy with.
                     <br />
                     <br />
-                    <Gist id="660208eac5459d1701f314a77307b7d6" />
+                    <Gist id="c62e8babd258950c45ca4809835c1d84" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -241,7 +247,7 @@ const RNNTextGeneration = () => {
                     our <i>char2num</i> dictionary.
                     <br />
                     <br />
-                    <Gist id="1a20324d7e0f58858406927ab69ec427" />
+                    <Gist id="ecc2222da0c58cef7c3df155469b1bc1" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -253,7 +259,7 @@ const RNNTextGeneration = () => {
                     our <i>X</i> and <i>Y</i> lists.
                     <br />
                     <br />
-                    <Gist id="96b7cc01639dba662027ac7734e2aafc" />
+                    <Gist id="2d2ec89bf75450beed3ac0355b508a5f" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -267,7 +273,7 @@ const RNNTextGeneration = () => {
                     We'll then go and print out the size of our training set and validation set.
                     <br />
                     <br />
-                    <Gist id="5fa8a5a405359b42c739bcf0f0601ac3" />
+                    <Gist id="05f68edbca8aeaedf555f357911947fd" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -279,7 +285,7 @@ const RNNTextGeneration = () => {
                     our <i>seed_text</i>, which we'll print out to see what the model has generated.
                     <br />
                     <br />
-                    <Gist id="283479043bd528dcb655a9e962cfac39" />
+                    <Gist id="459e838169860c3d24109097c277e1ed" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -293,7 +299,7 @@ const RNNTextGeneration = () => {
                     Your model's name MUST end with <i>.h5</i>..
                     <br />
                     <br />
-                    <Gist id="7288aa7cee192a70a7ad0b8ef2846fc3" />
+                    <Gist id="33710b0e6badf461ddc304b4ecdceb1f" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
@@ -301,10 +307,10 @@ const RNNTextGeneration = () => {
                     <br />
                     <br />
                     Finally we'll go and evaluate our model on our validation set. You should find that the adapted model's validation loss and accuracy are better than the 
-                    original model.
+                    original baseline model.
                     <br />
                     <br />
-                    <Gist id="c7a914a4499b5b1fe96259ee5e4f5b2e" />
+                    <Gist id="47104e5cf45662c31c9ea8ff04ece613" />
                 </p>
                 <br />
                 <p class="flow-text" style={style}>
