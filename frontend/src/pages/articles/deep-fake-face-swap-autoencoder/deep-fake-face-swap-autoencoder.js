@@ -10,7 +10,8 @@ const DeepFakeFaceSwap = () => {
                 <br />
                 <br />
                 This article well demonstrate how you can build an autoencoder that can swap the face featured in an image with another. To do this we'll use a 
-                a deep convolutional autoencoder that we will build using TensorFlow and Keras. This tutorial is for educational purposes only, I DO NOT condone any misuse of this technology and I am NOT RESPONSIBLE for anything you do with it.
+                a deep convolutional autoencoder that we will build using TensorFlow and Keras. This tutorial is for educational purposes only, I DO NOT condone any 
+                misuse of this technology and I am NOT RESPONSIBLE for anything you do with it.
                 <br />
                 <br />
                 The code for this tutorial, as well as the trained model can be found on my GitHub page <a href="https://github.com/OsbornAI/Deep-Fake-Face-Swap-Autoencoder" target="_blank" rel="noreferrer" >here</a>.
@@ -18,8 +19,8 @@ const DeepFakeFaceSwap = () => {
                 <br />
                 To start off with you're going to need a dataset which contains the faces of the person you want to swap the face of and the persons face you want to swap the face with.
                 For this tutorial, I will be swapping Donald Trump's face with Keanu Reeve's, however you can choose any two people you like. I have created a dataset containing 
-                around 4000 images of each celebrities face. I can't release this dataset as I do not own the rights to the original images, however I will be covering 
-                how to gather such a large amount of faces in an upcoming article, so stick around!
+                around 4000 images of each celebrities face sourced from Google Images. All images sourced fall under the Creative Commons License so I will not be releasing this dataset 
+                as I do not own the rights to these images, however in an upcoming article I will be demonstrating how you can create a dataset like this one, so make sure to stick around!
             </p>
             <br />
             <p class="flow-text" style={style}>
@@ -31,7 +32,7 @@ const DeepFakeFaceSwap = () => {
                 by 255, so that the pixels of each image are between 0 and 1.
                 <br />
                 <br />
-                <Gist id="cf75bbb9da7626e4cd214d8d5866c805" />
+                <Gist id="0c3815cfc29bb726ba9405aa414786dd" />
             </p>
             <br />
             <p class="flow-text" style={style}>
@@ -42,7 +43,7 @@ const DeepFakeFaceSwap = () => {
                 of our data, then we'll say all the image data up to that point will become our training set, and the remaining data will be our validation set.
                 <br />
                 <br />
-                <Gist id="29e3a6d6184955ae2dd22a07ca8b9eec" />
+                <Gist id="75247d2d1e31157fc79ec6dc67c78fef" />
             </p>
             <br />
             <p class="flow-text" style={style}>
@@ -60,7 +61,7 @@ const DeepFakeFaceSwap = () => {
                 a validation set <i>trump_valid</i> using the <i>splitData</i> function, with the argument set as the raw <i>trump</i> array.
                 <br />
                 <br />
-                <Gist id="e7fd1f54e5ffe200345e7ab576d77566" />
+                <Gist id="2ebb82fc0f13668dff206f02894e81f5" />
             </p>
             <br />
             <p class="flow-text" style={style}>
@@ -98,7 +99,7 @@ const DeepFakeFaceSwap = () => {
                 and will decay every 15000 training steps.
                 <br />
                 <br />
-                <Gist id="602554af78a166485df7460d4e3e7223" />
+                <Gist id="4cfef4d93e9e4bffe9661258286f4a22" />
             </p>
             <br />
             <p class="flow-text" style={style}>
@@ -109,7 +110,7 @@ const DeepFakeFaceSwap = () => {
                 The for loop will run for the amount of iterations that will make the total epochs by the models combined add up to roughly 250, defined by the formula <i>epochs / (2 x batch_epochs)</i>.
                 <br />
                 <br />
-                <Gist id="3adebc5293b3068277008bb59711e077" />
+                <Gist id="f4a040acd7e9d10cf90cf03ee336ff75" />
             </p>
             <br />
             <p class="flow-text" style={style}>
@@ -119,7 +120,17 @@ const DeepFakeFaceSwap = () => {
                 Now we will go and save the model so we can use the model in future without having to retrain it.
                 <br />
                 <br />
-                <Gist id="28f99f32d3767111eae0f051d34ea656" />
+                <Gist id="0e1c8089b581feb1856019c42239c74e" />
+            </p>
+            <br />
+            <p class="flow-text" style={style}>
+                <b>Evaluating the model</b>
+                <br />
+                <br />
+                Now we will evaluate both model's using each model's respective validation/test data.
+                <br />
+                <br />
+                <Gist id="f97cee553314d1e4df584108f3ca57f3" />
             </p>
             <br />
             <p class="flow-text" style={style}>
@@ -132,7 +143,7 @@ const DeepFakeFaceSwap = () => {
                 able to swap Keanu's face with Trumps. Success!
                 <br />
                 <br />
-                <Gist id="5f8fc94a58921b700770e29d79aa02cc" />
+                <Gist id="68a7d0081f6b9edd56bdaf9b9ac2075d" />
             </p>
             <br />
             <p class="flow-text" style={style}>
