@@ -58,7 +58,7 @@ const DeployModelHeroku = () => {
                 <br />
                 <br />
                 To start off with we're going to set up the Flask web server. For this tutorial I will be deploying a simple machine learning model that classifies whether a fruit 
-                is an apple or an orange based on it's weight in grams and whether it's smooth or bumpy (0 for smooth, 1 for bumpy). The tutorial for this model can be
+                is an apple or an orange (0 for an apple, 1 for an orange) based on it's weight in grams and whether it's smooth or bumpy (0 for smooth, 1 for bumpy). The tutorial for this model can be
                 found <a href="https://youtu.be/cKxRvEZd3Mw?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal" target="_blank" rel="noreferrer">here</a>. I have saved this model as a pickle file 
                 named <i>model.p</i> that I have placed inside of my deployment directory.
                 <br />
