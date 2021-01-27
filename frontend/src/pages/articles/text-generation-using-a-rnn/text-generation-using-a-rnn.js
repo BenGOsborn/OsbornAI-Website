@@ -73,13 +73,13 @@ const RNNTextGeneration = () => {
                 called <i>num2char</i> which will map that number back to it's respective character.
                 <br />
                 <br />
-                Next we'll create a function which will encode each character within a piece of text into it's numerical form using our <i>char2num</i> dictionary. 
+                Next we'll create a function which will encode each character in a sequence using an encoding dictionary. 
                 <br />
                 <br />
                 We'll then go and apply this function to each document within our <i>text</i> series, and we'll store this result in a variable named <i>encoded</i>.
                 <br />
                 <br />
-                <Gist id="0bbbea8a263afd77aba705ac7291c074" />
+                <Gist id="f6baf493112a801f46108768713dab29" />
             </p>
             <br />
             <p class="flow-text" style={style}>
@@ -170,23 +170,22 @@ const RNNTextGeneration = () => {
                 Now we'll create a function that will take in a piece of text and will predict the characters that come after it.
                 <br />
                 <br />
-                To start off with we will clean the text we feed to the function, then we will take the last <i>seq_len</i> amount of characters for our model
-                to use as its context for predicting the next character, and we will encode these characters into their numerical form.
+                To start off with we will clean the text we feed to the function and then encode it using our <i>char2num</i> dictionary. Then we will take 
+                the last <i>seq_len</i> amount of characters for our model to use as its context for predicting the next character.
                 <br />
                 <br />
                 Now we will get into our character generating loop. We will take the last <i>seq_len</i> amount of encoded characters, and will one-hot encode them.
                 We will then feed these one-hot encoded characters into our model which will become our predictions for the next character. We will then divide these
                 prediction logits by a temperature variable. The higher the temperature the more random the predicted character. We'll then feed these scaled prediction logits
-                into a categorical distribution, then take a sample from this distribution, which will be our predicted character. We'll then appned this character to our
-                <i>encoded</i> list, then repeat the process for as many characters as we wish to generate.
+                into a categorical distribution, then take a sample from this distribution, which will be our predicted character. We'll then append this character to our
+                <i>encoded</i> list and <i>encoded_fixed</i> list, then repeat the process for as many characters as we wish to generate.
                 <br />
                 <br />
                 Finally we'll decode each item in our <i>encoded</i> list into it's character representation using our <i>num2char</i> dictionary. We will then 
-                join these characters together into a string, then return this string. This string will consist of the last <i>seq_len</i> characters from our <i>seed_text</i>,
-                and the models predictions for the next <i>gen_length</i> characters that come after.
+                join these characters together into a string, then return it.
                 <br />
                 <br />
-                <Gist id="262959e5e284209b78b9f82221dd23d6" />
+                <Gist id="93569b76bcbfc8eba72ede6af16d95c5" />
             </p>
             <br />
             <p class="flow-text" style={style}>
