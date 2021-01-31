@@ -34,7 +34,7 @@ const App = ({ location }) => {
             }
         }
 
-        return true
+        return true;
     };
 
     return (
