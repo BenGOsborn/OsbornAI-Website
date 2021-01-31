@@ -104,7 +104,7 @@ const RNNTextGeneration = () => {
                 and our <i>Y</i> list with the label for it's corresponding sequence. We will then shuffle this data, and then one-hot encode the characters within our data.
                 <br />
                 <br />
-                <Gist id="f158766244abd7b4d858f35a778cb0f5" />
+                <Gist id="cbb648dceed421e0d7dc9a6473056ab4" />
             </p>
             <br />
             <p class="flow-text" style={style}>
