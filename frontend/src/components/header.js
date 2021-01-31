@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-scroll';
 import { HashLink } from 'react-router-hash-link';
 import { Link as RouteLink, useLocation } from 'react-router-dom';

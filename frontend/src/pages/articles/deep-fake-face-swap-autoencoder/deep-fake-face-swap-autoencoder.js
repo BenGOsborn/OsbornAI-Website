@@ -1,3 +1,4 @@
+import React from 'react';
 import Gist from 'react-gist';
 import style from '../article-style';
 

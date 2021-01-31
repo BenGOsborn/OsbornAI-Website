@@ -1,3 +1,4 @@
+import React from 'react';
 import analytics from '../analytics';
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
