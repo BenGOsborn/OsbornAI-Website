@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/header';
-import ScrollToTop from './scroll-to-top';
+import ScrollToTop from './scrollToTop';
 
 import Home from './pages/home';
 import Pay from './pages/pay';
@@ -19,9 +19,10 @@ import NotFound from './pages/notFound';
 import Book from './components/book';
 import Footer from './components/footer';
 
-const App = ({ location }) => {
-    const header = () => {
-        const url = location.pathname;
+const App = (props) => {
+    const headerSwitch = () => {
+        // const url = location.pathname;
+        const url = "/"; // Edit this
 
         const exclusion_array = [
             '/admin',
@@ -41,8 +42,8 @@ const App = ({ location }) => {
     return (
         <div className="App">
             <ScrollToTop />
-            {header() && <Header />}
-            {!header() && <BlankHeader />}
+            {headerSwitch() && <Header />}
+            {!headerSwitch() && <BlankHeader />}
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/pay" exact component={PayNotFound} />
@@ -52,7 +53,7 @@ const App = ({ location }) => {
                 <Route path="/admin" exact component={Admin} />
                 <Route path="*" component={NotFound} />
             </Switch>
-            {header() && <Book />}
+            {headerSwitch() && <Book />}
             <Footer />
         </div>
     );
