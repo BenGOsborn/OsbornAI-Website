@@ -1,17 +1,16 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import '../form.css';
 import axios from 'axios';
 import FormData from 'form-data';
 import analytics from '../analytics';
 
 const Book = () => {
-    const [daysSince, setDaysSince] = useState(Infinity);
+    const [daysSince, setDaysSince] = React.useState(Infinity);
 
-    const [first, setFirst] = useState(null);
-    const [last, setLast] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [inquiry, setInquiry] = useState(null);
+    const [first, setFirst] = React.useState(null);
+    const [last, setLast] = React.useState(null);
+    const [email, setEmail] = React.useState(null);
+    const [inquiry, setInquiry] = React.useState(null);
 
     const getDaysSince = (last_inquiry_raw) => {
         const current_date = new Date().getTime();
@@ -21,7 +20,7 @@ const Book = () => {
         return days_since;
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
         analytics.init();
 
         const prev_inquiry_date = localStorage.getItem('prev_inquiry_date');

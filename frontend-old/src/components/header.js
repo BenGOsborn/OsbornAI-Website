@@ -57,7 +57,6 @@ const Header = () => {
     
     return (
         <div className="Header">
-            <div className="Top" />
             <header>
                 <ul id="slide-out" class="sidenav">
                     {links()}

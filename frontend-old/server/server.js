@@ -4,26 +4,39 @@ import path from 'path';
 
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
 
-import App from '../src/app';
-
-const port = process.env.PORT || 8000;
+import App from '../src/App';
 
 const app = express();
+const PORT = process.env.PORT || 8000;
 
-app.use("*", (req, res, next) => {
-    fs.readFile(path.resolve('./build/index.html'), 'utf-8', (err, data) =>{
+app.use('^/$', (req, res, next) => {
+    const index = path.resolve('./build/index.html');
+
+    fs.readFile(index, 'utf-8', (err, data) => {
         if (err) {
-            console.log(err);
-            return res.status(500).send("Server encountered an error!");
+            console.log(`Server encountered an error: ${err}`);
+            return res.status(500).send('Server encountered an error!');
         }
-        return res.send(data.replace(
+
+        const context = {};
+        const location = req.url;
+        const content = ReactDOMServer.renderToString(
+            <StaticRouter location={location} context={context}>
+                <App />
+            </StaticRouter>
+        );
+
+        const html = data.replace(
             '<div id="root"></div>',
-            `<div id="root">${ReactDOMServer.renderToString(<App />)}</div>`
-            ));
+            `<div id="root">${content}</div>`,
+        );
+
+        return res.send(html);
     });
 });
 
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(PORT, () => {console.log(`Server running on port ${PORT}`)});

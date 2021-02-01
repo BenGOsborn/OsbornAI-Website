@@ -1,10 +1,9 @@
 import React from 'react';
-import { useEffect } from 'react';
 import analytics from '../analytics';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import ArticleCard from '../components/article-card';
-import articleMetadata from './articles/article-metadata'
+import ArticleCard from '../components/articleCard';
+import articleMetadata from './articles/articleMetadata'
 
 const Article = (props) => {
     const articleId = props.match.params.id;
@@ -12,7 +11,7 @@ const Article = (props) => {
 
     const validArticles = Object.keys(articleMetadata).filter(articlePath => articlePath !== articleId).slice(0, 3);
 
-    useEffect(() => {
+    React.useEffect(() => {
         analytics.init();
         
         const id = props.match.params.id;

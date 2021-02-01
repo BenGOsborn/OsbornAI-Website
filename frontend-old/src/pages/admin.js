@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react'; import '../form.css';
+import '../form.css';
 import axios from 'axios';
 import FormData from 'form-data';
 import { Link } from 'react-router-dom';
@@ -7,23 +7,23 @@ import analytics from '../analytics';
 import { Helmet } from 'react-helmet';
 
 const Admin = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [token, setToken] = useState(null);
-    const [render, setRender] = useState(0); // 0 = Loading, 1 = Login, 2 = Dashboard
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [token, setToken] = React.useState(null);
+    const [render, setRender] = React.useState(0); // 0 = Loading, 1 = Login, 2 = Dashboard
 
-    const [numDisplayed, setNumDisplayed] = useState(5);
+    const [numDisplayed, setNumDisplayed] = React.useState(5);
 
-    const [notifications, setNotifications] = useState([]);
-    const [paymentIds, setPaymentIds] = useState([]);
-    const [payments, setPayments] = useState([]); 
+    const [notifications, setNotifications] = React.useState([]);
+    const [paymentIds, setPaymentIds] = React.useState([]);
+    const [payments, setPayments] = React.useState([]); 
 
-    const [purchase, setPurchase] = useState('');
-    const [amount, setAmount] = useState(0);
-    const [currency, setCurrency] = useState('aud');
+    const [purchase, setPurchase] = React.useState('');
+    const [amount, setAmount] = React.useState(0);
+    const [currency, setCurrency] = React.useState('aud');
 
     // This is going to be our initial load that will either authenticate a token or require a login
-    useEffect(() => {
+    React.useEffect(() => {
         analytics.init();
         analytics.sendPageview('/admin');
 
@@ -71,7 +71,7 @@ const Admin = () => {
     };
 
     // This is going to track the render component and whenever it is called then we are going to make a call to the api to change it
-    useEffect(() => {
+    React.useEffect(() => {
         if (render === 2) {
             if (token === null) {
                 setRender(1);

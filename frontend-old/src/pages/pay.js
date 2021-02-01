@@ -1,17 +1,16 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import FormData from 'form-data';
 import axios from 'axios';
-import PayNotFound from './pay-not-found';
+import PayNotFound from './payNotFound';
 import StripeCheckout from 'react-stripe-checkout';
 import analytics from '../analytics';
 import { Helmet } from 'react-helmet';
 
 const Pay = (props) => {
-    const [paymentDetails, setPaymentDetails] = useState({});
-    const [render, setRender] = useState(0); // 0 = Loading, 1 = Bad display, 2 = Display ID, 3 = Bad payment, 4 = Payment success 
+    const [paymentDetails, setPaymentDetails] = React.useState({});
+    const [render, setRender] = React.useState(0); // 0 = Loading, 1 = Bad display, 2 = Display ID, 3 = Bad payment, 4 = Payment success 
 
-    useEffect(() => {
+    React.useEffect(() => {
         analytics.init();
 
         setRender(0);

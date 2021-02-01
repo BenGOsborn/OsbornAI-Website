@@ -1,11 +1,10 @@
 import React from 'react';
-import { useEffect } from 'react';
 import analytics from '../analytics';
 import { Link } from 'react-scroll';
 import { Helmet } from 'react-helmet';
 
 const Home = () => {
-    useEffect(() => {
+    React.useEffect(() => {
         analytics.init();
         analytics.sendPageview('/');
     }, []);
