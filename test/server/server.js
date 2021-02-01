@@ -20,7 +20,7 @@ app.use('^/$', (req, res, next) => {
         return res.send(data.replace(
             '<div id="root"></div>',
             `<div id="root">${ReactDOMServer.renderToString(
-            <StaticRouter>
+            <StaticRouter location={req.url} context={{}}>
                 <App />
             </StaticRouter>
             )}</div>`
