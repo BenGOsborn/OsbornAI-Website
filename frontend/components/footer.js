@@ -8,14 +8,14 @@ export default function Footer(props) {
 
     return (
         <div className="Footer">
-            <footer class="page-footer grey darken-4">
-                <div class="container center">
-                    <div class="container">
-                        <div class="container">
-                            <div class="container row">
-                                <a class="col left" href="https://github.com/OsbornAI" target="_blank" rel="noreferrer" style={style}>GitHub</a>
-                                <Link class="col center" href="/#Top"><a style={style}>Top Of Page</a></Link>
-                                <a class="col right" href="https://www.linkedin.com/in/OsbornAI/" target="_blank" rel="noreferrer" style={style}>LinkedIn</a>
+            <footer className="page-footer grey darken-4">
+                <div className="container center">
+                    <div className="container">
+                        <div className="container">
+                            <div className="container row">
+                                <a className="col left" href="https://github.com/OsbornAI" target="_blank" rel="noreferrer" style={style}>GitHub</a>
+                                <Link className="col center" href="/#Top"><a style={style}>Top Of Page</a></Link>
+                                <a className="col right" href="https://www.linkedin.com/in/OsbornAI/" target="_blank" rel="noreferrer" style={style}>LinkedIn</a>
                             </div>
                         </div>
                     </div>
