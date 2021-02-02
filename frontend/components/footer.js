@@ -22,7 +22,7 @@ export default function Footer(props) {
                     </div>
                     <div style={{paddingBottom: 10}}>
                         <Link href="/#Top">
-                            <a style={linkStyle}>© Copyright OsbornAI {new Date().getFullYear()}</a>
+                            <a style={{color: 'white'}}>© Copyright OsbornAI {new Date().getFullYear()}</a>
                         </Link>
                     </div>
                 </div>

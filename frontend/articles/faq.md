@@ -1,6 +1,8 @@
 ---
 title: FAQ
 description: "Frequently Asked Questions"
+author: OsbornAI
+date_published: 02/02/2021
 ---
 
 ## What keyboard do you use?
