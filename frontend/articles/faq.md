@@ -23,3 +23,8 @@ description: "Frequently Asked Questions"
 - iTerm2: [gruvbox](https://github.com/morhetz/gruvbox-contrib)
 
 If you want to see all my VSCode settings/extensions: https://gist.github.com/benawad/1e9dd01994f78489306fbfd6f7b01cd3
+
+```python
+def helloWorld():
+    return None
+```
