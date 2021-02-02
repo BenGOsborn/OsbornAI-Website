@@ -22,7 +22,7 @@ export default function Layout(props) {
 
             const sidenavContainer = document.querySelector(".sidenav");
             M.Sidenav.init(sidenavContainer, optionsSidenav);
-        })
+        });
     }, []);
 
     return (

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 export default function Header(props) {
     const router = useRouter();
-    const book_path = `${router.pathname}#Book`;
+    const book_path = `${router.pathname}#Book`.replace('[slug]', router.query.slug);
 
     return (
         <div className="Header">

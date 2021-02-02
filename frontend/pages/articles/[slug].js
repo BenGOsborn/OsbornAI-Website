@@ -4,6 +4,7 @@ import path from 'path';
 import Head from 'next/head';
 import matter from 'gray-matter';
 import ReactMarkdown from 'react-markdown';
+import style from '../../styles/Article.module.css';
 
 export default function Article({ markdown, data }) {
     return (
@@ -15,7 +16,9 @@ export default function Article({ markdown, data }) {
                 <meta name="author" content={data.author} />
             </Head>
             <div className="container">
-
+                <div className={style.markdown}>
+                    <ReactMarkdown>{markdown}</ReactMarkdown>
+                </div>
             </div>
         </div>
     );
