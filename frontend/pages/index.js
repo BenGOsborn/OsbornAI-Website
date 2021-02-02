@@ -75,7 +75,7 @@ export default function Home() {
 									</span>
 								</div>
 								<div className="card-content">
-								<p>We'll work with you to find ways in which data can help your business grow, then implement these systems for you.</p>
+									<p>We'll work with you to find ways in which data can help your business grow, then implement these systems for you.</p>
 								</div>
 							</div>
 							</div>
