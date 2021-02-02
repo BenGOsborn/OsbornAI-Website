@@ -3,9 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import Head from 'next/head';
 import matter from 'gray-matter';
-import marked from 'marked';
+import ReactMarkdown from 'react-markdown';
 
-export default function Article({ html, data }) {
+export default function Article({ markdown, data }) {
     return (
         <div className="Article">
             <Head>
@@ -15,7 +15,7 @@ export default function Article({ html, data }) {
                 <meta name="author" content={data.author} />
             </Head>
             <div className="container">
-                <div dangerouslySetInnerHTML={{__html: html}} />
+
             </div>
         </div>
     );
@@ -38,11 +38,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { slug } }) {
     const markdown = fs.readFileSync(path.join('articles', slug + '.md')).toString();
     const parsed_markdown = matter(markdown);
-    const html_string = marked(parsed_markdown.content);
 
     return {
         props: {
-            html: html_string,
+            markdown: parsed_markdown.content,
             data: parsed_markdown.data
         }
     };
