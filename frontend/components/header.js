@@ -1,19 +1,27 @@
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function Header(props) {
+    const router = useRouter();
+    const book_path = `${router.pathname}#Book`;
+
     return (
         <div className="Header">
             <header>
-                <ul id="slide-out" class="sidenav">
+                <ul id="slide-out" className="sidenav">
                     <li><Link href="/#About">ABOUT</Link></li>
                     <li><Link href="/#Services">SERVICES</Link></li>
-                    <li><Link href="/#Book">BOOK A CONSULT</Link></li>
+                    <li><Link href={book_path}>BOOK A CONSULT</Link></li>
                     <li><Link href="/articles">ARTICLES</Link></li>
                 </ul>
-                <div class="navbar-fixed">
+                <div className="navbar-fixed">
                     <nav>
-                        <div class="nav-wrapper blue darken-1">
+                        <div className="nav-wrapper blue darken-1">
+                            <a href="/" data-target="slide-out" className="sidenav-trigger">
+                                <i className="material-icons left">menu</i>
+                            </a>
                             <div className="brand-logo center">
                                 <Link href="/#Top">
                                     <a>
@@ -23,17 +31,14 @@ export default function Header(props) {
                                     </a>
                                 </Link>
                             </div>
-                            <a href="/" data-target="slide-out" class="sidenav-trigger">
-                                <i class="material-icons right">menu</i>
-                            </a>
-                            <div class="hide-on-med-and-down">
+                            <div className="hide-on-med-and-down">
                                 <div style={{paddingLeft: 80, paddingRight: 80}}>
-                                    <ul class="left"> 
+                                    <ul className="left"> 
                                         <li><Link href="/#About">ABOUT</Link></li>
                                         <li><Link href="/#Services">SERVICES</Link></li>
                                     </ul>
-                                    <ul class="right">
-                                        <li><Link href="/#Book">BOOK A CONSULT</Link></li>
+                                    <ul className="right">
+                                        <li><Link href={book_path}>BOOK A CONSULT</Link></li>
                                         <li><Link href="/articles">ARTICLES</Link></li>
                                     </ul>
                                 </div>

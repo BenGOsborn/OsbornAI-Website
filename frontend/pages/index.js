@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Home() {
 	return (
 		<div className="Home">
-			<div class="container">
+			<div className="container">
 				<span id="About">
 					<div className="About">
 						<br />
