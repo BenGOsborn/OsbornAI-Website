@@ -5,7 +5,7 @@ import Header from './header';
 import Book from './book';
 import Footer from './footer';
 
-export default function Layout({ children }) {
+export default function Layout(props) {
     React.useEffect(() => {
         window.addEventListener("DOMContentLoaded", event => {
             const optionsSidenav = {
@@ -28,7 +28,7 @@ export default function Layout({ children }) {
     return (
         <>
             <Head>
-                <meta charset="utf-8" />
+                <meta charSet="utf-8" />
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="author" content="OsbornAI" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +46,7 @@ export default function Layout({ children }) {
             </Head>
             <div id="Top" />
             <Header />
-            {children}
+            {props.children}
             <Book />
             <Footer />
         </>
