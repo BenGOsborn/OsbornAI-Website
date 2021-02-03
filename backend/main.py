@@ -214,7 +214,7 @@ def addInquiry():
         return jsonify({'success': True, 'prev_inquiry_date': success['prev_inquiry_date']}), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        return jsonify({'success': False, 'prev_inquiry_date': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 @app.route('/admin/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
 @checkToken

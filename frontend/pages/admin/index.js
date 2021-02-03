@@ -81,9 +81,15 @@ export async function getServerSideProps({ req, res }) {
     const token = req.cookies.token;
 
     try {
-        await axios.post('https://osbornai.herokuapp.com/admin/validate_token', { token: token });
+        if (token) {
+            await axios.post('https://osbornai.herokuapp.com/admin/validate_token', { token: token });
 
-        return { props: { redirect: true } };
+            return { props: { redirect: true } };
+
+        } else {
+            throw 'No token!';
+        }
+
     } catch {
         return { props: { redirect: false } };
     }

@@ -1,6 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 
+const getDaysSince = (last_inquiry_raw) => {
+    const current_date = new Date().getTime();
+    const last_inquiry = new Date(last_inquiry_raw);
+    const days_since = parseInt((current_date - last_inquiry) / 8.64e7);
+
+    return days_since;
+};
+
 export default function Book(props) {
     const [daysSince, setDaysSince] = React.useState(Infinity);
 
@@ -9,29 +17,18 @@ export default function Book(props) {
     const [email, setEmail] = React.useState(null);
     const [inquiry, setInquiry] = React.useState(null);
 
-    const getDaysSince = (last_inquiry_raw) => {
-        const current_date = new Date().getTime();
-        const last_inquiry = new Date(last_inquiry_raw);
-        const days_since = parseInt((current_date - last_inquiry) / 8.64e7);
-
-        return days_since;
-    };
-
     React.useEffect(() => {
         const prev_inquiry_date = localStorage.getItem('prev_inquiry_date');
 
-        if (prev_inquiry_date === null) {
-            setDaysSince(10);
-        } else {
-            const days_since = getDaysSince(prev_inquiry_date);
-            setDaysSince(days_since);
+        if (prev_inquiry_date) {
+            setDaysSince(getDaysSince(prev_inquiry_date));
         }
     }, []);
 
     const sendInquiry = (e) => {
         e.preventDefault();
 
-        axios.post("https://osbornai.herokuapp.com/add_inquiry", {first: first, last: last, email: email, inquiry: inquiry})
+        axios.post("https://osbornai.herokuapp.com/add_inquiry", { first: first, last: last, email: email, inquiry: inquiry })
         .then(res => {
             const form = res.data;
 
@@ -41,20 +38,14 @@ export default function Book(props) {
             const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
         })
-        .catch((err) => {
+        .catch(err => {
             const form = err.response.data;
 
-            if (parseInt(form.error_code) === 25) {
-                const prev_inquiry_date = form.prev_inquiry_date;
-                localStorage.setItem('prev_inquiry_date', prev_inquiry_date);
+            const prev_inquiry_date = form.prev_inquiry_date;
+            localStorage.setItem('prev_inquiry_date', prev_inquiry_date);
 
-                const days_since = getDaysSince(prev_inquiry_date);
-                setDaysSince(days_since);
-            } else {
-                setDaysSince(Infinity);
-            }
-            
-            e.target.reset();
+            const days_since = getDaysSince(prev_inquiry_date);
+            setDaysSince(days_since);
         });
     }; 
 

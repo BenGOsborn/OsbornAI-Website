@@ -17,6 +17,7 @@ export default async function AdminLogin(req, res) {
         );
         res.statusCode = 200; 
         res.json({ success: true });
+        
     } catch {
         res.statusCode = 400; 
         res.json({ success: false });
