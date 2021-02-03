@@ -1,8 +1,6 @@
 import axios from 'axios';
 
 export default function Dashboard({ redirect, inquiry_notifications, payments, payment_ids }) {
-    console.log(redirect);
-
     return (
         <div className="Dashboard">
             <h1>Dashboard</h1>
@@ -13,30 +11,40 @@ export default function Dashboard({ redirect, inquiry_notifications, payments, p
 export async function getServerSideProps({ req, res }) {
     const token = req.cookies.token;
 
+    // try {
+    //     await axios.post('http://127.0.0.1:5000/admin/validate_token', { token: token });
+    // } catch (err) {
+    //     console.log(1);
+    //     console.log(err.response.data);
+    // }
+
     try {
-        await axios.post('https://osbornai.herokuapp.com/admin/validate_token', { token: token });
-        const inquiry_notification_response = await axios.get('https://osbornai.herokuapp.com/admin/view_inquiry_notifications', { token: token });
-        const payments_response = await axios.get('https://osbornai.herokuapp.com/admin/view_payments', { token: token });
-        const payment_ids_response = await axios.get('https://osbornai.herokuapp.com/admin/view_valid_payment_ids', { token: token });
 
-        return { 
-            props: { 
-                redirect: false, 
-                inquiry_notifications: inquiry_notification_response.data.inquiry_notifications,
-                payments: payments_response.data.payments,
-                payment_ids: payment_ids_response.data.payment_ids
-            } 
-        };
-
+        const inquiry_notification_response = await axios.post('http://127.0.0.1:5000/admin/view_inquiry_notifications', { token: token });
     } catch (err) {
-        console.log(err);
-        return {
-            props: {
-                redirect: true,
-                inquiry_notifications: [],
-                payments: [],
-                payment_ids: []
-            }
-        };
+        console.log(2);
+        console.log(err.response.data);
+    }
+
+    // try {
+    //     const payments_response = await axios.get('https://osbornai.herokuapp.com/admin/view_payments', { token: token });
+    // } catch (err) {
+    //     console.log(3);
+    //     console.log(err.response.data);
+
+    // }
+
+    // try {
+    //     const payment_ids_response = await axios.get('https://osbornai.herokuapp.com/admin/view_valid_payment_ids', { token: token });
+    // } catch (err) {
+    //     console.log(4);
+    //     console.log(err.response.data);
+    // }
+
+    return { 
+        props: { 
+            redirect: false, 
+        } 
     };
+
 };

@@ -52,6 +52,8 @@ def checkToken(f):
         try:
             form_json = request.json
 
+            print(form_json)
+
             token = form_json['token']
 
         except Exception as e:
@@ -95,7 +97,7 @@ def validateId():
     except Exception as e:
         return jsonify({'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
-@app.route('/admin/view_valid_payment_ids', methods=['GET'], strict_slashes=False)
+@app.route('/admin/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
 @checkToken
 def viewValidPaymentIds():
     try:
@@ -180,7 +182,7 @@ def pay():
     except Exception as e:
         return jsonify({'success': False, 'payment_success': payment_success, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
-@app.route('/admin/view_payments', methods=['GET'], strict_slashes=False)
+@app.route('/admin/view_payments', methods=['POST'], strict_slashes=False)
 @checkToken
 def viewPayments():
     try:
@@ -216,7 +218,7 @@ def addInquiry():
     except Exception as e:
         return jsonify({'success': False, 'prev_inquiry_date': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
-@app.route('/admin/view_inquiry_notifications', methods=['GET'], strict_slashes=False)
+@app.route('/admin/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
 @checkToken
 def viewInquiryNotifications():
     try:
@@ -249,4 +251,7 @@ def deleteInquiryNotification():
         return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 if __name__ == '__main__':
-    app.run()
+    if 'DYNO' in os.environ:
+        app.run()
+    else:
+        app.run(debug=True)
