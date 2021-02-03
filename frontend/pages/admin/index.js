@@ -17,14 +17,14 @@ export default function Admin(props) {
                 <div className="container">
                     <h1>Admin Login</h1>
                     <form onSubmit={onSubmit} id="login">
-                        <div class="input-field">
+                        <div className="input-field">
                             <input type="text" placeholder="Username" name="username" required={true} onChange={(e) => {setUsername(e.target.value)}} />
                             <input type="password" placeholder="Password" name="password" required={true} onChange={(e) => {setPassword(e.target.value)}} />
                         </div>
                     </form>
-                    <button class="btn blue darken-1 waves-effect waves-light" type="submit" form="login">
+                    <button className="btn blue darken-1 waves-effect waves-light" type="submit" form="login">
                         Login
-                        <i class="material-icons right">send</i>
+                        <i className="material-icons right">send</i>
                     </button>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import FormData from 'form-data';
 
 export default function Book(props) {
     const [daysSince, setDaysSince] = React.useState(Infinity);
@@ -32,13 +31,7 @@ export default function Book(props) {
     const sendInquiry = (e) => {
         e.preventDefault();
 
-        let form = new FormData();
-        form.append('first', first);
-        form.append('last', last);
-        form.append('email', email);
-        form.append('inquiry', inquiry);
-
-        axios.post("https://osbornai.herokuapp.com/add_inquiry", form)
+        axios.post("https://osbornai.herokuapp.com/add_inquiry", {first: first, last: last, email: email, inquiry: inquiry})
         .then(res => {
             const form = res.data;
 

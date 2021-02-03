@@ -31,8 +31,6 @@ def login():
     try:
         form_json = request.json
 
-        print(form_json)
-
         username = form_json['username']
         password = form_json['password']
 
@@ -52,7 +50,7 @@ def checkToken(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         try:
-            form_json = request.form
+            form_json = request.json
 
             token = form_json['token']
 
@@ -83,7 +81,7 @@ def validateToken():
 @app.route('/load_payment_id', methods=['POST'], strict_slashes=False)
 def validateId():
     try:
-        form_json = request.form
+        form_json = request.json
 
         payment_id = form_json['payment_id']
 
@@ -115,7 +113,7 @@ def viewValidPaymentIds():
 @checkToken
 def createPaymentId():
     try:
-        form_json = request.form
+        form_json = request.json
 
         purchase = form_json['purchase']
         amount = form_json['amount']
@@ -136,7 +134,7 @@ def pay():
     payment_success = False
 
     try:
-        form_json = request.form
+        form_json = request.json
 
         payment_token_json = form_json['token']
         payment_id = form_json['payment_id']
@@ -201,7 +199,7 @@ def viewPayments():
 @app.route('/add_inquiry', methods=['POST'], strict_slashes=False)
 def addInquiry():
     try:
-        form_json = request.form
+        form_json = request.json
 
         first = form_json['first']
         last = form_json['last']
@@ -236,7 +234,7 @@ def viewInquiryNotifications():
 @checkToken
 def deleteInquiryNotification():
     try:
-        form_json = request.form
+        form_json = request.json
 
         inquiry_notification_id = form_json['inquiry_notification_id']
 

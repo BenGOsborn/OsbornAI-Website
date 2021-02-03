@@ -1,16 +1,8 @@
 import cookie from 'cookie';
 import axios from 'axios';
-import FormData from 'form-data';
 
 export default function AdminLogin(req, res) {
-
-    const form = new FormData();
-    form.append('username', 'Ben');
-    form.append('password', 'Pass');
-
-    const form_2 = {username: 'Ben', password: 'Pass'};
-
-    axios.post('https://osbornai.herokuapp.com/admin/login', form_2).then((res) => console.log(res.data)).catch((err) => console.log(err.response));
+    axios.post('https://osbornai.herokuapp.com/admin/login', { username: req.body.username, password: req.body.password }).then((res) => console.log(res.data)).catch((err) => console.log(err.response));
 
     // res.setHeader(
     //     "Set-Cookie", 
