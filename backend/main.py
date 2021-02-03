@@ -44,7 +44,7 @@ def login():
         return jsonify({'success': True, 'token': token}), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'token': None 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        return jsonify({'success': False, 'token': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 def checkToken(f):
     @wraps(f)
