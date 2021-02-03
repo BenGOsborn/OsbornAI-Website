@@ -52,8 +52,6 @@ def checkToken(f):
         try:
             form_json = request.json
 
-            print(form_json)
-
             token = form_json['token']
 
         except Exception as e:
