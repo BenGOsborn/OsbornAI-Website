@@ -1,29 +1,30 @@
 import React from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import Header from './header';
 import Book from './book';
 import Footer from './footer';
 
 export default function Layout(props) {
-    React.useEffect(() => {
-        window.addEventListener("DOMContentLoaded", event => {
-            const optionsSidenav = {
-            edge: 'left',
-            draggable: true,
-            inDuration: 250,
-            outDuration: 200,
-            onOpenStart: null,
-            onOpenEnd: null,
-            onCloseStart: null,
-            onCloseEnd: null,
-            preventScrolling: true
-            }
+    const router = useRouter();
 
-            const sidenavContainer = document.querySelector(".sidenav");
-            M.Sidenav.init(sidenavContainer, optionsSidenav);
-        });
-    }, []);
+    function bareMode() {
+        const exclusion_array = [
+            '/admin',
+            '/pay'
+        ];
+
+        for (let i = 0; i < exclusion_array.length; i++) {
+            const sub_url = exclusion_array[i];
+            if (router.pathname.slice(0, sub_url.length) === sub_url) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+    const bare = bareMode();
 
     return (
         <>
@@ -45,9 +46,9 @@ export default function Layout(props) {
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
             </Head>
             <div id="Top" />
-            <Header />
+            <Header bare={bare} />
             {props.children}
-            <Book />
+            {bare !== true ? <Book /> : <></>}
             <Footer />
         </>
     );

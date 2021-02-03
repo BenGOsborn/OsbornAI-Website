@@ -3,9 +3,28 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-export default function Header(props) {
+export default function Header({ bare }) {
     const router = useRouter();
-    const book_path = `${router.pathname}#Book`.replace('[slug]', router.query.slug);
+    const book_path = `${router.pathname}#Book`.replace(/\[.*?\]/, router.query.slug);
+
+    React.useEffect(() => {
+        window.addEventListener("DOMContentLoaded", event => {
+            const optionsSidenav = {
+            edge: 'left',
+            draggable: true,
+            inDuration: 250,
+            outDuration: 200,
+            onOpenStart: null,
+            onOpenEnd: null,
+            onCloseStart: null,
+            onCloseEnd: null,
+            preventScrolling: true
+            }
+
+            const sidenavContainer = document.querySelector(".sidenav");
+            M.Sidenav.init(sidenavContainer, optionsSidenav);
+        });
+    }, []);
 
     return (
         <div className="Header">
@@ -13,7 +32,7 @@ export default function Header(props) {
                 <ul id="slide-out" className="sidenav">
                     <li><Link href="/#About">ABOUT</Link></li>
                     <li><Link href="/#Services">SERVICES</Link></li>
-                    <li><Link href={book_path}>BOOK A CONSULT</Link></li>
+                    {bare !== true ? <li><Link href={book_path}>BOOK A CONSULT</Link></li> : <></>}
                     <li><Link href="/articles">ARTICLES</Link></li>
                 </ul>
                 <div className="navbar-fixed">
@@ -38,7 +57,7 @@ export default function Header(props) {
                                         <li><Link href="/#Services">SERVICES</Link></li>
                                     </ul>
                                     <ul className="right">
-                                        <li><Link href={book_path}>BOOK A CONSULT</Link></li>
+                                        {bare !== true ? <li><Link href={book_path}>BOOK A CONSULT</Link></li> : <></>}
                                         <li><Link href="/articles">ARTICLES</Link></li>
                                     </ul>
                                 </div>
