@@ -1,9 +1,10 @@
 import cookie from 'cookie';
 import axios from 'axios';
 
-export default function AdminLogin(req, res) {
-    axios.post('https://osbornai.herokuapp.com/admin/login', { username: req.body.username, password: req.body.password })
-    .then((response) => {
+export default async function AdminLogin(req, res) {
+    try {
+        const response = await axios.post('https://osbornai.herokuapp.com/admin/login', { username: req.body.username, password: req.body.password });
+
         res.setHeader(
             "Set-Cookie", 
             cookie.serialize("token", response.data.token, {
@@ -16,9 +17,8 @@ export default function AdminLogin(req, res) {
         );
         res.statusCode = 200; 
         res.json({ success: true });
-    })
-    .catch((err) => {
+    } catch {
         res.statusCode = 400; 
         res.json({ success: false });
-    });
+    }
 };

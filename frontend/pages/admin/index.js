@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-export default function Admin(props) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [failed, setFailed] = useState(false);
+export default function Admin({ redirect }) {
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [failed, setFailed] = React.useState(false);
 
     const router = useRouter();
+
+    React.useEffect(() => {
+        if (redirect) {
+            router.push("/admin/dashboard");
+        }
+    }, []);
 
     function onSubmit(e) {
         e.preventDefault();
@@ -51,9 +57,14 @@ export default function Admin(props) {
     );
 };
 
-export function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req, res }) {
     const token = req.cookies.token;
-    // Now we need to validate if this token is correct or not before redirecting
 
-    return { props: {  } }
+    try {
+        const response = await axios.post('https://osbornai.herokuapp.com/admin/validate_token', { token: token });
+
+        return { props: { redirect: true } };
+    } catch {
+        return { props: { redirect: false } };
+    }
 };
