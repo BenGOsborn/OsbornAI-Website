@@ -37,14 +37,14 @@ def login():
         success = app.config['DB'].admin_login(username, password)
 
         if not success['success']:
-            return jsonify({'success': False, 'error_code': success['error_code'], 'error': success['error']}), 400
+            return jsonify({'success': False, 'token': None, 'error_code': success['error_code'], 'error': success['error']}), 400
 
         token = jwt.encode({'username': username, 'exp': datetime.utcnow() + timedelta(days=1)}, app.config['SECRET_KEY'], algorithm="HS256")
 
         return jsonify({'success': True, 'token': token}), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        return jsonify({'success': False, 'token': None 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 def checkToken(f):
     @wraps(f)
@@ -88,12 +88,12 @@ def validateId():
         success = app.config['DB'].admin_view_payment_id_details(payment_id)
 
         if not success['success']:
-            return jsonify({'success': False, 'error_code': success['error_code'], 'error': success['error']}), 400
+            return jsonify({'success': False, 'payment_id_info': sanitizeJSON(success['payment_id_info']), 'error_code': success['error_code'], 'error': success['error']}), 400
 
-        return jsonify({**{'success': True}, **sanitizeJSON(success['payment_id_info'])}), 200
+        return jsonify({'success': True, 'payment_id_info': sanitizeJSON(success['payment_id_info'])}), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        return jsonify({'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 @app.route('/admin/view_valid_payment_ids', methods=['GET'], strict_slashes=False)
 @checkToken
@@ -102,12 +102,12 @@ def viewValidPaymentIds():
         success = app.config['DB'].admin_view_payment_ids()
 
         if not success['success']:
-            return jsonify({'success': False, 'error_code': success['error_code'], 'error': success['error']}), 400
+            return jsonify({'success': False, 'payment_ids': sanitizeJSON(success['payment_ids']), 'error_code': success['error_code'], 'error': success['error']}), 400
 
         return jsonify({'success': True, 'payment_ids': sanitizeJSON(success['payment_ids'])}), 200
     
     except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        return jsonify({'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 @app.route('/admin/create_payment_id', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -122,12 +122,12 @@ def createPaymentId():
         success = app.config['DB'].admin_create_payment_id(purchase, amount, currency)
 
         if not success['success']:
-            return jsonify({'success': False, 'error_code': success['error_code'], 'error': success['error']}), 400
+            return jsonify({'success': False, 'payment_details': sanitizeJSON(success['payment_details']), 'error_code': success['error_code'], 'error': success['error']}), 400
 
-        return jsonify({**{'success': True}, **sanitizeJSON(success['payment_details'])}), 200
+        return jsonify({'success': True, 'payment_details': sanitizeJSON(success['payment_details'])}), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        return jsonify({'success': False, 'payment_details': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 @app.route('/pay', methods=['POST'], strict_slashes=False)
 def pay():
@@ -187,12 +187,12 @@ def viewPayments():
         success = app.config['DB'].admin_view_payments()
 
         if not success['success']:
-            return jsonify({'success': False, 'error_code': success['error_code'], 'error': success['error']}), 400
+            return jsonify({'success': False, 'payments': sanitizeJSON(success['payments']), 'error_code': success['error_code'], 'error': success['error']}), 400
         
         return jsonify({'success': True, 'payments': sanitizeJSON(success['payments'])}), 200
 
     except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        return jsonify({'success': False, 'payments': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 # ------------------- Inquiry routes -----------------------
 
@@ -209,9 +209,9 @@ def addInquiry():
         success = app.config['DB'].add_inquiry(first, last, email, inquiry)
 
         if not success['success']:
-            return jsonify({'success': False, 'prev_inquiry_date': success['prev_inquiry_date'], 'error_code': success['error_code'], 'error': success['error']}), 400
+            return jsonify({'success': False, 'prev_inquiry_date': sanitizeJSON(success['prev_inquiry_date']), 'error_code': success['error_code'], 'error': success['error']}), 400
 
-        return jsonify({'success': True, 'prev_inquiry_date': success['prev_inquiry_date']}), 200
+        return jsonify({'success': True, 'prev_inquiry_date': sanitizeJSON(success['prev_inquiry_date'])}), 200
 
     except Exception as e:
         return jsonify({'success': False, 'prev_inquiry_date': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
@@ -223,12 +223,12 @@ def viewInquiryNotifications():
         success = app.config['DB'].admin_view_inquiry_notifications()
 
         if not success['success']:
-            return jsonify({'success': False, 'error_code': success['error_code'], 'error': success['error']}), 400
+            return jsonify({'success': False, 'inquiry_notifications': sanitizeJSON(success['inquiry_notifications']), 'error_code': success['error_code'], 'error': success['error']}), 400
 
         return jsonify({'success': True, 'inquiry_notifications': sanitizeJSON(success['inquiry_notifications'])}), 200
     
     except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        return jsonify({'success': False, 'inquiry_notifications': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
 @app.route('/admin/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
 @checkToken

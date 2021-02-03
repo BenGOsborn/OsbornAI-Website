@@ -93,7 +93,7 @@ class Database:
             return {'success': True, 'payments': payments}
 
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+            return {'success': False, 'payments': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_view_inquiry_notifications(self):
         try:
@@ -102,7 +102,7 @@ class Database:
             return {'success': True, 'inquiry_notifications': new_inquiries}
         
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+            return {'success': False, 'inquiry_notifications': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_delete_inquiry_notification(self, inquiry_notification_id):
         try:
@@ -120,7 +120,7 @@ class Database:
                 return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Not a valid currency!"}
             
             if float(amount) < 1:
-                return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Amount must be greater than or equal to $1!"}
+                return {'success': False, 'payment_details': None, 'error_code': ErrorCodes.error_code_failed, 'error': "Amount must be greater than or equal to $1!"}
 
             document = {'name': "OsbornAI Payment", 'purchase': purchase, 'amount': round(float(amount), 2), 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
             payment_id = self.payment_ids.insert_one(document)
@@ -130,7 +130,7 @@ class Database:
             return {'success': True, 'payment_details': payment_details}
 
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+            return {'success': False, 'payment_details': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_delete_payment_id(self, payment_id):
         try:
@@ -148,7 +148,7 @@ class Database:
             return {'success': True, 'payment_ids': payment_ids}
         
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+            return {'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_view_payment_id_details(self, payment_id):
         try:
@@ -157,7 +157,7 @@ class Database:
             return {'success': True, 'payment_id_info': payment_id_info}
         
         except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+            return {'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
     def admin_login(self, username, password):
         try:
