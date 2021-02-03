@@ -29,7 +29,9 @@ def sanitizeJSON(json_raw):
 @app.route('/admin/login', methods=['POST'], strict_slashes=False)
 def login():
     try:
-        form_json = request.form
+        form_json = request.json
+
+        print(form_json)
 
         username = form_json['username']
         password = form_json['password']
