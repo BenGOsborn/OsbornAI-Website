@@ -85,7 +85,7 @@ def validateId():
 
         payment_id = form_json['payment_id']
 
-        success = app.config['DB'].admin_view_payment_id_details(payment_id)
+        success = app.config['DB'].view_payment_id_details(payment_id)
 
         if not success['success']:
             return jsonify({'success': False, 'payment_id_info': sanitizeJSON(success['payment_id_info']), 'error_code': success['error_code'], 'error': success['error']}), 400
@@ -152,7 +152,7 @@ def pay():
         payment_token_json = form_json['token']
         payment_id = form_json['payment_id']
 
-        success = app.config['DB'].admin_view_payment_id_details(payment_id)
+        success = app.config['DB'].view_payment_id_details(payment_id)
         if not success['success']:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
         

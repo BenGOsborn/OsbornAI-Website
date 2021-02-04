@@ -165,9 +165,11 @@ class Database:
         except Exception as e:
             return {'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
-    def admin_view_payment_id_details(self, payment_id):
+    def view_payment_id_details(self, payment_id):
         try:
             payment_id_info = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
+            if payment_id_info == None:
+                return {'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_failed, 'error': 'Invalid payment ID!'}
 
             return {'success': True, 'payment_id_info': payment_id_info}
         
