@@ -95,9 +95,22 @@ def validateId():
     except Exception as e:
         return jsonify({'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
 
+@app.route('/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
+def viewValidPaymentIds():
+    try:
+        success = app.config['DB'].view_payment_ids()
+
+        if not success['success']:
+            return jsonify({'success': False, 'payment_ids': sanitizeJSON(success['payment_ids']), 'error_code': success['error_code'], 'error': success['error']}), 400
+
+        return jsonify({'success': True, 'payment_ids': sanitizeJSON(success['payment_ids'])}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+
 @app.route('/admin/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
 @checkToken
-def viewValidPaymentIds():
+def adminViewValidPaymentIds():
     try:
         success = app.config['DB'].admin_view_payment_ids()
 

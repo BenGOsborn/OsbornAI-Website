@@ -152,6 +152,19 @@ class Database:
         except Exception as e:
             return {'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
+    def view_payment_ids(self):
+        try:
+            success = self.admin_view_payment_ids()
+            if not success['success']:
+                return success
+
+            payment_ids = [payment_id['_id'] for payment_id in success['payment_ids']]
+
+            return {'success': True, 'payment_ids': payment_ids}
+
+        except Exception as e:
+            return {'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+
     def admin_view_payment_id_details(self, payment_id):
         try:
             payment_id_info = self.payment_ids.find_one({'_id': ObjectId(payment_id)})
