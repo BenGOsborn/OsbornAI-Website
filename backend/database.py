@@ -113,8 +113,10 @@ class Database:
         except Exception as e:
             return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
 
-    def admin_create_payment_id(self, purchase, amount, currency):
+    def admin_create_payment_id(self, purchase, amount, currency_raw):
         try:
+            currency = currency_raw.lower()
+
             valid_currencies = ['aud', 'usd']
             if currency not in valid_currencies:
                 return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Not a valid currency!"}
