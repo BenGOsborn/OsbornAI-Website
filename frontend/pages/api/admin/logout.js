@@ -1,6 +1,6 @@
 import cookie from 'cookie';
 
-export default function AdminLogin(req, res) {
+export default function Logout(req, res) {
     res.setHeader(
         "Set-Cookie", 
         cookie.serialize("token", "", {

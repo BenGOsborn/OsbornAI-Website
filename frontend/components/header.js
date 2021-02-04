@@ -30,15 +30,16 @@ export default function Header({ bare }) {
         <div className="Header">
             <header>
                 <ul id="slide-out" className="sidenav">
-                    <li><Link href="/#About">ABOUT</Link></li>
-                    <li><Link href="/#Services">SERVICES</Link></li>
-                    {bare !== true ? <li><Link href={book_path}>BOOK A CONSULT</Link></li> : <></>}
-                    <li><Link href="/articles">ARTICLES</Link></li>
+                    <li><a className="sidenav-close" style={{color: '#1E88E5'}} href="#!">CLOSE</a></li>
+                    <li><Link href="/#About"><a className="sidenav-close">ABOUT</a></Link></li>
+                    <li><Link href="/#Services"><a className="sidenav-close">SERVICES</a></Link></li>
+                    {bare !== true ? <li><Link href={book_path}><a className="sidenav-close">BOOK A CONSULT</a></Link></li> : <></>}
+                    <li><Link href="/articles"><a className="sidenav-close">ARTICLES</a></Link></li>
                 </ul>
                 <div className="navbar-fixed">
                     <nav>
                         <div className="nav-wrapper blue darken-1">
-                            <a href="/" data-target="slide-out" className="sidenav-trigger">
+                            <a href="#!" data-target="slide-out" className="sidenav-trigger">
                                 <i className="material-icons left">menu</i>
                             </a>
                             <div className="brand-logo center">
@@ -53,12 +54,12 @@ export default function Header({ bare }) {
                             <div className="hide-on-med-and-down">
                                 <div style={{paddingLeft: 80, paddingRight: 80}}>
                                     <ul className="left"> 
-                                        <li><Link href="/#About">ABOUT</Link></li>
-                                        <li><Link href="/#Services">SERVICES</Link></li>
+                                        <li><Link href="/#About"><a>ABOUT</a></Link></li>
+                                        <li><Link href="/#Services"><a>SERVICES</a></Link></li>
                                     </ul>
                                     <ul className="right">
-                                        {bare !== true ? <li><Link href={book_path}>BOOK A CONSULT</Link></li> : <></>}
-                                        <li><Link href="/articles">ARTICLES</Link></li>
+                                        {bare !== true ? <li><Link href={book_path}><a>BOOK A CONSULT</a></Link></li> : <></>}
+                                        <li><Link href="/articles"><a>ARTICLES</a></Link></li>
                                     </ul>
                                 </div>
                             </div>

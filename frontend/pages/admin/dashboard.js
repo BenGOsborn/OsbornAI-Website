@@ -16,12 +16,14 @@ const parseDate = (date_raw) => {
 
 export default function Dashboard({ redirect, token ,inquiry_notifications, payments, payment_ids }) {
     const [inquiryNotifications, setInquiryNotifications] = React.useState(inquiry_notifications);
-    const [prevPayments, setPrevPayments] = React.useState(payments); // This one is most likely not necessary
     const [paymentIds, setPaymentIds] = React.useState(payment_ids);
 
     const [purchase, setPurchase] = useState(null);
     const [amount, setAmount] = useState(null);
-    const [currency, setCurrency] = useState(null);
+    const [currency, setCurrency] = useState('aud');
+
+    const [displayCount, setDisplayCount] = useState(5);
+    const [baseUrl, setBaseUrl] = useState('');
 
     const router = useRouter();
 
@@ -29,16 +31,53 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
         if (redirect) {
             router.push('/admin');
         } 
-    });
+        setBaseUrl(window.location.protocol + '//' + window.location.hostname);
+    }, []);
 
     return (
         <div className="Dashboard">
+            <br />
             <div style={{paddingLeft: 80, paddingRight: 80}}>
+                <br />
+                <div className="row">
+                    <div className="container">
+                        <div className="container">
+                            <div className="col s12 m12 l6 center">
+                                <h5>Display count:</h5>
+                                <select className="browser-default" onChange={e => {setDisplayCount(e.target.value)}}>
+                                    <option value={1}>1</option>
+                                    <option value={5} selected="selected">5</option>
+                                    <option value={10}>10</option>
+                                    <option value={Infinity}>All</option>
+                                </select>
+                            </div>
+                            <div className="col s12 m12 l6 center">
+                                <h5>Logout:</h5>
+                                <button className="btn blue darken-1 waves-effect waves-light" type="button" onClick={(e) => {
+                                    e.preventDefault();
+
+                                    axios.post('/api/admin/logout')
+                                    .then(res => {
+                                        router.push('/admin');
+                                    })
+                                    .catch(err => {
+                                        console.log(err.response.data);
+                                    });
+                                }}>
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
                 <div className="row">
                     {/* Inquiry notifications */}
                     <div className="col s12 m12 l4">
                         <h4 className="center">Inquiry notifications:</h4>
-                        {inquiryNotifications.length === 0 ? <h5 className="center">There are no current inquiry notifications!</h5> : inquiryNotifications.map(notification => {
+                        {inquiryNotifications.length === 0 ? <h5 className="center">There are no current inquiry notifications!</h5> : inquiryNotifications.slice(0, displayCount).map(notification => {
                             return (
                                 <div key={notification._id} className="card">
                                     <div className="card-content truncate">
@@ -69,7 +108,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                                                     return (
                                                         <li id={prev_inquiry._id}>
                                                             <br />
-                                                            <div class="container">
+                                                            <div className="container">
                                                                 <b>Previous inquiry date:</b>
                                                                 <br />
                                                                 {parseDate(prev_inquiry.inquiry_date)}
@@ -83,8 +122,8 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                                                 })}
                                             </ul>
                                     </div>
-                                    <div class="card-action">
-                                        <button class="btn blue darken-1 waves-effect waves-light" type="button" onClick={(e) => {
+                                    <div className="card-action">
+                                        <button className="btn blue darken-1 waves-effect waves-light" type="button" onClick={(e) => {
                                             e.preventDefault();
 
                                             axios.post('https://osbornai.herokuapp.com/admin/delete_inquiry_notification', { token: token, inquiry_notification_id: notification._id })
@@ -106,10 +145,10 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                     {/* Payments */}
                     <div className="col s12 m12 l4">
                         <h4 className="center">Payments:</h4>
-                        {payments.length === 0 ? <h5 className="center">There are no payments to display!</h5> : payments.map(payment => {
+                        {payments.length === 0 ? <h5 className="center">There are no payments to display!</h5> : payments.slice(0, displayCount).map(payment => {
                             return (
                                 <div key={payment.payment_id_details._id} className="card">
-                                    <div class="card-content truncate">
+                                    <div className="card-content truncate">
                                         <b>Payment ID:</b>
                                         <br />
                                         {payment.payment_id_details._id}
@@ -146,67 +185,75 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                             e.preventDefault();
 
                             axios.post('https://osbornai.herokuapp.com/admin/create_payment_id', { token: token, purchase: purchase, amount: amount, currency: currency })
-                            .then()
-                            .catch();
+                            .then(res => {
+                                const payment_details = [res.data.payment_details];
+                                const new_payment_ids = [...payment_details, ...paymentIds];
+                                setPaymentIds(new_payment_ids);
+                            })
+                            .catch(err => {
+                                console.log(err.response.data);
+                            });
                         }} id="sendForm">
                             <div className="input-field">
-                                <textarea className="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={(e) => {setPurchase(e.target.value)}} />
-                                <input type="number" min={1} step={0.01} placeholder="Amount" name="amount" required={true} onChange={(e) => {setAmount(Math.max(1, e.target.value))}} />
-                                <select className="browser-default" name="currency" onChange={(e) => {setCurrency(e.target.value)}}>
-                                    <option value="aud">AUD</option>
+                                <textarea className="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={e => {setPurchase(e.target.value)}} />
+                                <input type="number" min={1} step={0.01} placeholder="Amount" name="amount" required={true} onChange={e => {setAmount(Math.max(1, e.target.value))}} />
+                                <select className="browser-default" name="currency" onChange={e => {setCurrency(e.target.value)}}>
+                                    <option value="aud" selected="selected">AUD</option>
                                     <option value="usd">USD</option>
                                 </select>
                             </div>
                         </form>
-                        <button class="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
+                        <button className="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
                             Send
-                            <i class="material-icons right">send</i>
+                            <i className="material-icons right">send</i>
                         </button>
+                        <br />
+                        <br />
                         <h4 className="center">Payment IDs:</h4>
-                        {paymentIds.length === 0 ? <h5 className="center">There are no active payment ID's!</h5> : paymentIds.map(payment_id => {
+                        {paymentIds.length === 0 ? <h5 className="center">There are no active payment ID's!</h5> : paymentIds.slice(0, displayCount).map(payment_id => {
                             const href = `/pay/${payment_id._id}`;
-                            const payment_url = window.location.protocol + '//' + window.location.hostname + href;
+                            const payment_url = baseUrl + href;
 
                             return (
                                 <div key={payment_id._id} className="card">
-                                    <div class="card-content truncate">
+                                    <div className="card-content truncate">
                                         <b>Payment URL:</b>
                                         <br />
-                                        <Link href={href} onClick={e => {
+                                        <a href="/" onClick={e => {
                                             e.preventDefault();
                                             navigator.clipboard.writeText(payment_url);
                                             window.M.toast({html: 'Copied URL to clipboard!', displayLength: 1000});
                                         }}>
-                                            <a>{payment_url}</a>
-                                        </Link>
+                                            {payment_url}
+                                        </a>
                                         <br />
                                         <b>Payment ID:</b>
                                         <br />
-                                        {payment_details._id}
+                                        {payment_id._id}
                                         <br />
                                         <b>Name:</b>
                                         <br />
-                                        {payment_details.name}
+                                        {payment_id.name}
                                         <br />
                                         <b>Purchase:</b>
                                         <div style={{whiteSpace: 'pre-line'}}>
-                                            {payment_details.purchase}
+                                            {payment_id.purchase}
                                         </div>
                                         <b>Amount:</b>
                                         <br />
-                                        ${payment_details.amount}
+                                        ${payment_id.amount}
                                         <br />
                                         <b>Currency:</b>
                                         <br />
-                                        {payment_details.currency.toUpperCase()}
+                                        {payment_id.currency.toUpperCase()}
                                         <br />
                                         <b>Payment creation date:</b>
                                         <br />
-                                        {parseDate(payment_details.timeCreated)}
+                                        {parseDate(payment_id.timeCreated)}
                                         <br />
                                         <b>Expiry:</b>
                                         <br />
-                                        {parseInt((new Date(payment_details.expiry) - new Date().getTime()) / 8.64e7) + 1} days
+                                        {parseInt((new Date(payment_id.expiry) - new Date().getTime()) / 8.64e7) + 1} days
                                     </div>
                                 </div>
                             );
@@ -214,6 +261,9 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                     </div>
                 </div>
             </div>
+            <br />
+            <br />
+            <br />
         </div>
     );
 };

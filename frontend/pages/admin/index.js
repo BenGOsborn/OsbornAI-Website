@@ -18,7 +18,7 @@ export default function Admin({ redirect }) {
     function onSubmit(e) {
         e.preventDefault();
 
-        axios.post('/api/admin/admin-login', { username: username, password: password })
+        axios.post('/api/admin/login', { username: username, password: password })
         .then((res) => {
             router.push("/admin/dashboard");
 

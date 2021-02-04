@@ -67,6 +67,10 @@ export default function Articles({ article_data }) {
                             }
                         })}
                     </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </div>
             </div>
         </div>
