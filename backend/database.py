@@ -127,7 +127,7 @@ class Database:
             document = {'name': "OsbornAI Payment", 'purchase': purchase, 'amount': round(float(amount), 2), 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
             payment_id = self.payment_ids.insert_one(document)
 
-            payment_details = {**{'payment_id': payment_id.inserted_id}, **document}
+            payment_details = {**{'_id': payment_id.inserted_id}, **document}
 
             return {'success': True, 'payment_details': payment_details}
 

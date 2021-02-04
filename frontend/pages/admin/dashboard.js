@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -16,8 +16,12 @@ const parseDate = (date_raw) => {
 
 export default function Dashboard({ redirect, token ,inquiry_notifications, payments, payment_ids }) {
     const [inquiryNotifications, setInquiryNotifications] = React.useState(inquiry_notifications);
-    const [prevPayments, setPrevPayments] = React.useState(payments);
+    const [prevPayments, setPrevPayments] = React.useState(payments); // This one is most likely not necessary
     const [paymentIds, setPaymentIds] = React.useState(payment_ids);
+
+    const [purchase, setPurchase] = useState(null);
+    const [amount, setAmount] = useState(null);
+    const [currency, setCurrency] = useState(null);
 
     const router = useRouter();
 
