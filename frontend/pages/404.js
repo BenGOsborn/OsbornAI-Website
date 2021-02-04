@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function NotFound(props) {
     const router = useRouter();
@@ -8,6 +9,13 @@ export default function NotFound(props) {
 
     return (
         <div className="NotFound">
+            <Head>
+                <title>Page Not Found - OsbornAI</title>
+                <meta name="description" content="The page you're looking for cannot be found!" />
+                <meta name="keywords" content="invalid url, invalid page, osbornai, bad page, invalid" />
+                <meta name="author" content="OsbornAI" />
+                <meta name="robots" content="noindex, nofollow" />
+            </Head>
             <div className="container">
                 <div className="container center">
                     <br />

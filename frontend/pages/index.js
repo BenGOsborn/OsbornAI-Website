@@ -1,8 +1,15 @@
 import Link from 'next/link';
+import Head from 'next/head';
 
 export default function Home(props) {
 	return (
 		<div className="Home">
+			<Head>
+				<title>Grow Your Business Using Data and AI - OsbornAI</title>
+				<meta name="author" content="OsbornAI" />
+				<meta name="description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" />
+				<meta name="keywords" content="data analytics, business analytics, data dashboards, marketing analysis, business consulting, osbornai" />
+			</Head>
 			<div className="container">
 				<span id="About">
 					<div className="About">

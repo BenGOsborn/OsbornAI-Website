@@ -45,7 +45,7 @@ export default function Header({ bare }) {
                             <div className="brand-logo center">
                                 <Link href="/#Top">
                                     <a>
-                                        <div style={{paddingTop: 4}}>
+                                        <div style={{paddingTop: 3, minWidth: 300}}>
                                             <Image layout="intrinsic" src="/headerLogo.png" alt="OsbornAI logo" width={345} height={57.5} />
                                         </div>
                                     </a>

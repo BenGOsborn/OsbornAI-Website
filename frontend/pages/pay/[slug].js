@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
+import Head from 'next/head';
 import { parseDate } from '../../helpers/helpers';
 
 export default function Payment({ payment_id_details }) {
@@ -115,6 +116,13 @@ export default function Payment({ payment_id_details }) {
 
     return (
         <div className="Pay container center" style={{fontSize: 18}} >
+            <Head>
+                <title>Complete The Payment Process - OsbornAI</title>
+                <meta name="description" content={`Complete the payment process so that we can get started with your project! Payment ID: ${payment_id_details._id}`} />
+                <meta name="keywords" content="payment, pay, osbornai, checkout, money" />
+                <meta name="author" content="OsbornAI" />
+                <meta name="robots" content="noindex, nofollow" />
+            </Head>
             {render()}
         </div>
     );

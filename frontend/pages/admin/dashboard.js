@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { parseDate } from '../../helpers/helpers';
-
 
 export default function Dashboard({ redirect, token ,inquiry_notifications, payments, payment_ids }) {
     const [inquiryNotifications, setInquiryNotifications] = React.useState(inquiry_notifications);
@@ -26,6 +26,13 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
 
     return (
         <div className="Dashboard">
+            <Head>
+                <title>Admin Dashboard - OsbornAI</title>
+                <meta name="description" content="The admin dashboard containing the analytics regarding our business." />
+                <meta name="keywords" content="admin, dashboard, osbornai, payments, analytics" />
+                <meta name="author" content="OsbornAI" />
+                <meta name="robots" content="noindex, nofollow" />
+            </Head>
             <br />
             <div style={{paddingLeft: 80, paddingRight: 80}}>
                 <br />
@@ -251,6 +258,9 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                     </div>
                 </div>
             </div>
+            <br />
+            <br />
+            <br />
             <br />
             <br />
             <br />

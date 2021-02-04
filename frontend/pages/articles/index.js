@@ -2,6 +2,7 @@ import React from 'react';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
+import Head from 'next/head';
 import ArticleCard from '../../components/articleCard';
 
 export default function Articles({ article_data }) {
@@ -36,6 +37,12 @@ export default function Articles({ article_data }) {
 
     return (
         <div className="Articles">
+            <Head>
+                <title>Explore Our Articles - OsbornAI</title>
+                <meta name="author" content="OsbornAI" />
+                <meta name="description" content="The full list of our existing articles containing the latest topics, news, and tutorials regarding all things data science!" />
+                <meta name="keywords" content="articles, data science, ai, machine learning, news, blog, tutorials, osbornai" />
+            </Head>
             <div className="container">
                 <br />
                 <br />

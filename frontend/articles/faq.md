@@ -3,6 +3,7 @@ title: FAQ
 description: "Frequently Asked Questions"
 author: OsbornAI
 date_published: 02/02/2021
+keywords: faq
 ---
 
 ## What keyboard do you use?

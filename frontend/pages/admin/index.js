@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export default function Admin({ redirect }) {
     const [username, setUsername] = React.useState('');
@@ -31,6 +32,13 @@ export default function Admin({ redirect }) {
 
     return (
         <div className="AdminLogin">
+            <Head>
+                <title>Admin Login - OsbornAI</title>
+                <meta name="description" content="Log in using the admin credentials to view the admin dashboard." />
+                <meta name="keywords" content="admin, dashboard, osbornai, login, analytics" />
+                <meta name="author" content="OsbornAI" />
+                <meta name="robots" content="noindex, nofollow" />
+            </Head>
             <br />
             <br />
             <br />
