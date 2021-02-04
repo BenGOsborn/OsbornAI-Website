@@ -119,7 +119,7 @@ export default function Payment({ payment_id_details }) {
             <Head>
                 <title>Complete The Payment Process - OsbornAI</title>
                 <meta name="description" content={`Complete the payment process so that we can get started with your project! Payment ID: ${payment_id_details._id}`} />
-                <meta name="keywords" content="payment, pay, osbornai, checkout, money" />
+                <meta name="keywords" content="payment, pay, osbornai, checkout, money, buy, order" />
                 <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />
             </Head>

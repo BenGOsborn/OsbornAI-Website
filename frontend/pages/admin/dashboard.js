@@ -29,7 +29,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
             <Head>
                 <title>Admin Dashboard - OsbornAI</title>
                 <meta name="description" content="The admin dashboard containing the analytics regarding our business." />
-                <meta name="keywords" content="admin, dashboard, osbornai, payments, analytics" />
+                <meta name="keywords" content="admin, dashboard, osbornai, payments, analytics, data, osbornai, payments, payment ids, notifications, inquiries, inquire, inquiry" />
                 <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />
             </Head>

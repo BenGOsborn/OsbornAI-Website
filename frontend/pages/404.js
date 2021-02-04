@@ -12,7 +12,7 @@ export default function NotFound(props) {
             <Head>
                 <title>Page Not Found - OsbornAI</title>
                 <meta name="description" content="The page you're looking for cannot be found!" />
-                <meta name="keywords" content="invalid url, invalid page, osbornai, bad page, invalid" />
+                <meta name="keywords" content="invalid url, invalid page, osbornai, bad page, invalid, error, 404, error page, bad url" />
                 <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />
             </Head>

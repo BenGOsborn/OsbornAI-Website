@@ -35,7 +35,7 @@ export default function Admin({ redirect }) {
             <Head>
                 <title>Admin Login - OsbornAI</title>
                 <meta name="description" content="Log in using the admin credentials to view the admin dashboard." />
-                <meta name="keywords" content="admin, dashboard, osbornai, login, analytics" />
+                <meta name="keywords" content="admin, dashboard, osbornai, login, analytics, authentication, dashboard access, protected" />
                 <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />
             </Head>

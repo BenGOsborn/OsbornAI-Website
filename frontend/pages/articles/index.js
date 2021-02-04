@@ -41,7 +41,7 @@ export default function Articles({ article_data }) {
                 <title>Explore Our Articles - OsbornAI</title>
                 <meta name="author" content="OsbornAI" />
                 <meta name="description" content="The full list of our existing articles containing the latest topics, news, and tutorials regarding all things data science!" />
-                <meta name="keywords" content="articles, data science, ai, machine learning, news, blog, tutorials, osbornai" />
+                <meta name="keywords" content="articles, data science, ai, machine learning, news, blog, tutorials, osbornai, posts, blogs, education, guides, artificial intelligence, data" />
             </Head>
             <div className="container">
                 <br />
