@@ -1,18 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { parseDate } from '../../helpers/helpers';
 
-const parseDate = (date_raw) => {
-    const pad = (n, width) => {
-        n = n + '';
-        return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;  
-    };
-
-    const date = new Date(date_raw);
-
-    return `${pad(date.getDate(), 2)}/${pad(date.getMonth() + 1, 2)}/${pad(date.getFullYear(), 2)} at ${pad(date.getHours(), 2)}:${pad(date.getSeconds(), 2)}`;
-};
 
 export default function Dashboard({ redirect, token ,inquiry_notifications, payments, payment_ids }) {
     const [inquiryNotifications, setInquiryNotifications] = React.useState(inquiry_notifications);
