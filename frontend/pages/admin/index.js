@@ -90,7 +90,7 @@ export async function getServerSideProps({ req, res }) {
 
     try {
         if (token) {
-            await axios.post('https://osbornai.herokuapp.com/admin/validate_token', { token: token });
+            await axios.post('https://osbornai-backend.herokuapp.com/admin/validate_token', { token: token });
 
             return { props: { redirect: true } };
 

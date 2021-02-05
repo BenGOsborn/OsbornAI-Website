@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default async function Login(req, res) {
     try {
-        const response = await axios.post('https://osbornai.herokuapp.com/admin/login', { username: req.body.username, password: req.body.password });
+        const response = await axios.post('https://osbornai-backend.herokuapp.com/admin/login', { username: req.body.username, password: req.body.password });
 
         res.setHeader(
             "Set-Cookie", 

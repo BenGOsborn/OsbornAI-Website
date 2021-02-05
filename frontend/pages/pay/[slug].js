@@ -46,7 +46,7 @@ export default function Payment({ payment_id_details }) {
                             amount={payment_id_details.amount * 100}
                             currency={payment_id_details.currency.toUpperCase()}
                             token={token => {
-                                axios.post('https://osbornai.herokuapp.com/pay', { token: JSON.stringify(token), payment_id: payment_id_details._id })
+                                axios.post('https://osbornai-backend.herokuapp.com/pay', { token: JSON.stringify(token), payment_id: payment_id_details._id })
                                 .then(res => {
                                     setStatus(2);
 
@@ -133,7 +133,7 @@ export default function Payment({ payment_id_details }) {
 
 export async function getStaticPaths() {
     try {
-        const payment_ids_response = await axios.post('https://osbornai.herokuapp.com/view_valid_payment_ids');
+        const payment_ids_response = await axios.post('https://osbornai-backend.herokuapp.com/view_valid_payment_ids');
         const payment_ids = payment_ids_response.data.payment_ids;
 
         const paths = payment_ids.map(payment_id => ({
@@ -158,7 +158,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { slug } }) {
     try {
-        const payment_id_details_response = await axios.post('https://osbornai.herokuapp.com/load_payment_id', { payment_id: slug });
+        const payment_id_details_response = await axios.post('https://osbornai-backend.herokuapp.com/load_payment_id', { payment_id: slug });
         const payment_id_details = payment_id_details_response.data.payment_id_info;
         
         return { props: { payment_id_details: payment_id_details } };

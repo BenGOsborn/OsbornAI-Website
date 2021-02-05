@@ -123,7 +123,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                                         <button className="btn blue darken-1 waves-effect waves-light" type="button" onClick={(e) => {
                                             e.preventDefault();
 
-                                            axios.post('https://osbornai.herokuapp.com/admin/delete_inquiry_notification', { token: token, inquiry_notification_id: notification._id })
+                                            axios.post('https://osbornai-backend.herokuapp.com/admin/delete_inquiry_notification', { token: token, inquiry_notification_id: notification._id })
                                             .then(res => {
                                                 const new_inquiry_notifications = inquiryNotifications.filter(not => not._id !== notification._id);
                                                 setInquiryNotifications(new_inquiry_notifications);
@@ -181,7 +181,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                         <form onSubmit={e => {
                             e.preventDefault();
 
-                            axios.post('https://osbornai.herokuapp.com/admin/create_payment_id', { token: token, purchase: purchase, amount: amount, currency: currency })
+                            axios.post('https://osbornai-backend.herokuapp.com/admin/create_payment_id', { token: token, purchase: purchase, amount: amount, currency: currency })
                             .then(res => {
                                 const payment_details = [res.data.payment_details];
                                 const new_payment_ids = [...payment_details, ...paymentIds];
@@ -280,24 +280,24 @@ export async function getServerSideProps({ req, res }) {
     };
 
     try {
-        await axios.post('https://osbornai.herokuapp.com/admin/validate_token', { token: token });
+        await axios.post('https://osbornai-backend.herokuapp.com/admin/validate_token', { token: token });
         return_form.redirect = false;
     } catch {
         return { props: return_form };
     }
 
     try {
-        const inquiry_notifications_response = await axios.post('https://osbornai.herokuapp.com/admin/view_inquiry_notifications', { token: token });
+        const inquiry_notifications_response = await axios.post('https://osbornai-backend.herokuapp.com/admin/view_inquiry_notifications', { token: token });
         return_form.inquiry_notifications = inquiry_notifications_response.data.inquiry_notifications;
     } catch { }
 
     try {
-        const payments_response = await axios.post('https://osbornai.herokuapp.com/admin/view_payments', { token: token });
+        const payments_response = await axios.post('https://osbornai-backend.herokuapp.com/admin/view_payments', { token: token });
         return_form.payments = payments_response.data.payments;
     } catch { }
 
     try {
-        const payment_ids_response = await axios.post('https://osbornai.herokuapp.com/admin/view_valid_payment_ids', { token: token });
+        const payment_ids_response = await axios.post('https://osbornai-backend.herokuapp.com/admin/view_valid_payment_ids', { token: token });
         return_form.payment_ids = payment_ids_response.data.payment_ids;
     } catch { }
 

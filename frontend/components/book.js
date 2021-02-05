@@ -29,7 +29,7 @@ export default function Book(props) {
     const sendInquiry = (e) => {
         e.preventDefault();
 
-        axios.post("https://osbornai.herokuapp.com/add_inquiry", { first: first, last: last, email: email, inquiry: inquiry })
+        axios.post("https://osbornai-backend.herokuapp.com/add_inquiry", { first: first, last: last, email: email, inquiry: inquiry })
         .then(res => {
             const form = res.data;
 
