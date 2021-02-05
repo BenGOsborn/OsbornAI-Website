@@ -15,8 +15,6 @@ export default function Article({ markdown, data, other_article_data }) {
         Prism.highlightAll();
     });
 
-    console.log(new Date(data.date_published));
-
     return (
         <div className="Article">
             <Head>
@@ -26,54 +24,56 @@ export default function Article({ markdown, data, other_article_data }) {
                 <meta name="author" content={data.author} />
             </Head>
             <div className="container">
-                <div className="center">
-                    <h1 style={{fontWeight: 500}}>{data.title}</h1>
-                    <p className="flow-text" style={{fontSize: 20}}>{data.author} - {data.date_published}</p>
-                    <p className="flow-text">{data.description}</p>
-                </div>
-                <br />
-                <br />
-                <article className={style.markdown}>
-                    <ReactMarkdown>{markdown}</ReactMarkdown>
-                </article>
-                <br />
-                <br />
-                <div className="center">
-                    <p className="flow-text" style={{fontSize: 23}}>
-                        Enjoyed this article? Check out our most recent posts!
-                    </p>
-                    <div className="row">
-                        {other_article_data.length === 0 ? 
-                        <div className="container">
-                            <p className="flow-text" style={{fontSize: 20}}>
-                                There are no other articles available at this time. Check back regularly to find the latest news and tutorials regarding all 
-                                things data science and machine learning!
-                            </p>
-                        </div>
-                        :  other_article_data.slice(0, 3).map(article => {
-                                if (other_articles.length === 1) {
-                                    return (
-                                        <div key={article.href} className="col s12 m12 l12">
-                                            <ArticleCard path={article.href} title={article.title} date_published={article.date_published} author={article.author}  />
-                                        </div>
-                                    );
+                <div className="container">
+                    <div className="center">
+                        <h1 style={{fontWeight: 500}}>{data.title}</h1>
+                        <p className="flow-text" style={{fontSize: 20}}>{data.author} - {data.date_published}</p>
+                        <p className="flow-text">{data.description}</p>
+                    </div>
+                    <br />
+                    <br />
+                    <article className={style.markdown}>
+                        <ReactMarkdown allowDangerousHtml={true}>{markdown}</ReactMarkdown>
+                    </article>
+                    <br />
+                    <br />
+                    <div className="center">
+                        <p className="flow-text" style={{fontSize: 23}}>
+                            Enjoyed this article? Check out our most recent posts!
+                        </p>
+                        <div className="row">
+                            {other_article_data.length === 0 ? 
+                            <div className="container">
+                                <p className="flow-text" style={{fontSize: 20}}>
+                                    There are no other articles available at this time. Check back regularly to find the latest news and tutorials regarding all 
+                                    things data science and machine learning!
+                                </p>
+                            </div>
+                            :  other_article_data.slice(0, 3).map(article => {
+                                    if (other_article_data.length === 1) {
+                                        return (
+                                            <div key={article.ref} className="col s12 m12 l12">
+                                                <ArticleCard path={article.ref} title={article.title} date_published={article.date_published} author={article.author}  />
+                                            </div>
+                                        );
 
-                                } else if (other_articles.length === 2) {
-                                    return (
-                                        <div key={article.href} className="col s12 m12 l6">
-                                            <ArticleCard path={article.href} title={article.title} date_published={article.date_published} author={article.author}  />
-                                        </div>
-                                    );
+                                    } else if (other_article_data.length === 2) {
+                                        return (
+                                            <div key={article.ref} className="col s12 m12 l6">
+                                                <ArticleCard path={article.ref} title={article.title} date_published={article.date_published} author={article.author}  />
+                                            </div>
+                                        );
 
-                                } else {
-                                    return (
-                                        <div key={article.href} className="col s12 m12 l4">
-                                            <ArticleCard path={article.href} title={article.title} date_published={article.date_published} author={article.author}  />
-                                        </div>
-                                    );
+                                    } else {
+                                        return (
+                                            <div key={article.ref} className="col s12 m12 l4">
+                                                <ArticleCard path={article.ref} title={article.title} date_published={article.date_published} author={article.author}  />
+                                            </div>
+                                        );
+                                    }
                                 }
-                            }
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
