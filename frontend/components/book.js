@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { sendEvent } from '../extras/analytics';
 
 const getDaysSince = (last_inquiry_raw) => {
     const current_date = new Date().getTime();
@@ -37,6 +38,8 @@ export default function Book(props) {
 
             const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
+
+            sendEvent({ category: 'User', action: 'Inquired' });
         })
         .catch(err => {
             const form = err.response.data;

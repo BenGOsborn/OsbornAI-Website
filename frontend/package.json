@@ -15,6 +15,7 @@
     "prismjs": "^1.23.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-ga": "^3.3.0",
     "react-markdown": "^5.0.3",
     "react-stripe-checkout": "^2.6.3"
   }

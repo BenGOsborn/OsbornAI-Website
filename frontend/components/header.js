@@ -2,10 +2,17 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { init, sendPageView, sendEvent } from '../extras/analytics';
 
 export default function Header({ bare }) {
     const router = useRouter();
     const book_path = `${router.pathname}#Book`.replace(/\[.*?\]/, router.query.slug);
+
+    React.useEffect(() => {
+        init();
+        const path = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
+        sendPageView(path);
+    });
 
     React.useEffect(() => {
         const optionsSidenav = {
@@ -23,6 +30,10 @@ export default function Header({ bare }) {
         const sidenavContainer = document.querySelector(".sidenav");
         window.M.Sidenav.init(sidenavContainer, optionsSidenav);
     }, []);
+    
+    function onBookClick() {
+        sendEvent({ category: 'Navigation', action: 'Showed interest in booking a consult' });
+    };
 
     return (
         <div className="Header">
@@ -31,7 +42,7 @@ export default function Header({ bare }) {
                     <li><a className="sidenav-close" style={{color: '#1E88E5'}} href="#!">CLOSE</a></li>
                     <li><Link href="/#About"><a className="sidenav-close">ABOUT</a></Link></li>
                     <li><Link href="/#Services"><a className="sidenav-close">SERVICES</a></Link></li>
-                    {bare !== true ? <li><Link href={book_path}><a className="sidenav-close">BOOK A CONSULT</a></Link></li> : <></>}
+                    {bare !== true ? <li><Link href={book_path}><a className="sidenav-close" onClick={onBookClick}>BOOK A CONSULT</a></Link></li> : <></>}
                     <li><Link href="/articles"><a className="sidenav-close">ARTICLES</a></Link></li>
                 </ul>
                 <div className="navbar-fixed">
@@ -56,7 +67,7 @@ export default function Header({ bare }) {
                                         <li><Link href="/#Services"><a>SERVICES</a></Link></li>
                                     </ul>
                                     <ul className="right">
-                                        {bare !== true ? <li><Link href={book_path}><a>BOOK A CONSULT</a></Link></li> : <></>}
+                                        {bare !== true ? <li><Link href={book_path}><a onClick={onBookClick}>BOOK A CONSULT</a></Link></li> : <></>}
                                         <li><Link href="/articles"><a>ARTICLES</a></Link></li>
                                     </ul>
                                 </div>

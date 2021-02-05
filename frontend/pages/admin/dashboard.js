@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { parseDate } from '../../helpers/helpers';
+import { parseDate } from '../../extras/helpers';
 
 export default function Dashboard({ redirect, token ,inquiry_notifications, payments, payment_ids }) {
     const [inquiryNotifications, setInquiryNotifications] = React.useState(inquiry_notifications);

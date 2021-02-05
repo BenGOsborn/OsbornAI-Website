@@ -61,14 +61,14 @@ export default function Articles({ article_data }) {
                         {articles.map(article => {
                             if ((articles.length % 2 !== 0) && (article.ref === articles[articles.length - 1].ref)) {
                                 return (
-                                    <div className="col s12 m12 l12">
+                                    <div key={article.ref} className="col s12 m12 l12">
                                         <ArticleCard path={article.ref} title={article.title} author={article.author} date_published={article.date_published} />
                                     </div>
                                 );
                             } else {
                                 return (
-                                    <div className="col s12 m12 l6">
-                                        <ArticleCard path={article.ref} title={article.title} author={currentArticle.author} date_published={article.date_published} />
+                                    <div key={article.ref} className="col s12 m12 l6">
+                                        <ArticleCard path={article.ref} title={article.title} author={article.author} date_published={article.date_published} />
                                     </div>
                                 );
                             }

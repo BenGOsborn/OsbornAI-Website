@@ -5,7 +5,7 @@ import Head from 'next/head';
 
 export default function NotFound(props) {
     const router = useRouter();
-    const book_path = `${router.pathname}#Book`;
+    const book_path = `${router.pathname}#Book`.replace(/\[.*?\]/, router.query.slug);
 
     return (
         <div className="NotFound">
