@@ -92,6 +92,7 @@ export async function getStaticProps() {
 
         return { ref: `/articles/${filename.replace('.md', '')}`, title: data.title, author: data.author, date_published: data.date_published };
     });
+    article_data.sort((a, b) => { return new Date(b.date_published) - new Date(a.date_published) });
 
     return {
         props: {

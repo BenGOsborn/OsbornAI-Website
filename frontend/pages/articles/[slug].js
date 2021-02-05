@@ -15,6 +15,8 @@ export default function Article({ markdown, data, other_article_data }) {
         Prism.highlightAll();
     });
 
+    console.log(new Date(data.date_published));
+
     return (
         <div className="Article">
             <Head>
@@ -25,7 +27,7 @@ export default function Article({ markdown, data, other_article_data }) {
             </Head>
             <div className="container">
                 <div className="center">
-                    <h1>{data.title}</h1>
+                    <h1 style={{fontWeight: 500}}>{data.title}</h1>
                     <p className="flow-text" style={{fontSize: 20}}>{data.author} - {data.date_published}</p>
                     <p className="flow-text">{data.description}</p>
                 </div>
@@ -104,6 +106,7 @@ export async function getStaticProps({ params: { slug } }) {
 
         return { ref: `/articles/${filename.replace('.md', '')}`, title: data.title, author: data.author, date_published: data.date_published };
     });
+    other_article_data.sort((a, b) => { return new Date(b.date_published) - new Date(a.date_published) });
 
     return {
         props: {
