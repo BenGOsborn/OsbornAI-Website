@@ -474,7 +474,7 @@ So now you know how to use a RNN to generate characters to form a sequence. I en
 <br />
 
 ### Credits:
-Gutenberg Dataset
+Gutenberg Dataset:
  - Author: Shibamouli Lahiri
  - Title: Complexity of Word Collocation Networks: A Preliminary Structural Analysis
  - Booktitle: Proceedings of the Student Research Workshop at the 14th Conference of the European Chapter of the Association for Computational Linguistics
@@ -482,15 +482,15 @@ Gutenberg Dataset
  - Address: Gothenburg, Sweden
  - Publisher: Association for Computational Linguistics
  - Pages: 96-105
- - URL: https://bit.ly/391s7bQ, https://bit.ly/2Lgks13
+ - URL: [https://bit.ly/391s7bQ](https://bit.ly/391s7bQ), [https://bit.ly/2Lgks13](https://bit.ly/2Lgks13)
 
-Alice In Wonderland
- - Dataset Provider: https://bit.ly/3hBJbc9
- - Dataset Link: https://bit.ly/3b6a5rk
+Alice In Wonderland:
+ - Dataset Provider: [https://bit.ly/3hBJbc9](https://bit.ly/3hBJbc9)
+ - Dataset Link: [https://bit.ly/3b6a5rk](https://bit.ly/3b6a5rk)
  - Author: Lewis Carroll
  - Booktitle: Alice's Adventures In Wonderland
  - Publish Date: November 1865
  - Publisher: Macmillan Publishers
  - Illustrator: John Tennial
  - Pages: 88
- - Book URL: https://amzn.to/2X4WCIa
+ - Book URL: [https://amzn.to/2X4WCIa](https://amzn.to/2X4WCIa)
