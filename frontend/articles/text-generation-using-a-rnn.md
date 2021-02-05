@@ -305,11 +305,7 @@ cycle_epochs = 5 # Number of epochs per training cycle
 
 batch_size = 64 # Set the batch size
 
-# Create some 'seed_text' to test out model on every few iterations
-seed_text = '''It is for us the living, rather, to be dedicated here to the unfinished
-                work which they who fought here have thus far so nobly advanced.
-                It is rather for us to be here dedicated to the great task remaining
-                before us. . .that from these honored dead'''
+seed_text = '''It is for the living to be dedicated here to the unfinished work which they who fought here have advanced. We have the task remaining before us that from the dead''' # Create some 'seed_text' to test out model on every few iterations
 
 training_loop_iterations = epochs // cycle_epochs # Set the number of training cycle iterations
 for i in range(training_loop_iterations): # Repeat our training loop 4 times
@@ -429,8 +425,7 @@ Now we're going to fine-tune our pre-trained model to the Alice in Wonderland da
 ```python
 
 # Create some 'seed_text' to test out model on after training
-seed_text = '''There seemed to be no use in waiting by the little door, so she
-went back to the table, half hoping she might find another key'''
+seed_text = '''There was no use in waiting at the door, so she went to the table, hoping she might find another key that would fit''' # Create some 'seed_text' to test out model on after training
 
 model.fit(X_train, Y_train, epochs=5, batch_size=batch_size, validation_data=(X_valid, Y_valid), verbose=1) # Fit the model to our training data, over 5 epochs, with a batch size of 64 (adjust for your PC), and validating on our validation/test data
 
