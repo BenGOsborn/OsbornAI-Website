@@ -49,7 +49,7 @@ export default function Articles({ article_data }) {
                 <br />
                 <br />
                 <div className="container center" >
-                    <p style={{fontSize: 27.5, fontWeight: 475}} class="flow-text">
+                    <p style={{fontSize: 27.5, fontWeight: 475}} className="flow-text">
                         Here's a list of our existing articles. Check back regularly to find
                         the latest topics, news, and tutorials regarding all things data science!
                     </p>

@@ -31,3 +31,8 @@ If you want to see all my VSCode settings/extensions: https://gist.github.com/be
 var s = "JavaScript syntax highlighting";
 alert(s);
 ```
+
+```python
+def foo(x):
+    return x
+```

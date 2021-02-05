@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://osbornai.com/#/</loc>
+        <loc>https://osbornai.com/</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://osbornai.com/#/articles</loc>
+        <loc>https://osbornai.com/articles</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://osbornai.com/#/articles/deep-fake-face-swap-autoencoder</loc>
+        <loc>https://osbornai.com/articles/deep-fake-face-swap-autoencoder</loc>
     </url>
     <url>
-        <loc>https://osbornai.com/#/articles/text-generation-using-a-rnn</loc>
+        <loc>https://osbornai.com/articles/text-generation-using-a-rnn</loc>
     </url>
     <url>
-        <loc>https://osbornai.com/#/articles/deploy-a-model-to-heroku-for-free</loc>
+        <loc>https://osbornai.com/articles/deploy-a-model-to-heroku-for-free</loc>
     </url>
 </urlset>

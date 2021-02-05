@@ -6,8 +6,15 @@ import matter from 'gray-matter';
 import ReactMarkdown from 'react-markdown';
 import style from '../../styles/Article.module.css';
 import ArticleCard from '../../components/articleCard';
+import Prism from 'prismjs';
+
+import 'prismjs/components/prism-python';
 
 export default function Article({ markdown, data, other_article_data }) {
+    React.useEffect(() => {
+        Prism.highlightAll();
+    });
+
     return (
         <div className="Article">
             <Head>
