@@ -2,14 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { init, sendPageView, sendEvent } from '../extras/analytics';
+import { sendPageView, sendEvent } from '../extras/analytics';
 
 export default function Header({ bare }) {
     const router = useRouter();
     const book_path = `${router.pathname}#Book`.replace(/\[.*?\]/, router.query.slug);
 
     React.useEffect(() => {
-        init();
         const path = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
         sendPageView(path);
     });
