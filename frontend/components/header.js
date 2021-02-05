@@ -8,22 +8,20 @@ export default function Header({ bare }) {
     const book_path = `${router.pathname}#Book`.replace(/\[.*?\]/, router.query.slug);
 
     React.useEffect(() => {
-        window.addEventListener("DOMContentLoaded", event => {
-            const optionsSidenav = {
-            edge: 'left',
-            draggable: true,
-            inDuration: 250,
-            outDuration: 200,
-            onOpenStart: null,
-            onOpenEnd: null,
-            onCloseStart: null,
-            onCloseEnd: null,
-            preventScrolling: true
-            }
+        const optionsSidenav = {
+        edge: 'left',
+        draggable: true,
+        inDuration: 250,
+        outDuration: 200,
+        onOpenStart: null,
+        onOpenEnd: null,
+        onCloseStart: null,
+        onCloseEnd: null,
+        preventScrolling: true
+        }
 
-            const sidenavContainer = document.querySelector(".sidenav");
-            M.Sidenav.init(sidenavContainer, optionsSidenav);
-        });
+        const sidenavContainer = document.querySelector(".sidenav");
+        window.M.Sidenav.init(sidenavContainer, optionsSidenav);
     }, []);
 
     return (
