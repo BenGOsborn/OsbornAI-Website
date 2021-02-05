@@ -5,14 +5,9 @@ import { useRouter } from 'next/router';
 import Header from './header';
 import Book from './book';
 import Footer from './footer';
-import { init } from '../extras/analytics';
 
 export default function Layout(props) {
     const router = useRouter();
-
-    React.useEffect(() => {
-        init();
-    }, []);
 
     function bareMode() {
         const exclusion_array = [

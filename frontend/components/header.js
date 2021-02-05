@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { sendPageView, sendEvent } from '../extras/analytics';
+import { sendPageView, sendEvent, init } from '../extras/analytics';
 
 export default function Header({ bare }) {
     const router = useRouter();
@@ -10,6 +10,7 @@ export default function Header({ bare }) {
 
     React.useEffect(() => {
         const path = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
+        init();
         sendPageView(path);
     });
 
@@ -31,6 +32,7 @@ export default function Header({ bare }) {
     }, []);
     
     function onBookClick() {
+        init();
         sendEvent({ category: 'Navigation', action: 'Showed interest in booking a consult' });
     };
 
