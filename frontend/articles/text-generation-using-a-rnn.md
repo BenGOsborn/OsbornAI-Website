@@ -33,7 +33,7 @@ Change the <code>number_of_files</code> variable to be the amount of documents y
 
 <br />
 
-We will then read the contents from each file then save it to a list. Finally, we'll convert this list to a Pandas series for easy processing later.
+We will then read the contents from each file then save it to a list. Finally, we'll convert this list to a <code>pandas</code> series for easy processing later.
 
 <br />
 
