@@ -92,7 +92,11 @@ export async function getStaticProps() {
 
         return { ref: `/articles/${filename.replace('.md', '')}`, title: data.title, author: data.author, date_published: data.date_published };
     });
-    article_data.sort((a, b) => { return new Date(b.date_published) - new Date(a.date_published) });
+    const sorted_article_data = article_data.sort((a, b) => { 
+        return new Date(b.date_published) - new Date(a.date_published); // This line is broken here AND in the slug one
+    });
+
+    console.log(sorted_article_data);
 
     return {
         props: {
