@@ -40,7 +40,7 @@ export default function Payment({ payment_id_details }) {
                         ${payment_id_details.amount} {payment_id_details.currency.toUpperCase()}
                         <br />
                         <br />
-                        <StripeCheckout stripeKey="pk_live_51I8LX2C7YoItP8TecbnnNAlWuANCjN2bQBfUpdu9yoaYwLoNrVZ480oNqCQyOlZSfNPxeb0GemzaQBSSVLG6pX9w00gPrfeZeS" 
+                        <StripeCheckout stripeKey={process.env.STRIPE_KEY} 
                             name={payment_id_details.name}
                             description={payment_id_details.purchase}
                             amount={payment_id_details.amount * 100}
@@ -49,7 +49,7 @@ export default function Payment({ payment_id_details }) {
                                 axios.post('https://osbornai.herokuapp.com/pay', { token: JSON.stringify(token), payment_id: payment_id_details._id })
                                 .then(res => {
                                     setStatus(2);
-                                    
+
                                     sendEvent({ category: 'User', action: 'Successful payment' });
                                 })
                                 .catch(err => {
