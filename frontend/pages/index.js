@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
+import { sendEvent } from '../extras/analytics';
 
 export default function Home(props) {
 	return (
@@ -118,7 +119,7 @@ export default function Home(props) {
 						<p style={{fontSize: 18}}>
 							And that’s just the beginning. If you’re interested in what we can do for your business, 
 							or have a project in mind that requires data, 
-							then <b><Link href="/#Book"><a>book a consultation</a></Link></b> with us 
+							then <b><Link href="/#Book"><a onClick={() => { sendEvent({ category: 'Navigation', action: 'Clicked the book a consult link', label: '/' }) }}>book a consultation</a></Link></b> with us 
 							and let’s get started!
 						</p>
 					</div>
