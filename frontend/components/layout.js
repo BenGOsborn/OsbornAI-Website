@@ -9,6 +9,14 @@ import Footer from './footer';
 export default function Layout(props) {
     const router = useRouter();
 
+    React.useEffect(() => {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', process.env.GA_MEASUREMENT_ID);
+    });
+
     function bareMode() {
         const exclusion_array = [
             '/admin',
@@ -44,6 +52,8 @@ export default function Layout(props) {
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+                <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_MEASUREMENT_ID}`} />
             </Head>
             <div id="Top" />
             <Header bare={bare} />
