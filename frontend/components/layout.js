@@ -45,6 +45,7 @@ export default function Layout(props) {
 				<meta name="keywords" content="data analytics, business analytics, data dashboards, marketing analysis, business consulting, osbornai, machine learning, data science, artificial intelligence, ai, data" />
                 <title>Grow Your Business Using Data and AI - OsbornAI</title>
 
+                <link rel="image_src" href="/logo192.png" />
                 <link rel="apple-touch-icon" href="/logo192.png" />
                 <link rel="manifest" href="/manifest.json" />
 
