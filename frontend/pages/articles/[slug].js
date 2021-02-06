@@ -9,8 +9,9 @@ import ArticleCard from '../../components/articleCard';
 import Prism from 'prismjs';
 
 import 'prismjs/components/prism-python';
+import { parseBadDate } from '../../extras/helpers';
 
-export default function Article({ markdown, data, other_article_data }) {
+export default function Article({ markdown, data, sorted_article_data }) {
     React.useEffect(() => {
         Prism.highlightAll();
     });
@@ -42,22 +43,22 @@ export default function Article({ markdown, data, other_article_data }) {
                             Enjoyed this article? Check out our most recent posts!
                         </p>
                         <div className="row">
-                            {other_article_data.length === 0 ? 
+                            {sorted_article_data.length === 0 ? 
                             <div className="container">
                                 <p className="flow-text" style={{fontSize: 20}}>
                                     There are no other articles available at this time. Check back regularly to find the latest news and tutorials regarding all 
                                     things data science and machine learning!
                                 </p>
                             </div>
-                            :  other_article_data.slice(0, 3).map(article => {
-                                    if (other_article_data.length === 1) {
+                            :  sorted_article_data.slice(0, 3).map(article => {
+                                    if (sorted_article_data.length === 1) {
                                         return (
                                             <div key={article.ref} className="col s12 m12 l12">
                                                 <ArticleCard path={article.ref} title={article.title} date_published={article.date_published} author={article.author}  />
                                             </div>
                                         );
 
-                                    } else if (other_article_data.length === 2) {
+                                    } else if (sorted_article_data.length === 2) {
                                         return (
                                             <div key={article.ref} className="col s12 m12 l6">
                                                 <ArticleCard path={article.ref} title={article.title} date_published={article.date_published} author={article.author}  />
@@ -106,13 +107,15 @@ export async function getStaticProps({ params: { slug } }) {
 
         return { ref: `/articles/${filename.replace('.md', '')}`, title: data.title, author: data.author, date_published: data.date_published };
     });
-    other_article_data.sort((a, b) => { return new Date(b.date_published) - new Date(a.date_published) });
+    const sorted_article_data = other_article_data.sort((a, b) => { 
+        return parseBadDate(b.date_published) - parseBadDate(a.date_published);
+    });
 
     return {
         props: {
             markdown: parsed_markdown.content,
             data: parsed_markdown.data,
-            other_article_data: other_article_data
+            sorted_article_data
         }
     };
 };

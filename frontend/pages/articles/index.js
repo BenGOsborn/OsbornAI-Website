@@ -4,8 +4,9 @@ import matter from 'gray-matter';
 import path from 'path';
 import Head from 'next/head';
 import ArticleCard from '../../components/articleCard';
+import { parseBadDate } from '../../extras/helpers';
 
-export default function Articles({ article_data }) {
+export default function Articles({ sorted_article_data }) {
     const [page, setPage] = React.useState(1);
     const [articles, setArticles] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
@@ -28,7 +29,7 @@ export default function Articles({ article_data }) {
 
     React.useEffect(() => {
         setLoading(true);
-        const new_articles = article_data.slice((page - 1) * page_size, page * page_size);
+        const new_articles = sorted_article_data.slice((page - 1) * page_size, page * page_size);
         if (new_articles.length !== 0) {
             setArticles(prev => [...prev, ...new_articles]);
             setLoading(false);
@@ -93,14 +94,12 @@ export async function getStaticProps() {
         return { ref: `/articles/${filename.replace('.md', '')}`, title: data.title, author: data.author, date_published: data.date_published };
     });
     const sorted_article_data = article_data.sort((a, b) => { 
-        return new Date(b.date_published) - new Date(a.date_published); // This line is broken here AND in the slug one
+        return parseBadDate(b.date_published) - parseBadDate(a.date_published);
     });
-
-    console.log(sorted_article_data);
 
     return {
         props: {
-            article_data
+            sorted_article_data
         }
     };
 };
