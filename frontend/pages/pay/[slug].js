@@ -3,7 +3,6 @@ import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import Head from 'next/head';
 import { parseDate } from '../../extras/helpers';
-import { sendEvent } from '../../extras/analytics';
 
 export default function Payment({ payment_id_details }) {
     const [status, setStatus] = useState(0); // 0 is normal; 1 is error; 2 is success
@@ -49,8 +48,6 @@ export default function Payment({ payment_id_details }) {
                                 axios.post('https://osbornai-backend.herokuapp.com/pay', { token: JSON.stringify(token), payment_id: payment_id_details._id })
                                 .then(res => {
                                     setStatus(2);
-
-                                    sendEvent({ category: 'User', action: 'Successful payment' });
                                 })
                                 .catch(err => {
                                     console.log(err.response.data);

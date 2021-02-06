@@ -5,16 +5,9 @@ import { useRouter } from 'next/router';
 import Header from './header';
 import Book from './book';
 import Footer from './footer';
-import { init, sendPageView } from '../extras/analytics';
 
 export default function Layout(props) {
     const router = useRouter();
-
-    React.useEffect(() => {
-        init();
-        const path = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
-        sendPageView(path);
-    });
 
     function bareMode() {
         const exclusion_array = [
