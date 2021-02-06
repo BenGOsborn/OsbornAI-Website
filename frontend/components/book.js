@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { init, sendEvent } from '../extras/analytics';
+import { sendEvent } from '../extras/analytics';
 
 const getDaysSince = (last_inquiry_raw) => {
     const current_date = new Date().getTime();
@@ -39,7 +39,6 @@ export default function Book(props) {
             const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
 
-            init();
             sendEvent({ category: 'User', action: 'Inquired' });
         })
         .catch(err => {
@@ -59,7 +58,7 @@ export default function Book(props) {
                 <div className="Displayed">
                     <div className="container">
                         <br />
-                        <p style={{color: '#1E88E5', fontWeight: 'bold'}} class="flow-text">
+                        <p style={{color: '#1E88E5', fontWeight: 'bold'}} className="flow-text">
                             We'll contact you shortly! You may reinquire in {10 - daysSince} days.
                         </p>
                     </div>

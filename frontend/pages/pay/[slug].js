@@ -3,7 +3,7 @@ import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import Head from 'next/head';
 import { parseDate } from '../../extras/helpers';
-import { init, sendEvent } from '../../extras/analytics';
+import { sendEvent } from '../../extras/analytics';
 
 export default function Payment({ payment_id_details }) {
     const [status, setStatus] = useState(0); // 0 is normal; 1 is error; 2 is success
@@ -50,7 +50,6 @@ export default function Payment({ payment_id_details }) {
                                 .then(res => {
                                     setStatus(2);
 
-                                    init();
                                     sendEvent({ category: 'User', action: 'Successful payment' });
                                 })
                                 .catch(err => {

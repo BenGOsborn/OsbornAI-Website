@@ -2,17 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { sendPageView, sendEvent, init } from '../extras/analytics';
+import { sendEvent } from '../extras/analytics';
 
 export default function Header({ bare }) {
     const router = useRouter();
     const book_path = `${router.pathname}#Book`.replace(/\[.*?\]/, router.query.slug);
-
-    React.useEffect(() => {
-        const path = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
-        init();
-        sendPageView(path);
-    });
 
     React.useEffect(() => {
         const optionsSidenav = {
@@ -32,8 +26,7 @@ export default function Header({ bare }) {
     }, []);
     
     function onBookClick() {
-        init();
-        sendEvent({ category: 'Navigation', action: 'Showed interest in booking a consult' });
+        sendEvent({ category: 'Navigation', action: 'Showed interest in booking a consult', label: `${router.pathname}`.replace(/\[.*?\]/, router.query.slug) });
     };
 
     return (
