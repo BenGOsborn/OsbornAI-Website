@@ -8,6 +8,7 @@ import jwt
 from datetime import datetime, timedelta
 import dotenv
 from functools import wraps
+import traceback
 
 dotenv.load_dotenv()
 
@@ -43,8 +44,8 @@ def login():
 
         return jsonify({'success': True, 'token': token}), 200
 
-    except Exception as e:
-        return jsonify({'success': False, 'token': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'token': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 def checkToken(f):
     @wraps(f)
@@ -54,14 +55,14 @@ def checkToken(f):
 
             token = form_json['token']
 
-        except Exception as e:
-            return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+        except:
+            return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
                 
         try:
             jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
         
-        except Exception as e:
-            return jsonify({'success': False, 'error_code': ErrorCodes.error_code_token, 'error': str(e)}), 400
+        except:
+            return jsonify({'success': False, 'error_code': ErrorCodes.error_code_token, 'error': traceback.format_exc()}), 400
         
         return f(*args, **kwargs)
     
@@ -73,8 +74,8 @@ def validateToken():
     try:
         return jsonify({'success': True}), 200
     
-    except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 # -------------------------- Payment routes -----------------------------
 
@@ -92,8 +93,8 @@ def validateId():
 
         return jsonify({'success': True, 'payment_id_info': sanitizeJSON(success['payment_id_info'])}), 200
 
-    except Exception as e:
-        return jsonify({'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 @app.route('/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
 def viewValidPaymentIds():
@@ -105,8 +106,8 @@ def viewValidPaymentIds():
 
         return jsonify({'success': True, 'payment_ids': sanitizeJSON(success['payment_ids'])}), 200
     
-    except Exception as e:
-        return jsonify({'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 @app.route('/admin/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -119,8 +120,8 @@ def adminViewValidPaymentIds():
 
         return jsonify({'success': True, 'payment_ids': sanitizeJSON(success['payment_ids'])}), 200
     
-    except Exception as e:
-        return jsonify({'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 @app.route('/admin/create_payment_id', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -139,8 +140,8 @@ def createPaymentId():
 
         return jsonify({'success': True, 'payment_details': sanitizeJSON(success['payment_details'])}), 200
 
-    except Exception as e:
-        return jsonify({'success': False, 'payment_details': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'payment_details': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 @app.route('/pay', methods=['POST'], strict_slashes=False)
 def pay():
@@ -190,8 +191,8 @@ def pay():
 
         return jsonify({'success': True, 'payment_success': payment_success}), 200
 
-    except Exception as e:
-        return jsonify({'success': False, 'payment_success': payment_success, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'payment_success': payment_success, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 @app.route('/admin/view_payments', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -204,8 +205,8 @@ def viewPayments():
         
         return jsonify({'success': True, 'payments': sanitizeJSON(success['payments'])}), 200
 
-    except Exception as e:
-        return jsonify({'success': False, 'payments': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'payments': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 # ------------------- Inquiry routes -----------------------
 
@@ -226,8 +227,8 @@ def addInquiry():
 
         return jsonify({'success': True, 'prev_inquiry_date': sanitizeJSON(success['prev_inquiry_date'])}), 200
 
-    except Exception as e:
-        return jsonify({'success': False, 'prev_inquiry_date': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'prev_inquiry_date': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 @app.route('/admin/view_inquiry_notifications', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -240,8 +241,8 @@ def viewInquiryNotifications():
 
         return jsonify({'success': True, 'inquiry_notifications': sanitizeJSON(success['inquiry_notifications'])}), 200
     
-    except Exception as e:
-        return jsonify({'success': False, 'inquiry_notifications': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'inquiry_notifications': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 @app.route('/admin/delete_inquiry_notification', methods=['POST'], strict_slashes=False)
 @checkToken
@@ -258,8 +259,8 @@ def deleteInquiryNotification():
 
         return jsonify({'success': success}), 200
     
-    except Exception as e:
-        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}), 400
+    except:
+        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}), 400
 
 if __name__ == '__main__':
     if 'DYNO' in os.environ:

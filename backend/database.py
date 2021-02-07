@@ -5,6 +5,7 @@ import dotenv
 import os
 import hashlib
 from bson import ObjectId
+import traceback
 
 class ErrorCodes:
     error_code_token = 24
@@ -72,8 +73,8 @@ class Database:
 
             return {'success': True, 'prev_inquiry_date': date}
 
-        except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e), 'prev_inquiry_date': None}
+        except:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc(), 'prev_inquiry_date': None}
 
     def add_payment(self, payment_id_details, stripe_token, charge, customer):
         try:
@@ -83,8 +84,8 @@ class Database:
 
             return {'success': True} 
         
-        except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
 
     def admin_view_payments(self):
         try:
@@ -92,8 +93,8 @@ class Database:
 
             return {'success': True, 'payments': payments}
 
-        except Exception as e:
-            return {'success': False, 'payments': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'payments': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
 
     def admin_view_inquiry_notifications(self):
         try:
@@ -101,8 +102,8 @@ class Database:
 
             return {'success': True, 'inquiry_notifications': new_inquiries}
         
-        except Exception as e:
-            return {'success': False, 'inquiry_notifications': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'inquiry_notifications': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
 
     def admin_delete_inquiry_notification(self, inquiry_notification_id):
         try:
@@ -110,8 +111,8 @@ class Database:
 
             return {'success': True}
         
-        except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
 
     def admin_create_payment_id(self, purchase, amount, currency_raw):
         try:
@@ -131,8 +132,8 @@ class Database:
 
             return {'success': True, 'payment_details': payment_details}
 
-        except Exception as e:
-            return {'success': False, 'payment_details': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'payment_details': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
 
     def admin_delete_payment_id(self, payment_id):
         try:
@@ -140,8 +141,8 @@ class Database:
 
             return {'success': True}
         
-        except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
 
     def admin_view_payment_ids(self):
         try:
@@ -149,8 +150,8 @@ class Database:
 
             return {'success': True, 'payment_ids': payment_ids}
         
-        except Exception as e:
-            return {'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
 
     def view_payment_ids(self):
         try:
@@ -162,8 +163,8 @@ class Database:
 
             return {'success': True, 'payment_ids': payment_ids}
 
-        except Exception as e:
-            return {'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
 
     def view_payment_id_details(self, payment_id):
         try:
@@ -173,8 +174,8 @@ class Database:
 
             return {'success': True, 'payment_id_info': payment_id_info}
         
-        except Exception as e:
-            return {'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
 
     def admin_login(self, username, password):
         try:
@@ -190,5 +191,5 @@ class Database:
             
             return {'success': False, 'error_code': ErrorCodes.error_code_failed, 'error': "Authentication failed!"}
 
-        except Exception as e:
-            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': str(e)}
+        except:
+            return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': traceback.format_exc()}
