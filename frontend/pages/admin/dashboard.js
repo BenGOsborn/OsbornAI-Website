@@ -252,6 +252,22 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                                         <br />
                                         {parseInt((new Date(payment_id.expiry) - new Date().getTime()) / 8.64e7) + 1} days
                                     </div>
+                                    <div className="card-action">
+                                        <button className="btn blue darken-1 waves-effect waves-light" type="button" onClick={(e) => {
+                                            e.preventDefault();
+
+                                            axios.post('https://osbornai-backend.herokuapp.com/admin/delete_payment_id', { token: token, payment_id: payment_id._id })
+                                            .then(res => {
+                                                const new_payment_ids = paymentIds.filter(not => not._id !== payment_id._id);
+                                                setPaymentIds(new_payment_ids);
+                                            })
+                                            .catch(err => {
+                                                console.log(err.response.data);
+                                            });
+                                        }}>
+                                            Delete
+                                        </button>
+                                    </div>
                                 </div>
                             );
                         })}
