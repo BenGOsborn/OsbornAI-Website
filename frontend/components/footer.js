@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 export default function Footer(props) {
     const linkStyle = {
         color: 'white',
-        fontWeight: 500
     };
 
     const router = useRouter();
@@ -17,17 +16,21 @@ export default function Footer(props) {
                 <div className="container center">
                     <div className="container">
                         <div className="container">
+                            <div className="container">
+                                <Link className="center" href={top_path}><a style={{ color: 'white', fontWeight: 500 }}>Top Of Page</a></Link>
+                            </div>
+                            <br />
                             <div className="container row">
-                                <a className="col left" href="https://github.com/OsbornAI" target="_blank" rel="noreferrer" style={linkStyle}>GitHub</a>
-                                <Link className="col center" href={top_path}><a style={linkStyle}>Top Of Page</a></Link>
-                                <a className="col right" href="https://www.linkedin.com/in/OsbornAI/" target="_blank" rel="noreferrer" style={linkStyle}>LinkedIn</a>
+                                <a className="col s12 m12 l4" href="https://github.com/OsbornAI" target="_blank" rel="noreferrer" style={linkStyle}>GitHub</a>
+                                <a className="col s12 m12 l4" href="https://twitter.com/BenOsbornAI" target="_blank" rel="noreferrer" style={linkStyle}>Twitter</a>
+                                <a className="col s12 m12 l4" href="https://www.linkedin.com/in/OsbornAI/" target="_blank" rel="noreferrer" style={linkStyle}>LinkedIn</a>
+                            </div>
+                            <div className="container" style={{paddingBottom: 10}}>
+                                <Link href={top_path}>
+                                    <a style={linkStyle}>© Copyright OsbornAI {new Date().getFullYear()}</a>
+                                </Link>
                             </div>
                         </div>
-                    </div>
-                    <div style={{paddingBottom: 10}}>
-                        <Link href={top_path}>
-                            <a style={{color: 'white'}}>© Copyright OsbornAI {new Date().getFullYear()}</a>
-                        </Link>
                     </div>
                 </div>
             </footer>
