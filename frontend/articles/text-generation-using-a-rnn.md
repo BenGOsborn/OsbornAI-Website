@@ -25,7 +25,7 @@ We're going to be using two datasets to train our model. The first dataset we'll
 <br />
 
 ### Loading raw data:
-Now that the data has been downloaded, we're going to read the contents of each file and store them in a <code>pandas</code> series. Set the <code>root</code> variable to be the location of the documents located within your downloaded Gutenberg dataset. We will then load these files, shuffle them, and then select a sample of documents.
+Now that the data has been downloaded, we're going to read the contents of each file and store them in a <code>pandas</code> series. Set the <code>root</code> variable to be the location of the folder that contains the documents located within your downloaded Gutenberg dataset. We will then load these files, shuffle them, and then select a sample of documents.
 
 <br />
 

@@ -38,11 +38,11 @@ Now you're going to have to install Git. If you already have Git installed you m
 <br />
 
 ### Setting up the web app and model for deployment:
-To start off with we're going to set up the Flask web server. For this tutorial I will be deploying a simple machine learning model that classifies whether a fruit is an apple or an orange (0 for an apple, 1 for an orange) based on it's weight in grams and whether it's smooth or bumpy (0 for smooth, 1 for bumpy). The tutorial for this model can be found [here](https://youtu.be/cKxRvEZd3Mw?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal). I have saved this model as a pickle file named model.p that I have placed inside of my deployment directory.
+To start off with we're going to set up the Flask web server. For this tutorial I will be deploying a simple machine learning model that classifies whether a fruit is an apple or an orange (0 for an apple, 1 for an orange) based on it's weight in grams and whether it's smooth or bumpy (0 for smooth, 1 for bumpy). The tutorial for this model can be found [here](https://youtu.be/cKxRvEZd3Mw?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal). I have saved this model as a pickle file named <i>model.p</i> that I have placed inside of my <i>deployment</i> directory.
 
 <br />
 
-To create the web server, first I'll create a new file in my deployment directory called server.py. I'll then initialize the Flask app within the file and enable CORS. Next I'll load my model in using Pickle.
+To create the web server, first I'll create a new file in my deployment <i>directory</i> called <i>server.py</i>. I'll then initialize the Flask app within the file and enable CORS. Next I'll load my model in using Pickle.
 
 <br />
 
@@ -50,7 +50,7 @@ Next I'll create the route which will be responsible for predicting the labels o
 
 <br />
 
-To do this I'll use the app.route decorator with the URL set to <code>/predict</code>, the allowed methods set as POST requests only, and strict slashes set to false. Next I'll define the function that will be called whenever a POST request is sent to this route. This function will get the <code>features</code> parameter from the body of the POST request form, and will use the model to predict the labels of these feature vectors. We will then convert the labels to a list of integers, before returning the labels under the <code>predicted_labels</code> parameter of the JSON form the server will return. We will then start the web server by calling <code>app.run()</code> if we are running the server file directly. All of the code for server.py can be found below.
+To do this I'll use the app.route decorator with the URL set to <code>/predict</code>, the allowed methods set as POST requests only, and strict slashes set to false. Next I'll define the function that will be called whenever a POST request is sent to this route. This function will get the <code>features</code> parameter from the body of the POST request form, and will use the model to predict the labels of these feature vectors. We will then convert the labels to a list of integers, before returning the labels under the <code>predicted_labels</code> parameter of the JSON form the server will return. We will then start the web server by calling <code>app.run()</code> if we are running the server file directly. All of the code for <i>server.py</i> can be found below.
 
 <br />
 
@@ -80,7 +80,7 @@ if __name__ == '__main__': # If this file is run directly
 
 <br />
 
-Next we have to create a Procfile inside of our deployment folder. A Procfile contains the code that Heroku will use to start our server.py file. The code for the Procfile can be found below. Note: Make sure you name the Procfile <i>Procfile</i> EXACTLY, with no file extensions, and a capital P. All of the code for the Procfile can be found below.
+Next we have to create a Procfile inside of our <i>deployment</i> folder. A Procfile contains the code that Heroku will use to start our <i>server.py file. The code for the Procfile can be found below. Note: Make sure you name the Procfile <i>Procfile</i> EXACTLY, with no file extensions, and a capital P. All of the code for the Procfile can be found below.
 
 ```python
 web: gunicorn server:app
@@ -88,7 +88,7 @@ web: gunicorn server:app
 
 <br />
 
-Finally we have to define the Python packages required for our server to run. To do this, we create a new file called requirements.txt inside of the deployment folder that contains the package name and version of each package used in the project connected by a <code>==</code> on consecutive lines. The requirements.txt for my project can be found below as an example. <b>Make sure you include Gunicorn in your list of requirements or else your server will not start</b>.
+Finally we have to define the Python packages required for our server to run. To do this, we create a new file called <i>requirements.txt</i> inside of the deployment folder that contains the package name and version of each package used in the project connected by a <code>==</code> on consecutive lines. The <i>requirements.txt</i> for my project can be found below as an example. <b>Make sure you include <code>gunicorn</code> in your list of requirements or else your server will not work properly when deployed</b>.
 
 <br />
 
@@ -126,7 +126,7 @@ Click on the add buildpack button, and then select the Python buildpack. Then pr
 
 <br />
 
-Now open up the command prompt and navigate to your deployment folder. Now enter the command <code>heroku login</code>, then follow the instructions.
+Now open up the command prompt and navigate to your <i>deployment</i> folder. Now enter the command <code>heroku login</code>, then follow the instructions.
 
 <br />
 
@@ -134,7 +134,7 @@ Now open up the command prompt and navigate to your deployment folder. Now enter
 
 <br />
 
-Now that you've logged in, you're ready to push your project to Heroku. Navigate to your deployment folder, then enter the command <code>git init</code>. This will initialize the repository.
+Now that you've logged in, you're ready to push your project to Heroku. While still in the <i>deployment</i> folder, then enter the command <code>git init</code>. This will initialize the repository.
 
 <br />
 
@@ -142,7 +142,7 @@ Now that you've logged in, you're ready to push your project to Heroku. Navigate
 
 <br />
 
-Now while still in your deployment folder enter the command <code>heroku git:remote -a your-project-name</code> where <code>your-project-name</code> is the name you gave your Heroku app.
+Now while still in your <i>deployment</i> folder enter the command <code>heroku git:remote -a your-project-name</code> where <code>your-project-name</code> is the name you gave your Heroku app.
 
 <br />
 
@@ -150,7 +150,7 @@ Now while still in your deployment folder enter the command <code>heroku git:rem
 
 <br />
 
-While still inside the deployment folder, run the following commands: <code>git add .</code>, <code>git commit -am "Initial commit"</code>, and <code>git push heroku master</code>. This part might take a few minutes.
+While still inside the <i>deployment</i> folder, run the following commands: <code>git add .</code>, <code>git commit -am "Initial commit"</code>, and <code>git push heroku master</code>. This part might take a few minutes.
 
 <br />
 
@@ -182,7 +182,7 @@ Now enable the dyno by clicking the edit button, setting the slider to the right
 
 <br />
 
-So now it's time to test out the model. The URL to your app will be [https://your-app-name.herokuapp.com](https://your-app-name.herokuapp.com), where your-app-name is whatever name you gave your Heroku app. To test out the URL, I'm going to use an app [Insomnia](https://insomnia.rest/), which will allow us to send POST requests to our deployed model. Download and install Insomnia to your computer following the steps on the page.
+So now it's time to test out the model. The URL to your app will be [https://your-app-name.herokuapp.com](https://your-app-name.herokuapp.com), where <i>your-app-name</i> is whatever name you gave your Heroku app. To test out the URL, I'm going to use an app [Insomnia](https://insomnia.rest/), which will allow us to send POST requests to our deployed model. Download and install Insomnia to your computer following the steps on the page.
 
 <br />
 
