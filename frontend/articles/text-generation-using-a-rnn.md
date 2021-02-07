@@ -350,7 +350,7 @@ Now we're going to fine-tune our model to generate text in the style of Alice in
 
 <br />
 
-We'll start off by scraping the book from the website using the <code>requests</code> library. We'll then remove the star pattern present within the book. Next we'll apply our <code>cleanText</code> function with our <code>valid_chars</code>, and then we'll encode the cleaned text using our <code>encode</code> function and our <code>char2num</code> dictionary.
+We'll start off by scraping the [Alice's Adventures in Wonderland book](https://gist.githubusercontent.com/phillipj/4944029/raw/75ba2243dd5ec2875f629bf5d79f6c1e4b5a8b46/alice_in_wonderland.txt) from the website using the <code>requests</code> library. We'll then remove the star pattern present within the book. Next we'll apply our <code>cleanText</code> function with our <code>valid_chars</code>, and then we'll encode the cleaned text using our <code>encode</code> function and our <code>char2num</code> dictionary.
 
 <br />
 
