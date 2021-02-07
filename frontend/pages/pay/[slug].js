@@ -4,9 +4,27 @@ import StripeCheckout from 'react-stripe-checkout';
 import Head from 'next/head';
 import { parseDate } from '../../extras/helpers';
 import { sendEvent } from '../../extras/analytics';
+import { useRouter } from 'next/router';
 
-export default function Payment({ payment_id_details }) {
-    const [status, setStatus] = useState(0); // 0 is normal; 1 is error; 2 is success
+export default function Payment(props) {
+    const [status, setStatus] = useState(0); // -1 is bad param, 0 is normal; 1 is error; 2 is success
+    const [paymentIdDetails, setPaymentIdDetails] = useState({});
+    const router = useRouter();
+
+    React.useEffect(() => {
+        console.log(router.query.slug);
+
+        axios.post('https://osbornai-backend.herokuapp.com/load_payment_id', { payment_id: router.query.slug })
+        .then((res) => {
+            const payment_id_details = payment_id_details_response.data.payment_id_info;
+            setPaymentIdDetails(payment_id_details);
+
+            console.log(payment_id_details);
+        })
+        .catch((err) => {
+            console.log(err.response.data);
+        });
+    }, []);
 
     function render() {
         if (status === 0 || status === 1) {
@@ -22,31 +40,31 @@ export default function Payment({ payment_id_details }) {
                         <br />
                         <b>Payment ID:</b>
                         <br />
-                        {payment_id_details._id}
+                        {paymentIdDetails._id}
                         <br />
                         <br />
                         <b>Expiry date:</b>
                         <br />
-                        {parseDate(payment_id_details.expiry)}
+                        {parseDate(paymentIdDetails.expiry)}
                         <br />
                         <br />
                         <b>Purchase:</b>
                         <div style={{whiteSpace: 'pre-line'}}>
-                            {payment_id_details.purchase}
+                            {paymentIdDetails.purchase}
                         </div>
                         <br />
                         <b>Amount:</b>
                         <br />
-                        ${payment_id_details.amount} {payment_id_details.currency.toUpperCase()}
+                        {/* ${paymentIdDetails.amount} {paymentIdDetails.currency.toUpperCase()} */}
                         <br />
                         <br />
                         <StripeCheckout stripeKey={process.env.STRIPE_KEY} 
-                            name={payment_id_details.name}
-                            description={payment_id_details.purchase}
-                            amount={payment_id_details.amount * 100}
-                            currency={payment_id_details.currency.toUpperCase()}
+                            name={paymentIdDetails.name}
+                            description={paymentIdDetails.purchase}
+                            amount={paymentIdDetails.amount * 100}
+                            // currency={paymentIdDetails.currency.toUpperCase()}
                             token={token => {
-                                axios.post('https://osbornai-backend.herokuapp.com/pay', { token: JSON.stringify(token), payment_id: payment_id_details._id })
+                                axios.post('https://osbornai-backend.herokuapp.com/pay', { token: JSON.stringify(token), payment_id: paymentIdDetails._id })
                                 .then(res => {
                                     setStatus(2);
 
@@ -121,7 +139,7 @@ export default function Payment({ payment_id_details }) {
         <div className="Pay container center" style={{fontSize: 18}} >
             <Head>
                 <title>Complete The Payment Process - OsbornAI</title>
-                <meta name="description" content={`Complete the payment process so that we can get started with your project! Payment ID: ${payment_id_details._id}`} />
+                <meta name="description" content="Complete the payment process so that we can get started with your project!" />
                 <meta name="keywords" content="payment, pay, osbornai, checkout, money, buy, order" />
                 <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />
@@ -131,39 +149,39 @@ export default function Payment({ payment_id_details }) {
     );
 };
 
-export async function getStaticPaths() {
-    try {
-        const payment_ids_response = await axios.post('https://osbornai-backend.herokuapp.com/view_valid_payment_ids');
-        const payment_ids = payment_ids_response.data.payment_ids;
+// export async function getStaticPaths() {
+//     try {
+//         const payment_ids_response = await axios.post('https://osbornai-backend.herokuapp.com/view_valid_payment_ids');
+//         const payment_ids = payment_ids_response.data.payment_ids;
 
-        const paths = payment_ids.map(payment_id => ({
-            params: {
-                slug: payment_id
-            }
-        }));
+//         const paths = payment_ids.map(payment_id => ({
+//             params: {
+//                 slug: payment_id
+//             }
+//         }));
 
-        return {
-            paths,
-            fallback: false
-        };
-    } catch {
-        const paths = [];
+//         return {
+//             paths,
+//             fallback: false
+//         };
+//     } catch {
+//         const paths = [];
 
-        return {
-            paths,
-            fallback: false
-        };
-    }
-};
+//         return {
+//             paths,
+//             fallback: false
+//         };
+//     }
+// };
 
-export async function getStaticProps({ params: { slug } }) {
-    try {
-        const payment_id_details_response = await axios.post('https://osbornai-backend.herokuapp.com/load_payment_id', { payment_id: slug });
-        const payment_id_details = payment_id_details_response.data.payment_id_info;
+// export async function getStaticProps({ params: { slug } }) {
+//     try {
+//         const payment_id_details_response = await axios.post('https://osbornai-backend.herokuapp.com/load_payment_id', { payment_id: slug });
+//         const payment_id_details = payment_id_details_response.data.payment_id_info;
         
-        return { props: { payment_id_details: payment_id_details } };
+//         return { props: { payment_id_details: payment_id_details } };
 
-    } catch {
-        return { props: { payment_id_details: null } };
-    }
-};
+//     } catch {
+//         return { props: { payment_id_details: null } };
+//     }
+// };
