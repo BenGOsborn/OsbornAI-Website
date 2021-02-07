@@ -106,24 +106,9 @@ def validateId():
         print(err)
         return jsonify({'success': False, 'payment_id_info': None, 'error_code': ErrorCodes.error_code_other, 'error': err}), 400
 
-@app.route('/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
-def viewValidPaymentIds():
-    try:
-        success = app.config['DB'].view_payment_ids()
-
-        if not success['success']:
-            return jsonify({'success': False, 'payment_ids': sanitizeJSON(success['payment_ids']), 'error_code': success['error_code'], 'error': success['error']}), 400
-
-        return jsonify({'success': True, 'payment_ids': sanitizeJSON(success['payment_ids'])}), 200
-    
-    except:
-        err = traceback.format_exc()
-        print(err)
-        return jsonify({'success': False, 'payment_ids': None, 'error_code': ErrorCodes.error_code_other, 'error': err}), 400
-
 @app.route('/admin/view_valid_payment_ids', methods=['POST'], strict_slashes=False)
 @checkToken
-def adminViewValidPaymentIds():
+def viewValidPaymentIds():
     try:
         success = app.config['DB'].admin_view_payment_ids()
 
@@ -227,6 +212,25 @@ def viewPayments():
         err = traceback.format_exc()
         print(err)
         return jsonify({'success': False, 'payments': None, 'error_code': ErrorCodes.error_code_other, 'error': err}), 400
+
+@app.route('/admin/delete_payment_id', methods=['POST'], strict_slashes=False)
+@checkToken
+def deletePaymentId():
+    try:
+        form_json = request.json
+
+        payment_id = form_json['payment_id']
+
+        success = app.config['DB'].admin_delete_payment_id(payment_id)
+        if not success['success']:
+            return jsonify({'success': False, 'error_code': success['error_code'], 'error': success['error']}), 400
+
+        return jsonify({'success': True}), 200
+    
+    except:
+        err = traceback.format_exc()
+        print(err)
+        return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': err}), 400
 
 # ------------------- Inquiry routes -----------------------
 
