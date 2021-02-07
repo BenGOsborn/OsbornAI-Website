@@ -201,8 +201,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                             </div>
                         </form>
                         <button className="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
-                            Send
-                            <i className="material-icons right">send</i>
+                            Create
                         </button>
                         <br />
                         <br />
