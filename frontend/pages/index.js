@@ -78,11 +78,11 @@ export default function Home(props) {
 							<div className="card">
 								<div className="card-image">
 									<img alt="Person Holding Space Gray Iphone 6" src="https://images.pexels.com/photos/17663/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=750&w=1260" />
+								</div>
+								<div className="card-content">
 									<span className="card-title">
 										<b>Consulting</b>
 									</span>
-								</div>
-								<div className="card-content">
 									<p>We'll work with you to find ways in which data can help your business grow, then implement these systems for you.</p>
 								</div>
 							</div>
@@ -91,12 +91,12 @@ export default function Home(props) {
 							<div className="card">
 								<div className="card-image">
 									<img alt="Blue Click Pen Near White Document Papers on Top of Brown Wooden Table" src="https://images.pexels.com/photos/95916/pexels-photo-95916.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
+								</div>
+								<div className="card-content">
 									<span className="card-title">
 										<b>Dashboards</b>
 									</span>
-								</div>
-								<div className="card-content">
-								<p>We'll build you a beautiful data dashboard so you can easily visualize your businesses performance and make smart decisions.</p>
+									<p>We'll build you a beautiful data dashboard so you can easily visualize your businesses performance and make smart decisions.</p>
 								</div>
 							</div>
 							</div>
@@ -104,14 +104,12 @@ export default function Home(props) {
 							<div className="card">
 								<div className="card-image">
 									<img alt="Time Lapse Photography of Blue Lights" src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260s" />
+								</div>
+								<div className="card-content">
 									<span className="card-title">
 										<b>AI</b>
 									</span>
-								</div>
-								<div className="card-content">
-								<p>
-									We'll use cutting edge Aritifical Intelligence to automatically extract insights from your data and save you time.
-								</p>
+									<p>We'll use cutting edge Aritifical Intelligence to automatically extract insights from your data and save you time.</p>
 								</div>
 							</div>
 							</div>
