@@ -2,6 +2,7 @@
 title: Text Generation Using A RNN
 description: This article demonstrates how a recurrent neural network can be used to generate text one character at a time.
 author: OsbornAI
+author_social: https://twitter.com/BenOsbornAI
 date_published: 02/01/2021 
 keywords: rnn, tensorflow, character generation, text generation, lstm, text generator, gru, tensorflow, python
 ---

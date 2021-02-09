@@ -2,6 +2,7 @@
 title: Deploy A Model To Heroku For Free
 description: This article demonstrates how you can deploy your machine learning models to the cloud for free using Heroku and Flask.
 author: OsbornAI
+author_social: https://twitter.com/BenOsbornAI
 date_published: 26/01/2021
 keywords: sklearn, scikit-learn, heroku, model, free, flask, python, deploy, gunicorn
 ---

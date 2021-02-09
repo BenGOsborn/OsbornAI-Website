@@ -2,6 +2,7 @@
 title: Deep Fake Face Swap Autoencoder
 description: This article demonstrates how an autoencoder can be used to create a deep fake that swaps the faces of an individual with another.
 author: OsbornAI
+author_social: https://twitter.com/BenOsbornAI
 date_published: 11/01/2021 
 keywords: autoencoder, face swap, deep fake, tensorflow, keras, tutorial, tensorflow, python, deepfake
 ---

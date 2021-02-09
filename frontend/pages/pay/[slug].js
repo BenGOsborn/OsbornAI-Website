@@ -154,10 +154,15 @@ export default function Payment({ status, payment_id_info }) {
         <div className="Pay container center" style={{fontSize: 18}} >
             <Head>
                 <title>Complete The Payment Process - OsbornAI</title>
-                <meta name="description" content="Complete the payment process so that we can get started with your project!" />
+                <meta name="description" content="Complete the payment process so that we can get started working with you!" />
                 <meta name="keywords" content="payment, pay, osbornai, checkout, money, buy, order" />
-                <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />
+
+                <meta property="og:title" content="Complete The Payment Process - OsbornAI" />
+                <meta property="og:description" content="Complete the payment process so that we can get started working with you!" />
+
+                <meta name="twitter:title" content="Complete The Payment Process - OsbornAI" />
+                <meta name="twitter:description" content="Complete the payment process so that we can get started working with you!" />
             </Head>
             {render()}
         </div>

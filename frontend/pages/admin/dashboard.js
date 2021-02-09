@@ -12,6 +12,8 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
     const [amount, setAmount] = useState(null);
     const [currency, setCurrency] = useState('aud');
 
+    const [newIdError, setNewIdError] = useState(false);
+
     const [displayCount, setDisplayCount] = useState(5);
     const [baseUrl, setBaseUrl] = useState('');
 
@@ -21,7 +23,8 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
         if (redirect) {
             router.push('/admin');
         } 
-        setBaseUrl(window.location.protocol + '//' + window.location.hostname);
+        const base_url = window.location.protocol + '//' + window.location.hostname;
+        setBaseUrl(base_url);
     }, []);
 
     return (
@@ -30,8 +33,13 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                 <title>Admin Dashboard - OsbornAI</title>
                 <meta name="description" content="The admin dashboard containing the analytics regarding our business." />
                 <meta name="keywords" content="admin, dashboard, osbornai, payments, analytics, data, osbornai, payments, payment ids, notifications, inquiries, inquire, inquiry" />
-                <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />
+
+                <meta property="og:title" content="Admin Dashboard - OsbornAI" />
+                <meta property="og:description" content="The admin dashboard containing the analytics regarding our business." />
+
+                <meta name="twitter:title" content="Admin Dashboard - OsbornAI" />
+                <meta name="twitter:description" content="The admin dashboard containing the analytics regarding our business." />
             </Head>
             <br />
             <div style={{paddingLeft: 80, paddingRight: 80}}>
@@ -73,7 +81,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                 <div className="row">
                     {/* Inquiry notifications */}
                     <div className="col s12 m12 l4">
-                        <h4 className="center">Inquiry notifications:</h4>
+                        <h4 className="center">Inquiry notifications: ({Math.max(0, inquiryNotifications.length - displayCount)} hidden)</h4>
                         {inquiryNotifications.length === 0 ? <h5 className="center">There are no current inquiry notifications!</h5> : inquiryNotifications.slice(0, displayCount).map(notification => {
                             return (
                                 <div key={notification._id} className="card">
@@ -141,7 +149,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                     </div>
                     {/* Payments */}
                     <div className="col s12 m12 l4">
-                        <h4 className="center">Payments:</h4>
+                        <h4 className="center">Payments: ({Math.max(0, payments.length - displayCount)} hidden)</h4>
                         {payments.length === 0 ? <h5 className="center">There are no payments to display!</h5> : payments.slice(0, displayCount).map(payment => {
                             return (
                                 <div key={payment.payment_id_details._id} className="card">
@@ -185,10 +193,13 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                             .then(res => {
                                 const payment_details = [res.data.payment_details];
                                 const new_payment_ids = [...payment_details, ...paymentIds];
+                                setNewIdError(false);
+                                e.target.reset()
                                 setPaymentIds(new_payment_ids);
                             })
                             .catch(err => {
                                 console.log(err.response.data);
+                                setNewIdError(true);
                             });
                         }} id="sendForm">
                             <div className="input-field">
@@ -204,8 +215,8 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                             Create
                         </button>
                         <br />
-                        <br />
-                        <h4 className="center">Payment IDs:</h4>
+                        {newIdError !== true ? <br /> : <p style={{color: 'red'}}>Could not create a new payment ID! Please try again.</p> }
+                        <h4 className="center">Payment IDs: ({Math.max(0, paymentIds.length - displayCount)} hidden)</h4>
                         {paymentIds.length === 0 ? <h5 className="center">There are no active payment ID's!</h5> : paymentIds.slice(0, displayCount).map(payment_id => {
                             const href = `/pay/${payment_id._id}`;
                             const payment_url = baseUrl + href;

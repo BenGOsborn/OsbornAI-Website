@@ -40,9 +40,15 @@ export default function Articles({ sorted_article_data }) {
         <div className="Articles">
             <Head>
                 <title>Explore Our Articles - OsbornAI</title>
-                <meta name="author" content="OsbornAI" />
                 <meta name="description" content="The full list of our existing articles containing the latest topics, news, and tutorials regarding all things data science!" />
                 <meta name="keywords" content="articles, data science, ai, machine learning, news, blog, tutorials, osbornai, posts, blogs, education, guides, artificial intelligence, data" />
+
+                <meta property="og:type" content="blog" />
+                <meta property="og:title" content="Explore Our Articles - OsbornAI" />
+                <meta property="og:description" content="The full list of our existing articles containing the latest topics, news, and tutorials regarding all things data science!" />
+
+                <meta name="twitter:title" content="Explore Our Articles - OsbornAI" />
+                <meta name="twitter:description" content="The full list of our existing articles containing the latest topics, news, and tutorials regarding all things data science!" />
             </Head>
             <div className="container">
                 <br />

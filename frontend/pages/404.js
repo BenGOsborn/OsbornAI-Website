@@ -13,8 +13,13 @@ export default function NotFound(props) {
                 <title>Page Not Found - OsbornAI</title>
                 <meta name="description" content="The page you're looking for cannot be found!" />
                 <meta name="keywords" content="invalid url, invalid page, osbornai, bad page, invalid, error, 404, error page, bad url" />
-                <meta name="author" content="OsbornAI" />
                 <meta name="robots" content="noindex, nofollow" />
+
+                <meta property="og:title" content="Page Not Found - OsbornAI" />
+                <meta property="og:description" content="The page you're looking for cannot be found!" />
+
+                <meta name="twitter:title" content="Page Not Found - OsbornAI" />
+                <meta name="twitter:description" content="The page you're looking for cannot be found!" />
             </Head>
             <div className="container">
                 <div className="container center">
