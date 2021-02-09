@@ -63,7 +63,7 @@ export default function Layout(props) {
                 <meta name="twitter:site" content="@BenOsbornAI" />
                 <meta name="twitter:title" content="Grow Your Business Using Data and AI - OsbornAI" />
                 <meta name="twitter:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" />
-                <meta name="twitter:image" content="/logo-main" />
+                <meta name="twitter:image" content="/logo-main.png" />
 
                 <link rel="apple-touch-icon" href="/logo192.png" />
                 <link rel="manifest" href="/manifest.json" />
