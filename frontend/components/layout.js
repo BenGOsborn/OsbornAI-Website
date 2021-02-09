@@ -57,7 +57,7 @@ export default function Layout(props) {
                 <meta property="og:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" />
                 <meta property="og:url" content={siteUrl} /> 
                 <meta property="og:site_name" content="OsbornAI" />
-                <meta property="og:image" content="/logo-main" />
+                <meta property="og:image" content="/logo-main.png" />
 
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content="@BenOsbornAI" />
