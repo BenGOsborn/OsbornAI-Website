@@ -8,6 +8,7 @@ import Footer from './footer';
 import { init, sendPageView } from '../extras/analytics';
 
 export default function Layout(props) {
+    const [baseUrl, setBaseUrl] = useState('');
     const [siteUrl, setSiteUrl] = useState('');
 
     const router = useRouter();
@@ -17,7 +18,10 @@ export default function Layout(props) {
         const path = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
         sendPageView(path);
 
-        const full_url = window.location.protocol + '//' + window.location.hostname + path;
+        const base_url = window.location.protocol + '//' + window.location.hostname;
+        setBaseUrl(base_url);
+
+        const full_url = base_url + path;
         setSiteUrl(full_url);
     });
 
@@ -57,13 +61,13 @@ export default function Layout(props) {
                 <meta property="og:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" />
                 <meta property="og:url" content={siteUrl} /> 
                 <meta property="og:site_name" content="OsbornAI" />
-                <meta property="og:image" content="/logo-main.png" />
+                <meta property="og:image" content={`${baseUrl}/logo-main.png`} />
 
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content="@BenOsbornAI" />
                 <meta name="twitter:title" content="Grow Your Business Using Data and AI - OsbornAI" />
                 <meta name="twitter:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" />
-                <meta name="twitter:image" content="/logo-main.png" />
+                <meta name="twitter:image" content={`${baseUrl}/logo-main.png`} />
 
                 <link rel="apple-touch-icon" href="/logo192.png" />
                 <link rel="manifest" href="/manifest.json" />
