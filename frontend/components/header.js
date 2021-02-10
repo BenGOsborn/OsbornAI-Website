@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { sendEvent } from '../extras/analytics';
+import { sendEvent, addInterest } from '../extras/analytics';
 
 export default function Header({ bare }) {
     const router = useRouter();
@@ -26,7 +26,9 @@ export default function Header({ bare }) {
     }, []);
 
     function onInquiryClick() {
-        sendEvent({ category: 'Interest', action: 'Showed interest on inquiring', label: `${router.pathname}`.replace(/\[.*?\]/, router.query.slug) });
+        const page_url =`${router.pathname}`.replace(/\[.*?\]/, router.query.slug); 
+        addInterest(page_url);
+        sendEvent({ category: 'Interest', action: 'Showed interest on inquiring', label: page_url });
     };
 
     return (

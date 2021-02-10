@@ -13,9 +13,20 @@ export function sendPageView(path) {
     ReactGA.pageview(path);
 };
 
-export function addTransaction(transaction_details) {
-    ReactGA.plugin.require('ecommerce');
-    ReactGA.plugin.execute('ecommerce', 'addTransaction', transaction_details);
-    ReactGA.plugin.execute('ecommerce', 'send');
-    ReactGA.plugin.execute('ecommerce', 'clear');
+export function addInterest(page_url) {
+    ReactGA.plugin.require('ec');
+    ReactGA.plugin.execute('ec', 'setAction', 'interest', { url: page_url });
+    ReactGA.plugin.execute('ec', 'clear');
+};
+
+export function addInquiry(page_url) {
+    ReactGA.plugin.require('ec');
+    ReactGA.plugin.execute('ec', 'setAction', 'inquiry', { url: page_url });
+    ReactGA.plugin.execute('ec', 'clear');
+};
+
+export function addPurchase(transaction_details) {
+    ReactGA.plugin.require('ec');
+    ReactGA.plugin.execute('ec', 'setAction', 'purchase', transaction_details);
+    ReactGA.plugin.execute('ec', 'clear');
 };

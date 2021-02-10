@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { sendEvent } from '../extras/analytics';
+import { sendEvent, addInquiry } from '../extras/analytics';
 
 const getDaysSince = (last_inquiry_raw) => {
     const current_date = new Date().getTime();
@@ -42,7 +42,9 @@ export default function Book(props) {
             const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
 
-            sendEvent({ category: 'Inquiry', action: 'Inquired', label: `${router.pathname}`.replace(/\[.*?\]/, router.query.slug) });
+            const page_url = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
+            addInquiry(page_url);
+            sendEvent({ category: 'Inquiry', action: 'Inquired', label: page_url });
         })
         .catch(err => {
             const form = err.response.data;
