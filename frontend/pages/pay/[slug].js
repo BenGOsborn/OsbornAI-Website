@@ -86,7 +86,7 @@ export default function Payment({ status, payment_id_info }) {
                                 .then(res => {
                                     setPageStatus(2);
 
-                                    sendEvent({ category: 'User', action: 'Completed payment' });
+                                    sendEvent({ category: 'Payment', action: 'Completed payment', label: payment_id_info._id });
                                 })
                                 .catch(err => {
                                     console.log(err.response.data);
