@@ -42,7 +42,7 @@ export default function Book(props) {
             const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
 
-            sendEvent({ category: 'User', action: 'Inquired', label: `${router.pathname}`.replace(/\[.*?\]/, router.query.slug) });
+            sendEvent({ category: 'Inquiry', action: 'Inquired', label: `${router.pathname}`.replace(/\[.*?\]/, router.query.slug) });
         })
         .catch(err => {
             const form = err.response.data;

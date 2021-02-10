@@ -10,15 +10,15 @@ export default function Header({ bare }) {
 
     React.useEffect(() => {
         const optionsSidenav = {
-        edge: 'left',
-        draggable: true,
-        inDuration: 250,
-        outDuration: 200,
-        onOpenStart: null,
-        onOpenEnd: null,
-        onCloseStart: null,
-        onCloseEnd: null,
-        preventScrolling: true
+            edge: 'left',
+            draggable: true,
+            inDuration: 250,
+            outDuration: 200,
+            onOpenStart: null,
+            onOpenEnd: null,
+            onCloseStart: null,
+            onCloseEnd: null,
+            preventScrolling: true
         }
 
         const sidenavContainer = document.querySelector(".sidenav");
@@ -26,7 +26,7 @@ export default function Header({ bare }) {
     }, []);
 
     function onInquiryClick() {
-        sendEvent({ category: 'Navigation', action: 'Clicked the book a consult link', label: `${router.pathname}`.replace(/\[.*?\]/, router.query.slug) });
+        sendEvent({ category: 'Interest', action: 'Showed interest on inquiring', label: `${router.pathname}`.replace(/\[.*?\]/, router.query.slug) });
     };
 
     return (
