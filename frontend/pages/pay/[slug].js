@@ -93,7 +93,7 @@ export default function Payment({ status, payment_id_info }) {
                                         amount: payment_id_info.amount,
                                         currency: payment_id_info.currency
                                     });
-                                    sendEvent({ category: 'Payment', action: 'Made a payment', value: payment_id_info });
+                                    sendEvent({ category: 'Payment', action: 'Made a payment', value: parseInt(100 * payment_id_info.amount) });
                                 })
                                 .catch(err => {
                                     console.log(err.response.data);
