@@ -51,6 +51,8 @@ export default function Layout(props) {
                 <meta name="robots" content="index, follow" />
                 <title>Grow Your Business Using Data and AI - OsbornAI</title>
 
+                <link rel="canonical" href={siteUrl} />
+
                 <meta property="og:locale" content="en_US" />
                 <meta property="og:type" content="company" />
                 <meta property="og:title" content="Grow Your Business Using Data and AI - OsbornAI" />
