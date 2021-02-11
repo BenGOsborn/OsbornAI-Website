@@ -10,6 +10,7 @@ export default function Payment({ status, payment_id_info }) {
 
     React.useEffect(() => {
         addItem(payment_id_info._id, payment_id_info.description, payment_id_info.amount);
+        sendPageView('/payment-page');
     }, []);
 
     function render() {
