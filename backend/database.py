@@ -124,7 +124,7 @@ class Database:
             print(err)
             return {'success': False, 'error_code': ErrorCodes.error_code_other, 'error': err}
 
-    def admin_create_payment_id(self, purchase, amount, currency_raw):
+    def admin_create_payment_id(self, intended_email, purchase, amount, currency_raw):
         try:
             currency = currency_raw.lower()
 
@@ -135,7 +135,9 @@ class Database:
             if float(amount) < 1:
                 return {'success': False, 'payment_details': None, 'error_code': ErrorCodes.error_code_failed, 'error': "Amount must be greater than or equal to $1!"}
 
-            document = {'name': "OsbornAI Payment", 'purchase': purchase, 'amount': round(float(amount), 2), 'currency': currency, 'timeCreated': datetime.utcnow(), 'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
+            document = {'name': "OsbornAI Payment", 'intended_email': intended_email, 'purchase': purchase, 
+                        'amount': round(float(amount), 2), 'currency': currency, 'timeCreated': datetime.utcnow(), 
+                        'expiry': datetime.utcnow() + timedelta(seconds=self.expires_in)}
             payment_id = self.payment_ids.insert_one(document)
 
             payment_details = {**{'_id': payment_id.inserted_id}, **document}

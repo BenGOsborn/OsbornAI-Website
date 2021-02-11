@@ -128,11 +128,12 @@ def createPaymentId():
     try:
         form_json = request.json
 
+        intended_email = form_json['intended_email']
         purchase = form_json['purchase']
         amount = form_json['amount']
         currency = form_json['currency']
 
-        success = app.config['DB'].admin_create_payment_id(purchase, amount, currency)
+        success = app.config['DB'].admin_create_payment_id(intended_email, purchase, amount, currency)
 
         if not success['success']:
             return jsonify({'success': False, 'payment_details': sanitizeJSON(success['payment_details']), 'error_code': success['error_code'], 'error': success['error']}), 400
