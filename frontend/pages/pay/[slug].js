@@ -3,10 +3,14 @@ import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import Head from 'next/head';
 import { parseDate } from '../../extras/helpers';
-import { sendEvent, addPurchase } from '../../extras/analytics';
+import { sendEvent, addItem, addPurchase } from '../../extras/analytics';
 
 export default function Payment({ status, payment_id_info }) {
     const [pageStatus, setPageStatus] = useState(status); // -1 is bad param, 0 is normal; 1 is error with payment; 2 is success
+
+    React.useEffect(() => {
+        addItem(payment_id_info._id, payment_id_info.description, payment_id_info.amount);
+    }, []);
 
     function render() {
         if (pageStatus === -1) {
@@ -86,13 +90,7 @@ export default function Payment({ status, payment_id_info }) {
                                 .then(res => {
                                     setPageStatus(2);
 
-                                    addPurchase({
-                                        id: payment_id_info._id,
-                                        name: payment_id_info.name,
-                                        description: payment_id_info.description,
-                                        amount: payment_id_info.amount,
-                                        currency: payment_id_info.currency
-                                    });
+                                    addPurchase(payment_id_info._id);
                                     sendEvent({ category: 'Payment', action: 'Made a payment', value: parseInt(100 * payment_id_info.amount) });
                                 })
                                 .catch(err => {

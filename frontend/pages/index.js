@@ -109,8 +109,7 @@ export default function Home(props) {
 						</div>
 						<p style={{fontSize: 18}}>
 							And that’s just the beginning. If you’re interested in what we can do for your business, 
-							or have a project in mind that requires data, 
-							then <b><Link href="/#Book"><a onClick={() => { sendEvent({ category: 'Navigation', action: 'Clicked the book a consult link', label: '/' }) }}>book a consultation</a></Link></b> with us 
+							or have a project in mind that requires data, then <b><Link href="/#Book"><a onClick={() => { sendEvent({ category: 'Interest', action: 'Showed interest in inquiring', label: '/#Services' }) }}>book a consultation</a></Link></b> with us 
 							and let’s get started!
 						</p>
 					</div>
