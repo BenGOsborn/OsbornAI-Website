@@ -57,8 +57,8 @@ export default function Admin({ redirect }) {
                     <h1 className="center">Admin Login</h1>
                     <form onSubmit={onSubmit} id="login">
                         <div className="input-field">
-                            <input type="text" placeholder="Username" name="username" required={true} onChange={(e) => {setUsername(e.target.value)}} />
-                            <input type="password" placeholder="Password" name="password" required={true} onChange={(e) => {setPassword(e.target.value)}} />
+                            <input type="text" placeholder="Username" required={true} onChange={(e) => {setUsername(e.target.value)}} />
+                            <input type="password" placeholder="Password" required={true} onChange={(e) => {setPassword(e.target.value)}} />
                         </div>
                     </form>
                     <button className="btn blue darken-1 waves-effect waves-light" type="submit" form="login">

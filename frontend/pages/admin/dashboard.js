@@ -204,10 +204,10 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                             });
                         }} id="sendForm">
                             <div className="input-field">
-                                <input type="text" id="email" placeholder="Email" name="email" required={true} onChange={e => {setIntendedEmail(e.target.value)}} />
-                                <textarea className="materialize-textarea" id="purchase" placeholder="Purchase" name="purchase" required={true} onChange={e => {setPurchase(e.target.value)}} />
-                                <input type="number" min={1} step={0.01} placeholder="Amount" name="amount" required={true} onChange={e => {setAmount(Math.max(1, e.target.value))}} />
-                                <select className="browser-default" name="currency" onChange={e => {setCurrency(e.target.value)}}>
+                                <input type="text" placeholder="Intended email" required={true} onChange={e => {setIntendedEmail(e.target.value)}} />
+                                <textarea className="materialize-textarea" placeholder="Purchase" required={true} onChange={e => {setPurchase(e.target.value)}} />
+                                <input type="number" min={1} step={0.01} placeholder="Amount" required={true} onChange={e => {setAmount(Math.max(1, e.target.value))}} />
+                                <select className="browser-default" onChange={e => {setCurrency(e.target.value)}}>
                                     <option value="aud" selected="selected">AUD</option>
                                     <option value="usd">USD</option>
                                 </select>
@@ -303,12 +303,18 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
 export async function getServerSideProps({ req, res }) {
     const token = req.cookies.token;
 
-    let return_form = {
+    const return_form = {
         redirect: true,
-        token: token,
+        token: null,
         inquiry_notifications: [],
         payments: [],
         payment_ids: []
+    };
+
+    if (!token) {
+        return { props: return_form };
+    } else {
+        return_form.token = token;
     };
 
     try {

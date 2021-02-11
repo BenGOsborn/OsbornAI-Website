@@ -73,10 +73,10 @@ export default function Book(props) {
                 <div className="Displayed">
                     <form onSubmit={sendInquiry} id="sendForm">
                         <div className="input-field">
-                            <input type="text" placeholder="First" name="first" required={true} onChange={(e) => {setFirst(e.target.value)}} />
-                            <input type="text" placeholder="Last" name="last" required={true} onChange={(e) => {setLast(e.target.value)}} />
-                            <input type="email" placeholder="Email" name="email" required={true} onChange={(e) => {setEmail(e.target.value)}} />
-                            <textarea className="materialize-textarea" id="inquiry" placeholder="Inquiry" name="inquiry" required={true} minLength="10" maxLength="300" onChange={(e) => {setInquiry(e.target.value)}} />
+                            <input type="text" placeholder="First" required={true} onChange={(e) => {setFirst(e.target.value)}} />
+                            <input type="text" placeholder="Last" required={true} onChange={(e) => {setLast(e.target.value)}} />
+                            <input type="email" placeholder="Email" required={true} onChange={(e) => {setEmail(e.target.value)}} />
+                            <textarea className="materialize-textarea" placeholder="Inquiry" required={true} minLength="10" maxLength="300" onChange={(e) => {setInquiry(e.target.value)}} />
                         </div>
                     </form>
                     <button className="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
