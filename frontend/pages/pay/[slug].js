@@ -3,7 +3,7 @@ import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import Head from 'next/head';
 import { parseDate } from '../../extras/helpers';
-import { sendEvent, addItem, addPurchase } from '../../extras/analytics';
+import { sendEvent, addItem, addPurchase, sendPageView } from '../../extras/analytics';
 
 export default function Payment({ status, payment_id_info }) {
     const [pageStatus, setPageStatus] = useState(status); // -1 is bad param, 0 is normal; 1 is error with payment; 2 is success
@@ -91,7 +91,8 @@ export default function Payment({ status, payment_id_info }) {
                                     setPageStatus(2);
 
                                     addPurchase(payment_id_info._id);
-                                    sendEvent({ category: 'Payment', action: 'Made a payment', value: parseInt(100 * payment_id_info.amount) });
+                                    sendEvent({ category: 'Payment', action: 'Made a payment', value: parseInt(payment_id_info.amount * 100) });
+                                    sendPageView('/made-purchase');
                                 })
                                 .catch(err => {
                                     console.log(err.response.data);

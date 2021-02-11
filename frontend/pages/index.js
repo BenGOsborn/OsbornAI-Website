@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { sendEvent } from '../extras/analytics';
+import { sendEvent, sendPageView } from '../extras/analytics';
 
 export default function Home(props) {
 	return (
@@ -102,14 +102,24 @@ export default function Home(props) {
 									<span className="card-title">
 										<b>AI</b>
 									</span>
-									<p>We'll use cutting edge Aritifical Intelligence to automatically extract insights from your data and save you time.</p>
+									<p>We'll use cutting edge Artifical Intelligence to automatically extract insights from your data and save you time.</p>
 								</div>
 							</div>
 							</div>
 						</div>
 						<p style={{fontSize: 18}}>
 							And that’s just the beginning. If you’re interested in what we can do for your business, 
-							or have a project in mind that requires data, then <b><Link href="/#Book"><a onClick={() => { sendEvent({ category: 'Interest', action: 'Showed interest in inquiring', label: '/#Services' }) }}>book a consultation</a></Link></b> with us 
+							or have a project in mind that requires data, then <b>
+								<Link href="/#Book">
+									<a onClick={() => { 
+										sendEvent({ category: 'Interest', action: 'Showed interest in inquiring', label: '/#Service' });
+										sendPageView('/interest-in-consult');
+									}
+									}>
+										book a consultation
+									</a>
+								</Link>
+							</b> with us 
 							and let’s get started!
 						</p>
 					</div>
