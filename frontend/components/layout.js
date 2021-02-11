@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -8,7 +8,8 @@ import Footer from './footer';
 import { init, sendPageView } from '../extras/analytics';
 
 export default function Layout(props) {
-    const [siteUrl, setSiteUrl] = useState('');
+    const [siteUrl, setSiteUrl] = React.useState('');
+    const [bare, setBare] = React.useState(false)
 
     const router = useRouter();
 
@@ -19,24 +20,17 @@ export default function Layout(props) {
 
         const site_url = window.location.protocol + '//' + window.location.hostname + path;
         setSiteUrl(site_url);
-    });
 
-    function bareMode() {
-        const exclusion_array = [
-            '/admin',
-            '/pay'
-        ];
-
+        const exclusion_array = ['/admin', '/pay'];
         for (let i = 0; i < exclusion_array.length; i++) {
             const sub_url = exclusion_array[i];
             if (router.pathname.slice(0, sub_url.length) === sub_url) {
-                return true;
+                setBare(true);
+                return;
             }
         }
-
-        return false;
-    };
-    const bare = bareMode();
+        sendPageView('/page-with-book');
+    });
 
     return (
         <>
