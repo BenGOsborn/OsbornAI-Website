@@ -14,6 +14,8 @@ export default function Layout(props) {
     const router = useRouter();
 
     React.useEffect(() => {
+        setBare(false);
+
         init();
         const path = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
         sendPageView(path);
@@ -21,15 +23,16 @@ export default function Layout(props) {
         const site_url = window.location.protocol + '//' + window.location.hostname + path;
         setSiteUrl(site_url);
 
-        const exclusion_array = ['/admin', '/pay'];
+        const exclusion_array = ['/admin', '/pay', '/legal'];
         for (let i = 0; i < exclusion_array.length; i++) {
             const sub_url = exclusion_array[i];
             if (router.pathname.slice(0, sub_url.length) === sub_url) {
                 setBare(true);
-                return;
             }
         }
-        sendPageView('/page-with-book');
+        if (bare) {
+            sendPageView('/page-with-book');
+        }
     });
 
     return (

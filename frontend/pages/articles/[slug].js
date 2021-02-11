@@ -4,7 +4,7 @@ import path from 'path';
 import Head from 'next/head';
 import matter from 'gray-matter';
 import ReactMarkdown from 'react-markdown';
-import style from '../../styles/Article.module.css';
+import style from '../../styles/Markdown.module.css';
 import ArticleCard from '../../components/articleCard';
 import Prism from 'prismjs';
 

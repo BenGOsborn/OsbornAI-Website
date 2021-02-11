@@ -145,13 +145,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 .markdown a {
-  color: #0366d6;
+  color: #039be5;
   text-decoration: none;
 }
 
-.markdown a:hover {
+/* .markdown a:hover {
   text-decoration: underline;
-}
+} */
 
 .markdown strong {
   font-weight: 600;

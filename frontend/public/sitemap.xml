@@ -9,6 +9,10 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://osbornai.com/privacy-policy</loc>
+        <priority>0.3</priority>
+    </url>
+    <url>
         <loc>https://osbornai.com/articles/deep-fake-face-swap-autoencoder</loc>
     </url>
     <url>
