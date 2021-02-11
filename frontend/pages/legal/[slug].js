@@ -12,7 +12,7 @@ export default function Legal({ markdown, data }) {
                 <title>{data.title} - OsbornAI</title>
                 <meta name="description" content={data.description} />
                 <meta name="keywords" content={data.keywords} />
-                <meta name="author" content={data.author} />
+                <meta name="author" content="OsbornAI" />
 
                 <meta property="og:type" content="article" />
                 <meta property="og:title" content={`${data.title} - OsbornAI`} />
@@ -20,25 +20,20 @@ export default function Legal({ markdown, data }) {
 
                 <meta name="twitter:title" content={`${data.title} - OsbornAI`} />
                 <meta name="twitter:description" content={data.description} />
-
-                {/* Select what should be in the public time and such */}
-                {/* <meta property="article:publisher" content="https://twitter.com/BenOsbornAI" />
-                <meta property="article:author" content={data.author_social} />
-                <meta property="article:published_time" content={parseBadDate(data.date_published)} /> */}
             </Head>
             <div className="container">
                 <div className="container">
                     <div className="center">
                         <h1 style={{fontWeight: 500}}>{data.title}</h1>
-                        <br />
-                        <br />
-                        <article className={style.markdown}>
-                            <ReactMarkdown allowDangerousHtml={true}>{markdown}</ReactMarkdown>
-                        </article>
-                        <br />
-                        <br />
-                        <br />
                     </div>
+                    <br />
+                    <br />
+                    <article className={style.markdown}>
+                        <ReactMarkdown allowDangerousHtml={true}>{markdown}</ReactMarkdown>
+                    </article>
+                    <br />
+                    <br />
+                    <br />
                 </div>
             </div>
         </div>
