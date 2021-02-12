@@ -9,7 +9,7 @@ import { init, sendPageView } from '../extras/analytics';
 
 export default function Layout(props) {
     const [siteUrl, setSiteUrl] = React.useState('');
-    const [bare, setBare] = React.useState(false)
+    const [bare, setBare] = React.useState(false);
 
     const router = useRouter();
 
@@ -74,8 +74,10 @@ export default function Layout(props) {
             </Head>
             <div id="Top" />
             <Header bare={bare} />
-            {props.children}
-            {bare !== true ? <Book /> : <></>}
+            <main>
+                {props.children}
+                {bare !== true ? <Book /> : <></>}
+            </main>
             <Footer />
         </>
     );
