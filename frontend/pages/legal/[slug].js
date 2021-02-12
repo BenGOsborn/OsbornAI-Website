@@ -34,8 +34,6 @@ export default function Legal({ markdown, data }) {
                     <br />
                     <br />
                     <br />
-                    <br />
-                    <br />
                 </div>
             </div>
         </div>
