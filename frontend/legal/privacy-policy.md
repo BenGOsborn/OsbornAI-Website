@@ -14,11 +14,11 @@ In this policy we aim to help you to understand how we collect your data, what w
 <br />
 
 ### How we collect your data and what we use it for
-Our site has various methods of collecting data from individuals. 
+Our site has various methods of collecting data from individuals. The following will disclose how we collect this data, and what we will and won't do with your data.
 
 <br />
 
-When you inquire about a consult, the personal data you submit to our form (your first name, last name, email and inquiry) will be kept on record. We will use this data you have sent us to follow up with you about your inquiry via an email regarding your inquiry. We will also keep this data on record so we can view your history with our business, eg. if you have worked with us before and the work you have done with us if applicable. We may also use the email you share with us to view the individual of whom our payment ID is intended for. This personal data that you disclose with us will be kept private and will not be shared with any third parties.
+When you inquire about a consult, the personal data you submit to our form (your first name, last name, email and inquiry) will be kept on record in our database. We will use this data you have sent us to follow up with you about your inquiry via an email regarding your inquiry. We will also keep this data on record so we can view your history with our business, eg. if you have worked with us before and the work you have done with us if applicable. We may also use the email you share with us to view the individual of whom our payment ID is intended for. This personal data that you disclose with us will be kept private and will not be shared or sold to any third parties.
 
 <br />
 
@@ -30,7 +30,10 @@ When you make a payment with us, the email you inquired with and the email you u
 
 <br />
 
+<!-- Working on this one -->
 ### Third party services and advertising services
+Our website takes advantage of third party services for collecting data. These services collect and store data in different ways
+
  - Google analytics
  - Stripe
 
@@ -50,4 +53,5 @@ If you decide that you no longer would like us to store your data on our systems
 
 <br />
 
-### Contact information for site administrators
+### Contact information
+If you have any other questions regarding your data or you would like to view and/or delete the data we have collected on you, you can email us during business hours at bengrantalbertosborn@gmail.com.
