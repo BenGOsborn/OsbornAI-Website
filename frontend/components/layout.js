@@ -14,9 +14,10 @@ export default function Layout(props) {
     const router = useRouter();
 
     React.useEffect(() => {
+        init();
+        
         setBare(false);
 
-        init();
         const path = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
         sendPageView(path);
 

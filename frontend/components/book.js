@@ -72,7 +72,7 @@ export default function Book(props) {
         } else {
             return (
                 <div className="Displayed">
-                    <form onSubmit={sendInquiry} id="sendForm">
+                    <form onSubmit={sendInquiry} id="sendInquiry">
                         <div className="input-field">
                             <input type="text" placeholder="First" required={true} onChange={(e) => {setFirst(e.target.value)}} />
                             <input type="text" placeholder="Last" required={true} onChange={(e) => {setLast(e.target.value)}} />
@@ -80,7 +80,7 @@ export default function Book(props) {
                             <textarea className="materialize-textarea" placeholder="Inquiry" required={true} minLength="10" maxLength="300" onChange={(e) => {setInquiry(e.target.value)}} />
                         </div>
                     </form>
-                    <button className="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
+                    <button className="btn blue darken-1 waves-effect waves-light" type="submit" form="sendInquiry">
                         Send
                         <i className="material-icons right">send</i>
                     </button>

@@ -3,12 +3,13 @@ import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import Head from 'next/head';
 import { parseDate } from '../../extras/helpers';
-import { sendEvent, addItem, addPurchase, sendPageView } from '../../extras/analytics';
+import { sendEvent, addItem, addPurchase, sendPageView, init } from '../../extras/analytics';
 
 export default function Payment({ status, payment_id_info }) {
     const [pageStatus, setPageStatus] = useState(status); // -1 is bad param, 0 is normal; 1 is error with payment; 2 is success
 
     React.useEffect(() => {
+        init();
         addItem(payment_id_info._id, payment_id_info.description, payment_id_info.amount);
         sendPageView('/payment-page');
     }, []);
@@ -84,7 +85,7 @@ export default function Payment({ status, payment_id_info }) {
                         <StripeCheckout stripeKey={process.env.STRIPE_KEY} 
                             name={payment_id_info.name}
                             description={payment_id_info.purchase}
-                            amount={payment_id_info.amount * 100}
+                            amount={(payment_id_info.amount * 100).toFixed(2)}
                             currency={payment_id_info.currency.toUpperCase()}
                             token={token => {
                                 axios.post('https://osbornai-backend.herokuapp.com/pay', { token: JSON.stringify(token), payment_id: payment_id_info._id })
@@ -92,7 +93,7 @@ export default function Payment({ status, payment_id_info }) {
                                     setPageStatus(2);
 
                                     addPurchase(payment_id_info._id);
-                                    sendEvent({ category: 'Payment', action: 'Made a payment', value: parseInt(payment_id_info.amount * 100) });
+                                    sendEvent({ category: 'Payment', action: 'Made a payment', value: parseInt((payment_id_info.amount * 100).toFixed(2)) });
                                     sendPageView('/made-purchase');
                                 })
                                 .catch(err => {

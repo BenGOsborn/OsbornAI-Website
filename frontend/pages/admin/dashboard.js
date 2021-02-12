@@ -202,7 +202,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                                 console.log(err.response.data);
                                 setNewIdError(true);
                             });
-                        }} id="sendForm">
+                        }} id="createPaymentId">
                             <div className="input-field">
                                 <input type="text" placeholder="Intended email" required={true} onChange={e => {setIntendedEmail(e.target.value)}} />
                                 <textarea className="materialize-textarea" placeholder="Purchase" required={true} onChange={e => {setPurchase(e.target.value)}} />
@@ -213,7 +213,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                                 </select>
                             </div>
                         </form>
-                        <button className="btn blue darken-1 waves-effect waves-light" type="submit" form="sendForm">
+                        <button className="btn blue darken-1 waves-effect waves-light" type="submit" form="createPaymentId">
                             Create
                         </button>
                         <br />
