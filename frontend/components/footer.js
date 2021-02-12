@@ -34,7 +34,7 @@ export default function Footer(props) {
                                     </div>
                                     <div className="col s12 m12 l6">
                                         <Link href="/legal/privacy-policy">
-                                            <a style={linkStyle}>Privacy policy</a>
+                                            <a style={linkStyle}>Privacy Policy</a>
                                         </Link>
                                     </div>
                                 </div>
