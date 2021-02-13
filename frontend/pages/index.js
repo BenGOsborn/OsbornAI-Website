@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { sendEvent, sendPageView } from '../extras/analytics';
+import { sendEvent } from '../extras/analytics';
 
 export default function Home(props) {
 	return (
@@ -113,7 +113,6 @@ export default function Home(props) {
 								<Link href="/#Book">
 									<a onClick={() => { 
 										sendEvent({ category: 'Interest', action: 'Showed interest in inquiring', label: '/#Service' });
-										sendPageView('/interest-in-consult');
 									}
 									}>
 										book a consultation

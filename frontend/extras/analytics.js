@@ -13,16 +13,6 @@ export function sendPageView(path) {
     ReactGA.pageview(path);
 };
 
-export function addItem(id, name, price) {
-    ReactGA.plugin.require('ecommerce');
-    ReactGA.plugin.execute('ecommerce', 'addItem', { id: id, name: name, price: price });
-    ReactGA.plugin.execute('ecommerce', 'send');
-    ReactGA.plugin.execute('ecommerce', 'clear');
-};
-
-export function addPurchase(id) {
-    ReactGA.plugin.require('ecommerce');
-    ReactGA.plugin.execute('ecommerce', 'addTransaction', { id: id });
-    ReactGA.plugin.execute('ecommerce', 'send');
-    ReactGA.plugin.execute('ecommerce', 'clear');
-};
+// Ecommerce implementation:
+// https://github.com/react-ga/react-ga/issues/269
+// https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce

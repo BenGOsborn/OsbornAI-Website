@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { sendEvent, sendPageView } from '../extras/analytics';
+import { sendEvent } from '../extras/analytics';
 
 export default function Header({ bare }) {
     const router = useRouter();
@@ -28,7 +28,6 @@ export default function Header({ bare }) {
     function onInquiryClick() {
         const page_url =`${router.pathname}`.replace(/\[.*?\]/, router.query.slug); 
         sendEvent({ category: 'Interest', action: 'Showed interest in inquiring', label: page_url });
-        sendPageView('/interest-in-consult');
     };
 
     return (

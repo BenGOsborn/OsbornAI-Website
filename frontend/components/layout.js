@@ -29,10 +29,8 @@ export default function Layout(props) {
             const sub_url = exclusion_array[i];
             if (router.pathname.slice(0, sub_url.length) === sub_url) {
                 setBare(true);
+                return;
             }
-        }
-        if (bare) {
-            sendPageView('/page-with-book');
         }
     });
 
