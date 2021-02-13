@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-
 import Header from './header';
 import Book from './book';
 import Footer from './footer';

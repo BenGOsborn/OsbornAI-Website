@@ -2,14 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { sendEvent } from '../extras/analytics';
-
-const getDaysSince = (last_inquiry_raw) => {
-    const current_date = new Date().getTime();
-    const last_inquiry = new Date(last_inquiry_raw);
-    const days_since = parseInt((current_date - last_inquiry) / 8.64e7);
-
-    return days_since;
-};
+import { getDaysSince } from '../extras/helpers';
 
 export default function Book(props) {
     const [daysSince, setDaysSince] = React.useState(Infinity);

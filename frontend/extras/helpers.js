@@ -24,3 +24,11 @@ export function parseBadDate(date_string) {
 
     return date;
 };
+
+export function getDaysSince(last_inquiry_raw) {
+    const current_date = new Date().getTime();
+    const last_inquiry = new Date(last_inquiry_raw);
+    const days_since = parseInt((current_date - last_inquiry) / 8.64e7);
+
+    return days_since;
+};
