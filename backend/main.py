@@ -99,6 +99,8 @@ def validateId():
         if not success['success']:
             return jsonify({'success': False, 'payment_id_info': sanitizeJSON(success['payment_id_info']), 'error_code': success['error_code'], 'error': success['error']}), 400
 
+        del success['payment_id_info']['intended_email']
+
         return jsonify({'success': True, 'payment_id_info': sanitizeJSON(success['payment_id_info'])}), 200
 
     except:
