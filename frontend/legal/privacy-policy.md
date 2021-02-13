@@ -61,13 +61,13 @@ You own the rights to your data, and thus have the right to view it and/or have 
 
 <br />
 
-If you would like to view your own personal data, you may contact us via email, and we will send you the data you have requested to see. You may not ask to view another users data on behalf of them, and you must provide identification upon requesting to view your data for the sole purpose of proving that you are who you say you are. It should be noted that the data you receive will only be all of the data that we have collected upon you up to the moment we sent it to you. If you wish to view the data we have collected on you after the request has been fulfilled, make another request to view your data. You may request to view your data as many times as you wish.
+If you would like to view your own personal data, you may contact us and we will send you the data you have requested to view. You may not ask to view another users data on behalf of them, and you must provide identification upon requesting to view your data for the sole purpose of proving that you are who you say you are. It should be noted that the data you receive will only be all of the data that we have collected upon you up to the moment we sent it to you. If you wish to view the data we have collected on you after the request has been fulfilled, make another request to view your data. You may request to view your data as many times as you wish.
 
 <br />
 
-If you decide that you no longer would like us to store your data, then you make a request to have it deleted. You may contact us via email and tell us the data that you would like for us to delete, and we will clear it. You may not request another users data be deleted on behalf of them, and you must provide identification upon requesting the deletion of your data for the sole purpose of proving that you are who you say you are. It should also be noted that even if you have had your data wiped from our systems, your data will still continued to be collected when you use our site. You may request for your data to be deleted as many times as you wish.
+If you decide that you no longer would like us to store your data, then you make a request to have it deleted. You may contact us and tell us the data that you would like for us to delete, and we will clear it. You may not request another users data be deleted on behalf of them, and you must provide identification upon requesting the deletion of your data for the sole purpose of proving that you are who you say you are. It should also be noted that even if you have had your data wiped from our systems, your data will still continued to be collected when you use our site. You may request for your data to be deleted as many times as you wish.
 
 <br />
 
 ### Contact information
-If you have any other questions regarding your data or you would like to view and/or delete the data we have collected on you, you may email us at bengrantalbertosborn@gmail.com.
+If you have any other questions regarding your data or you would like to view and/or delete the data we have collected on you, you may contact us on Twitter at [@BenOsbornAI](https://twitter.com/BenOsbornAI).
