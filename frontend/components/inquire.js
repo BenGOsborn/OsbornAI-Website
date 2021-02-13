@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { sendEvent } from '../extras/analytics';
 import { getDaysSince } from '../extras/helpers';
 
-export default function Book(props) {
+export default function Inquire(props) {
     const [daysSince, setDaysSince] = React.useState(Infinity);
 
     const [first, setFirst] = React.useState(null);
@@ -82,8 +82,8 @@ export default function Book(props) {
     };
 
     return (
-        <div className="Book">
-            <div id="Book" className="container">
+        <div className="Inquire">
+            <div id="Inquire" className="container">
                 <br />
                 <br />
                 <b>

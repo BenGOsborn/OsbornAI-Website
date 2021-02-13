@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Header from './header';
-import Book from './book';
+import Inquire from './inquire';
 import Footer from './footer';
 import { init, sendPageView } from '../extras/analytics';
 
@@ -73,7 +73,7 @@ export default function Layout(props) {
             <Header bare={bare} />
             <main>
                 {props.children}
-                {bare !== true ? <Book /> : <></>}
+                {bare !== true ? <Inquire /> : <></>}
             </main>
             <Footer />
         </>

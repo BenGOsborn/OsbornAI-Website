@@ -2,10 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { sendEvent } from '../extras/analytics';
 
 export default function NotFound(props) {
     const router = useRouter();
-    const book_path = `${router.pathname}#Book`.replace(/\[.*?\]/, router.query.slug);
+    const inquire_path = `${router.pathname}#Inquire`.replace(/\[.*?\]/, router.query.slug);
 
     return (
         <div className="NotFound">
@@ -27,8 +28,6 @@ export default function NotFound(props) {
                     <br />
                     <br />
                     <br />
-                    <br />
-                    <br />
                     <h1>404 Error:</h1>
                     <h3>The page you're looking for cannot be found!</h3>
                     <p className="flow-text">
@@ -37,7 +36,7 @@ export default function NotFound(props) {
                     <br />
                     <br />
                 </div>
-                <div className="row center" style={{fontSize: 20}}>
+                <div className="row center" style={{fontSize: 30}}>
                     <b>
                         <div className="col s12 m12 l3">
                             <Link href="/#About">ABOUT</Link>
@@ -46,14 +45,20 @@ export default function NotFound(props) {
                             <Link href="/#Services">SERVICES</Link>
                         </div>
                         <div className="col s12 m12 l3">
-                            <Link href="/articles">ARTICLES</Link>
+                            <Link href={inquire_path}>
+                                <a onClick={() => { 
+                                    sendEvent({ category: 'Interest', action: 'Showed interest in inquiring', label: '/404' });
+                                }
+                                }>
+                                    INQUIRE
+                                </a>
+                            </Link>
                         </div>
                         <div className="col s12 m12 l3">
-                            <Link href={book_path}>BOOK A CONSULT</Link>
+                            <Link href="/articles">ARTICLES</Link>
                         </div>
                     </b>
                 </div>
-                <br />
                 <br />
                 <br />
             </div>
