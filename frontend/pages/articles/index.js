@@ -53,14 +53,11 @@ export default function Articles({ sorted_article_data }) {
             <div className="container">
                 <br />
                 <br />
-                <br />
-                <br />
                 <div className="container center" >
                     <p style={{fontSize: 27.5, fontWeight: 475}} className="flow-text">
                         Here's a list of our existing articles. Check back regularly to find
                         the latest topics, news, and tutorials regarding all things data science!
                     </p>
-                    <br />
                     <br />
                     <br />
                     <br />
@@ -81,9 +78,6 @@ export default function Articles({ sorted_article_data }) {
                             }
                         })}
                     </div>
-                    <br />
-                    <br />
-                    <br />
                     <br />
                 </div>
             </div>
