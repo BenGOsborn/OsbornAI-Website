@@ -83,13 +83,13 @@ export default function Home(props) {
 							<div className="col s12 m4 l4">
 							<div className="card">
 								<div className="card-image">
-									<img alt="Blue Click Pen Near White Document Papers on Top of Brown Wooden Table" src="https://images.pexels.com/photos/95916/pexels-photo-95916.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
+									<img alt="Blue Click Pen Near White Document Papers on Top of Brown Wooden Table" src="https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
 								</div>
 								<div className="card-content">
 									<span className="card-title">
-										<b>Dashboards</b>
+										<b>Analysis</b>
 									</span>
-									<p>We'll build you a beautiful data dashboard so you can easily visualize your businesses performance and make smart decisions.</p>
+									<p>We'll extract crucial insights about your business from your data and present them to you concisely, so you know exactly what areas of your business to focus.</p>
 								</div>
 							</div>
 							</div>
@@ -100,9 +100,9 @@ export default function Home(props) {
 								</div>
 								<div className="card-content">
 									<span className="card-title">
-										<b>AI</b>
+										<b>Machine Learning and AI</b>
 									</span>
-									<p>We'll use cutting edge Artifical Intelligence to automatically extract insights from your data and save you time.</p>
+									<p>We'll use cutting edge Machine Learning algorithms to extract hidden insights from your data and to automate areas of your business, saving you money.</p>
 								</div>
 							</div>
 							</div>
