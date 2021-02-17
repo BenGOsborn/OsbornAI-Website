@@ -56,11 +56,13 @@ export default function Layout(props) {
                 <meta property="og:site_name" content="OsbornAI" />
                 <meta property="og:image" content="https://i.imgur.com/AzX1tNi.png" />
 
-                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:site" content="@BenOsbornAI" />
+                <meta name="twitter:creator" content="@BenOsbornAI" />
                 <meta name="twitter:title" content="Grow Your Business Using Data and AI - OsbornAI" />
                 <meta name="twitter:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" />
                 <meta name="twitter:image" content="https://i.imgur.com/AzX1tNi.png" />
+                <meta name="twitter:image:alt" content="The banner of the OsbornAI website" />
 
                 <link rel="apple-touch-icon" href="/logo192.png" />
                 <link rel="manifest" href="/manifest.json" />

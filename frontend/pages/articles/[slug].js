@@ -30,6 +30,7 @@ export default function Article({ markdown, data, sorted_article_data }) {
 
                 <meta name="twitter:title" content={`${data.title} - OsbornAI`} />
                 <meta name="twitter:description" content={data.description} />
+                <meta name="twitter:creator" content={data.author_social} />
 
                 <meta property="article:publisher" content="https://twitter.com/BenOsbornAI" />
                 <meta property="article:author" content={data.author_social} />
