@@ -83,11 +83,11 @@ export default function Home(props) {
 							<div className="col s12 m4 l4">
 							<div className="card">
 								<div className="card-image">
-									<img alt="Blue Click Pen Near White Document Papers on Top of Brown Wooden Table" src="https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
+									<img alt="Black and Gray Laptop on Black Sectional Couch" src="https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
 								</div>
 								<div className="card-content">
 									<span className="card-title">
-										<b>Analysis</b>
+										<b>Data Analysis</b>
 									</span>
 									<p>We'll extract crucial insights about your business from your data and present them to you concisely, so you know exactly what areas of your business to focus.</p>
 								</div>
