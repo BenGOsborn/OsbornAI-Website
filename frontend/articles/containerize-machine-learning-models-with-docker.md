@@ -47,12 +47,12 @@ Now that we know what containerization is and why we should use it, and have an 
 
 <br />
 
-#### Building the model
+#### Building the model:
 First, let's create a basic TensorFlow model. This model will be trained on the Iris dataset and will be be able to determine which category of flower each set of features belongs to (Setosa, Versicolor, Virginica).
 
 <br />
 
-First we'll import our dependencies for this file, then declare our current working directory and set the random seed for NumPy and TensorFlow. Next we'll load the features and labels from the Iris dataset. We'll then concatenate our features and labels so that we can shuffle our data and keep them paired together. We will then split our data into a training and validation set. 80% of the data for our training set, and the remaining 20% will make up the validation set. The code for this section can be found below.
+In a new file <i>model.py</i> in the <i>root</i> directory we'll first import our dependencies for this file, then declare our current working directory and set the random seed for NumPy and TensorFlow. Next we'll load the features and labels from the Iris dataset. We'll then concatenate our features and labels so that we can shuffle our data and keep them paired together. We will then split our data into a training and validation set. 80% of the data for our training set, and the remaining 20% will make up the validation set. The code for this section can be found below.
 
 <br />
 
@@ -83,7 +83,7 @@ Y_valid = data[split_size:, 4:] # Create the validation labels
 
 <br />
 
-Now we will standardize our data to increase the performance of the model. We will do this by getting the mean and standard deviation of our TRAINING SET ONLY. It is important that you do not take into consideration the validation data when calculating the mean and standard deviation, or you will end up with data leakage. Next we will save our calculated mean and standard deviation to a pickle file, as we will use these calculated values when making the predictions for our features. We will then standardize both our training and validation sets. The code for this section can be found below.
+In the same file <i>model.py</i> we will then standardize our data to increase the performance of the model. We will do this by getting the mean and standard deviation of our TRAINING SET ONLY. It is important that you do not take into consideration the validation data when calculating the mean and standard deviation, or you will end up with data leakage. Next we will save our calculated mean and standard deviation to a pickle file, as we will use these calculated values when making the predictions for our features. We will then standardize both our training and validation sets. The code for this section can be found below.
 
 <br />
 
@@ -100,7 +100,7 @@ X_valid = (X_valid - train_mean) / train_std # Standardize the validation featur
 
 <br />
 
-Now we will build the model. We will use a Keras sequential model that contains:
+In the same file <i>model.py</i> we will build the model. We will use a Keras sequential model that contains:
  - A dense layer with a ReLU activation function with an output size of 24
  - A dropout layer with a dropout rate of 0.4 (40%)
  - A batch normalization layer
@@ -126,12 +126,12 @@ model.save(os.path.join(BASE_PATH, 'model.h5')) # Save the model
 
 <br />
 
-#### Creating the API
+#### Creating the API:
 Now we will create the API that will predict the category of flower that the features sent belong to.
 
 <br />
 
-First of all we will import the dependencies for the project, and will define the class that will be responsible for predicting the cateogory of flower that the features belong to. We will call this class <code>Model</code> and will give it a constructor that will initialize the current working directory, load in our standardization parameters and set them as class members, load in the model and set is as a class member, and declare the mapping from the index of the category with the highest probability output by the model to the name of the flower that that index corresponds to and set is as a class member.
+In a new file <i>app.py</i> in the <i>root</i> directory we will import the dependencies for the project, and will define the class that will be responsible for predicting the cateogory of flower that the features belong to. We will call this class <code>Model</code> and will give it a constructor that will initialize the current working directory, load in our standardization parameters and set them as class members, load in the model and set is as a class member, and declare the mapping from the index of the category with the highest probability output by the model to the name of the flower that that index corresponds to and set is as a class member.
 
 <br />
 
@@ -171,7 +171,7 @@ Now we're going to use Flask to create the API that will serve the <code>Model</
 
 <br />
 
-First of all initialize the Flask <code>app</code>m and then initialize our <code>Model</code> class and store it inside of the <code>app.config</code>. Now we will create the <i>/predict</i> route which will receive a set of features in the form of a POST request and will return the cateogry of flower of which each set of features belongs to. To do this we will define a route with the URL <i>/predict</i> that will only accept POST requests and will have strict slashes set to false.
+In the same file <i>app.py</i> we will initialize the Flask <code>app</code>m and then initialize our <code>Model</code> class and store it inside of the <code>app.config</code>. Now we will create the <i>/predict</i> route which will receive a set of features in the form of a POST request and will return the cateogry of flower of which each set of features belongs to. To do this we will define a route with the URL <i>/predict</i> that will only accept POST requests and will have strict slashes set to false.
 
 <br />
 
@@ -202,3 +202,37 @@ if __name__ == '__main__': # If this file is run directly
 ```
 
 <br />
+
+#### Containerizing the model:
+Now that we have created the API, it is time to package it all together into a Docker image. First of all make you sure you have Docker installed. You can download [Docker desktop here](https://www.docker.com/products/docker-desktop) for Mac and Windows and then simply follow the instructions to install it.
+
+<br />
+
+Once you have installed Docker, the first thing you'll need to do is define the Python packages used for your project within a <i>requirements.txt</i> file located within the <i>root<i> directory. An example of the <i>requirements.txt</i> for this project can be found below. NOTE: while Gunicorn has not been used so far, it will be required for running our API in the container and therefore must be added to the <i>requirements.txt</i>. You may also notice that we have not included TensorFlow in the <i>requirements.txt<i>, and that is because it will already be installed in our environment, and therefore there is no need for us to reinstall it and risk breaking the environment.
+
+<br />
+
+```python
+Flask==1.1.1
+gunicorn==20.0.4
+```
+<br />
+
+Now we will build our <i>Dockerfile</i> that will allow us to create an image containing our API and its necessary environment. Create a new file named <i>Dockerfile</i> EXACTLY with no file extensions inside of the <i>root</i> directory. Before you can continue building the image, you must install the base image in which we will be building upon. You can do this by downloading the following Docker image using the command below.
+
+<br />
+
+```bash
+docker pull tensorflow/tensorflow:2.4.1-gpu
+```
+
+<br />
+
+This image will contain the environment required to run TensorFlow 2.4.1 with CUDA (GPU). If you do not have a GPU, you can install the following Docker image instead using the command below.
+
+<br />
+
+```bash
+docker pull tensorflow/tensorflow:2.4.1
+```
+
