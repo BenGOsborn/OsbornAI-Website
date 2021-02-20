@@ -5,11 +5,9 @@ author: OsbornAI
 author_social: https://twitter.com/BenOsbornAI
 date_published: 02/01/2021 
 keywords: rnn, tensorflow, character generation, text generation, lstm, text generator, gru, tensorflow, python
+img: https://images.pexels.com/photos/278888/pexels-photo-278888.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260
+img_alt: Pile of Scrabble Letter Pieces
 ---
-
-![Pile of Scrabble Letter Pieces](https://images.pexels.com/photos/278888/pexels-photo-278888.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260)
-
-<br />
 
 ### Introduction:
 In this article we're going to be building an RNN (Recurrent Neural Network) that generates text one character at a time. Before we get started it should be noted that the model we will be building in this episode certaintly won't be fooling any decent English teacher, but I encourage you to play around with the code featured to create a model that you're happy with. This tutorial is for educational purposes only, I DO NOT condone any misuse of this technology and I am NOT RESPONSIBLE for anything you do with it.

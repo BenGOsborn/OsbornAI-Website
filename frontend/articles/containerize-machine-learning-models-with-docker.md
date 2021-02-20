@@ -1,35 +1,33 @@
 ---
 title: How to containerize machine learning models using Docker
-description: This article demonstrates how to containerize any of your machine learning or deep learning model using Docker.
+description: This article demonstrates how to containerize any of your machine learning or deep learning models using Docker.
 author: OsbornAI
 author_social: https://twitter.com/BenOsbornAI
 date_published: 20/02/2021 
-keywords: docker, containerizing, tensorflow, machine learning, how to containerize a machine learning model, how to, deployment, environment, deep learning, consistent
+keywords: docker, containerizing, tensorflow, machine learning, how to containerize a machine learning model, how to, deployment, environment, deep learning, consistent, iris, insomnia, rest, api, cuda, gunicorn, flask
+img: https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260
+img_alt: Aerial View Photography of Container Van Lot
 ---
 
-![Aerial View Photography of Container Van Lot](https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260)
-
-<br />
-
 ### Introduction:
-Who would of thought that being able to bundle up your model into an environment that can be run on any computer without need for excess installations would be so useful? But surely that sounds way too good to be true, right? Wrong! Containerizing applications has become extremely popular within recent years, with no exception to the big data, machine learning and deep learning industry, which take advantage of this new technology to its fullest potential. 
+Imagine if you were able to take your entire machine learning project, and bundle it up with all the dependencies it requires to run into one nice little package that could be run on any PC without hassle? But surely that sounds way too good to be true, right? Wrong! Containerizing applications has become extremely popular within recent years with no exception to the big data, machine learning and deep learning industry, which take advantage of this new technology to its fullest potential. 
 
 <br />
 
-In this article you're going to learn what is containerization and why you should use it, what Docker is, and be provided with an example of how you can containerize a TensorFlow and Flask REST API using Docker.
+In this article you're going to learn what containerization is and why you should use it, what Docker is, and be provided with an example of how you can containerize a TensorFlow and Flask REST API using Docker.
 
 <br />
 
 ### What is containerization and why it is useful:
-As stated earlier, containerization is essentially the process of bundling together a project and its environment into virtual runtime environments which can then be deployed wherever and will run exactly according to how the environment was set up. 
+As stated earlier, containerization is essentially the process of bundling together a project and its environment into a neat little container which can then be deployed on any computer to run exactly as we specify. 
 
 <br />
 
-A container is essentially a miniature virtual server that contains all of the tools required to run your code. Ok, but why is that useful? Containers provide a simple way of sharing code with others without the need for them to set up their environment to run that code. This means that your code can now be run on almost any computer in the world that is able to run that container without the need for excess set up. 
+A container is essentially a miniature virtual machine that contains all of the code and tools required to run your application. Ok, but why is that useful? Containers provide a simple way of sharing code with others without the need for them to set up their environment to run that code, which will make your project portable. This means that your code can now be run on almost any computer in the world without the need to set up the runtime environment first. 
 
 <br />
 
-Lets say that I'm working on a machine learning model for a client using Python 3.8 and TensorFlow 2.0. I finish the application, and I explain to my client that the application is finished and ready for them to deploy. You send them your code, and tell them to install Python 3.8 and TensorFlow 2.0, which they say they already have installed. Two hours later you get a phone call saying that their team has been encountering an error when trying to run your code. You spend the next four hours working with them, before finding out that they were actually using Python 3.6, which did not support some features that the intended version of Python 3.8 did. You've fixed the problem, but now this mistake has wasted both parties time, given you a large headache and worst of all has damaged your reputation. If only there was something you could of done to prevent this...
+Lets say that you're working on a machine learning based application for a client using Python 3.8 and TensorFlow 2.0. You finish the application, and explain to your client that the application is finished and ready for them to use, and inform them that they will need to install Python 3.8 and TensorFlow 2.0 on the server of which they intend to run the project, which they say they already have installed. Two hours later you get a phone call saying that their team has been encountering an error when trying to run your application. You spend the next four hours working with them, before finding out that they were actually using Python 3.6, which did not support some features that the intended version of Python 3.8 did. You've fixed the problem, but now this mistake has wasted both parties time, given you a large headache and worst of all it has damaged your reputation. If only there was something you could of done to prevent this...
 
 <br />
 
@@ -38,7 +36,7 @@ Now let's say you created a container that contained the code for the model with
 <br />
 
 ### What is Docker:
-Docker is a platform that allows you to build, run and share containers to make containerizing your applications a straightforward process. In Docker, you containerize your applications by building a Docker image (a container). A Docker image usually consists of first declaring a base image to build upon, which is usually a base Operating System (Typically Linux) for you to run your code on. After that, you declare what files to include in the image, as well as any dependencies the project might need, and then how the container should go about executing your code. Once a container has been built, it can be run, which will start your application. You can also share your image around, allowing other people to run your code without needing to mess around installing dependencies.
+Docker is an application that allows you to build, run and share containers, and makes containerizing your applications a straightforward process. In Docker, you containerize your applications by building a Docker image (a container). A Docker image usually consists of first declaring a base image to build upon, which is usually a base Operating System (Typically Linux) or an existing runtime environment for you to run your code on. After that, you declare what files to include in the image, as well as any dependencies the project might need, as well as specifying how the container should go about executing your code. Once a container has been built, it can be run, which will start your application. You can also share your container around, allowing other people to run your code on their computers without needing to mess around installing dependencies.
 
 <br />
 
@@ -52,7 +50,7 @@ First, let's create a basic TensorFlow model. This model will be trained on the 
 
 <br />
 
-In a new file <i>model.py</i> in the <i>root</i> directory we'll first import our dependencies for this file, then declare our current working directory and set the random seed for NumPy and TensorFlow. Next we'll load the features and labels from the Iris dataset. We'll then concatenate our features and labels so that we can shuffle our data and keep them paired together. We will then split our data into a training and validation set. 80% of the data for our training set, and the remaining 20% will make up the validation set. The code for this section can be found below.
+In a new file <i>model.py</i> in the <i>root</i> directory we'll first import our dependencies for this file, then declare our current working directory and set the random seed for NumPy and TensorFlow. Next we'll load the features and labels from the Iris dataset, then concatenate our features and labels so that we can shuffle our data while keeping them paired together. We will then split our data into a training and validation set. 80% of the data will be used for the training set, and the remaining 20% will make up the validation set. The code for this section can be found below.
 
 <br />
 
@@ -126,16 +124,20 @@ model.save(os.path.join(BASE_PATH, 'model.h5')) # Save the model
 
 <br />
 
+Once the training has finished, you will see that the model was able to achieve roughly an 89% accuracy on the training data and and roughly an 93.3% accuracy on the validation data which we can accept.
+
+<br />
+
 #### Creating the API:
 Now we will create the API that will predict the category of flower that the features sent belong to.
 
 <br />
 
-In a new file <i>app.py</i> in the <i>root</i> directory we will import the dependencies for the project, and will define the class that will be responsible for predicting the cateogory of flower that the features belong to. We will call this class <code>Model</code> and will give it a constructor that will initialize the current working directory, load in our standardization parameters and set them as class members, load in the model and set is as a class member, and declare the mapping from the index of the category with the highest probability output by the model to the name of the flower that that index corresponds to and set is as a class member.
+In a new file <i>app.py</i> in the <i>root</i> directory we will import the dependencies for the project, and will define the class that will be responsible for predicting the cateogory of flower that each set of features belongs to. We will call this class <code>Model</code> and will give it a constructor that will initialize the current working directory, load in our standardization parameters and set them as class members, load in the model and set is as a class member, and declare the mapping from the index of the category with the highest probability output by the model to the name of the flower that that index corresponds to and set is as a class member.
 
 <br />
 
-Then we will create a class method <code>predict_labels</code> that will take in a set of features and determine what category of flowers those features correspond to. We will first standardize the input features using our standardizing mean and standard deviation, and will then make predictions of the labels of these standardized flower features using our model. We will then determine the indices with the highest probabilies for each set of outputs from the model (depending on the number of features fed to the model), which will then be converted to the corresponding name of the flower category. These labels will then be returned. The code for this section can be found below.
+Then we will create a class method <code>predict_labels</code> that will take in a set of features and determine what category of flowers those features correspond to. We will first standardize the input features using our standardizing mean and standard deviation, and will then make predictions of the labels of these standardized flower features using our model. We will then determine the indices with the highest probabilies for each set of outputs from the model (depending on the number of features fed to the model), which will then be given its appropriate flower name. These labels will then be returned. The code for this section can be found below.
 
 <br />
 
@@ -171,7 +173,7 @@ Now we're going to use Flask to create the API that will serve the <code>Model</
 
 <br />
 
-In the same file <i>app.py</i> we will initialize the Flask <code>app</code>m and then initialize our <code>Model</code> class and store it inside of the <code>app.config</code>. Now we will create the <i>/predict</i> route which will receive a set of features in the form of a POST request and will return the cateogry of flower of which each set of features belongs to. To do this we will define a route with the URL <i>/predict</i> that will only accept POST requests and will have strict slashes set to false.
+In the same file <i>app.py</i> we will initialize the Flask <code>app</code> and then initialize our <code>Model</code> class inside of the <code>app.config</code>. Now we will create the <i>/predict</i> route which will receive sets of features in the form of a POST request and will return the cateogry of flower of which each set of features belongs to. To do this we will define a route with the URL <i>/predict</i> that will only accept POST requests and will have strict slashes set to false.
 
 <br />
 
@@ -208,7 +210,7 @@ Now that we have created the API, it is time to package it all together into a D
 
 <br />
 
-Once you have installed Docker, the first thing you'll need to do is define the Python packages used for your project within a <i>requirements.txt</i> file located within the <i>root<i> directory. An example of the <i>requirements.txt</i> for this project can be found below. NOTE: while Gunicorn has not been used so far, it will be required for running our API in the container and therefore must be added to the <i>requirements.txt</i>. You may also notice that we have not included TensorFlow in the <i>requirements.txt<i>, and that is because it will already be installed in our environment, and therefore there is no need for us to reinstall it and risk breaking the environment.
+Once you have installed Docker, the first thing you'll need to do is define the Python packages used for your project within a <i>requirements.txt</i> file located within the <i>root<i> directory. An example of the <i>requirements.txt</i> for this project can be found below. NOTE: while Gunicorn has not been used so far, it will be required for running our API in the container and therefore must be added to the <i>requirements.txt</i>. You may also notice that we have not included TensorFlow in the <i>requirements.txt<i>, and that is because it will already be installed in our environment, and therefore there is no need for us to reinstall it and risk breaking the predefined environment.
 
 <br />
 
@@ -218,7 +220,7 @@ gunicorn==20.0.4
 ```
 <br />
 
-Now we will build our <i>Dockerfile</i> that will allow us to create an image containing our API and its necessary environment. Create a new file named <i>Dockerfile</i> EXACTLY with no file extensions inside of the <i>root</i> directory. Before you can continue building the image, you must install the base image in which we will be building upon. You can do this by downloading the following Docker image using the command below.
+Now we will build our <i>Dockerfile</i> that will allow us to create an image containing our API and its necessary environment. Create a new file named <i>Dockerfile</i> EXACTLY with no file extensions inside of the <i>root</i> directory. Before you can continue building the image, you must install the base image in which we will be building upon. You can do this by downloading the following Docker image using the first command below. This image will contain the environment required to run TensorFlow 2.4.1 with CUDA. If your GPU does not support CUDA, you can install the following Docker image instead using the second command below.
 
 <br />
 
@@ -228,17 +230,13 @@ docker pull tensorflow/tensorflow:2.4.1-gpu
 
 <br />
 
-This image will contain the environment required to run TensorFlow 2.4.1 with CUDA (GPU). If you do not have a GPU, you can install the following Docker image instead using the command below.
-
-<br />
-
 ```bash
 docker pull tensorflow/tensorflow:2.4.1
 ```
 
 <br />
 
-Now copy the lines of code listed below into your <i>Dockerfile</i>. The <code>FROM</code> keyword will determine what image we want to build our image on. The <code>COPY</code> keyword will copy all of the files within our <i>root</i> directory to an <i>app</i> folder on the image. We will the use the <code>RUN</code> keyword to install our requirements from our <i>requirements.txt</code>. We will then navigate on the image to the <i>app</i> directory using the <code>WORKDIR</code>. Finally, we will run the command <code>gunicorn app:app -b 0.0.0.0:8000</code> using the <code>CMD</code> keyword that will run our <i>app.py</i> with Gunicorn and will bind the server to your IP on the port of 8000. NOTE: if you installed TensorFlow image version 2.4.1 with no GPU support, change the first line of the file from <code>FROM tensorflow/tensorflow:2.4.1-gpu</code> to <code>FROM tensorflow/tensorflow:2.4.1</code>.
+Now copy the lines of code listed below into your <i>Dockerfile</i>. The <code>FROM</code> keyword will determine what image we want to build our image on. The <code>COPY</code> keyword will copy all of the files within our <i>root</i> directory to an <i>app</i> folder on the image. We will then use the <code>RUN</code> keyword to install our requirements from our <i>requirements.txt</code>. Next we'll navigate inside of the image to the <i>app</i> directory using the <code>WORKDIR</code>. Finally, we will run the command <code>gunicorn app:app -b 0.0.0.0:8000</code> using the <code>CMD</code> keyword that will run our <i>app.py</i> with Gunicorn and will bind the server to your IP on the port of 8000. NOTE: if you installed TensorFlow image version 2.4.1 with no CUDA support, change the first line of the file from <code>FROM tensorflow/tensorflow:2.4.1-gpu</code> to <code>FROM tensorflow/tensorflow:2.4.1</code>.
 
 <br />
 
@@ -266,7 +264,7 @@ docker build -t app .
 
 <br />
 
-You should see that the image was successfully built. If not go back and check that you followed all of the steps correctly. 
+You should see that the image was successfully built with the name <i>app</i>. If not go back and check that you followed all of the steps correctly. 
 
 <br />
 
@@ -281,13 +279,13 @@ docker run -p 8000:8000 app
 
 <br />
 
-You should see your container start with no errors. Now you can test your container by making a POST request to [http://127.0.0.1:8000/predict](http://127.0.0.1:8000/predict) with a JSON body with a key of <code>features</code> with a corresponding value of an array of your features you wish to predict. An example can be shown below using Insomnia.
+You should see your container start with no errors. Now you can test your container by making a POST request to [http://127.0.0.1:8000/predict](http://127.0.0.1:8000/predict) with a JSON body that has a key <code>features</code> with a corresponding value of an array containing the features you wish for the model to predict the categories of flowers they belong to. An example can be shown below using [Insomnia](https://insomnia.rest/).
 
 <br />
 
-![An example POST request to the container and its response containing the categories of which each flower belongs to](https://i.imgur.com/663sV4y.png)
+![An example POST request to the container and its response containing the categories of which each flower belongs to using Insomnia](https://i.imgur.com/663sV4y.png)
 
 <br />
 
 ### Outroduction:
-So now you know what containerization is and why its useful, what Docker is, as well as understanding how to actually build a Docker image/container yourself. So now take this knowledge and go and containerize all of your awesome machine learning and deep learning models to show off to the world, hassle free!
+So now you know what containerization is, why it's useful, what Docker is, as well as understanding how to actually build a Docker image/container yourself that contains a TensorFlow and Flask REST API. So now take this knowledge and go and containerize all of your awesome machine learning and deep learning models to show off to the world, hassle free!

@@ -5,11 +5,9 @@ author: OsbornAI
 author_social: https://twitter.com/BenOsbornAI
 date_published: 26/01/2021
 keywords: sklearn, scikit-learn, heroku, model, free, flask, python, deploy, gunicorn
+img: https://images.pexels.com/photos/2232917/pexels-photo-2232917.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260
+img_alt: Aerial View Photography of Container Van Lot
 ---
-
-![Clouds on Sky](https://images.pexels.com/photos/2232917/pexels-photo-2232917.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260)
-
-<br />
 
 ### Introduction:
 

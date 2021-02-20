@@ -5,11 +5,9 @@ author: OsbornAI
 author_social: https://twitter.com/BenOsbornAI
 date_published: 11/01/2021 
 keywords: autoencoder, face swap, deep fake, tensorflow, keras, tutorial, tensorflow, python, deepfake
+img: https://images.pexels.com/photos/1362371/pexels-photo-1362371.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260
+img_alt: Selective Focus Photography of Person Wearing Mask
 ---
-
-![Selective Focus Photography of Person Wearing Mask](https://images.pexels.com/photos/1362371/pexels-photo-1362371.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260)
-
-<br />
 
 ### Introduction:
 This article well demonstrate how you can build an autoencoder that can swap the face featured in an image with another. To do this we'll use a a deep convolutional autoencoder that we will build using TensorFlow and Keras. This tutorial is for educational purposes only, I DO NOT condone any misuse of this technology and I am NOT RESPONSIBLE for anything you do with it.

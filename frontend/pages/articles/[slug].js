@@ -30,6 +30,7 @@ export default function Article({ markdown, data, sorted_article_data }) {
                 <meta property="og:type" content="article" />
                 <meta property="og:title" content={`${data.title} - OsbornAI`} />
                 <meta property="og:description" content={data.description} />
+                <meta property="og:image" content={data.img} />
 
                 <meta name="twitter:title" content={`${data.title} - OsbornAI`} />
                 <meta name="twitter:description" content={data.description} />
@@ -38,6 +39,8 @@ export default function Article({ markdown, data, sorted_article_data }) {
                 <meta property="article:publisher" content="https://twitter.com/BenOsbornAI" />
                 <meta property="article:author" content={data.author_social} />
                 <meta property="article:published_time" content={parseBadDate(data.date_published)} />
+                <meta name="twitter:image" content={data.img} />
+                <meta name="twitter:image:alt" content={data.img_alt} />
             </Head>
             <div className="container">
                 <div className="container">
@@ -45,6 +48,8 @@ export default function Article({ markdown, data, sorted_article_data }) {
                         <h1 style={{fontWeight: 500}}>{data.title}</h1>
                         <p className="flow-text" style={{fontSize: 20}}>{data.author} - {data.date_published}</p>
                         <p className="flow-text">{data.description}</p>
+                        <br />
+                        <img className="responsive-img center" alt={data.img_alt} src={data.img} />
                     </div>
                     <br />
                     <br />
