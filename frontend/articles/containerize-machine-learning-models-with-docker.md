@@ -1,12 +1,14 @@
 ---
 title: How to containerize machine learning models using Docker
 description: This article demonstrates how to containerize any of your machine learning or deep learning models using Docker.
-author: OsbornAI
-author_social: https://twitter.com/BenOsbornAI
 date_published: 20/02/2021 
 keywords: docker, containerizing, tensorflow, machine learning, how to containerize a machine learning model, how to, deployment, environment, deep learning, consistent, iris, insomnia, rest, api, cuda, gunicorn, flask
 img: https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260
 img_alt: Aerial View Photography of Container Van Lot
+
+author: OsbornAI
+author_social: https://twitter.com/BenOsbornAI
+twitter: BenOsbornAI
 ---
 
 ### Introduction:

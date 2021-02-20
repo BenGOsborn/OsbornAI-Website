@@ -25,7 +25,7 @@ export default function Article({ markdown, data, sorted_article_data }) {
                 <title>{data.title} - OsbornAI</title>
                 <meta name="description" content={data.description} />
                 <meta name="keywords" content={data.keywords} />
-                <meta name="author" content={data.author} />
+                { data.author !== null ? <meta name="author" content={data.author} /> : <></> }
 
                 <meta property="og:type" content="article" />
                 <meta property="og:title" content={`${data.title} - OsbornAI`} />
@@ -34,13 +34,13 @@ export default function Article({ markdown, data, sorted_article_data }) {
 
                 <meta name="twitter:title" content={`${data.title} - OsbornAI`} />
                 <meta name="twitter:description" content={data.description} />
-                <meta name="twitter:creator" content={data.author_social} />
-
-                <meta property="article:publisher" content="https://twitter.com/BenOsbornAI" />
-                <meta property="article:author" content={data.author_social} />
-                <meta property="article:published_time" content={parseBadDate(data.date_published)} />
+                { data.twitter !== null ? <meta name="twitter:creator" content={`@${data.twitter}`} /> : <></> }
                 <meta name="twitter:image" content={data.img} />
                 <meta name="twitter:image:alt" content={data.img_alt} />
+
+                <meta property="article:publisher" content="https://twitter.com/BenOsbornAI" />
+                { data.author_social !== null ? <meta property="article:author" content={data.author_social} /> : <meta property="article:author" content="https://twitter.com/BenOsbornAI" /> }
+                <meta property="article:published_time" content={parseBadDate(data.date_published)} />
             </Head>
             <div className="container">
                 <div className="container">
