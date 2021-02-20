@@ -12,6 +12,7 @@ import { parseBadDate } from '../../extras/helpers';
 
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-docker';
 
 export default function Article({ markdown, data, sorted_article_data }) {
     React.useEffect(() => {
