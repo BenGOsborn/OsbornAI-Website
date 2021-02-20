@@ -128,3 +128,77 @@ model.save(os.path.join(BASE_PATH, 'model.h5')) # Save the model
 
 #### Creating the API
 Now we will create the API that will predict the category of flower that the features sent belong to.
+
+<br />
+
+First of all we will import the dependencies for the project, and will define the class that will be responsible for predicting the cateogory of flower that the features belong to. We will call this class <code>Model</code> and will give it a constructor that will initialize the current working directory, load in our standardization parameters and set them as class members, load in the model and set is as a class member, and declare the mapping from the index of the category with the highest probability output by the model to the name of the flower that that index corresponds to and set is as a class member.
+
+<br />
+
+Then we will create a class method <code>predict_labels</code> that will take in a set of features and determine what category of flowers those features correspond to. We will first standardize the input features using our standardizing mean and standard deviation, and will then make predictions of the labels of these standardized flower features using our model. We will then determine the indices with the highest probabilies for each set of outputs from the model (depending on the number of features fed to the model), which will then be converted to the corresponding name of the flower category. These labels will then be returned. The code for this section can be found below.
+
+<br />
+
+```python
+import numpy as np
+import pickle
+import tensorflow as tf
+from flask import Flask, request, jsonify
+import os
+
+class Model: # Create the class that will be used for predicting the class of a flower given its features
+    def __init__(self): # Define a constructor
+        base_path = os.getcwd() # Initialize the current directory
+
+        self.standardize = pickle.load(open(os.path.join(base_path, 'standardize.p'), 'rb')) # Load the standardization data from the pickle file
+        self.model = tf.keras.models.load_model(os.path.join(base_path, 'model.h5')) # Load the model
+
+        self.labels = {0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'} # Define the labels for the outputs of the model
+    
+    def predict_labels(self, features): # Create the function that will predict the labels given the inoput features
+        processed_features = (np.array(features) - self.standardize['mean']) / self.standardize['std'] # Standardize the features
+        predictions = self.model.predict(processed_features) # Predict the labels for the standardized features
+        predictions_argmax = np.argmax(predictions, axis=1).astype(int) # Choose the highest probability label as the predicted label
+
+        labels = [self.labels[pred] for pred in predictions_argmax] # Convert the output indeces from the network to the flowers corresponding label
+
+        return labels # Return the labels
+```
+
+<br />
+
+Now we're going to use Flask to create the API that will serve the <code>Model</code> class we just created.
+
+<br />
+
+First of all initialize the Flask <code>app</code>m and then initialize our <code>Model</code> class and store it inside of the <code>app.config</code>. Now we will create the <i>/predict</i> route which will receive a set of features in the form of a POST request and will return the cateogry of flower of which each set of features belongs to. To do this we will define a route with the URL <i>/predict</i> that will only accept POST requests and will have strict slashes set to false.
+
+<br />
+
+We will then define the function <code>predict</code> that will be called whenever a POST request is sent to this route. We will first get the JSON body from the request, and will then extract the features from the JSON body. We will then use our <code>Model</code> class to predict the category of flower that each set of features corresponds to, before returning these predictions in JSON.
+
+<br />
+
+Finally we will call our <code>app</code>. To do this we will specify that if we run this file directly, indicated by <code>__name__ == '__main__'</code> returning true, then we will run our <code>app</code>. The code for this section can be found below.
+
+<br>
+
+```python
+app = Flask(__name__) # Initialize flask
+
+app.config['MODEL'] = Model() # Initialize the model class
+
+@app.route('/predict', methods=['POST'], strict_slashes=False) # Create the route that will recieve a POST request containing the features of flowers to have their labels predicted
+def predict(): # Define the function that will be called when a post request is sent to this route
+    form = request.json # Get the json data from the request
+
+    features = form['features'] # Extract the features from the json body
+    predicted_labels = app.config['MODEL'].predict_labels(features) # Predict the labels of the features
+
+    return jsonify({'predicted_labels': predicted_labels}) # Return the predicted labels
+
+if __name__ == '__main__': # If this file is run directly
+    app.run() # Run the app
+```
+
+<br />
