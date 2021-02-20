@@ -8,8 +8,10 @@ import style from '../../styles/Markdown.module.css';
 import ArticleCard from '../../components/articleCard';
 import Prism from 'prismjs';
 
-import 'prismjs/components/prism-python';
 import { parseBadDate } from '../../extras/helpers';
+
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-bash';
 
 export default function Article({ markdown, data, sorted_article_data }) {
     React.useEffect(() => {

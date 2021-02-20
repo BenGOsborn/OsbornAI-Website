@@ -83,7 +83,7 @@ if __name__ == '__main__': # If this file is run directly
 
 Next we have to create a Procfile inside of our <i>deployment</i> folder. A Procfile contains the code that Heroku will use to start our <i>server.py file. The code for the Procfile can be found below. Note: Make sure you name the Procfile <i>Procfile</i> EXACTLY, with no file extensions, and a capital P. All of the code for the Procfile can be found below.
 
-```python
+```bash
 web: gunicorn server:app
 ```
 
