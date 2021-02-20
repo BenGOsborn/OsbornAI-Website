@@ -38,7 +38,7 @@ Now let's say you created a container that contained the code for the model with
 <br />
 
 ### What is Docker:
-Docker is a platform that allows you to build, run and share containers to make containerizing your applications a straightforward process. In Docker, you containerize your applications by building a Docker image. A Docker image usually consists of first declaring a base image to build upon, which is usually a base Operating System (Typically Linux) for you to run your code on. After that, you declare what files to include in the image, as well as any dependencies the project might need, and then how the container should go about executing your code. Once a container has been built, it can be run, which will start your application. You can also share your image around, allowing other people to run your code without needing to mess around installing dependencies.
+Docker is a platform that allows you to build, run and share containers to make containerizing your applications a straightforward process. In Docker, you containerize your applications by building a Docker image (a container). A Docker image usually consists of first declaring a base image to build upon, which is usually a base Operating System (Typically Linux) for you to run your code on. After that, you declare what files to include in the image, as well as any dependencies the project might need, and then how the container should go about executing your code. Once a container has been built, it can be run, which will start your application. You can also share your image around, allowing other people to run your code without needing to mess around installing dependencies.
 
 <br />
 
@@ -253,3 +253,41 @@ WORKDIR /app
 
 CMD gunicorn app:app -b 0.0.0.0:8000
 ```
+
+<br />
+
+Now navigate into your <i>root</i> directory and run the command below.
+
+<br />
+
+```bash
+docker build -t app .
+```
+
+<br />
+
+You should see that the image was successfully built. If not go back and check that you followed all of the steps correctly. 
+
+<br />
+
+#### Running the container:
+Now you can run your image by running the command below. NOTE: you can make the container run in the background by replacing <code>-p</code> with <code>-dp</code> in the command below.
+
+<br />
+
+```bash
+docker run -p 8000:8000 app
+```
+
+<br />
+
+You should see your container start with no errors. Now you can test your container by making a POST request to [http://127.0.0.1:8000/predict](http://127.0.0.1:8000/predict) with a JSON body with a key of <code>features</code> with a corresponding value of an array of your features you wish to predict. An example can be shown below using Insomnia.
+
+<br />
+
+![An example POST request to the container and its response containing the categories of which each flower belongs to](https://i.imgur.com/663sV4y.png)
+
+<br />
+
+### Outroduction:
+So now you know what containerization is and why its useful, what Docker is, as well as understanding how to actually build a Docker image/container yourself. So now take this knowledge and go and containerize all of your awesome machine learning and deep learning models to show off to the world, hassle free!
