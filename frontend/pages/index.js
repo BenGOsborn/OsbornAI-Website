@@ -63,9 +63,9 @@ export default function Home(props) {
 							</p>
 						</b>
 						<p style={{fontSize: 18}}>
-							Whether you want to know how data can help improve your business, or your growing business is collecting too much data that you don't know what to do with, we 
-							will work with you to find the best course of action to achieve your desired outcome and then implement these solutions for you quickly and in a way that will 
-							scale for however large your business may grow. Here's just a few of the problems we can help you with:
+							Whether you're curious about how data can help improve your business, or you need a solution to your rapdily growing data that your current system can't handle, we 
+							will work with you to find the most optimal and scalable solution for your problem and implement these solutions for you quickly and effectively. 
+							Here's a few examples of what we can do for you and your business:
 						</p>
 						<div className="row">
 							<div className="col s12 m6 l6">
@@ -95,7 +95,7 @@ export default function Home(props) {
 											<b>Data Collection and Metric Tracking</b>
 										</span>
 										<p>
-											Looking to get started with big data and analytics but not sure how to start? We'll work with you to design and implement tracking systems 
+											Looking to get started with big data and analytics but not sure how? We'll work with you to design and implement data tracking and collection systems 
 											for the most important metrics regarding your business that will yield the most insights about your business while mininimizing the amount of data 
 											collected, saving you money. 
 										</p>
@@ -154,8 +154,7 @@ export default function Home(props) {
 							</div>
 						</div>
 						<p style={{fontSize: 18}}>
-							And that’s just the beginning. If you’re interested in what we can do for your business, 
-							or have a project in mind that requires data, then <b>
+							And that’s just the beginning. If you’re interested in what data can do for your business, or have a project in mind that involves data, then <b>
 								<Link href="/#Inquire">
 									<a onClick={() => { 
 										sendEvent({ category: 'Interest', action: 'Showed interest in inquiring', label: '/#Service' });
