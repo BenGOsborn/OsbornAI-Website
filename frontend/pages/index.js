@@ -94,9 +94,10 @@ export default function Home(props) {
 										<span className="card-title">
 											<b>Data Collection and Metric Tracking</b>
 										</span>
-										<p>Looking to integrate data and analytics into your business but not sure how? We'll help you to find ways to collect data and track your users.
-											you can use.
-										</p>
+										<p>
+											Looking to get started with big data and analytics but not sure how to start? We'll work with you to find the most important metrics to track for your business 
+											that will yield the most insights about your business while minimizing the amount of data you collect to save you money, as well as working with you to integrate 
+											these tracking systems into your current business. </p>
 									</div>
 								</div>
 							</div>
