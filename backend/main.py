@@ -88,18 +88,18 @@ def validateToken():
 # -------------------------- Payment routes -----------------------------
 
 @app.route('/load_payment_id', methods=['POST'], strict_slashes=False)
-def validateId():
+def loadPaymentId():
     try:
         form_json = request.json
 
         payment_id = form_json['payment_id']
 
-        success = app.config['DB'].view_payment_id_details(payment_id)
+        success = app.config['DB'].admin_view_payment_id_details(payment_id)
 
         if not success['success']:
             return jsonify({'success': False, 'payment_id_info': sanitizeJSON(success['payment_id_info']), 'error_code': success['error_code'], 'error': success['error']}), 400
 
-        del success['payment_id_info']['intended_email']
+        del success['payment_id_info']['identifier']
 
         return jsonify({'success': True, 'payment_id_info': sanitizeJSON(success['payment_id_info'])}), 200
 
@@ -130,12 +130,12 @@ def createPaymentId():
     try:
         form_json = request.json
 
-        intended_email = form_json['intended_email']
+        identifier = form_json['identifier']
         purchase = form_json['purchase']
         amount = form_json['amount']
         currency = form_json['currency']
 
-        success = app.config['DB'].admin_create_payment_id(intended_email, purchase, amount, currency)
+        success = app.config['DB'].admin_create_payment_id(identifier, purchase, amount, currency)
 
         if not success['success']:
             return jsonify({'success': False, 'payment_details': sanitizeJSON(success['payment_details']), 'error_code': success['error_code'], 'error': success['error']}), 400
@@ -157,7 +157,7 @@ def pay():
         payment_token_json = form_json['token']
         payment_id = form_json['payment_id']
 
-        success = app.config['DB'].view_payment_id_details(payment_id)
+        success = app.config['DB'].admin_view_payment_id_details(payment_id)
         if not success['success']:
             return jsonify({'success': False, 'payment_success': payment_success, 'error_code': success['error_code'], 'error': success['error']}), 400
         

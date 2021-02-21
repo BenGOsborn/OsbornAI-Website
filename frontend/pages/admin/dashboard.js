@@ -8,7 +8,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
     const [inquiryNotifications, setInquiryNotifications] = React.useState(inquiry_notifications);
     const [paymentIds, setPaymentIds] = React.useState(payment_ids);
 
-    const [intendedEmail, setIntendedEmail] = useState(null);
+    const [identifier, setIdentifier] = useState(null);
     const [purchase, setPurchase] = useState(null);
     const [amount, setAmount] = useState(null);
     const [currency, setCurrency] = useState('aud');
@@ -190,7 +190,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                         <form onSubmit={e => {
                             e.preventDefault();
 
-                            axios.post('https://osbornai-backend.herokuapp.com/admin/create_payment_id', { token: token, intended_email: intendedEmail, purchase: purchase, amount: amount, currency: currency })
+                            axios.post('https://osbornai-backend.herokuapp.com/admin/create_payment_id', { token: token, identifier: identifier, purchase: purchase, amount: amount, currency: currency })
                             .then(res => {
                                 const payment_details = [res.data.payment_details];
                                 const new_payment_ids = [...payment_details, ...paymentIds];
@@ -204,7 +204,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                             });
                         }} id="createPaymentId">
                             <div className="input-field">
-                                <input type="text" placeholder="Intended email" required={true} onChange={e => {setIntendedEmail(e.target.value)}} />
+                                <input type="text" placeholder="Identifier" required={true} onChange={e => {setIdentifier(e.target.value)}} />
                                 <textarea className="materialize-textarea" placeholder="Purchase" required={true} onChange={e => {setPurchase(e.target.value)}} />
                                 <input type="number" min={1} step={0.01} placeholder="Amount" required={true} onChange={e => {setAmount(Math.max(1, e.target.value))}} />
                                 <select className="browser-default" onChange={e => {setCurrency(e.target.value)}}>
@@ -240,9 +240,9 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                                         <br />
                                         {payment_id._id}
                                         <br />
-                                        <b>Intended email:</b>
+                                        <b>Identifier:</b>
                                         <br />
-                                        {payment_id.intended_email}
+                                        {payment_id.identifier}
                                         <br />
                                         <b>Name:</b>
                                         <br />
