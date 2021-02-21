@@ -92,7 +92,7 @@ export default function Inquire(props) {
                     </p>
                 </b>
                 <p style={{fontSize: 18}}>
-                    Inquire below so we can get started. We look forward to working with you!
+                    Inquire about a consult below so we can get started. We look forward to working with you!
                 </p>
                 {isDisplayed()}
                 <br />
