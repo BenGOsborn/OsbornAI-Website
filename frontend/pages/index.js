@@ -78,9 +78,9 @@ export default function Home(props) {
 											<b>Data Analysis and Insight Extraction</b>
 										</span>
 										<p>
-											Got lots of data but no idea what to do with it? We'll transform your raw useless data into meaningful insights, reports
-											and visualizations that will allow you to understand your target audience and customer behaviours, helping you to make smarter business decisions 
-											and understand and focus on critical areas within your business.
+											Got lots of data but no idea what to do with it? We'll transform your raw data into meaningful insights, reports, and visualizations, 
+											allowing you to understand your target audience and their behaviours, helping you to make smarter business decisions and focus on 
+											critical areas within your business.
 										</p>
 									</div>
 								</div>
@@ -95,9 +95,10 @@ export default function Home(props) {
 											<b>Data Collection and Metric Tracking</b>
 										</span>
 										<p>
-											Looking to get started with big data and analytics but not sure how to start? We'll work with you to find the most important metrics to track for your business 
-											that will yield the most insights about your business while minimizing the amount of data you collect to save you money, as well as working with you to integrate 
-											these tracking systems into your current business. </p>
+											Looking to get started with big data and analytics but not sure how to start? We'll work with you to design and implement tracking systems 
+											for the most important metrics regarding your business that will yield the most insights about your business while mininimizing the amount of data 
+											collected, saving you money. 
+										</p>
 									</div>
 								</div>
 							</div>
@@ -112,8 +113,9 @@ export default function Home(props) {
 										<span className="card-title">
 											<b>Data Storage Solutions</b>
 										</span>
-										<p>In need of a new place to store your data? We'll work with you to find and implement the storage solution that will suit you and your business in the most 
-											cost effective and scalable way.
+										<p>
+											In need of a new place to store your data? We'll work with you to find and implement a scalable data storage solution that will suit your 
+											businesses data needs for now and the future, saving you future hassles and excess expenses.
 										</p>
 									</div>
 								</div>
@@ -127,8 +129,9 @@ export default function Home(props) {
 										<span className="card-title">
 											<b>Advertising Campaigns</b>
 										</span>
-										<p>Got a marketing campaign that isn't as effective as you'd like, or looking to start a campaign in a way that will maximize your return while minimizing your expenses?
-											We'll work with you to help you craft more effective campaigns that will directly target your main demographic, increasing your campaign effectiveness!
+										<p>
+											Struggling to build effective advertising campaigns? We'll work with you to craft successful advertising campaigns that will target your main demographic, 
+											allowing you to minimize your expenses on ads while maximizing your return!
 										</p>
 									</div>
 								</div>
@@ -136,14 +139,15 @@ export default function Home(props) {
 							<div className="col s12 m4 l4">
 								<div className="card">
 									<div className="card-image">
-										<img alt="Assorted-color Plastic Gear Lot" src="https://images.pexels.com/photos/1476320/pexels-photo-1476320.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
+										<img alt="Person Wearing Analog Watch" src="https://images.pexels.com/photos/23475/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=750&w=1260" />
 									</div>
 									<div className="card-content">
 										<span className="card-title">
 											<b>Automation</b>
 										</span>
-										<p>Spending too much time or money on an area of your business that involves repetitive tasks? Chances are we can find a way to automate it for you using 
-											state of the art machine learning and deep learning algorithms saving you time and money in the long run.
+										<p>
+											Spending too much time or money on repetitive tasks? Chances are we can find a way to automate it for you using 
+											state of the art machine learning and deep learning algorithms, saving you time, money, and human resources in the long run.
 										</p>
 									</div>
 								</div>

@@ -88,7 +88,7 @@ export default function Inquire(props) {
                 <br />
                 <b>
                     <p style={{fontSize: 23}}>
-                        Ready to take the next step for your business?
+                        Ready to enter the world of data and grow your business?
                     </p>
                 </b>
                 <p style={{fontSize: 18}}>
