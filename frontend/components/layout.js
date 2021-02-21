@@ -64,8 +64,8 @@ export default function Layout(props) {
                 <meta name="twitter:image" content="https://i.imgur.com/8FL8W7A.png" />
                 <meta name="twitter:image:alt" content="The banner of the OsbornAI website" />
 
-                <link rel="apple-touch-icon" href="/logo192.png" />
-                <link rel="apple-touch-startup-image" href="/logo192.png" />
+                <link rel="apple-touch-icon" href="/logoWhite192.png" />
+                <link rel="apple-touch-startup-image" href="/logoWhite192.png" />
 
                 <link rel="manifest" href="/manifest.json" />
 
