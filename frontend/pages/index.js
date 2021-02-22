@@ -68,7 +68,7 @@ export default function Home(props) {
 							Here's a few examples of what we can do for you and your business:
 						</p>
 						<div className="row">
-							<div className="col s12 m6 l6">
+							<div className="col s12 m4 l4">
 								<div className="card">
 									<div className="card-image">
 										<img alt="Black and Gray Laptop on Black Sectional Couch" src="https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
@@ -85,7 +85,7 @@ export default function Home(props) {
 									</div>
 								</div>
 							</div>
-							<div className="col s12 m6 l6">
+							<div className="col s12 m4 l4">
 								<div className="card">
 									<div className="card-image">
 										<img alt="Photo of Person Typing on Computer Keyboard" src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
@@ -96,14 +96,12 @@ export default function Home(props) {
 										</span>
 										<p>
 											Looking to get started with big data and analytics but not sure how? We'll work with you to design and implement data tracking and collection systems 
-											for the most important metrics regarding your business that will yield the most insights about your business while mininimizing the amount of data 
+											for the most important metrics regarding your business that will yield the most insights about your while mininimizing the amount of data 
 											collected, saving you money. 
 										</p>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div className="row">
 							<div className="col s12 m4 l4">
 								<div className="card">
 									<div className="card-image">
@@ -114,40 +112,9 @@ export default function Home(props) {
 											<b>Data Storage Solutions</b>
 										</span>
 										<p>
-											In need of a new place to store your data? We'll work with you to find and implement a scalable data storage solution that will suit your 
-											businesses data needs for now and the future, saving you future hassles and excess expenses.
-										</p>
-									</div>
-								</div>
-							</div>
-							<div className="col s12 m4 l4">
-								<div className="card">
-									<div className="card-image">
-										<img alt="Man Beside Woman Billboard" src="https://images.pexels.com/photos/1031700/pexels-photo-1031700.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" />
-									</div>
-									<div className="card-content">
-										<span className="card-title">
-											<b>Advertising Campaigns</b>
-										</span>
-										<p>
-											Struggling to build effective advertising campaigns? We'll work with you to craft successful advertising campaigns that will target your main demographic, 
-											allowing you to minimize your expenses on ads while maximizing your return!
-										</p>
-									</div>
-								</div>
-							</div>
-							<div className="col s12 m4 l4">
-								<div className="card">
-									<div className="card-image">
-										<img alt="Person Wearing Analog Watch" src="https://images.pexels.com/photos/23475/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=750&w=1260" />
-									</div>
-									<div className="card-content">
-										<span className="card-title">
-											<b>Automation</b>
-										</span>
-										<p>
-											Spending too much time or money on repetitive tasks? Chances are we can find a way to automate it for you using 
-											state of the art machine learning and deep learning algorithms, saving you time, money, and human resources in the long run.
+											In need of a new place to store your data? We'll work with you to find and implement a scalable data storage solution suits your 
+											businesses needs for now and the future, saving you future hassles and excess expenses. We will also work with you to implement custom ETL 
+											data pipelines that take your raw data and automatically transform and store it for quick access when you're making critical business decisions.
 										</p>
 									</div>
 								</div>
