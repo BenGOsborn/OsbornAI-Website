@@ -18,7 +18,7 @@ export default function Layout(props) {
         
         setBare(false);
 
-        const site_url = window.location.protocol + '//' + window.location.hostname + path;
+        const site_url = window.location.protocol + '//' + window.location.hostname + `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
         setSiteUrl(site_url);
 
         const exclusion_array = ['/admin', '/pay', '/legal'];
