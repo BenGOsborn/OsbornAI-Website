@@ -13,6 +13,8 @@ export default function Layout(props) {
     const router = useRouter();
 
     React.useEffect(() => {
+        TagManager.initialize({ gtmId: 'GTM-PKSW92X' });
+
         init();
         
         setBare(false);
