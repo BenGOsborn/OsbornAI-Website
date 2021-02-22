@@ -15,7 +15,7 @@ export default function Articles({ sorted_article_data }) {
 
     React.useEffect(() => {
         const handleScroll = (event) => {
-            if ((document.body.scrollHeight - window.scrollY < 1400) && (loading === false)) {
+            if ((document.body.scrollHeight - window.scrollY < 1600) && (loading === false)) {
                 setPage(prev => prev + 1);
             }
         };
@@ -50,36 +50,33 @@ export default function Articles({ sorted_article_data }) {
                 <meta name="twitter:title" content="Explore Our Articles - OsbornAI" />
                 <meta name="twitter:description" content="The full list of our existing articles containing the latest topics, news, and tutorials regarding all things data science!" />
             </Head>
-            <div className="container">
+            <br />
+            <br />
+            <div className="container center" >
+                <p style={{fontSize: 27.5, fontWeight: 475}} className="flow-text">
+                    Here's a list of our existing articles. Check back regularly to find
+                    the latest topics, news, and tutorials regarding all things data science!
+                </p>
                 <br />
                 <br />
-                <div className="container center" >
-                    <p style={{fontSize: 27.5, fontWeight: 475}} className="flow-text">
-                        Here's a list of our existing articles. Check back regularly to find
-                        the latest topics, news, and tutorials regarding all things data science!
-                    </p>
-                    <br />
-                    <br />
-                    <br />
-                    <div className="row">
-                        {articles.map(article => {
-                            if ((articles.length % 2 !== 0) && (article.ref === articles[articles.length - 1].ref)) {
-                                return (
-                                    <div key={article.ref} className="col s12 m12 l12">
-                                        <ArticleCard path={article.ref} title={article.title} author={article.author} date_published={article.date_published} />
-                                    </div>
-                                );
-                            } else {
-                                return (
-                                    <div key={article.ref} className="col s12 m12 l6">
-                                        <ArticleCard path={article.ref} title={article.title} author={article.author} date_published={article.date_published} />
-                                    </div>
-                                );
-                            }
-                        })}
-                    </div>
-                    <br />
+                <div className="row">
+                    {articles.map(article => {
+                        if ((articles.length % 2 !== 0) && (article.ref === articles[articles.length - 1].ref)) {
+                            return (
+                                <div key={article.ref} className="col s12 m12 l12">
+                                    <ArticleCard path={article.ref} title={article.title} description={article.description} img={article.img} img_alt={article.img_alt} author={article.author} date_published={article.date_published} />
+                                </div>
+                            );
+                        } else {
+                            return (
+                                <div key={article.ref} className="col s12 m12 l6">
+                                    <ArticleCard path={article.ref} title={article.title} description={article.description} img={article.img} img_alt={article.img_alt} author={article.author} date_published={article.date_published} />
+                                </div>
+                            );
+                        }
+                    })}
                 </div>
+                <br />
             </div>
         </div>
     );
@@ -91,7 +88,7 @@ export async function getStaticProps() {
         const parsed_markdown = matter(markdown);
         const data = parsed_markdown.data;
 
-        return { ref: `/articles/${filename.replace('.md', '')}`, title: data.title, author: data.author, date_published: data.date_published };
+        return { ref: `/articles/${filename.replace('.md', '')}`, title: data.title, description: data.description, img: data.img, img_alt: data.img_alt, author: data.author, date_published: data.date_published };
     });
     const sorted_article_data = article_data.sort((a, b) => { 
         return parseBadDate(b.date_published) - parseBadDate(a.date_published);
