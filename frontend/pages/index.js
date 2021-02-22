@@ -78,8 +78,8 @@ export default function Home(props) {
 											<b>Data Analysis and Insight Extraction</b>
 										</span>
 										<p>
-											Got lots of data but no idea what to do with it? We'll transform your raw data into meaningful insights, reports, and visualizations, 
-											allowing you to understand your target audience and their behaviours, helping you to make smarter business decisions and focus on 
+											Got lots of data but no idea what to do with it? We'll transform your raw data, regardless of the type of data into meaningful insights, 
+											reports, and visualizations, allowing you to understand your target audience and their behaviours, helping you to make smarter business decisions and focus on 
 											critical areas within your business.
 										</p>
 									</div>
