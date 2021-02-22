@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { sendEvent } from '../extras/analytics';
 
 export default function Home(props) {
 	return (
@@ -121,16 +120,8 @@ export default function Home(props) {
 							</div>
 						</div>
 						<p style={{fontSize: 18}}>
-							And that’s just the beginning. If you’re interested in what data can do for your business, or have a project in mind that involves data, then <b>
-								<Link href="/#Inquire">
-									<a onClick={() => { 
-										sendEvent({ category: 'Interest', action: 'Showed interest in inquiring', label: '/#Service' });
-									}
-									}>
-										inquire about a consult	
-									</a>
-								</Link>
-							</b> with us below and let’s get started!
+							And that’s just the beginning. If you’re interested in what data can do for your business, or have a project in mind that involves data, then <b><Link href="/#Inquire"><a>inquire about a consult</a></Link></b> with 
+							us below and let’s get started!
 						</p>
 					</div>
 				</span>

@@ -1,7 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
-import { sendEvent } from '../extras/analytics';
 import { getDaysSince } from '../extras/helpers';
 
 export default function Inquire(props) {
@@ -11,8 +9,6 @@ export default function Inquire(props) {
     const [last, setLast] = React.useState(null);
     const [email, setEmail] = React.useState(null);
     const [inquiry, setInquiry] = React.useState(null);
-
-    const router = useRouter();
 
     React.useEffect(() => {
         const prev_inquiry_date = localStorage.getItem('prev_inquiry_date');
@@ -34,9 +30,6 @@ export default function Inquire(props) {
 
             const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
-
-            const page_url = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
-            sendEvent({ category: 'Inquiry', action: 'Inquired', label: page_url });
         })
         .catch(err => {
             const form = err.response.data;

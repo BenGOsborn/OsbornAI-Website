@@ -1,10 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import TagManager from 'react-gtm-module';
 import Header from './header';
 import Inquire from './inquire';
 import Footer from './footer';
-import { init, sendPageView } from '../extras/analytics';
 
 export default function Layout(props) {
     const [siteUrl, setSiteUrl] = React.useState('');
@@ -13,14 +13,10 @@ export default function Layout(props) {
     const router = useRouter();
 
     React.useEffect(() => {
-        TagManager.initialize({ gtmId: 'GTM-PKSW92X' });
-
-        init();
+        const tagManagerArgs = { gtmId: 'GTM-PKSW92X' };
+        TagManager.initialize(tagManagerArgs);
         
         setBare(false);
-
-        const path = `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
-        sendPageView(path);
 
         const site_url = window.location.protocol + '//' + window.location.hostname + path;
         setSiteUrl(site_url);

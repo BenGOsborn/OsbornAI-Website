@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { sendEvent } from '../extras/analytics';
 
 export default function Header({ bare }) {
     const router = useRouter();
@@ -25,11 +24,6 @@ export default function Header({ bare }) {
         window.M.Sidenav.init(sidenavContainer, optionsSidenav);
     }, []);
 
-    function onInquiryClick() {
-        const page_url =`${router.pathname}`.replace(/\[.*?\]/, router.query.slug); 
-        sendEvent({ category: 'Interest', action: 'Showed interest in inquiring', label: page_url });
-    };
-
     return (
         <div className="Header">
             <header>
@@ -37,7 +31,7 @@ export default function Header({ bare }) {
                     <li><a className="sidenav-close" style={{color: '#1E88E5'}} href="#!">CLOSE</a></li>
                     <li><Link href="/#About"><a className="sidenav-close">ABOUT</a></Link></li>
                     <li><Link href="/#Services"><a className="sidenav-close">SERVICES</a></Link></li>
-                    {bare !== true ? <li><Link href={inquire_path}><a className="sidenav-close" onClick={onInquiryClick}>INQUIRE</a></Link></li> : <></>}
+                    {bare !== true ? <li><Link href={inquire_path}><a className="sidenav-close">INQUIRE</a></Link></li> : <></>}
                     <li><Link href="/articles"><a className="sidenav-close">ARTICLES</a></Link></li>
                 </ul>
                 <div className="navbar-fixed">
@@ -62,7 +56,7 @@ export default function Header({ bare }) {
                                         <li><Link href="/#Services"><a>SERVICES</a></Link></li>
                                     </ul>
                                     <ul className="right">
-                                        {bare !== true ? <li><Link href={inquire_path}><a onClick={onInquiryClick}>INQUIRE</a></Link></li> : <></>}
+                                        {bare !== true ? <li><Link href={inquire_path}><a>INQUIRE</a></Link></li> : <></>}
                                         <li><Link href="/articles"><a>ARTICLES</a></Link></li>
                                     </ul>
                                 </div>

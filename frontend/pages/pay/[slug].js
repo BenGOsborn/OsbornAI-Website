@@ -3,15 +3,9 @@ import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import Head from 'next/head';
 import { parseDate } from '../../extras/helpers';
-import { sendEvent, init } from '../../extras/analytics';
 
 export default function Payment({ status, payment_id_info }) {
     const [pageStatus, setPageStatus] = useState(status); // -1 is bad param, 0 is normal; 1 is error with payment; 2 is success
-
-    React.useEffect(() => {
-        init();
-        sendEvent({ category: 'Checkout', action: 'Navigated to checkout', label: payment_id_info._id });
-    }, []);
 
     function render() {
         if (pageStatus === -1) {
@@ -90,8 +84,6 @@ export default function Payment({ status, payment_id_info }) {
                                 axios.post('https://osbornai-backend.herokuapp.com/pay', { token: JSON.stringify(token), payment_id: payment_id_info._id })
                                 .then(res => {
                                     setPageStatus(2);
-
-                                    sendEvent({ category: 'Payment', action: 'Made a purchase', label: payment_id_info._id, value: parseInt((payment_id_info.amount * 100).toFixed(2)) });
                                 })
                                 .catch(err => {
                                     console.log(err.response.data);
