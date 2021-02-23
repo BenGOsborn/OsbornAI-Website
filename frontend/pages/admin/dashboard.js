@@ -17,12 +17,17 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
 
     const [displayCount, setDisplayCount] = useState(5);
 
+    const [basePath, setBasePath] = useState('https://osbornai.com');
+
     const router = useRouter();
 
     React.useEffect(() => {
         if (redirect) {
             router.push('/admin');
         } 
+
+        const base_path = 'https://' + window.location.hostname;
+        setBasePath(base_path);
     }, []);
 
     function component() {
@@ -245,7 +250,7 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
                             <h4 className="center">Payment IDs: ({Math.max(0, paymentIds.length - displayCount)} hidden)</h4>
                             {paymentIds.length === 0 ? <h5 className="center">There are no active payment ID's!</h5> : paymentIds.slice(0, displayCount).map(payment_id => {
                                 const href = `/pay/${payment_id._id}`;
-                                const payment_url = 'https://osbornai.com' + href;
+                                const payment_url = basePath + href;
 
                                 return (
                                     <div key={payment_id._id} className="card">
