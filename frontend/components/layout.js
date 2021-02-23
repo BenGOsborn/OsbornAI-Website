@@ -21,10 +21,6 @@ export default function Layout(props) {
         const site_url = 'https://osbornai.com' + `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
         setSiteUrl(site_url);
 
-        // if (window.location.protocol !== 'https:') {
-        //     router.push(site_url + window.location.hash);
-        // }
-
         const exclusion_array = ['/admin', '/pay', '/legal'];
         for (let i = 0; i < exclusion_array.length; i++) {
             const sub_url = exclusion_array[i];

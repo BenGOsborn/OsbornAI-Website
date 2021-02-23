@@ -81,11 +81,6 @@ export default function Admin({ redirect }) {
             <br />
             <br />
             <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
         </div>
     );
 };
