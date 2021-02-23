@@ -19,6 +19,5 @@ The website is built with JavaScript using [Next.js](https://nextjs.org/), a pop
 <br />
 
 ## Analytics
-The website uses [Google Analytics](https://analytics.google.com/analytics/web/) to track a users interactions with the website. It allows one to track specific events, such as if a user clicks a button or visits a page. It also allows one to track other statistics such as the country in which users are accessing the website from, where the website is receiving its traffic from, or the type of device that the users of the website are using. These statistics allow us to improve our website for our users and to create better, more useful content.
-
+The website uses [Google Analytics](https://analytics.google.com/analytics/web/) to track a users interactions with the website. It allows one to track specific events, such as if a user clicks a button or visits a page. It also allows one to track other statistics such as the country in which users are accessing the website from, where the website is receiving its traffic from, or the type of device that the users of the website are using. These statistics allow us to improve our website for our users and to create better, more useful content. We have installed Google Analytics on our website using [Google Tag Manager](https://tagmanager.google.com/) which provides a way to add a variety of tracking services to a website and provides a way to define specific events to be tracked without needing to modify the code of the website besides the initial install of the tag manager.
 
