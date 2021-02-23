@@ -327,16 +327,16 @@ export default function Dashboard({ redirect, token ,inquiry_notifications, paym
     return (
         <div className="Dashboard">
             <Head>
-                <title>Admin Dashboard - OsbornAI</title>
-                <meta name="description" content="The admin dashboard containing the analytics regarding our business." />
-                <meta name="keywords" content="admin, dashboard, osbornai, payments, analytics, data, osbornai, payments, payment ids, notifications, inquiries, inquire, inquiry" />
-                <meta name="robots" content="noindex, nofollow" />
+                <title key="title">Admin Dashboard - OsbornAI</title>
+                <meta name="description" content="The admin dashboard containing the analytics regarding our business." key="description" />
+                <meta name="keywords" content="admin, dashboard, osbornai, payments, analytics, data, osbornai, payments, payment ids, notifications, inquiries, inquire, inquiry" key="keywords" />
+                <meta name="robots" content="noindex, nofollow" key="robots" />
 
-                <meta property="og:title" content="Admin Dashboard - OsbornAI" />
-                <meta property="og:description" content="The admin dashboard containing the analytics regarding our business." />
+                <meta property="og:title" content="Admin Dashboard - OsbornAI" key="ogTitle" />
+                <meta property="og:description" content="The admin dashboard containing the analytics regarding our business." key="ogDescription" />
 
-                <meta name="twitter:title" content="Admin Dashboard - OsbornAI" />
-                <meta name="twitter:description" content="The admin dashboard containing the analytics regarding our business." />
+                <meta name="twitter:title" content="Admin Dashboard - OsbornAI" key="twitterTitle" />
+                <meta name="twitter:description" content="The admin dashboard containing the analytics regarding our business." key="twitterDescription" />
             </Head>
             {component()}
         </div>

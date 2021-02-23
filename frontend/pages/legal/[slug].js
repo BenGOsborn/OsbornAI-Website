@@ -9,17 +9,17 @@ export default function Legal({ markdown, data }) {
     return (
         <div className="Legal">
             <Head>
-                <title>{data.title} - OsbornAI</title>
-                <meta name="description" content={data.description} />
-                <meta name="keywords" content={data.keywords} />
-                <meta name="author" content="OsbornAI" />
+                <title key="title">{data.title} - OsbornAI</title>
+                <meta name="description" content={data.description} key="description" />
+                <meta name="keywords" content={data.keywords} key="keywords" />
+                <meta name="author" content="OsbornAI" key="author" />
 
-                <meta property="og:type" content="article" />
-                <meta property="og:title" content={`${data.title} - OsbornAI`} />
-                <meta property="og:description" content={data.description} />
+                <meta property="og:type" content="article" key="ogType" />
+                <meta property="og:title" content={`${data.title} - OsbornAI`} key="ogTitle" />
+                <meta property="og:description" content={data.description} key="ogDescription" />
 
-                <meta name="twitter:title" content={`${data.title} - OsbornAI`} />
-                <meta name="twitter:description" content={data.description} />
+                <meta name="twitter:title" content={`${data.title} - OsbornAI`} key="twitterTitle" />
+                <meta name="twitter:description" content={data.description} key="twitterDescription" />
             </Head>
             <div className="container">
                 <div className="container">

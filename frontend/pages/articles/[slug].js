@@ -22,25 +22,25 @@ export default function Article({ markdown, data, sorted_article_data }) {
     return (
         <div className="Article">
             <Head>
-                <title>{data.title} - OsbornAI</title>
-                <meta name="description" content={data.description} />
-                <meta name="keywords" content={data.keywords} />
-                { data.author !== null ? <meta name="author" content={data.author} /> : <></> }
+                <title key="title">{data.title} - OsbornAI</title>
+                <meta name="description" content={data.description} key="description" />
+                <meta name="keywords" content={data.keywords} key="keywords" />
+                { data.author !== null ? <meta name="author" content={data.author} key="author" /> : <></> }
 
-                <meta property="og:type" content="article" />
-                <meta property="og:title" content={`${data.title} - OsbornAI`} />
-                <meta property="og:description" content={data.description} />
-                <meta property="og:image" content={data.img} />
+                <meta property="og:type" content="article" key="ogType" />
+                <meta property="og:title" content={`${data.title} - OsbornAI`} key="ogTitle" />
+                <meta property="og:description" content={data.description} key="ogDescription" />
+                <meta property="og:image" content={data.img} key="ogImage" />
 
-                <meta name="twitter:title" content={`${data.title} - OsbornAI`} />
-                <meta name="twitter:description" content={data.description} />
-                { data.twitter !== null ? <meta name="twitter:creator" content={`@${data.twitter}`} /> : <></> }
-                <meta name="twitter:image" content={data.img} />
-                <meta name="twitter:image:alt" content={data.img_alt} />
+                <meta name="twitter:title" content={`${data.title} - OsbornAI`} key="twitterTitle" />
+                <meta name="twitter:description" content={data.description} key="twitterDescription" />
+                { data.twitter !== null ? <meta name="twitter:creator" content={`@${data.twitter}`} key="twitterCreator" /> : <></> }
+                <meta name="twitter:image" content={data.img} key="twitterImage" />
+                <meta name="twitter:image:alt" content={data.img_alt} key="twitterImageAlt" />
 
-                <meta property="article:publisher" content="https://twitter.com/BenOsbornAI" />
-                { data.author_social !== null ? <meta property="article:author" content={data.author_social} /> : <meta property="article:author" content="https://twitter.com/BenOsbornAI" /> }
-                <meta property="article:published_time" content={parseBadDate(data.date_published)} />
+                <meta property="article:publisher" content="https://twitter.com/BenOsbornAI" key="articlePublisher" />
+                { data.author_social !== null ? <meta property="article:author" content={data.author_social} /> : <meta property="article:author" content="https://twitter.com/BenOsbornAI" key="articleAuthor" /> }
+                <meta property="article:published_time" content={parseBadDate(data.date_published)} key="articlePublishedTime" />
             </Head>
             <div className="container">
                 <div className="container">

@@ -150,16 +150,16 @@ export default function Payment({ status, payment_id_info }) {
     return (
         <div className="Pay container center" style={{fontSize: 18}} >
             <Head>
-                <title>Complete The Payment Process - OsbornAI</title>
-                <meta name="description" content="Complete the payment process so that we can get started working with you!" />
-                <meta name="keywords" content="payment, pay, osbornai, checkout, money, buy, order" />
-                <meta name="robots" content="noindex, nofollow" />
+                <title key="title">Complete The Payment Process - OsbornAI</title>
+                <meta name="description" content="Complete the payment process so that we can get started working with you!" key="description" />
+                <meta name="keywords" content="payment, pay, osbornai, checkout, money, buy, order" key="keywords" />
+                <meta name="robots" content="noindex, nofollow" key="robots" />
 
-                <meta property="og:title" content="Complete The Payment Process - OsbornAI" />
-                <meta property="og:description" content="Complete the payment process so that we can get started working with you!" />
+                <meta property="og:title" content="Complete The Payment Process - OsbornAI" key="ogTitle" />
+                <meta property="og:description" content="Complete the payment process so that we can get started working with you!" key="ogDescription" />
 
-                <meta name="twitter:title" content="Complete The Payment Process - OsbornAI" />
-                <meta name="twitter:description" content="Complete the payment process so that we can get started working with you!" />
+                <meta name="twitter:title" content="Complete The Payment Process - OsbornAI" key="twitterTitle" />
+                <meta name="twitter:description" content="Complete the payment process so that we can get started working with you!" key="twitterDescription" />
             </Head>
             {render()}
         </div>

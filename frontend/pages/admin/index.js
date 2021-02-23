@@ -33,16 +33,16 @@ export default function Admin({ redirect }) {
     return (
         <div className="AdminLogin">
             <Head>
-                <title>Admin Login - OsbornAI</title>
-                <meta name="description" content="Log in using your admin credentials to view the admin dashboard." />
-                <meta name="keywords" content="admin, dashboard, osbornai, login, analytics, authentication, dashboard access, protected" />
-                <meta name="robots" content="noindex, nofollow" />
+                <title key="title">Admin Login - OsbornAI</title>
+                <meta name="description" content="Log in using your admin credentials to view the admin dashboard." key="description" />
+                <meta name="keywords" content="admin, dashboard, osbornai, login, analytics, authentication, dashboard access, protected" key="keywords" />
+                <meta name="robots" content="noindex, nofollow" key="robots" />
 
-                <meta property="og:title" content="Admin Login - OsbornAI" />
-                <meta property="og:description" content="Log in using your admin credentials to view the admin dashboard." />
+                <meta property="og:title" content="Admin Login - OsbornAI" key="ogTitle" />
+                <meta property="og:description" content="Log in using your admin credentials to view the admin dashboard." key="ogDescription" />
 
-                <meta name="twitter:title" content="Admin Login - OsbornAI" />
-                <meta name="twitter:description" content="Log in using your admin credentials to view the admin dashboard." />
+                <meta name="twitter:title" content="Admin Login - OsbornAI" key="twitterTitle" />
+                <meta name="twitter:description" content="Log in using your admin credentials to view the admin dashboard." key="twitterDescription" />
             </Head>
             <br />
             <br />

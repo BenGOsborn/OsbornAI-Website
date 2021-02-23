@@ -34,42 +34,42 @@ export default function Layout(props) {
     return (
         <>
             <Head>
-                <meta charSet="utf-8" />
-                <link rel="icon" href="/favicon.ico" />
-                <meta name="author" content="OsbornAI" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="theme-color" content="#1E88E5" />
-                <meta name="description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" />
-                <meta name="keywords" content="data analytics, business analytics, data dashboards, marketing analysis, business consulting, osbornai, machine learning, data science, artificial intelligence, ai, data" />
-                <meta name="robots" content="index, follow" />
-                <title>Grow Your Business Using Data and AI - OsbornAI</title>
+                <meta charSet="utf-8" key="charSet" />
+                <link rel="icon" href="/favicon.ico" key="icon" />
+                <meta name="author" content="OsbornAI" key="author" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
+                <meta name="theme-color" content="#1E88E5" key="themeColor" />
+                <meta name="description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" key="description" />
+                <meta name="keywords" content="data analytics, business analytics, data dashboards, marketing analysis, business consulting, osbornai, machine learning, data science, artificial intelligence, ai, data" key="keywords" />
+                <meta name="robots" content="index, follow" key="robots" />
+                <title key="title">Grow Your Business Using Data and AI - OsbornAI</title>
 
-                <link rel="canonical" href={siteUrl} />
+                <link rel="canonical" href={siteUrl} key="canonical" />
 
-                <meta property="og:locale" content="en_US" />
-                <meta property="og:type" content="company" />
-                <meta property="og:title" content="Grow Your Business Using Data and AI - OsbornAI" />
-                <meta property="og:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" />
-                <meta property="og:url" content={siteUrl} /> 
-                <meta property="og:site_name" content="OsbornAI" />
-                <meta property="og:image" content="https://i.imgur.com/8FL8W7A.png" />
+                <meta property="og:locale" content="en_US" key="ogLocale" />
+                <meta property="og:type" content="company" key="ogType" />
+                <meta property="og:title" content="Grow Your Business Using Data and AI - OsbornAI" key="ogTitle" />
+                <meta property="og:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" key="ogDescription" />
+                <meta property="og:url" content={siteUrl} key="ogUrl" /> 
+                <meta property="og:site_name" content="OsbornAI" key="ogSiteName" />
+                <meta property="og:image" content="https://i.imgur.com/8FL8W7A.png" key="ogImage" />
 
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:site" content="@BenOsbornAI" />
-                <meta name="twitter:creator" content="@BenOsbornAI" />
-                <meta name="twitter:title" content="Grow Your Business Using Data and AI - OsbornAI" />
-                <meta name="twitter:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" />
-                <meta name="twitter:image" content="https://i.imgur.com/8FL8W7A.png" />
-                <meta name="twitter:image:alt" content="The banner of the OsbornAI website" />
+                <meta name="twitter:card" content="summary_large_image" key="twitterCard" />
+                <meta name="twitter:site" content="@BenOsbornAI" key="twitterSite" />
+                <meta name="twitter:creator" content="@BenOsbornAI" key="twitterCreator" />
+                <meta name="twitter:title" content="Grow Your Business Using Data and AI - OsbornAI" key="twitterTitle" />
+                <meta name="twitter:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" key="twitterDescription" />
+                <meta name="twitter:image" content="https://i.imgur.com/8FL8W7A.png" key="twitterImage" />
+                <meta name="twitter:image:alt" content="The banner of the OsbornAI website" key="twitterImageAlt" />
 
-                <link rel="apple-touch-icon" href="/logoWhite192.png" />
-                <link rel="apple-touch-startup-image" href="/logoWhite192.png" />
+                <link rel="apple-touch-icon" href="/logoWhite192.png" key="appleTouchIcon" />
+                <link rel="apple-touch-startup-image" href="/logoWhite192.png" key="appleTouchStartupIcon" />
 
-                <link rel="manifest" href="/manifest.json" />
+                <link rel="manifest" href="/manifest.json" key="manifest" />
 
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" />
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" key="materializeJS" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" key="materializeCSS" />
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" key="materializeIcons" />
             </Head>
             <div id="Top" />
             <Header bare={bare} />
