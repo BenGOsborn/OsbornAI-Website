@@ -72,13 +72,13 @@ export default function Payment({ status, payment_id_info }) {
                         <br />
                         <b>Amount:</b>
                         <br />
-                        ${payment_id_info.amount} {payment_id_info.currency.toUpperCase()}
+                        ${parseFloat(payment_id_info.amount).toFixed(2)} {payment_id_info.currency.toUpperCase()}
                         <br />
                         <br />
                         <StripeCheckout stripeKey={process.env.STRIPE_KEY} 
                             name={payment_id_info.name}
                             description={payment_id_info.purchase}
-                            amount={(payment_id_info.amount * 100).toFixed(2)}
+                            amount={parseFloat(payment_id_info.amount * 100).toFixed(2)}
                             currency={payment_id_info.currency.toUpperCase()}
                             token={token => {
                                 axios.post('https://osbornai-backend.herokuapp.com/pay', { token: JSON.stringify(token), payment_id: payment_id_info._id })
@@ -167,7 +167,7 @@ export default function Payment({ status, payment_id_info }) {
 };
 
 export async function getServerSideProps({ req, res }) {
-    const payment_id = req.url.replace('/pay/', '');
+    const payment_id = req.__NEXT_INIT_QUERY.slug || req.url.replace('/pay/', '');
 
     try {
         const res = await axios.post('https://osbornai-backend.herokuapp.com/load_payment_id', { payment_id: payment_id });
@@ -175,7 +175,7 @@ export async function getServerSideProps({ req, res }) {
 
         return { props: { status: 0, payment_id_info: payment_id_info } };
 
-    } catch {
+    } catch (e) {
         return { props: { status: -1, payment_id_info: null } };
     }
 };
