@@ -22,7 +22,7 @@ export default function Layout(props) {
         setSiteUrl(site_url);
 
         if (window.location.protocol !== 'https:') {
-            router.push(site_url);
+            router.push(site_url + window.location.hash);
         }
 
         const exclusion_array = ['/admin', '/pay', '/legal'];
