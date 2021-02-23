@@ -6,10 +6,12 @@ const ArticleCard = ({ path, title, description, img, img_alt, author, date_publ
         <div className="ArticleCard">
             <div className="card white">
                 <div className="card-image">
-                    <img alt={img_alt} src={img} />
+                    <Link href={path}>
+                        <a><img alt={img_alt} src={img} /></a>
+                    </Link>
                 </div>
                 <div className="card-content black-text center">
-                    <span className="card-title truncate" style={{fontWeight: 500, fontSize: 20}}>
+                    <span className="card-title" style={{fontWeight: 500, fontSize: 20}}>
                         <Link href={path}>
                             <a className="truncate">{String(title).toUpperCase()}</a>
                         </Link>
