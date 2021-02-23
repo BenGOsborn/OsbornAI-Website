@@ -31,11 +31,15 @@ Our website takes advantage of third party services for collecting data regardin
 
 <br />
 
-Google Analytics is a third party service that allows us to track performance and how users interact with our site, so that we can then analyse these interactions to provide our users and clients with a better experience. Some of the metrics Google Analytics anonymously tracks include age, gender, web browser, IP address, location, and operating system. Google Analytics also allows us to track page views such as the number of times a page was viewed, the amount of time spent on the page, and the bounce rate for the page, as well as events that occur on a page such as button presses and link presses.
+Google Analytics is a third party service that allows us to track performance and how users interact with our site, so that we can then analyse these interactions to provide our users and clients with a better experience. Some of the metrics Google Analytics tracks include age, gender, web browser, IP address, location, and operating system. Google Analytics also allows us to track page views such as the number of times a page was viewed, the amount of time spent on the page, and the bounce rate for the page, as well as events that occur on a page such as button presses and link presses. Google Analytics is installed on our site using Google Tag Manager.
 
 <br />
 
 Stripe is a third party service that allows us to handle transactions on our site by letting us accept and charge credit cards without the need to handle the card details directly, providing a safe and secure way for our site to handle payments. On completing a payment, the details of the transaction will be stored in our database, and Stripe will store your email and card details safely and securely on their own servers. You and Stripe are the only parties aware of your card details, and neither us or Stripe will ever request to charge your card without your consent. Stripe will send the email you provided during the payment process a receipt upon a successful payment containing details of the payment.
+
+<br />
+
+Google Tag Manager is a third party service that allows us to track how users interact with our site, so that we can then analyse these interactions to provide our users and clients with a better experience. Some of the interactions Google Tag Manager tracks include the pages you visit on our site, the time you spend on those pages, and the buttons and links you interact with on our site. These metrics are then sent to the third party services that Google Tag Manager has been allocated to share them with. For our site, Google Tag Manager shares these metrics with Google Analytics.
 
 <br />
 
@@ -56,6 +60,10 @@ The third party service we use to accept payments on our site, Stripe, uses cook
 
 <br />
 
+The third party service we use for tracking user interactions on our site, Google Tag Manager and allows third party services such as Google Analytics to load their own cookies onto our site and also tracks events such as page views, time spent on pages, and clicks and button presses for these other third party services. These interactions collected by Google Tag Manager will be shared with these third party services, however we will never disclose any personal information you share with us to Google Tag Manager. We will send these interactions collected by Google Tag Manager to Google Analytics to allow us to track how our users interact with our website and how it is performing, which will allow us to improve the experience of our users and clients.
+
+<br />
+
 ### Your rights regarding your data
 You own the rights to your data, and thus have the right to view it and/or have it deleted at your request. 
 
@@ -65,7 +73,7 @@ If you would like to view your own personal data, you may contact us and we will
 
 <br />
 
-If you decide that you no longer would like us to store your data, then you make a request to have it deleted. You may contact us and tell us the data that you would like for us to delete, and we will clear it. You may not request another users data be deleted on behalf of them, and you must provide identification upon requesting the deletion of your data for the sole purpose of proving that you are who you say you are. It should also be noted that even if you have had your data wiped from our systems, your data will still continued to be collected when you use our site. You may request for your data to be deleted as many times as you wish.
+If you decide that you no longer would like us to store your data, then you make a request to have it deleted. You may contact us and tell us the data that you would like for us to delete, and we will clear it. You may not request another users data be deleted on behalf of them, and you must provide identification upon requesting the deletion of your data for the sole purpose of proving that you are who you say you are. It should also be noted that even if you have had your data wiped from our systems, your data will still continued to be collected when you use our site. You may request for your data to be deleted as many times as you wish. If you do not wish for us to collect your data, then you must immediately stop using any part of our site.
 
 <br />
 
