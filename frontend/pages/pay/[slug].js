@@ -72,7 +72,7 @@ export default function Payment({ status, payment_id_info }) {
                         <br />
                         <b>Amount:</b>
                         <br />
-                        ${parseFloat(payment_id_info.amount).toFixed(2)} {payment_id_info.currency.toUpperCase()}
+                        $<span id="gtm-amount">{parseFloat(payment_id_info.amount).toFixed(2)}</span> <span id="gtm-currency">{payment_id_info.currency.toUpperCase()}</span>
                         <br />
                         <br />
                         <StripeCheckout stripeKey={process.env.STRIPE_KEY} 
