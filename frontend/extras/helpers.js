@@ -33,9 +33,3 @@ export function getDaysSince(last_inquiry_raw) {
 
     return days_since;
 };
-
-export function formatDate(date) {
-    const date_string = date.getFullYear() + '-' + pad(date.getMonth() + 1, 2) + '-' + pad(date.getDate(), 2) + 'T13:00:00.000Z';
-
-    return date_string;
-};
