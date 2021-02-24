@@ -45,9 +45,10 @@ export default function Home(props) {
 						</div>
 						<br />
 						<p style={{fontSize: 20}}>
-							Here at OsbornAI, we understand the importance of data, so we make it our mission 
-							to help you use data in the most effective way for your business, so you can make 
-							smarter business decisions and tackle complex problems within your business.
+							Here at OsbornAI, we understand the importance of data to growing your business and 
+							increasing your revenue, so we make it our mission to help you use data in the most 
+							effective way for your business, so you can make smarter business decisions and tackle 
+							complex problems within your business.
 						</p>
 					</div>
 				</span>
@@ -62,9 +63,10 @@ export default function Home(props) {
 							</p>
 						</b>
 						<p style={{fontSize: 18}}>
-							Whether you're curious about how data can help improve your business, or you need a solution to your rapdily growing data that your current system can't handle, we 
-							will work with you to find the most optimal and scalable solution for your problem and implement these solutions for you quickly and effectively. 
-							Here's a few examples of what we can do for you and your business:
+							Whether you're curious about how data can help improve your business, or you need a solution 
+							to your rapidly growing data that your current system can't handle, we'll work with you to find the most 
+							optimal and scalable solution for your problem and implement these solutions for you quickly and effectively. 
+							Listed below are some examples of what we can do for you and your business:	
 						</p>
 						<div className="row">
 							<div className="col s12 m4 l4">
@@ -77,9 +79,10 @@ export default function Home(props) {
 											<b>Data Analysis and Insight Extraction</b>
 										</span>
 										<p>
-											Got lots of data but no idea what to do with it? We'll transform your raw data, regardless of the type of data into meaningful insights, 
-											reports, and visualizations, allowing you to understand your target audience and their behaviours, helping you to make smarter business decisions and focus on 
-											critical areas within your business.
+											Got lots of data but no idea what to do with it? We'll transform your raw data, regardless 
+											of the type of data into meaningful insights, reports, and visualizations, allowing you to 
+											understand your target audience and their behaviors, helping you to make smarter business 
+											decisions and focus on critical areas within your business.
 										</p>
 									</div>
 								</div>
@@ -94,9 +97,9 @@ export default function Home(props) {
 											<b>Data Collection and Metric Tracking</b>
 										</span>
 										<p>
-											Looking to get started with big data and analytics but not sure how? We'll work with you to design and implement data tracking and collection systems 
-											for the most important metrics regarding your business that will yield the most insights about your while mininimizing the amount of data 
-											collected, saving you money. 
+											Looking to get started with big data and analytics but not sure how? We'll work with you to design 
+											and implement data tracking and collection systems for the most important metrics regarding your business 
+											that will yield the most insights about your while minimizing the amount of data collected, saving you money.
 										</p>
 									</div>
 								</div>
@@ -111,9 +114,10 @@ export default function Home(props) {
 											<b>Data Storage Solutions</b>
 										</span>
 										<p>
-											In need of a new place to store your data? We'll work with you to find and implement a scalable data storage solution suits your 
-											businesses needs for now and the future, saving you future hassles and excess expenses. We will also work with you to implement custom ETL 
-											data pipelines that take your raw data and automatically transform and store it for quick access when you're making critical business decisions.
+											In need of a new place to store your data? We'll work with you to find and implement a scalable data storage 
+											solution that suits your business's needs for now and the future, saving you future hassles and excess expenses. 
+											We will also work with you to implement custom ETL data pipelines that take your raw data and automatically 
+											transform and store it for quick access when you're making critical business decisions. 
 										</p>
 									</div>
 								</div>
