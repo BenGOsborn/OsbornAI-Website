@@ -8,7 +8,7 @@ import style from '../../styles/Markdown.module.css';
 import ArticleCard from '../../components/articleCard';
 import Prism from 'prismjs';
 
-import { parseBadDate } from '../../extras/helpers';
+import { formatDate, parseBadDate } from '../../extras/helpers';
 
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-bash';
@@ -40,7 +40,7 @@ export default function Article({ markdown, data, sorted_article_data }) {
 
                 <meta property="article:publisher" content="https://twitter.com/BenOsbornAI" key="articlePublisher" />
                 { data.author_social !== null ? <meta property="article:author" content={data.author_social} /> : <meta property="article:author" content="https://twitter.com/BenOsbornAI" key="articleAuthor" /> }
-                <meta property="article:published_time" content={parseBadDate(data.date_published)} key="articlePublishedTime" />
+                <meta property="article:published_time" content={formatDate(parseBadDate(data.date_published))} key="articlePublishedTime" />
             </Head>
             <div className="container">
                 <div className="container">

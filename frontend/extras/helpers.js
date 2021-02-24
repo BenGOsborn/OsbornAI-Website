@@ -1,9 +1,10 @@
-export function parseDate(date_raw) {
-    const pad = (n, width) => {
-        n = n + '';
-        return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;  
-    };
+export function pad(n, width) {
+    n = n + '';
 
+    return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;  
+};
+
+export function parseDate(date_raw) {
     const date = new Date(date_raw);
 
     return `${pad(date.getDate(), 2)}/${pad(date.getMonth() + 1, 2)}/${pad(date.getFullYear(), 2)}`;
@@ -31,4 +32,10 @@ export function getDaysSince(last_inquiry_raw) {
     const days_since = parseInt((current_date - last_inquiry) / 8.64e7);
 
     return days_since;
+};
+
+export function formatDate(date) {
+    const date_string = date.getFullYear() + '-' + pad(date.getMonth() + 1, 2) + '-' + pad(date.getDate(), 2) + 'T13:00:00.000Z';
+
+    return date_string;
 };
