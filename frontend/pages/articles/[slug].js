@@ -58,43 +58,43 @@ export default function Article({ markdown, data, sorted_article_data }) {
                     </article>
                     <br />
                     <br />
-                    <div className="center">
-                        <p className="flow-text" style={{fontSize: 23}}>
-                            Enjoyed this article? Check out our most recent posts!
-                        </p>
-                        <div className="row">
-                            {sorted_article_data.length === 0 ? 
-                            <div className="container">
-                                <p className="flow-text" style={{fontSize: 20}}>
-                                    There are no other articles available at this time. Check back regularly to find the latest news and tutorials regarding all 
-                                    things data science and machine learning!
-                                </p>
-                            </div>
-                            :  sorted_article_data.slice(0, 3).map(article => {
-                                    if (sorted_article_data.length === 1) {
-                                        return (
-                                            <div key={article.ref} className="col s12 m12 l12">
-                                                <ArticleCard path={article.ref} title={article.title} date_published={article.date_published} author={article.author}  />
-                                            </div>
-                                        );
-
-                                    } else if (sorted_article_data.length === 2) {
-                                        return (
-                                            <div key={article.ref} className="col s12 m12 l6">
-                                                <ArticleCard path={article.ref} title={article.title} date_published={article.date_published} author={article.author}  />
-                                            </div>
-                                        );
-
-                                    } else {
-                                        return (
-                                            <div key={article.ref} className="col s12 m12 l4">
-                                                <ArticleCard path={article.ref} title={article.title} date_published={article.date_published} author={article.author}  />
-                                            </div>
-                                        );
-                                    }
-                                }
-                            )}
+                </div>
+                <div className="center">
+                    <p className="flow-text" style={{fontSize: 30}}>
+                        Enjoyed this article? Check out our most recent posts!
+                    </p>
+                    <div className="row">
+                        {sorted_article_data.length === 0 ? 
+                        <div className="container">
+                            <p className="flow-text" style={{fontSize: 20}}>
+                                There are no other articles available at this time. Check back regularly to find the latest news and tutorials regarding all 
+                                things data science and machine learning!
+                            </p>
                         </div>
+                        :  sorted_article_data.slice(0, 3).map(article => {
+                                if (sorted_article_data.length === 1) {
+                                    return (
+                                        <div key={article.ref} className="col s12 m12 l12">
+                                            <ArticleCard path={article.ref} title={article.title} img={article.img} img_alt={article.img_alt} description={article.description} date_published={article.date_published} author={article.author}  />
+                                        </div>
+                                    );
+
+                                } else if (sorted_article_data.length === 2) {
+                                    return (
+                                        <div key={article.ref} className="col s12 m12 l6">
+                                            <ArticleCard path={article.ref} title={article.title} img={article.img} img_alt={article.img_alt} description={article.description} date_published={article.date_published} author={article.author}  />
+                                        </div>
+                                    );
+
+                                } else {
+                                    return (
+                                        <div key={article.ref} className="col s12 m12 l4">
+                                            <ArticleCard path={article.ref} title={article.title} img={article.img} img_alt={article.img_alt} description={article.description} date_published={article.date_published} author={article.author}  />
+                                        </div>
+                                    );
+                                }
+                            }
+                        )}
                     </div>
                 </div>
             </div>
@@ -125,7 +125,7 @@ export async function getStaticProps({ params: { slug } }) {
         const parsed_md = matter(md);
         const data = parsed_md.data;
 
-        return { ref: `/articles/${filename.replace('.md', '')}`, title: data.title, author: data.author, date_published: data.date_published };
+        return { ref: `/articles/${filename.replace('.md', '')}`, title: data.title, img: data.img, img_alt: data.img_alt, description: data.description, author: data.author, date_published: data.date_published };
     });
     const sorted_article_data = other_article_data.sort((a, b) => { 
         return parseBadDate(b.date_published) - parseBadDate(a.date_published);
