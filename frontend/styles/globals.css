@@ -3,7 +3,7 @@ html {
 }
 
 .dynamic-text {
-	font-size: 1.8vw !important;
+	font-size: 1.5vw !important;
 }
 
 .input-field input:focus + label {

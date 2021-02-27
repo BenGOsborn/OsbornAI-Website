@@ -10,20 +10,18 @@ export default function Home(props) {
 						<br />
 						<br />
 						<div className="row center valign-wrapper hide-on-med-and-down">
-							<div className="col s12 m12 l6" style={{minWidth: 450}} >
+							<div className="col s12 m12 l6" >
 								<img className="responsive-img" alt="Black and Gray Mining Rig"
 								src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="562.5" height="375"/>
 							</div>
 							<div className="col s12 m12 l6">
-								<div style={{fontSize: 23}}>
-									<p className="dynamic-text">
-										Data can be confusing, but it’s also essential to the success of your business. 
-									</p>
-									<p className="dynamic-text">
-										Whether you’re a large company or a small business, correct usage of data will allow you to scale your 
-										business to new heights and increase your revenue.
-									</p>
-								</div>
+								<p className="dynamic-text">
+									Data can be confusing, but it’s also essential to the success of your business. 
+								</p>
+								<p className="dynamic-text">
+									Whether you’re a large company or a small business, correct usage of data will allow you to scale your 
+									business to new heights and increase your revenue.
+								</p>
 							</div>
 						</div>
 						<div className="row hide-on-large-only">
@@ -32,11 +30,11 @@ export default function Home(props) {
 								src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="843.75" height="562.5"/>
 							</div>
 							<div className="col s12 m12 l12">
-								<div style={{fontSize: 23}}>
-									<p className="flow-text">
+								<div style={{fontSize: 20}}>
+									<p>
 										Data can be confusing, but it’s also essential to the success of your business. 
 									</p>
-									<p className="flow-text">
+									<p>
 										Whether you’re a large company or a small business, correct usage of data will allow you to scale your 
 										business to new heights and increase your revenue.
 									</p>
@@ -44,12 +42,14 @@ export default function Home(props) {
 							</div>
 						</div>
 						<br />
-						<p style={{fontSize: 20}}>
-							Here at OsbornAI, we understand the importance of data to growing your business and 
-							increasing your revenue, so we make it our mission to help you use data in the most 
-							effective way for your business, so you can make smarter business decisions and tackle 
-							complex problems within your business.
-						</p>
+						<div style={{fontSize: 20}}>
+							<p>
+								Here at OsbornAI, we understand the importance of data to growing your business and 
+								increasing your revenue, so we make it our mission to help you use data in the most 
+								effective way for your business, so you can make smarter business decisions and tackle 
+								complex problems within your business.
+							</p>
+						</div>
 					</div>
 				</span>
 				<span id="Services">
