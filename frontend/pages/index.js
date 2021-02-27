@@ -10,37 +10,37 @@ export default function Home(props) {
 						<br />
 						<br />
 						<div className="row center valign-wrapper hide-on-med-and-down">
-							<div className="col s12 m12 l6">
-								<img className="responsive-img center" alt="Black and Gray Mining Rig"
+							<div className="col s12 m12 l6" style={{minWidth: 450}} >
+								<img className="responsive-img" alt="Black and Gray Mining Rig"
 								src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="562.5" height="375"/>
 							</div>
 							<div className="col s12 m12 l6">
-								<p style={{fontSize: 23}}>
-									<p>
+								<div style={{fontSize: 23}}>
+									<p className="dynamic-text">
 										Data can be confusing, but it’s also essential to the success of your business. 
 									</p>
-									<p>
+									<p className="dynamic-text">
 										Whether you’re a large company or a small business, correct usage of data will allow you to scale your 
 										business to new heights and increase your revenue.
 									</p>
-								</p>
+								</div>
 							</div>
 						</div>
-						<div className="row center hide-on-large-only">
-							<div className="col s12 m12 l12">
-								<img className="responsive-img center" alt="Black and Gray Mining Rig"
-								src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="562.5" height="375"/>
+						<div className="row hide-on-large-only">
+							<div className="col center s12 m12 l12">
+								<img className="responsive-img" alt="Black and Gray Mining Rig"
+								src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="843.75" height="562.5"/>
 							</div>
 							<div className="col s12 m12 l12">
-								<p style={{fontSize: 23}}>
-									<p>
+								<div style={{fontSize: 23}}>
+									<p className="flow-text">
 										Data can be confusing, but it’s also essential to the success of your business. 
 									</p>
-									<p>
+									<p className="flow-text">
 										Whether you’re a large company or a small business, correct usage of data will allow you to scale your 
 										business to new heights and increase your revenue.
 									</p>
-								</p>
+								</div>
 							</div>
 						</div>
 						<br />

@@ -2,6 +2,10 @@ html {
     scroll-behavior: smooth;
 }
 
+.dynamic-text {
+	font-size: 1.8vw !important;
+}
+
 .input-field input:focus + label {
   color: #1E88E5 !important;
 }
