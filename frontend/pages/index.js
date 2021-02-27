@@ -30,7 +30,7 @@ export default function Home(props) {
 								src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="843.75" height="562.5"/>
 							</div>
 							<div className="col s12 m12 l12">
-								<div style={{fontSize: 20}}>
+								<div style={{fontSize: 21}}>
 									<p>
 										Data can be confusing, but it’s also essential to the success of your business. 
 									</p>
