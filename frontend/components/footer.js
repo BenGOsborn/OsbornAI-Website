@@ -25,17 +25,16 @@ export default function Footer(props) {
                                 <a className="col s12 m12 l4" href="https://twitter.com/BenOsbornAI" target="_blank" rel="noreferrer" style={linkStyle}>Twitter</a>
                                 <a className="col s12 m12 l4" href="https://www.linkedin.com/in/OsbornAI/" target="_blank" rel="noreferrer" style={linkStyle}>LinkedIn</a>
                             </div>
-                            <div className="container" style={{paddingBottom: 10}}>
+                            <div style={{paddingBottom: 10}}>
                                 <div className="row">
-                                    <div className="col s12 m12 l6">
-                                        <Link href="/#Top">
-                                            <a style={linkStyle}>© Copyright OsbornAI {new Date().getFullYear()}</a>
-                                        </Link>
+                                    <div className="col s12 m12 l4">
+                                        <Link href="/#Top"><a style={linkStyle}>© Copyright OsbornAI {new Date().getFullYear()}</a></Link>
                                     </div>
-                                    <div className="col s12 m12 l6">
-                                        <Link href="/legal/privacy-policy">
-                                            <a style={linkStyle}>Privacy Policy</a>
-                                        </Link>
+                                    <div className="col s12 m12 l4">
+                                        <Link href="/legal/privacy-policy"><a style={linkStyle}>Privacy Policy</a></Link>
+                                    </div>
+                                    <div className="col s12 m12 l4">
+                                        <Link href="https://osbornai.com/admin"><a style={linkStyle}>Admin</a></Link>
                                     </div>
                                 </div>
                             </div>

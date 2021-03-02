@@ -364,6 +364,7 @@ export async function getServerSideProps({ req, res }) {
         await axios.post('https://osbornai-backend.herokuapp.com/admin/validate_token', { token: token });
         return_form.redirect = false;
     } catch {
+
         return { props: return_form };
     }
 
