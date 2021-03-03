@@ -16,9 +16,8 @@ export default function Footer(props) {
                 <div className="container center">
                     <div className="container">
                         <div className="container">
-                            <div className="container">
-                                <Link className="center" href={top_path}><a style={{ color: 'white', fontWeight: 500 }}>Top Of Page</a></Link>
-                            </div>
+                            <Link className="center" href={top_path}><a style={{ color: 'white', fontWeight: 500 }}>Top Of Page</a></Link>
+                            <br />
                             <br />
                             <div className="container row">
                                 <a className="col s12 m12 l4" href="https://github.com/OsbornAI" target="_blank" rel="noreferrer" style={linkStyle}>GitHub</a>
