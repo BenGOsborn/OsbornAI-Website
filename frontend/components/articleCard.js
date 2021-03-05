@@ -7,7 +7,7 @@ const ArticleCard = ({ path, title, description, img, img_alt, author, date_publ
             <div className="card white">
                 <div className="card-image">
                     <Link href={path}>
-                        <a><img alt={img_alt} src={img} /></a>
+                        <a><img alt={img_alt} src={img} style={{objectFit: 'cover', maxHeight: 300}} /></a>
                     </Link>
                 </div>
                 <div className="card-content black-text center">
