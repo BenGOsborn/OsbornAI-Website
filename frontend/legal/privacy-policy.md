@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 description: The privacy policy for the OsbornAI website.
-keywords: privacy policy, osbornai, privacy, policy, data collection, data privacy
+keywords: privacy policy, osbornai, data, why we collect your data, how we collect your data, what we use it for, third party services, advertising services, cookies, your rights regarding your data, contact information
 ---
 
 ### Why we collect your data

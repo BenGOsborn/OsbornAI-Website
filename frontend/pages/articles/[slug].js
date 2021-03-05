@@ -67,8 +67,8 @@ export default function Article({ markdown, data, sorted_article_data }) {
                         {sorted_article_data.length === 0 ? 
                         <div className="container">
                             <p className="flow-text" style={{fontSize: 20}}>
-                                There are no other articles available at this time. Check back regularly to find the latest news and tutorials regarding all 
-                                things data science and machine learning!
+                                There are no other articles available at this time. Check back regularly to find
+                                the latest topics, news, and tutorials regarding all things data and business!
                             </p>
                         </div>
                         :  sorted_article_data.slice(0, 3).map(article => {

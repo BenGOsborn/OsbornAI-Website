@@ -39,8 +39,8 @@ export default function Layout(props) {
                 <meta name="author" content="OsbornAI" key="author" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" key="viewport" />
                 <meta name="theme-color" content="#1E88E5" key="themeColor" />
-                <meta name="description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" key="description" />
-                <meta name="keywords" content="data analytics, business analytics, data dashboards, marketing analysis, business consulting, osbornai, machine learning, data science, artificial intelligence, ai, data" key="keywords" />
+                <meta name="description" content="We use data and AI to help you grow your business. If you are interested in what data can do your business, or have a project in mind that involves data, then inquire about a consult with us and let's get started!" key="description" />
+                <meta name="keywords" content="analytics, osbornai, data analysis, insights, business, reports, visualizations, target audience, data collection, metric tracking, big data, data tracking, metrics, data storage, scalable, pipelines, raw data, transform, decisions, data" key="keywords" />
                 <meta name="robots" content="index, follow" key="robots" />
                 <title key="title">Grow Your Business Using Data and AI - OsbornAI</title>
 
@@ -49,7 +49,7 @@ export default function Layout(props) {
                 <meta property="og:locale" content="en_US" key="ogLocale" />
                 <meta property="og:type" content="company" key="ogType" />
                 <meta property="og:title" content="Grow Your Business Using Data and AI - OsbornAI" key="ogTitle" />
-                <meta property="og:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" key="ogDescription" />
+                <meta property="og:description" content="We use data and AI to help you grow your business. If you are interested in what data can do your business, or have a project in mind that involves data, then inquire about a consult with us and let's get started!" key="ogDescription" />
                 <meta property="og:url" content={siteUrl} key="ogUrl" /> 
                 <meta property="og:site_name" content="OsbornAI" key="ogSiteName" />
                 <meta property="og:image" content="https://i.imgur.com/8FL8W7A.png" key="ogImage" />
@@ -58,7 +58,7 @@ export default function Layout(props) {
                 <meta name="twitter:site" content="@BenOsbornAI" key="twitterSite" />
                 <meta name="twitter:creator" content="@BenOsbornAI" key="twitterCreator" />
                 <meta name="twitter:title" content="Grow Your Business Using Data and AI - OsbornAI" key="twitterTitle" />
-                <meta name="twitter:description" content="We use data and AI to help you grow your business. If you have a project in mind that involves lots of data or are looking to grow your business, then book a consult with us, and let's get started!" key="twitterDescription" />
+                <meta name="twitter:description" content="We use data and AI to help you grow your business. If you are interested in what data can do your business, or have a project in mind that involves data, then inquire about a consult with us and let's get started!" key="twitterDescription" />
                 <meta name="twitter:image" content="https://i.imgur.com/8FL8W7A.png" key="twitterImage" />
                 <meta name="twitter:image:alt" content="The banner of the OsbornAI website" key="twitterImageAlt" />
 
