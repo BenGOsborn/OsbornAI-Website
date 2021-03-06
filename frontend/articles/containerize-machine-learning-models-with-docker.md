@@ -1,6 +1,6 @@
 ---
 title: How to containerize machine learning models using Docker
-description: This article provides as an introduction to containerization, what it is, and why it's useful. It also explains what Docker is, and then provides an example of how a Python, TensorFlow, and Flask REST API can be containerized using Docker.
+description: This article servers as an introduction to containerization, what it is, and why it's useful. It also explains what Docker is, and then provides an example of how a Python, TensorFlow, and Flask REST API can be containerized using Docker.
 date_published: 20/02/2021 
 keywords: containerize, containers, portable, tensorflow, flask, python, rest, api, docker, how to containerize an application, model, iris dataset, gpu, gunicorn, insomnia, CORS, server, post, app
 img: https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260

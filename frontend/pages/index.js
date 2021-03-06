@@ -12,13 +12,13 @@ export default function Home(props) {
 						<div className="row center valign-wrapper hide-on-med-and-down">
 							<div className="col s12 m12 l6" >
 								<img className="responsive-img" alt="Black and Gray Mining Rig"
-								src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="562.5" height="375"/>
+								src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" width="562.5" height="375" style={{objectFit: 'contain', minWidth: 375}}/>
 							</div>
-							<div className="col s12 m12 l6">
-								<p className="dynamic-text">
+							<div className="dynamic-text col s12 m12 l6" style={{paddingLeft: 50, paddingRight: 50}}>
+								<p>
 									Data can be confusing, but it’s also essential to the success of your business. 
 								</p>
-								<p className="dynamic-text">
+								<p>
 									Whether you’re a large company or a small business, correct usage of data will allow you to scale your 
 									business to new heights and increase your revenue.
 								</p>
