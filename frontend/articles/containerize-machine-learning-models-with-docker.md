@@ -1,8 +1,8 @@
 ---
 title: How to containerize machine learning models using Docker
-description: This article demonstrates how to containerize any of your machine learning or deep learning models using Docker.
+description: This article provides as an introduction to containerization, what it is, and why it's useful. It also explains what Docker is, and then provides an example of how a Python, TensorFlow, and Flask REST API can be containerized using Docker.
 date_published: 20/02/2021 
-keywords: docker, containerizing, tensorflow, machine learning, how to containerize a machine learning model, how to, deployment, environment, deep learning, consistent, iris, insomnia, rest, api, cuda, gunicorn, flask
+keywords: containerize, containers, portable, tensorflow, flask, python, rest, api, docker, how to containerize an application, model, iris dataset, gpu, gunicorn, insomnia, CORS, server, post, app
 img: https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260
 img_alt: Aerial View Photography of Container Van Lot
 
@@ -148,6 +148,7 @@ import numpy as np
 import pickle
 import tensorflow as tf
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 
 class Model: # Create the class that will be used for predicting the class of a flower given its features
@@ -175,7 +176,7 @@ Now we're going to use Flask to create the API that will serve the <code>Model</
 
 <br />
 
-In the same file <i>app.py</i> we will initialize the Flask <code>app</code> and then initialize our <code>Model</code> class inside of the <code>app.config</code>. Now we will create the <i>/predict</i> route which will receive sets of features in the form of a POST request and will return the cateogry of flower of which each set of features belongs to. To do this we will define a route with the URL <i>/predict</i> that will only accept POST requests and will have strict slashes set to false.
+In the same file <i>app.py</i> we will initialize the Flask <code>app</code> with CORS, and then our <code>Model</code> class inside of the <code>app.config</code>. Now we will create the <i>/predict</i> route which will receive sets of features in the form of a POST request and will return the cateogry of flower of which each set of features belongs to. To do this we will define a route with the URL <i>/predict</i> that will only accept POST requests and will have strict slashes set to false.
 
 <br />
 
@@ -189,6 +190,7 @@ Finally we will call our <code>app</code>. To do this we will specify that if we
 
 ```python
 app = Flask(__name__) # Initialize flask
+CORS(app) # Enable CORS
 
 app.config['MODEL'] = Model() # Initialize the model class
 
@@ -218,6 +220,7 @@ Once you have installed Docker, the first thing you'll need to do is define the 
 
 ```python
 Flask==1.1.1
+Flask-Cors==3.0.10
 gunicorn==20.0.4
 ```
 <br />
