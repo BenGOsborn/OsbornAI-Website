@@ -63,7 +63,7 @@ export default function Home(props) {
 							</p>
 						</b>
 						<p style={{fontSize: 18}}>
-							Whether you're curious about how data can help improve your business, or you need a solution 
+							Whether you're curious about how data can help improve your business or you need a solution 
 							to your rapidly growing data that your current system can't handle, we'll work with you to find the most 
 							optimal and scalable solution for your problem and implement these solutions for you quickly and effectively. 
 							Listed below are some examples of what we can do for you and your business:	
