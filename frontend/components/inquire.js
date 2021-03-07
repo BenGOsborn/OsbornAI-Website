@@ -5,6 +5,8 @@ import { getDaysSince } from '../extras/helpers';
 export default function Inquire(props) {
     const [daysSince, setDaysSince] = React.useState(Infinity);
 
+    const [sendError, setSendError] = React.useState(false);
+
     const [first, setFirst] = React.useState(null);
     const [last, setLast] = React.useState(null);
     const [email, setEmail] = React.useState(null);
@@ -30,15 +32,23 @@ export default function Inquire(props) {
 
             const days_since = getDaysSince(prev_inquiry_date);
             setDaysSince(days_since);
+
+            setSendError(false);
         })
         .catch(err => {
             const form = err.response.data;
+            const error_code = form.error_code;
 
-            const prev_inquiry_date = form.prev_inquiry_date;
-            localStorage.setItem('prev_inquiry_date', prev_inquiry_date);
+            if (error_code === 25) {
+                const prev_inquiry_date = form.prev_inquiry_date;
+                localStorage.setItem('prev_inquiry_date', prev_inquiry_date);
 
-            const days_since = getDaysSince(prev_inquiry_date);
-            setDaysSince(days_since);
+                const days_since = getDaysSince(prev_inquiry_date);
+                setDaysSince(days_since);
+
+            } else {
+                setSendError(true);
+            } 
         });
     }; 
 
@@ -79,15 +89,14 @@ export default function Inquire(props) {
             <div id="Inquire" className="container">
                 <br />
                 <br />
-                <b>
-                    <p style={{fontSize: 23}}>
-                        Ready to learn what data can do for your business?
-                    </p>
-                </b>
+                <p style={{fontSize: 23}}>
+                    <b>Ready to learn what data can do for your business?</b>
+                </p>
                 <p style={{fontSize: 18}}>
                     Inquire about a consult below so we can get started. We look forward to working with you!
                 </p>
                 {isDisplayed()}
+                {sendError === true ? <p className="flow-text" style={{color: 'red'}}>Failed to send inquiry. Please try again!</p> : <></>}
                 <br />
                 <br />
             </div>
