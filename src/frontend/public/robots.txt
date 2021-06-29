@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
-Sitemap: https://osbornai.com/sitemap.xml
+Sitemap: https://osbornai-frontend.herokuapp.com/sitemap.xml
 User-agent: *
 Disallow:
