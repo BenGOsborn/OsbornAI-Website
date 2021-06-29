@@ -1,0 +1,25 @@
+{
+    "name": "OsbornAI",
+    "short_name": "OsbornAI",
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#1E88E5",
+    "background_color": "#1E88E5",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "48x48",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "logoWhite192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "logo192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
