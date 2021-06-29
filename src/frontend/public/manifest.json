@@ -1,7 +1,7 @@
 {
     "name": "OsbornAI",
     "short_name": "OsbornAI",
-    "start_url": ".",
+    "start_url": "/",
     "display": "standalone",
     "theme_color": "#1E88E5",
     "background_color": "#1E88E5",

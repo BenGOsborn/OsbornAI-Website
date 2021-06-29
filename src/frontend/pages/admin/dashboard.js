@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { parseDate } from "../../extras/helpers";
+import { siteURL } from "../../next.config";
 
 export default function Dashboard({
     redirect,
@@ -453,8 +454,7 @@ export default function Dashboard({
                                     .slice(0, displayCount)
                                     .map((payment_id) => {
                                         const href = `/pay/${payment_id._id}`;
-                                        const payment_url =
-                                            "https://osbornai.com" + href;
+                                        const payment_url = siteURL + href;
 
                                         return (
                                             <div

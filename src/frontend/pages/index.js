@@ -100,7 +100,7 @@ export default function Home(props) {
                             you and your business:
                         </p>
                         <div className="row">
-                            <div className="col s12 m4 l4">
+                            <div className="col s12 m12 l4">
                                 <div className="card">
                                     <div className="card-image">
                                         <img
@@ -118,11 +118,10 @@ export default function Home(props) {
                                         <p>
                                             Got lots of data but no idea what to
                                             do with it? We'll transform your raw
-                                            data, regardless of the type of data
-                                            into meaningful insights, reports,
-                                            and visualizations, allowing you to
-                                            understand your target audience and
-                                            their behaviors, helping you to make
+                                            data into meaningful insights,
+                                            allowing you to better understand
+                                            your target audience and their
+                                            behaviors, helping you to make
                                             smarter business decisions and focus
                                             on critical areas within your
                                             business.
@@ -130,7 +129,7 @@ export default function Home(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col s12 m4 l4">
+                            <div className="col s12 m12 l4">
                                 <div className="card">
                                     <div className="card-image">
                                         <img
@@ -150,17 +149,15 @@ export default function Home(props) {
                                             and analytics but not sure how?
                                             We'll work with you to design and
                                             implement data tracking and
-                                            collection systems for the most
-                                            important metrics regarding your
-                                            business that will yield the most
-                                            insights about your while minimizing
-                                            the amount of data collected, saving
-                                            you money.
+                                            collection systems that will yield
+                                            the most insights for your business
+                                            while minimizing the amount of data
+                                            collected, saving you money.
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col s12 m4 l4">
+                            <div className="col s12 m12 l4">
                                 <div className="card">
                                     <div className="card-image">
                                         <img
@@ -173,19 +170,17 @@ export default function Home(props) {
                                             <b>Data Storage Solutions</b>
                                         </span>
                                         <p>
-                                            In need of a new place to store your
+                                            In need of a place to store your
                                             data? We'll work with you to find
                                             and implement a scalable data
                                             storage solution that suits your
                                             business's needs for now and the
-                                            future, saving you future hassles
-                                            and excess expenses. We will also
-                                            work with you to implement custom
-                                            ETL data pipelines that take your
-                                            raw data and automatically transform
-                                            and store it for quick access when
-                                            you're making critical business
-                                            decisions.
+                                            future. We will also work with you
+                                            to implement custom ETL data
+                                            pipelines that automatically
+                                            transform your raw data and store it
+                                            for quick access when you're making
+                                            critical business decisions.
                                         </p>
                                     </div>
                                 </div>
