@@ -18,7 +18,7 @@ CORS(app)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['DB'] = Database()
 
-stripe.api_key = os.getenv('STRIPE_SECRET')
+stripe.api_key = os.getenv('STRIPE_SECRET_TEST') if "DYNO" not in os.environ else os.getenv('STRIPE_SECRET')
 
 # -------------------------- Helper Functions ---------------------------
 

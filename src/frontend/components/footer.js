@@ -29,7 +29,7 @@ export default function Footer(props) {
                             <div className="container row">
                                 <a
                                     className="col s12 m12 l4"
-                                    href="https://github.com/OsbornAI"
+                                    href="https://github.com/BenGOsborn"
                                     target="_blank"
                                     rel="noreferrer"
                                     style={linkStyle}
@@ -38,7 +38,7 @@ export default function Footer(props) {
                                 </a>
                                 <a
                                     className="col s12 m12 l4"
-                                    href="https://twitter.com/BenOsbornAI"
+                                    href="https://twitter.com/BenGOsborn"
                                     target="_blank"
                                     rel="noreferrer"
                                     style={linkStyle}
@@ -73,7 +73,7 @@ export default function Footer(props) {
                                         </Link>
                                     </div>
                                     <div className="col s12 m12 l4">
-                                        <Link href="https://osbornai.com/admin">
+                                        <Link href="/admin">
                                             <a style={linkStyle}>Admin</a>
                                         </Link>
                                     </div>

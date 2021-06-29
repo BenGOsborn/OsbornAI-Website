@@ -86,7 +86,11 @@ export default function Payment({ status, payment_id_info }) {
                         <br />
                         <br />
                         <StripeCheckout
-                            stripeKey={process.env.STRIPE_KEY}
+                            stripeKey={
+                                process.env.NODE_ENV !== "production"
+                                    ? process.env.STRIPE_PUBLIC_TEST
+                                    : process.env.STRIPE_PUBLIC
+                            }
                             name={payment_id_info.name}
                             description={payment_id_info.purchase}
                             amount={parseFloat(
