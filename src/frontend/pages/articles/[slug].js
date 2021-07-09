@@ -11,10 +11,6 @@ import ArticleCard from "../../components/articleCard";
 import { parseBadDate } from "../../extras/helpers";
 
 export default function Article({ markdown, data, sorted_article_data }) {
-    React.useEffect(() => {
-        Prism.highlightAll();
-    });
-
     return (
         <div className="Article">
             <Head>
