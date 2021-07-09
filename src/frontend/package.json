@@ -13,12 +13,13 @@
     "cookie": "^0.4.1",
     "gray-matter": "^4.0.3",
     "next": "11.0.1",
-    "prismjs": "^1.24.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-gtm-module": "^2.0.11",
     "react-markdown": "^6.0.2",
-    "react-stripe-checkout": "^2.6.3"
+    "react-stripe-checkout": "^2.6.3",
+    "rehype-raw": "^5.1.0",
+    "rehype-sanitize": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "7.30.0",

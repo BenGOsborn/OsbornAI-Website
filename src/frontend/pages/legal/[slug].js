@@ -4,6 +4,8 @@ import path from "path";
 import style from "../../styles/Markdown.module.css";
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 
 export default function Legal({ markdown, data }) {
     return (
@@ -49,7 +51,9 @@ export default function Legal({ markdown, data }) {
                     <br />
                     <br />
                     <article className={style.markdown}>
-                        <ReactMarkdown allowDangerousHtml={true}>
+                        <ReactMarkdown
+                            rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                        >
                             {markdown}
                         </ReactMarkdown>
                     </article>

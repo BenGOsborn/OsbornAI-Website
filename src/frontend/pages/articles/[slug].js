@@ -4,15 +4,12 @@ import path from "path";
 import Head from "next/head";
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 import style from "../../styles/Markdown.module.css";
 import ArticleCard from "../../components/articleCard";
 import Prism from "prismjs";
-
 import { parseBadDate } from "../../extras/helpers";
-
-import "prismjs/components/prism-python";
-import "prismjs/components/prism-bash";
-import "prismjs/components/prism-docker";
 
 export default function Article({ markdown, data, sorted_article_data }) {
     React.useEffect(() => {
@@ -119,7 +116,9 @@ export default function Article({ markdown, data, sorted_article_data }) {
                     <br />
                     <br />
                     <article className={style.markdown}>
-                        <ReactMarkdown allowDangerousHtml={true}>
+                        <ReactMarkdown
+                            rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                        >
                             {markdown}
                         </ReactMarkdown>
                     </article>

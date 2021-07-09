@@ -222,7 +222,7 @@ Now that we have created the API, it is time to package it all together into a D
 
 <br />
 
-Once you have installed Docker, the first thing you'll need to do is define the Python packages used for your project within a <i>requirements.txt</i> file located within the <i>root<i> directory. An example of the <i>requirements.txt</i> for this project can be found below. NOTE: while Gunicorn has not been used so far, it will be required for running our API in the container and therefore must be added to the <i>requirements.txt</i>. You may also notice that we have not included TensorFlow in the <i>requirements.txt<i>, and that is because it will already be installed in our environment, and therefore there is no need for us to reinstall it and risk breaking the predefined environment.
+Once you have installed Docker, the first thing you'll need to do is define the Python packages used for your project within a <i>requirements.txt</i> file located within the <i>root</i> directory. An example of the <i>requirements.txt</i> for this project can be found below. NOTE: while Gunicorn has not been used so far, it will be required for running our API in the container and therefore must be added to the <i>requirements.txt</i>. You may also notice that we have not included TensorFlow in the <i>requirements.txt</i>, and that is because it will already be installed in our environment, and therefore there is no need for us to reinstall it and risk breaking the predefined environment.
 
 <br />
 
