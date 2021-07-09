@@ -5,7 +5,6 @@ import TagManager from "react-gtm-module";
 import Header from "./header";
 import Inquire from "./inquire";
 import Footer from "./footer";
-import { siteURL } from "../next.config";
 
 export default function Layout(props) {
     const [siteUrl, setSiteUrl] = React.useState("");
@@ -20,7 +19,7 @@ export default function Layout(props) {
         setBare(false);
 
         const site_url =
-            siteURL +
+            process.env.siteURL +
             `${router.pathname}`.replace(/\[.*?\]/, router.query.slug);
         setSiteUrl(site_url);
 
