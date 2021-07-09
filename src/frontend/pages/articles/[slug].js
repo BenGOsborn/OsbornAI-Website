@@ -8,7 +8,6 @@ import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import style from "../../styles/Markdown.module.css";
 import ArticleCard from "../../components/articleCard";
-import Prism from "prismjs";
 import { parseBadDate } from "../../extras/helpers";
 
 export default function Article({ markdown, data, sorted_article_data }) {
