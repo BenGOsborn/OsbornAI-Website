@@ -1,5 +1,4 @@
 from pymongo import MongoClient
-import json
 from datetime import datetime, timedelta
 import dotenv
 import os
