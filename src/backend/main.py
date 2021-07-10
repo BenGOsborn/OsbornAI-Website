@@ -5,10 +5,12 @@ import os
 from database import Database, ErrorCodes
 import dotenv
 from utils import *
+from admin.admin_routes import admin
 
 dotenv.load_dotenv()
 
 app = Flask(__name__)
+app.register_blueprint(admin)
 CORS(app)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -89,8 +91,6 @@ def pay():
         err = traceback.format_exc()
         print(err)
         return jsonify({'success': False, 'payment_success': payment_success, 'error_code': ErrorCodes.error_code_other, 'error': err}), 400
-
-# ------------------- Inquiry routes -----------------------
 
 @app.route('/add_inquiry', methods=['POST'], strict_slashes=False)
 def addInquiry():
