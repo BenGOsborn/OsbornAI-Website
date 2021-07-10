@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const ArticleCard = ({
     path,
@@ -16,9 +17,11 @@ const ArticleCard = ({
                 <div className="card-image">
                     <Link href={path}>
                         <a>
-                            <img
+                            <Image
                                 alt={img_alt}
                                 src={img}
+                                width={1260}
+                                height={750}
                                 style={{ objectFit: "cover", maxHeight: 300 }}
                             />
                         </a>

@@ -55,10 +55,11 @@ export default function NotFound(props) {
                     <br />
                     <br />
                     <h1>404 Error:</h1>
-                    <h3>The page you're looking for cannot be found!</h3>
+                    <h3>{"The page you're looking for cannot be found!"}</h3>
                     <p className="flow-text">
-                        Here are some links to help you find what you're looking
-                        for:
+                        {
+                            "Here are some links to help you find what you're looking for:"
+                        }
                     </p>
                     <br />
                     <br />

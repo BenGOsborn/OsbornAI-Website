@@ -9,6 +9,7 @@ import rehypeSanitize from "rehype-sanitize";
 import style from "../../styles/Markdown.module.css";
 import ArticleCard from "../../components/articleCard";
 import { parseBadDate } from "../../extras/helpers";
+import Image from "next/image";
 
 export default function Article({ markdown, data, sorted_article_data }) {
     return (
@@ -102,10 +103,12 @@ export default function Article({ markdown, data, sorted_article_data }) {
                         </p>
                         <p className="flow-text">{data.description}</p>
                         <br />
-                        <img
+                        <Image
                             className="responsive-img center"
                             alt={data.img_alt}
                             src={data.img}
+                            width={1260}
+                            height={750}
                         />
                     </div>
                     <br />

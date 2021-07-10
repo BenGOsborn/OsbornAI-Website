@@ -7,4 +7,7 @@ module.exports = {
                 ? "http://localhost:3000"
                 : "https://osbornai-frontend.herokuapp.com",
     },
+    images: {
+        domains: ["images.pexels.com"],
+    },
 };

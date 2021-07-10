@@ -87,9 +87,10 @@ export default function Articles({ sorted_article_data }) {
                     style={{ fontSize: 27.5, fontWeight: 475 }}
                     className="flow-text"
                 >
-                    Here's a list of our existing articles. Check back regularly
-                    to find the latest topics, news, and tutorials regarding all
-                    things data and business!
+                    {
+                        "Here's a list of our existing articles. Check back regularly to find the latest topics, news, and tutorials regarding all things data and business!"
+                    }
+                    "
                 </p>
                 <br />
                 <br />

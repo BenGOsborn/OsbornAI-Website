@@ -70,7 +70,7 @@ export default function Inquire(props) {
                             style={{ color: "#1E88E5", fontWeight: "bold" }}
                             className="flow-text"
                         >
-                            We'll contact you shortly! You may reinquire in{" "}
+                            {"We'll contact you shortly! You may reinquire in "}
                             {10 - daysSince} days.
                         </p>
                     </div>

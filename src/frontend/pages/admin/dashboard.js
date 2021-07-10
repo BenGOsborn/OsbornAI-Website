@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
 import { parseDate } from "../../extras/helpers";
 
 export default function Dashboard({
@@ -180,10 +181,14 @@ export default function Dashboard({
                                                             .slice(0, 3)
                                                             .map(
                                                                 (
-                                                                    prev_inquiry
+                                                                    prev_inquiry,
+                                                                    i
                                                                 ) => {
                                                                     return (
                                                                         <li
+                                                                            key={
+                                                                                i
+                                                                            }
                                                                             id={
                                                                                 prev_inquiry._id
                                                                             }
@@ -446,7 +451,7 @@ export default function Dashboard({
                             </h4>
                             {paymentIds.length === 0 ? (
                                 <h5 className="center">
-                                    There are no active payment ID's!
+                                    {"There are no active payment ID's!"}
                                 </h5>
                             ) : (
                                 paymentIds
@@ -464,21 +469,22 @@ export default function Dashboard({
                                                 <div className="card-content truncate">
                                                     <b>Payment URL:</b>
                                                     <br />
-                                                    <a
-                                                        href="/"
-                                                        onClick={(e) => {
-                                                            e.preventDefault();
-                                                            navigator.clipboard.writeText(
-                                                                payment_url
-                                                            );
-                                                            window.M.toast({
-                                                                html: "Copied URL to clipboard!",
-                                                                displayLength: 1000,
-                                                            });
-                                                        }}
-                                                    >
-                                                        {payment_url}
-                                                    </a>
+                                                    <Link href="/">
+                                                        <a
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
+                                                                navigator.clipboard.writeText(
+                                                                    payment_url
+                                                                );
+                                                                window.M.toast({
+                                                                    html: "Copied URL to clipboard!",
+                                                                    displayLength: 1000,
+                                                                });
+                                                            }}
+                                                        >
+                                                            {payment_url}
+                                                        </a>
+                                                    </Link>
                                                     <br />
                                                     <b>Payment ID:</b>
                                                     <br />

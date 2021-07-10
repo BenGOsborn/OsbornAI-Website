@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home(props) {
     return (
@@ -11,12 +12,12 @@ export default function Home(props) {
                         <br />
                         <div className="row center valign-wrapper hide-on-med-and-down">
                             <div className="col s12 m12 l6">
-                                <img
+                                <Image
                                     className="responsive-img"
                                     alt="Black and Gray Mining Rig"
                                     src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-                                    width="562.5"
-                                    height="375"
+                                    width={562.5}
+                                    height={375}
                                     style={{
                                         objectFit: "contain",
                                         minWidth: 375,
@@ -41,12 +42,12 @@ export default function Home(props) {
                         </div>
                         <div className="row hide-on-large-only">
                             <div className="col center s12 m12 l12">
-                                <img
+                                <Image
                                     className="responsive-img"
                                     alt="Black and Gray Mining Rig"
                                     src="https://images.pexels.com/photos/1148820/pexels-photo-1148820.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-                                    width="843.75"
-                                    height="562.5"
+                                    width={843.75}
+                                    height={562.5}
                                 />
                             </div>
                             <div className="col s12 m12 l12">
@@ -90,22 +91,19 @@ export default function Home(props) {
                             </p>
                         </b>
                         <p style={{ fontSize: 18 }}>
-                            Whether you're curious about how data can help
-                            improve your business or you need a solution to your
-                            rapidly growing data that your current system can't
-                            handle, we'll work with you to find the most optimal
-                            and scalable solution for your problem and implement
-                            these solutions for you quickly and effectively.
-                            Listed below are some examples of what we can do for
-                            you and your business:
+                            {
+                                "Whether you're curious about how data can help improve your business or you need a solution to your rapidly growing data that your current system can't handle, we'll work with you to find the most optimal and scalable solution for your problem and implement these solutions for you quickly and effectively.  Listed below are some examples of what we can do for you and your business:"
+                            }
                         </p>
                         <div className="row">
                             <div className="col s12 m12 l4">
                                 <div className="card">
                                     <div className="card-image">
-                                        <img
+                                        <Image
                                             alt="Black and Gray Laptop on Black Sectional Couch"
                                             src="https://images.pexels.com/photos/577210/pexels-photo-577210.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+                                            width={1260}
+                                            height={750}
                                         />
                                     </div>
                                     <div className="card-content">
@@ -116,15 +114,9 @@ export default function Home(props) {
                                             </b>
                                         </span>
                                         <p>
-                                            Got lots of data but no idea what to
-                                            do with it? We'll transform your raw
-                                            data into meaningful insights,
-                                            allowing you to better understand
-                                            your target audience and their
-                                            behaviors, helping you to make
-                                            smarter business decisions and focus
-                                            on critical areas within your
-                                            business.
+                                            {
+                                                "Got lots of data but no idea what to do with it? We'll transform your raw data into meaningful insights, allowing you to better understand your target audience and their behaviors, helping you to make smarter business decisions and focus on critical areas within your business."
+                                            }
                                         </p>
                                     </div>
                                 </div>
@@ -132,9 +124,11 @@ export default function Home(props) {
                             <div className="col s12 m12 l4">
                                 <div className="card">
                                     <div className="card-image">
-                                        <img
+                                        <Image
                                             alt="Photo of Person Typing on Computer Keyboard"
                                             src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+                                            width={1260}
+                                            height={750}
                                         />
                                     </div>
                                     <div className="card-content">
@@ -145,14 +139,9 @@ export default function Home(props) {
                                             </b>
                                         </span>
                                         <p>
-                                            Looking to get started with big data
-                                            and analytics but not sure how?
-                                            We'll work with you to design and
-                                            implement data tracking and
-                                            collection systems that will yield
-                                            the most insights for your business
-                                            while minimizing the amount of data
-                                            collected, saving you money.
+                                            {
+                                                "Looking to get started with big data and analytics but not sure how?  We'll work with you to design and implement data tracking and collection systems that will yield the most insights for your business while minimizing the amount of data collected, saving you money."
+                                            }
                                         </p>
                                     </div>
                                 </div>
@@ -160,9 +149,11 @@ export default function Home(props) {
                             <div className="col s12 m12 l4">
                                 <div className="card">
                                     <div className="card-image">
-                                        <img
+                                        <Image
                                             alt="Server racks in modern data center"
                                             src="https://images.pexels.com/photos/4508751/pexels-photo-4508751.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+                                            width={1260}
+                                            height={750}
                                         />
                                     </div>
                                     <div className="card-content">
@@ -170,32 +161,24 @@ export default function Home(props) {
                                             <b>Data Storage Solutions</b>
                                         </span>
                                         <p>
-                                            In need of a place to store your
-                                            data? We'll work with you to find
-                                            and implement a scalable data
-                                            storage solution that suits your
-                                            business's needs for now and the
-                                            future. We will also work with you
-                                            to implement custom ETL data
-                                            pipelines that automatically
-                                            transform your raw data and store it
-                                            for quick access when you're making
-                                            critical business decisions.
+                                            {
+                                                "In need of a place to store your data? We'll work with you to find and implement a scalable data storage solution that suits your business's needs for now and the future. We will also work with you to implement custom ETL data pipelines that automatically transform your raw data and store it for quick access when you're making critical business decisions."
+                                            }
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <p style={{ fontSize: 18 }}>
-                            And that’s just the beginning. If you’re interested
-                            in what data can do for your business, or have a
-                            project in mind that involves data, then{" "}
+                            {
+                                "And that’s just the beginning. If you’re interested in what data can do for your business, or have a project in mind that involves data, then "
+                            }
                             <b>
                                 <Link href="/#Inquire">
                                     <a>inquire about a consult</a>
                                 </Link>
-                            </b>{" "}
-                            with us below and let’s get started!
+                            </b>
+                            {" with us below and let’s get started!"}
                         </p>
                     </div>
                 </span>

@@ -144,7 +144,7 @@ export default function Payment({ status, payment_id_info }) {
             );
         } else if (pageStatus === 2) {
             return (
-                <div class="container center">
+                <div className="container center">
                     <br />
                     <br />
                     <br />
