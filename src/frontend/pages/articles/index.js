@@ -90,7 +90,6 @@ export default function Articles({ sorted_article_data }) {
                     {
                         "Here's a list of our existing articles. Check back regularly to find the latest topics, news, and tutorials regarding all things data and business!"
                     }
-                    "
                 </p>
                 <br />
                 <br />
