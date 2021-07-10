@@ -3,12 +3,10 @@ from flask_cors import CORS
 import stripe
 import os
 from database import Database, ErrorCodes
-import json
 import jwt
 from datetime import datetime, timedelta
 import dotenv
-from functools import wraps
-import traceback
+from utils import *
 
 dotenv.load_dotenv()
 
@@ -19,11 +17,6 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['DB'] = Database()
 
 stripe.api_key = os.getenv('STRIPE_SECRET_TEST') if "DYNO" not in os.environ else os.getenv('STRIPE_SECRET')
-
-# -------------------------- Helper Functions ---------------------------
-
-def sanitizeJSON(json_raw):
-    return json.loads(json.dumps(json_raw, default=str))
 
 # -------------------------- Admin auth -------------------------------
 
@@ -48,31 +41,6 @@ def login():
         err = traceback.format_exc()
         print(err)
         return jsonify({'success': False, 'token': None, 'error_code': ErrorCodes.error_code_other, 'error': err}), 400
-
-def checkToken(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        try:
-            form_json = request.json
-
-            token = form_json['token']
-
-        except:
-            err = traceback.format_exc()
-            print(err)
-            return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': err}), 400
-                
-        try:
-            jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-        
-        except:
-            err = traceback.format_exc()
-            print(err)
-            return jsonify({'success': False, 'error_code': ErrorCodes.error_code_token, 'error': err}), 400
-        
-        return f(*args, **kwargs)
-    
-    return decorated
 
 @app.route('/admin/validate_token', methods=['POST'], strict_slashes=False)
 @checkToken
