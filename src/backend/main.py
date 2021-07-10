@@ -10,7 +10,7 @@ from admin.admin_routes import admin
 dotenv.load_dotenv()
 
 app = Flask(__name__)
-app.register_blueprint(admin)
+app.register_blueprint(admin, url_prefix='/admin')
 CORS(app)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
