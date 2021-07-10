@@ -1,11 +1,13 @@
+from flask.globals import current_app
+import jwt
+from database import ErrorCodes
 import json
-from flask import request
+from flask import request, jsonify, current_app
 from functools import wraps
 import traceback
 
 def sanitizeJSON(json_raw):
     return json.loads(json.dumps(json_raw, default=str))
-
 
 def checkToken(f):
     @wraps(f)
@@ -21,7 +23,7 @@ def checkToken(f):
             return jsonify({'success': False, 'error_code': ErrorCodes.error_code_other, 'error': err}), 400
                 
         try:
-            jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+            jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"])
         
         except:
             err = traceback.format_exc()
